@@ -1,121 +1,210 @@
 # Raphael V3 — Autonomous Cognitive Offensive AI Platform
 
-A self-growing offensive AI organism that autonomously probes targets, builds constraint-vector profiles, plans via greedy selection, acquires capabilities in parallel, and rewrites its own decision logic through post-engagement reflection.
+A self-growing offensive AI organism that autonomously probes targets, builds belief-state profiles via a **D-Series (Brain)**, continuously researches techniques via an **S-Series (Student)**, and executes stateful shell operations via an **E-Series (Hands)** — all within a strict, brokered authorization envelope.
 
 ## Architecture
 
-Raphael V3 is a **cognitive organism**, not a toolchain. Organs run at different cadences, communicate through shared state, and a reflection loop rewrites decision logic.
+Raphael V3 is a **unified cognitive agent**. Three series operate asynchronously, communicate through shared WorldModel state, and converge on a single objective: find a weakness, validate it, exploit it, and learn from it.
 
 ```
-┌──────────────────────────────────────────────────────────────────────┐
-│                        RAPHAEL COGNITIVE ORGANISM                    │
-│                                                                      │
-│  ┌────────────────────────────────────────────────────────────┐      │
-│  │                    raphael/ (THE BRAIN)                     │      │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌───────────┐  │      │
-│  │  │ Planner  │  │ Executor │  │ Model    │  │ Cerebellum│  │      │
-│  │  │ (cortex) │  │          │  │ Refiner  │  │ (errors)  │  │      │
-│  │  └──────────┘  └──────────┘  └──────────┘  └───────────┘  │      │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌───────────┐  │      │
-│  │  │Techniques│  │Blackboard│  │ EventBus │  │ Memory    │  │      │
-│  │  │ (23 reg) │  │ (shared)  │  │ (pipeline│  │(hippocampus│  │      │
-│  │  │          │  │          │  │  events) │  │ + cortex) │  │      │
-│  │  └──────────┘  └──────────┘  └──────────┘  └───────────┘  │      │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌───────────┐  │      │
-│  │  │ VHOST    │  │ Exploit  │  │ Parallel │  │Verification│  │      │
-│  │  │ Enum     │  │ Factory  │  │ Recon    │  │ Loop       │  │      │
-│  │  │          │  │          │  │(limbic/) │  │(TCP/HTTP)  │  │      │
-│  │  └──────────┘  └──────────┘  └──────────┘  └───────────┘  │      │
-│  └────────────────────────────────────────────────────────────┘      │
-│                                                                      │
-│  ┌────────────────────────────────────────────────────────────┐      │
-│  │               INFRASTRUCTURE (orchestrator/)                │      │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌───────────┐  │      │
-│  │  │Harvester │  │ Mesh     │  │Privesc   │  │Propagation│  │      │
-│  │  │(CVE feed)│  │(P2P net) │  │(27 LPE)  │  │(lateral)  │  │      │
-│  │  └──────────┘  └──────────┘  └──────────┘  └───────────┘  │      │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌───────────┐  │      │
-│  │  │Weaponizer│  │Social    │  │Survivabil│  │TTP Playbk │  │      │
-│  │  │(C/Go/Rust)│ │(phish)   │  │(kill sw) │  │(6 chains) │  │      │
-│  │  └──────────┘  └──────────┘  └──────────┘  └───────────┘  │      │
-│  └────────────────────────────────────────────────────────────┘      │
-│                                                                      │
-│  ┌────────────────────────────────────────────────────────────┐      │
-│  │              IMPLANT (agent/)                              │      │
-│  │  syscall (Hell's Gate/Halo's Gate) | injection | stealth   │      │
-│  │  credtheft | exfil | persistence | lateral | cleanup       │      │
-│  └────────────────────────────────────────────────────────────┘      │
-│                                                                      │
-│  ┌────────────────────────────────────────────────────────────┐      │
-│  │              SERVICES                                       │      │
-│  │  cli/  sword/  c2-server/  cai-service/  cloak-service/    │      │
-│  │  kali-tools/  phishing/  recon-pipeline/  mcp-hub/         │      │
-│  │  sliver/  mhddos-service/  bridge/                         │      │
-│  └────────────────────────────────────────────────────────────┘      │
-└──────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────┐
+│                        RAPHAEL COGNITIVE AGENT v2                        │
+│                                                                          │
+│  ┌──────────────────────────────────────────────────────────────────┐    │
+│  │  D-SERIES — BRAIN  (orchestrator/brain/)                         │    │
+│  │  ┌──────────┐  ┌────────────┐  ┌───────────┐  ┌──────────────┐  │    │
+│  │  │ Planner  │  │WorldModel  │  │Capability │  │Falsification │  │    │
+│  │  │ (action) │  │ (world)    │  │ Broker    │  │ Manager      │  │    │
+│  │  └──────────┘  └────────────┘  └───────────┘  └──────────────┘  │    │
+│  │  ┌──────────┐  ┌────────────┐  ┌───────────┐  ┌──────────────┐  │    │
+│  │  │Candidate │  │ Contradict │  │ Reflection│  │ Strategy     │  │    │
+│  │  │Generator │  │ Detection  │  │ Engine    │  │ Learner      │  │    │
+│  │  └──────────┘  └────────────┘  └───────────┘  └──────────────┘  │    │
+│  └──────────────────────────────────────────────────────────────────┘    │
+│                                                                          │
+│  ┌──────────────────────────────────────────────────────────────────┐    │
+│  │  S-SERIES — STUDENT  (orchestrator/student/)                      │    │
+│  │  ┌────────────────┐  ┌────────────────┐  ┌────────────────────┐  │    │
+│  │  │ Research       │  │ Chain          │  │ Knowledge          │  │    │
+│  │  │ Scheduler      │  │ Synthesizer    │  │ Background Service │  │    │
+│  │  └────────────────┘  └────────────────┘  └────────────────────┘  │    │
+│  │  ┌────────────────┐  ┌────────────────┐  ┌────────────────────┐  │    │
+│  │  │ Coverage Gap   │  │ Stack          │  │ SciHub             │  │    │
+│  │  │ Filler         │  │ Matcher        │  │ Integration        │  │    │
+│  │  └────────────────┘  └────────────────┘  └────────────────────┘  │    │
+│  └──────────────────────────────────────────────────────────────────┘    │
+│                                                                          │
+│  ┌──────────────────────────────────────────────────────────────────┐    │
+│  │  E-SERIES — HANDS  (orchestrator/capabilities/interactive_shell/) │    │
+│  │  ┌────────────────┐  ┌────────────────┐  ┌────────────────────┐  │    │
+│  │  │ SSH Shell      │  │ Reverse Shell  │  │ Command Filter     │  │    │
+│  │  │ Capability     │  │ Capability     │  │ Pipeline (T1+T2)   │  │    │
+│  │  └────────────────┘  └────────────────┘  └────────────────────┘  │    │
+│  │  ┌────────────────┐  ┌────────────────┐  ┌────────────────────┐  │    │
+│  │  │ Shell Session  │  │ TTY Normalizer │  │ Listener           │  │    │
+│  │  │ Store          │  │ + Evidence Ext │  │ Manager (Broker)   │  │    │
+│  │  └────────────────┘  └────────────────┘  └────────────────────┘  │    │
+│  └──────────────────────────────────────────────────────────────────┘    │
+│                                                                          │
+│  ┌──────────────────────────────────────────────────────────────────┐    │
+│  │  CORE INFRASTRUCTURE  (orchestrator/)                             │    │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌───────────┐       │    │
+│  │  │Harvester │  │ Mesh     │  │Privesc   │  │Propagation│       │    │
+│  │  │(CVE feed)│  │(P2P net) │  │(27 LPE)  │  │(lateral)  │       │    │
+│  │  └──────────┘  └──────────┘  └──────────┘  └───────────┘       │    │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌───────────┐       │    │
+│  │  │Weaponizer│  │Social    │  │Survivabil│  │CICD/Cloud │       │    │
+│  │  │(C/Go/Rust)│ │(phish)   │  │(kill sw) │  │/ML Attack │       │    │
+│  │  └──────────┘  └──────────┘  └──────────┘  └───────────┘       │    │
+│  └──────────────────────────────────────────────────────────────────┘    │
+│                                                                          │
+│  ┌──────────────────────────────────────────────────────────────────┐    │
+│  │  IMPLANT  (agent/)                                               │    │
+│  │  syscall (Hell's Gate/Halo's Gate) | injection | stealth         │    │
+│  │  credtheft | exfil | persistence | lateral | cleanup | audit     │    │
+│  └──────────────────────────────────────────────────────────────────┘    │
+│                                                                          │
+│  ┌──────────────────────────────────────────────────────────────────┐    │
+│  │  VALIDATION  (arena/ + tests/)                                   │    │
+│  │  Arena cognitive evaluation · 88 regression tests · SENTINEL     │    │
+│  └──────────────────────────────────────────────────────────────────┘    │
+│                                                                          │
+│  ┌──────────────────────────────────────────────────────────────────┐    │
+│  │  SERVICES                                                       │    │
+│  │  cli/  sword/  c2-server/  cai-service/  cloak-service/         │    │
+│  │  kali-tools/  phishing/  recon-pipeline/  mcp-hub/              │    │
+│  │  sliver/  mhddos-service/  bridge/                              │    │
+│  └──────────────────────────────────────────────────────────────────┘    │
+└──────────────────────────────────────────────────────────────────────────┘
 ```
 
-## The Cognitive Organism (raphael/)
+---
 
-The brain operates as a continuous loop:
+## D-Series — The Brain (`orchestrator/brain/`)
 
-### Cycle
+The Brain is the cognitive core. It perceives the target environment, plans actions, authorizes execution, and resolves contradictions in its belief state.
 
-0. **ParallelRecon** (`limbic/parallel_recon.py`) — on cycle 0, fires all available recon techniques concurrently, merges deltas, enriches affordance set before main loop begins.
+### Cognitive Loop
 
-1. **Planner** (`cortex/planner.py`) — selects next technique using:
-   - TargetModel filter (constraints + affordances)
-   - CapabilityModel filter (owned vs gaps)
-   - Memory prior ranking (recon=0.6, exploit=0.3 default)
-   - Exhaustion tracking (skips techniques that return no new info)
-   - Stuck detection → parallel ModelRefiner + Hypothesizer escape hatches
+```
+  ┌──────────┐     ┌──────────────┐     ┌───────────┐     ┌──────────────┐
+  │  Student  │────>│  Candidate   │────>│  Planner  │────>│ Capability   │
+  │ (S-Series)│     │  Generator   │     │ (scoring) │     │ Broker       │
+  └──────────┘     └──────────────┘     └───────────┘     └──────┬───────┘
+         ^                                                        │
+         │                                                        v
+  ┌──────┴───────┐     ┌──────────────┐     ┌───────────┐     ┌──────────┐
+  │ WorldModel   │<────│  Evidence    │<────│ Interactive│<────│ Authorized│
+  │ + Entities   │     │  Ingestion   │     │ Shell      │     │ Action    │
+  └──────────────┘     └──────────────┘     └───────────┘     └──────────┘
+```
 
-2. **Executor** (`executor/`) — runs techniques via:
-   - KaliBridge (HTTP :3800 or subprocess fallback)
-   - ProtocolInferenceEngine (enriches domain state from ports/services)
-   - Cerebellum error diagnosis (19 error patterns)
-   - SpinalReflex thermoregulator (1 Hz, inhibits at detection risk >0.8)
+| Module | Description |
+|--------|-------------|
+| `action.py` | Action planner — scores candidates (shell, recon, exploit) by utility/cost/risk. Rationale codes drive transparency. |
+| `world.py` | WorldModel — entity store with 20+ `EntityType`s (HOST, PORT, SERVICE, PROCESS, FILE, CREDENTIAL, VULNERABILITY, etc.) and 15+ `RelationshipType`s. Factory functions for evidence ingestion. |
+| `capability_broker.py` | Brokered authorization — dual-gate for shell sessions (connection + per-command), termination, cleanup. Reverse shell listeners are Broker-exclusive. |
+| `candidate_generators/` | Generates action candidates from triggers: `shell_generator.py` (E2) for T1/T2/T3 shell triggers + M1/M2 command proposals; `student_generator.py` for technique proposals from S-Series. |
+| `contradiction.py` | ContradictionManager — detects `CONTRADICTS` relationships between evidence, generates falsification tasks for continuous belief resolution. |
+| `evidence.py` | Evidence dataclass — captures observations with type, content, confidence, source. 8 shell-specific evidence types. |
+| `hypothesis.py` | Hypothesis generation — forms conjectures from partial evidence patterns. |
+| `reasoning.py` | Reasoning engine — multi-step inference over WorldModel entities and relationships. |
+| `reflection.py` | Post-engagement reflection — updates strategy weights, prunes stale beliefs. |
+| `strategy.py` / `strategy_learner.py` | Adaptive strategy selection — learns which action types succeed in which target profiles. |
+| `target_profiler.py` / `target_state.py` | Target profiling — builds constraint vectors, tracks owned vs. unknown affordances. |
+| `trust.py` | Trust engine — scores evidence sources by reliability, weights evidence confidence. |
+| `neural_memory.py` | Neural memory — episodic case-based reasoning for pattern recall. |
+| `skill_indexer.py` | Skill indexer — maps technique names to capability implementations. |
+| `adaptive_brain.py` | Adaptive brain — orchestrates the cognitive loop with dynamic cadence. |
+| `phases/` | Phase-specific executors: CICD pipeline poisoning, cloud abuse, container escape, ML model attack. Each phase has a plan→authorize→execute→ingest lifecycle. |
 
-3. **Absorb** (`models/target_model.py`) — integrates results:
-   - Per-field diff checking (constraints, affordances, unknowns)
-   - Returns False when nothing changed (prevents infinite loops)
-   - Negative cache with resurrection (dead technique revives when profile changes)
+---
 
-4. **Reflection** (`cognitive/`) — post-engagement:
-   - ModelRefiner updates target/capability models
-   - Hypothesizer generates new technique affordances
-   - SelfModificationEngine rewrites decision logic
-   - Episodic memory stored in Hippocampus
+## S-Series — The Student (`orchestrator/student/`)
 
-### 23 Registered Techniques
+The Student continuously researches the threat landscape and proposes operational techniques to the Brain. It never executes — it only advises.
 
-| Type | Technique | Purpose |
-|------|-----------|---------|
-| Recon | `port_scan` | Full TCP port scan |
-| Recon | `service_scan` | Service version detection |
-| Recon | `dns_lookup` | DNS record enumeration |
-| Recon | `vhost_enum` | Virtual host discovery (DNS brute, CT logs, SSL SAN) |
-| Recon | `blind_probe` | Zero-knowledge entropy vectors before protocol ID |
-| Recon | `check_http_methods` | HTTP OPTIONS to discover POST/PUT/DELETE |
-| Recon | `js_deobfuscate` | Chrome extension JS deobfuscation |
-| Recon | `leveldb_parse` | Chrome extension LevelDB extraction |
-| Recon | `mass_payload_test` | Rapid injection point discovery via PayloadFabric |
-| Recon | `fast_port_check` | 200-concurrent asyncio TCP probe |
-| Recon | `waf_detect` | WAF fingerprinting via nuclei |
-| Recon | `tech_detect` | Technology stack via whatweb |
-| Recon | `subdomain_enum` | Subdomain discovery via gobuster DNS |
-| Recon | `directory_brute` | Directory/file enumeration via gobuster dir |
-| Exploit | `exploit_factory` | CVE-based payload generation (5 CVEs, 8 templates) |
-| Exploit | `verification_loop` | 3-channel verification (TCP/HTTP/DNS) |
-| Exploit | `auth_bypass_post` | SQLi/NoSQLi auth bypass via POST login |
-| Exploit | `xor_crack` | Phase-shifted XOR decryption for HTB flags |
-| Exploit | `sqli_check` | Deep SQLi via sqlmap |
-| Exploit | `lfi_check` | LFI detection via nuclei |
-| Exploit | `ssrf_check` | SSRF detection via nuclei |
-| Exploit | `cmdi_check` | Command injection via nuclei |
-| Exploit | `open_redirect` | Open redirect via nuclei |
+| Module | Description |
+|--------|-------------|
+| `research_scheduler.py` | Cron-driven research of CVE feeds, GitHub PoCs, security blogs. Categorizes findings by target stack. |
+| `chain_synthesizer.py` | Synthesizes multi-step attack chains from atomic technique descriptions. Produces ranked proposals for the Planner. |
+| `knowledge_background_service.py` | Persistent background service maintaining a technique knowledge base with versioning, dependencies, and success metrics. |
+| `coverage_gap_filler.py` | Analyzes coverage gaps between known techniques and target profile. Probes research sources for missing technique variants. |
+| `stack_matcher.py` | Matches target software stack (nginx 1.2, PostgreSQL 15, etc.) to known CVEs and technique applicability. |
+| `scihub.py` | Scientific paper ingestion — parses PDF research papers for technique extraction. |
+| `integration_pipeline.py` | End-to-end pipeline: research → categorize → synthesize → propose to Planner. |
 
-## Infrastructure (orchestrator/)
+**Student→Brain integration:** The Student submits `technique_proposal` candidates to the CandidateGenerator pool. The Planner scores these alongside shell candidates and recon actions. Accepted techniques are ingested into the WorldModel as `TECHNIQUE` entities.
+
+---
+
+## E-Series — The Hands (`orchestrator/capabilities/interactive_shell/`)
+
+The Hands provide stateful, interactive shell execution within a strict brokered envelope.
+
+| Module | Description |
+|--------|-------------|
+| `capability.py` | `InteractiveShellCapability` ABC — contract for all shell implementations. |
+| `ssh_shell.py` | `SSHShellCapability` — SSH connection with key-based or password auth, TTY normalization, keep-alive. |
+| `reverse_shell.py` | `ReverseShellCapability` — reverse TCP shell accepts pre-attached client sockets from ListenerManager. |
+| `session.py` / `session_store.py` | `ShellSession` state machine (PENDING→ACTIVE→TERMINATED) + `ShellSessionStore` with SQLite persistence, temp-fallback. |
+| `command_filter.py` | Two-tier command filter: T1 static allowlist/blocklist (34 safe commands) + T2 LLM classifier for ambiguous commands. Shell injection chars (`;`, `\|`, `&`, `` ` ``) cause ESCALATE not DENY. |
+| `listener_manager.py` | `ListenerManager` — Broker-exclusive reverse shell listener provisioning. No component bypasses this. |
+| `tty_normalizer.py` | `TTYNormalizer` + `EvidenceExtractor` — normalizes raw TTY output, extracts 8 evidence types (process lists, file contents, network connections, credentials, etc.) for WorldModel ingestion. |
+
+### Authorization Model (Dual-Gate)
+
+```
+  ┌──────────────────┐     ┌──────────────────┐     ┌──────────────────┐
+  │  shell_connect   │────>│ authorize_shell_ │────>│ Session Created  │
+  │  candidate       │     │ session()        │     │ (ACTIVE)         │
+  └──────────────────┘     └──────────────────┘     └──────────────────┘
+                                                                │
+                                                        ┌───────┴───────┐
+                                                        │   Per-command  │
+                                                        │   Authorization │
+                                                        └───────┬───────┘
+                                                                │
+  ┌──────────────────┐     ┌──────────────────┐     ┌───────────┘
+  │  shell_command   │────>│ authorize_shell_ │────>│ T1 Filter (allow/
+  │  candidate       │     │ command()        │     │ block/injection)
+  └──────────────────┘     └──────────────────┘     └───────┬──────────┐
+                                                    ESCALATE?           │
+                                                        │              DENY
+                                                        v
+  ┌──────────────────┐     ┌──────────────────┐                         │
+  │ T2 LLM Classifier│────>│ Authorized /      │<────────────────────────┘
+  │ (Gemma 31B)      │     │ Denied            │
+  └──────────────────┘     └──────────────────┘
+```
+
+### Evidence Feedback Loop
+
+Every shell command output is processed by `TTYNormalizer` → `EvidenceExtractor` → `WorldModel.ingest_shell_evidence()` → 8 entity types (PROCESS, FILE, CREDENTIAL, VULNERABILITY, etc.) with relationships. Contradictions against prior beliefs generate `FalsificationTasks`.
+
+---
+
+## Arena — Cognitive Evaluation Framework (`arena/`)
+
+Arena provides end-to-end validation of Raphael's cognitive capabilities using controlled scenarios with known ground truth.
+
+| Module | Description |
+|--------|-------------|
+| `runner.py` | Ablation runner — orchestrates Raphael instances with configurable component masking (FULL, NO_LLM, NO_STUDENT, etc.) |
+| `environment.py` | Scenario environment — sandboxed target simulation with predefined vulnerabilities. |
+| `episode.py` | Single evaluation episode — one Raphael instance × one scenario × N action rounds. |
+| `evaluator.py` | Outcome evaluation — truth comparison, pass/fail determination, metric aggregation. |
+| `conclusion.py` / `conclusion_adapters.py` / `conclusion_evaluator.py` | Evidence-weighted conclusion reasoning. |
+| `defeater.py` | Adversarial defeater — tests Raphael's robustness against contradictions and false leads. |
+| `ablation.py` | Ablation study orchestrator — runs full matrix of component combinations. |
+| `d6_manifest.py` through `d13_diagnostic_runner.py` | D-series regression diagnostics — 10 suites covering D3 through D13. |
+| `scenarios/` | 5 scenario definitions: known open port, vulnerability with noise, false lead, contradictory observations, forbidden resource. |
+
+**Tests:** `tests/` contains 88 regression tests: 34 E1 (shell), 36 E2 (candidate gen), 7 Stage 1 invariants, 10 D5 preflight, 1 D5 seven-gate proof. All passing.
+
+---
+
+## Core Infrastructure (`orchestrator/`)
 
 | Module | Description |
 |--------|-------------|
@@ -127,8 +216,16 @@ The brain operates as a continuous loop:
 | `survivability/` | Snapshots, integrity checks, kill switches, auto-update |
 | `weaponizer/` | C/Go/Rust compilation, UPX packing, AES encryption |
 | `ttp_playbook/` | 6 adversary-profiled attack chains |
+| `cicd/` | CI/CD pipeline poisoning: token harvesting, runner fingerprinting, workflow parser |
+| `cloud_abuse/` | Cloud exploitation: API gateway abuse, IAM pathfinding, metadata service abuse, cloud enumeration |
+| `ml_attack/` | ML supply chain attacks: HF Hub API client, pickle payload factory, model format analyzer |
+| `container_escape/` | Container breakout: Docker escape, K8s escape, sandbox detection |
+| `hardening/` | Action receipt generation for post-engagement hardening analysis |
+| `validation/` | Exploit validator — checks exploit preconditions against target profile |
 
-## Implant (agent/)
+---
+
+## Implant (`agent/`)
 
 Multi-platform implant with OPSEC-hardened modules:
 
@@ -142,6 +239,7 @@ Multi-platform implant with OPSEC-hardened modules:
 | `persistence.py` | systemd, cron, LD_PRELOAD, Registry, WMI, Scheduled Tasks |
 | `lateral.py` | SSH, WMI, PSExec, SMB, WinRM, Docker, MSSQL |
 | `cleanup.py` | Log wiping (journald, auditd, wevtutil, macOS log) |
+| `audit.py` | Security audit of implant configuration and dependencies |
 
 ## CLI (cli/)
 
@@ -172,7 +270,7 @@ TypeScript/Bun-based CLI with OpenClaude integration:
 ```bash
 # Clone and configure
 cp .env.example .env
-# Edit .env — set at minimum: TOR_CONTROL_PASS, API_KEY
+# Edit .env — set at minimum: TOR_CONTROL_PASS, API_KEY, LLM_PROVIDER
 
 # Build and start
 docker compose build
@@ -181,10 +279,37 @@ docker compose up -d
 # Check health
 curl http://localhost:3900/health
 
-# Or run the brain directly (Python 3.11+)
+# Run the full cognitive agent (Python 3.11+)
 pip install -r requirements.txt
-python -m raphael.main --target <target>
+python -m arena.runner --mode full --target <target>
+
+# Run with specific components
+python -m arena.runner --mode ablation                  # Run ablation studies
+python -m arena.ablation --scenario 001_known_open_port # Single scenario test
+
+# Run the brain directly
+python -m orchestrator.modes.autonomous --target <target>
+
+# Run tests
+python -m pytest tests/ -v                              # All 88 regression tests
+python -m pytest tests/e2_shell_candidate_generation_test.py -v  # E2 only (36 tests)
+
+# Run SENTINEL audit
+python JUDGE.py                                         # Codebase governance check
+
+# Interactive shell capability test
+python -m pytest tests/e1_interactive_shell_test.py -v  # E1 only (34 tests)
 ```
+
+## Validation Status
+
+| Series | Tests | Status | SENTINEL |
+|--------|-------|--------|----------|
+| D-Series Brain | Stage 1 invariants (7), D5 preflight (10), D5 gate proof (1) | ✅ 18/18 | ✅ Frozen |
+| E1 Interactive Shell | Session lifecycle, auth, filter, TTY (34) | ✅ 34/34 | ✅ Sealed |
+| E2 Shell Candidate Gen | T1/T2/T3 triggers, M1/M2 proposals, invariants (36) | ✅ 36/36 | ✅ Accepted |
+| D-Series Arena | D3–D13 regression diagnostics (10 suites) | ✅ All pass | ✅ Verified |
+| **Total** | **88 regression tests** | **✅ 88/88** | **🛡️ Governance locked** |
 
 ## Operational Security
 
@@ -193,16 +318,19 @@ python -m raphael.main --target <target>
 - **CDN fronting and TLS SNI spoofing** use placeholder domains — configure your own fronting infra.
 - **Agent communications** are encrypted. Set `EGRESS_VERIFY_CERT=true` for MITM protection.
 - **Logs** capture C2 traffic at DEBUG level. Commands matching `REDACT_PATTERNS` are redacted.
+- **Shell sessions** are dual-gate authorized (connection + per-command) with auto-termination on 3 denials in 60s.
+- **Reverse shell listeners** are Broker-exclusive — no component can provision a listener bypassing CapabilityBroker.
 
 ## Key Design Decisions
 
-- **Cognitive organism, not a tool** — organs run at different cadences, communicate through shared state, reflection loop rewrites decision logic
-- **Two technique classes** — recon (generates affordances, prior 0.6) and exploit (requires affordances, prior 0.3)
-- **Memory is episodic** — full narratives via case-based reasoning, not just semantic priors
-- **Stuck handling** — parallel ModelRefiner + Hypothesizer via asyncio.wait(FIRST_COMPLETED)
-- **Exhaustion tracking** — `_exhaustion_count` per technique, threshold 2 consecutive no-change runs
-- **Negative cache** — technique stays dead until profile changes relevant to its blockers
+- **Three-series cognitive architecture** — D-Series (Brain) plans and falsifies, S-Series (Student) researches and advises, E-Series (Hands) executes within brokered envelope
+- **No unbrokered execution path** — every shell action passes through `authorize_shell_session()` + `authorize_shell_command()`
+- **Shell injection chars cause ESCALATE, not DENY** — `;`, `|`, `&`, `` ` `` trigger Tier 2 LLM classification rather than blind rejection
+- **Evidence drives cognition** — 8 shell evidence types continuously ingested into WorldModel, contradictions generate falsification tasks
+- **Candidate generation is trigger-based** — T1 credential discovery, T2 exploit confirmation, T3 student advisory — each produces `shell_connect` candidates
 - **Brain is never idle** — when no technique executable → ModelRefiner ∥ Hypothesizer → heuristic fallback → report stuck
+- **Memory is episodic** — full narratives via case-based reasoning in WorldModel
+- **Student is read-only** — it proposes techniques but never executes. All operations are brokered.
 
 ## Legal & Ethical Use
 
