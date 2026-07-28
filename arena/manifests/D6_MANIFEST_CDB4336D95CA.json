@@ -1,0 +1,269 @@
+{
+  "manifest_id": "D6_MANIFEST_CDB4336D95CA",
+  "manifest_version": "1.0",
+  "created_at": "2026-07-26T14:18:17Z",
+  "experiment_state": "VALIDATION_STARTED",
+  "source_snapshot": {
+    "arena_defeater": "57dec0cd5440cb9d",
+    "arena_conclusion": "eb443a1517afc625",
+    "arena_ablation": "61ee20718ab735ae",
+    "arena_ablation_runner": "7bddc43ff2b77d67",
+    "arena_conclusion_adapters": "6f17f5b0499c0c8d",
+    "arena_runner": "9f1bb10897f5ed61",
+    "arena_environment": "92e3c4c09d9759a0",
+    "arena_diagnostic": "522981de1d95367b",
+    "arena_all_py": "8beb1a6fa30652e6",
+    "orchestrator_brain_hypothesis": "d8d2e823c2e2e97c",
+    "orchestrator_brain_capability_broker": "19a0e618f3b3042d",
+    "orchestrator_brain_world": "3c8b61f18deb0748",
+    "orchestrator_brain_contradiction": "b7a76c968e393b10",
+    "d6_manifest": "409d1420d56276ad"
+  },
+  "source_snapshot_hash": "62ddd2814e12fc8a",
+  "config": {
+    "iteration_budget": 5,
+    "action_budget": 20,
+    "cost_model": "uniform",
+    "timeout_seconds": 120
+  },
+  "architectures": [
+    "FULL_RAPHAEL",
+    "NO_HYPOTHESIS",
+    "NO_FALSIFICATION",
+    "NO_WORLD_MODEL",
+    "NO_PLANNER",
+    "NO_LLM",
+    "NO_DEFEATER",
+    "SCRIPTED_BASELINE"
+  ],
+  "scenario_templates": {
+    "T1_NEGATIVE_CONTROL": {
+      "id": "arena-d6-001",
+      "name": "Known Open Port",
+      "capability": "negative_control",
+      "description": "Single host with open HTTP port, no noise, no deception.",
+      "scenario_hash": "409d1420d562"
+    },
+    "T2_HYPOTHESIS_SENSITIVE": {
+      "id": "arena-d6-002",
+      "name": "Vulnerability Among Noise",
+      "capability": "hypothesis_sensitive",
+      "description": "One real vulnerability hidden among benign services.",
+      "scenario_hash": "409d1420d562"
+    },
+    "T3_FALSIFICATION_SENSITIVE": {
+      "id": "arena-d6-003",
+      "name": "Contradictory Observations",
+      "capability": "falsification_sensitive",
+      "description": "Two tools report contradictory states for same service.",
+      "scenario_hash": "409d1420d562"
+    },
+    "T4_WORLD_MODEL_IDENTITY": {
+      "id": "arena-d6-004",
+      "name": "Multi-Interface Identity Resolution",
+      "capability": "world_model_identity",
+      "description": "Single host reachable via two IPs, requiring entity resolution.",
+      "scenario_hash": "409d1420d562"
+    },
+    "T5_PLANNING_COST": {
+      "id": "arena-d6-005",
+      "name": "Efficient Path Selection",
+      "capability": "planning_cost",
+      "description": "Multiple valid investigation paths with different costs.",
+      "scenario_hash": "409d1420d562"
+    },
+    "T6_SEMANTIC_LLM": {
+      "id": "arena-d6-006",
+      "name": "Ambiguous Log Analysis",
+      "capability": "semantic_llm",
+      "description": "Evidence requires semantic interpretation to resolve ambiguity.",
+      "scenario_hash": "409d1420d562"
+    },
+    "T7_DEFEATER_SENSITIVE": {
+      "id": "arena-d6-007",
+      "name": "Reliability Condition Violation",
+      "capability": "defeater_sensitive",
+      "description": "Initial evidence supports a hypothesis, but a reliability condition may be violated.",
+      "scenario_hash": "409d1420d562"
+    }
+  },
+  "seeds": {
+    "dev": {
+      "T1_NEGATIVE_CONTROL": [
+        1647499585,
+        716556833,
+        2030515071
+      ],
+      "T2_HYPOTHESIS_SENSITIVE": [
+        2115955365,
+        87164739,
+        301200447
+      ],
+      "T3_FALSIFICATION_SENSITIVE": [
+        1217861141,
+        1884300699,
+        1475357621
+      ],
+      "T4_WORLD_MODEL_IDENTITY": [
+        1985667451,
+        45309292,
+        2035298845
+      ],
+      "T5_PLANNING_COST": [
+        1294632536,
+        182432970,
+        2072950975
+      ],
+      "T6_SEMANTIC_LLM": [
+        1997136267,
+        1233846012,
+        2005216187
+      ],
+      "T7_DEFEATER_SENSITIVE": [
+        312355591,
+        989735042,
+        650065135
+      ]
+    },
+    "validation": {
+      "T1_NEGATIVE_CONTROL": [
+        658396518,
+        578695378,
+        2132511150,
+        1800733580,
+        1412830491
+      ],
+      "T2_HYPOTHESIS_SENSITIVE": [
+        647711021,
+        1508640033,
+        1915635312,
+        833719723,
+        884263002
+      ],
+      "T3_FALSIFICATION_SENSITIVE": [
+        176819969,
+        1663469950,
+        1513367993,
+        196313835,
+        1165429740
+      ],
+      "T4_WORLD_MODEL_IDENTITY": [
+        913229530,
+        663826272,
+        375381234,
+        1369650432,
+        1097785306
+      ],
+      "T5_PLANNING_COST": [
+        1742126005,
+        1445959485,
+        417194261,
+        371397768,
+        1981131364
+      ],
+      "T6_SEMANTIC_LLM": [
+        45343715,
+        1941238480,
+        1626355756,
+        1790660582,
+        480773922
+      ],
+      "T7_DEFEATER_SENSITIVE": [
+        1739649259,
+        1029768156,
+        1205390047,
+        204699997,
+        2036529778
+      ]
+    },
+    "holdout": {
+      "T1_NEGATIVE_CONTROL": [
+        2053982030,
+        1499255471,
+        1160769405,
+        1463700546,
+        1854102211,
+        536090012,
+        2100594540,
+        2143922711,
+        694587140,
+        75713919
+      ],
+      "T2_HYPOTHESIS_SENSITIVE": [
+        1465463048,
+        1104589972,
+        1308237392,
+        546790879,
+        1871028860,
+        245205166,
+        67532671,
+        1008142122,
+        930498778,
+        494404489
+      ],
+      "T3_FALSIFICATION_SENSITIVE": [
+        1625952809,
+        1636027126,
+        822526340,
+        2022074381,
+        707307937,
+        1758863023,
+        1483200432,
+        798001961,
+        94354553,
+        1199127901
+      ],
+      "T4_WORLD_MODEL_IDENTITY": [
+        207244845,
+        1875895081,
+        196583918,
+        929887888,
+        248779997,
+        64543981,
+        46792669,
+        2009663853,
+        347472955,
+        833759064
+      ],
+      "T5_PLANNING_COST": [
+        1610846945,
+        1242069489,
+        1653222273,
+        1915548271,
+        1027031611,
+        942918777,
+        1149715546,
+        1153369257,
+        392608803,
+        1201976892
+      ],
+      "T6_SEMANTIC_LLM": [
+        498754413,
+        1361124852,
+        664096505,
+        398914733,
+        124931429,
+        353736771,
+        1443272653,
+        1953207859,
+        339323604,
+        20633059
+      ],
+      "T7_DEFEATER_SENSITIVE": [
+        1816649293,
+        577013275,
+        1550669596,
+        1962938996,
+        453719537,
+        549046449,
+        771876192,
+        934595220,
+        1915031854,
+        1724886726
+      ]
+    },
+    "derivation": "SHA256(manifest_id:source_hash:version:label:index) mod 2^31"
+  },
+  "experiment_state_ledger": "PLANNED",
+  "validation_started_at": "2026-07-26T15:38:57.092813+00:00"
+}

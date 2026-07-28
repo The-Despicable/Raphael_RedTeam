@@ -1,0 +1,82 @@
+{
+  "diagnostic": "Q2_STEP1_CONFOUND_STRATIFICATION",
+  "description": "Confound stratification of 10 NO_PLANNER > FULL episodes",
+  "method": "Check provider_confounded flag on each FULL_RAPHAEL record in ABLATION_BETTER comparisons",
+  "result": {
+    "total_ablation_better": 10,
+    "confounded": 1,
+    "non_confounded": 9,
+    "confounded_percentage": 10.0,
+    "verdict": "NON_CONFOUNDED_MAJORITY \u2014 proceed to Step 2",
+    "note": "1/10 confounded (T3_FALSIFICATION_SENSITIVE|15895448). All others clean. Planner paradox is NOT a provider artifact."
+  },
+  "episodes": [
+    {
+      "key": "T3_FALSIFICATION_SENSITIVE|1002575656",
+      "f_score": 0.33,
+      "n_score": 0.67,
+      "f_confounded": false
+    },
+    {
+      "key": "T3_FALSIFICATION_SENSITIVE|1502335794",
+      "f_score": 0.33,
+      "n_score": 0.67,
+      "f_confounded": false
+    },
+    {
+      "key": "T3_FALSIFICATION_SENSITIVE|15895448",
+      "f_score": 0.0,
+      "n_score": 0.67,
+      "f_confounded": true,
+      "note": "PROVIDER_CONFOUNDED \u2014 FULL LLM failed"
+    },
+    {
+      "key": "T3_FALSIFICATION_SENSITIVE|630822989",
+      "f_score": 0.33,
+      "n_score": 0.67,
+      "f_confounded": false
+    },
+    {
+      "key": "T3_FALSIFICATION_SENSITIVE|993538949",
+      "f_score": 0.33,
+      "n_score": 0.67,
+      "f_confounded": false
+    },
+    {
+      "key": "T4_WORLD_MODEL_IDENTITY|1301329782",
+      "f_score": 0.0,
+      "n_score": 0.5,
+      "f_confounded": false
+    },
+    {
+      "key": "T4_WORLD_MODEL_IDENTITY|1733893407",
+      "f_score": 0.0,
+      "n_score": 0.5,
+      "f_confounded": false
+    },
+    {
+      "key": "T4_WORLD_MODEL_IDENTITY|1757322124",
+      "f_score": 0.0,
+      "n_score": 0.5,
+      "f_confounded": false
+    },
+    {
+      "key": "T6_SEMANTIC_LLM|1533198380",
+      "f_score": 0.0,
+      "n_score": 0.33,
+      "f_confounded": false
+    },
+    {
+      "key": "T6_SEMANTIC_LLM|740856003",
+      "f_score": 0.0,
+      "n_score": 0.33,
+      "f_confounded": false
+    }
+  ],
+  "template_breakdown": {
+    "T3_FALSIFICATION_SENSITIVE": "5 wins (1 confounded) \u2014 strongest concentration",
+    "T4_WORLD_MODEL_IDENTITY": "3 wins (0 confounded)",
+    "T6_SEMANTIC_LLM": "2 wins (0 confounded)",
+    "T1_T2_T5_T7": "0 wins \u2014 Planner never beats FULL here"
+  }
+}

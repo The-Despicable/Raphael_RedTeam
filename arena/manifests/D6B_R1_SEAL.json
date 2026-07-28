@@ -1,0 +1,28 @@
+{
+  "manifest_id": "D6_MANIFEST_A1B2C3D4E5F6",
+  "manifest_version": "2.1-R2",
+  "created_at": "2026-07-26T14:30:00Z",
+  "sealed_at": "2026-07-27T03:33:24.605076+00:00",
+  "experiment_state": "VALIDATION_SEALED_R1",
+  "batch": "D6B-R1",
+  "run_count": 315,
+  "unique_run_count": 280,
+  "provider": {
+    "provider": "nvidia",
+    "model": "deepseek-ai/deepseek-v4-flash",
+    "api_base": "https://integrate.api.nvidia.com/v1"
+  },
+  "lockfile": "arena/manifests/D6B_R2_LOCKFILE.json",
+  "lock_hash": "8492b1eb489185ffe3c79663d2429860d73cf9db62ce4d568fdb779dcff5937",
+  "instrumentation_patch": {
+    "file": "d6b_runner.py",
+    "description": "llm treatment-fidelity classifier now correctly uses llm_service trace component",
+    "changes": [
+      "extract_component_engagement: llm\u2192llm_service",
+      "classify_treatment_fidelity: llm_enabled\u2192llm_service"
+    ]
+  },
+  "partial_batch_invalidation": "R1_PARTIAL_INVALIDATION_INSTRUMENTATION (190 runs, archived)",
+  "raw_results": "arena/d6b_results/d6b_r1_results.jsonl",
+  "manifest_hash": "a0d0fb64cf7b6178262026f5b87d5979e9716ea17055fe12d3a0093bb8c3c79c"
+}

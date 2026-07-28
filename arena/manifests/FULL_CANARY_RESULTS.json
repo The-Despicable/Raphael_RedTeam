@@ -1,0 +1,480 @@
+{
+  "episode_A": {
+    "run_id": "full_t6_canary_A",
+    "traces": {
+      "semantic_inferences": [
+        {
+          "iteration": 0,
+          "error": "'LLMService' object has no attribute 'infer_semantic'"
+        },
+        {
+          "iteration": 1,
+          "error": "'LLMService' object has no attribute 'infer_semantic'"
+        },
+        {
+          "iteration": 2,
+          "error": "'LLMService' object has no attribute 'infer_semantic'"
+        }
+      ],
+      "si_consumptions": [],
+      "planner_decisions": [
+        {
+          "iteration": 0,
+          "candidate_id": "recon_10.0.93.10",
+          "target": "10.0.93.10",
+          "action_type": "recon",
+          "capability": "grep",
+          "rationale": []
+        },
+        {
+          "iteration": 1,
+          "candidate_id": "recon_10.0.93.10",
+          "target": "10.0.93.10",
+          "action_type": "recon",
+          "capability": "grep",
+          "rationale": []
+        },
+        {
+          "iteration": 2,
+          "candidate_id": "recon_10.0.93.10",
+          "target": "10.0.93.10",
+          "action_type": "recon",
+          "capability": "grep",
+          "rationale": []
+        }
+      ],
+      "action_sequence": [
+        {
+          "iteration": 0,
+          "target": "10.0.93.10",
+          "action_type": "recon",
+          "capability": "grep",
+          "result": "Found: operator-alice ran 'sudo cp /etc/shadow /tmp/.cache' at 03:14 UTC; exfil via scp to 10.0.93.50:/out/ 3.2MB; modified /etc/cron.d/evil; cleared /var/log/auth.log entries"
+        },
+        {
+          "iteration": 1,
+          "target": "10.0.93.10",
+          "action_type": "recon",
+          "capability": "grep",
+          "result": "Found: operator-alice ran 'sudo cp /etc/shadow /tmp/.cache' at 03:14 UTC; exfil via scp to 10.0.93.50:/out/ 3.2MB; modified /etc/cron.d/evil; cleared /var/log/auth.log entries"
+        },
+        {
+          "iteration": 2,
+          "target": "10.0.93.10",
+          "action_type": "recon",
+          "capability": "grep",
+          "result": "Found: operator-alice ran 'sudo cp /etc/shadow /tmp/.cache' at 03:14 UTC; exfil via scp to 10.0.93.50:/out/ 3.2MB; modified /etc/cron.d/evil; cleared /var/log/auth.log entries"
+        }
+      ]
+    },
+    "evaluation": {
+      "verdict": "inconclusive",
+      "score": 0.0,
+      "passed_checks": [],
+      "failed_checks": [
+        "no_evaluator_for_scenario"
+      ]
+    },
+    "evidence_count": 10,
+    "action_log": [
+      {
+        "timestamp": 1785079928.545635,
+        "action_id": "a7a2d795e4339a3a",
+        "target": "10.0.93.10",
+        "capability": "grep",
+        "decision": "allow",
+        "checks": [
+          {
+            "dimension": "target_authorization",
+            "decision": "allow",
+            "reason": "Target allowed by: 10.0.93.0/24",
+            "metadata": {
+              "target": "10.0.93.10"
+            }
+          },
+          {
+            "dimension": "roe_authorization",
+            "decision": "allow",
+            "reason": "Action type allowed: recon",
+            "metadata": {
+              "action_type": "recon"
+            }
+          },
+          {
+            "dimension": "capability_authorization",
+            "decision": "allow",
+            "reason": "Capability allowed: grep",
+            "metadata": {
+              "capability": "grep",
+              "method": "auto"
+            }
+          },
+          {
+            "dimension": "rate_authorization",
+            "decision": "allow",
+            "reason": "Rate limits OK",
+            "metadata": {
+              "recent_minute": 0,
+              "recent_hour": 0,
+              "concurrent": 0
+            }
+          },
+          {
+            "dimension": "impact_authorization",
+            "decision": "allow",
+            "reason": "Impact within budget",
+            "metadata": {
+              "action_impact": 1.0,
+              "cumulative_impact": 0.0
+            }
+          }
+        ]
+      },
+      {
+        "timestamp": 1785079928.5464125,
+        "action_id": "0ad73c60dc117b71",
+        "target": "10.0.93.10",
+        "capability": "grep",
+        "decision": "allow",
+        "checks": [
+          {
+            "dimension": "target_authorization",
+            "decision": "allow",
+            "reason": "Target allowed by: 10.0.93.0/24",
+            "metadata": {
+              "target": "10.0.93.10"
+            }
+          },
+          {
+            "dimension": "roe_authorization",
+            "decision": "allow",
+            "reason": "Action type allowed: recon",
+            "metadata": {
+              "action_type": "recon"
+            }
+          },
+          {
+            "dimension": "capability_authorization",
+            "decision": "allow",
+            "reason": "Capability allowed: grep",
+            "metadata": {
+              "capability": "grep",
+              "method": "auto"
+            }
+          },
+          {
+            "dimension": "rate_authorization",
+            "decision": "allow",
+            "reason": "Rate limits OK",
+            "metadata": {
+              "recent_minute": 1,
+              "recent_hour": 1,
+              "concurrent": 0
+            }
+          },
+          {
+            "dimension": "impact_authorization",
+            "decision": "allow",
+            "reason": "Impact within budget",
+            "metadata": {
+              "action_impact": 1.0,
+              "cumulative_impact": 1.0
+            }
+          }
+        ]
+      },
+      {
+        "timestamp": 1785079928.5469787,
+        "action_id": "f1e64b61528e48b6",
+        "target": "10.0.93.10",
+        "capability": "grep",
+        "decision": "allow",
+        "checks": [
+          {
+            "dimension": "target_authorization",
+            "decision": "allow",
+            "reason": "Target allowed by: 10.0.93.0/24",
+            "metadata": {
+              "target": "10.0.93.10"
+            }
+          },
+          {
+            "dimension": "roe_authorization",
+            "decision": "allow",
+            "reason": "Action type allowed: recon",
+            "metadata": {
+              "action_type": "recon"
+            }
+          },
+          {
+            "dimension": "capability_authorization",
+            "decision": "allow",
+            "reason": "Capability allowed: grep",
+            "metadata": {
+              "capability": "grep",
+              "method": "auto"
+            }
+          },
+          {
+            "dimension": "rate_authorization",
+            "decision": "allow",
+            "reason": "Rate limits OK",
+            "metadata": {
+              "recent_minute": 2,
+              "recent_hour": 2,
+              "concurrent": 0
+            }
+          },
+          {
+            "dimension": "impact_authorization",
+            "decision": "allow",
+            "reason": "Impact within budget",
+            "metadata": {
+              "action_impact": 1.0,
+              "cumulative_impact": 2.0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "episode_B": {
+    "run_id": "full_t6_canary_B",
+    "traces": {
+      "semantic_inferences": [
+        {
+          "iteration": 0,
+          "error": "'LLMService' object has no attribute 'infer_semantic'"
+        },
+        {
+          "iteration": 1,
+          "error": "'LLMService' object has no attribute 'infer_semantic'"
+        },
+        {
+          "iteration": 2,
+          "error": "'LLMService' object has no attribute 'infer_semantic'"
+        }
+      ],
+      "si_consumptions": [],
+      "planner_decisions": [
+        {
+          "iteration": 0,
+          "candidate_id": "recon_10.0.93.10",
+          "target": "10.0.93.10",
+          "action_type": "recon",
+          "capability": "grep",
+          "rationale": []
+        },
+        {
+          "iteration": 1,
+          "candidate_id": "recon_10.0.93.10",
+          "target": "10.0.93.10",
+          "action_type": "recon",
+          "capability": "grep",
+          "rationale": []
+        },
+        {
+          "iteration": 2,
+          "candidate_id": "recon_10.0.93.10",
+          "target": "10.0.93.10",
+          "action_type": "recon",
+          "capability": "grep",
+          "rationale": []
+        }
+      ],
+      "action_sequence": [
+        {
+          "iteration": 0,
+          "target": "10.0.93.10",
+          "action_type": "recon",
+          "capability": "grep",
+          "result": "Found: operator-alice ran 'sudo cp /etc/shadow /tmp/.cache' at 03:14 UTC; exfil via scp to 10.0.93.50:/out/ 3.2MB; modified /etc/cron.d/evil; cleared /var/log/auth.log entries"
+        },
+        {
+          "iteration": 1,
+          "target": "10.0.93.10",
+          "action_type": "recon",
+          "capability": "grep",
+          "result": "Found: operator-alice ran 'sudo cp /etc/shadow /tmp/.cache' at 03:14 UTC; exfil via scp to 10.0.93.50:/out/ 3.2MB; modified /etc/cron.d/evil; cleared /var/log/auth.log entries"
+        },
+        {
+          "iteration": 2,
+          "target": "10.0.93.10",
+          "action_type": "recon",
+          "capability": "grep",
+          "result": "Found: operator-alice ran 'sudo cp /etc/shadow /tmp/.cache' at 03:14 UTC; exfil via scp to 10.0.93.50:/out/ 3.2MB; modified /etc/cron.d/evil; cleared /var/log/auth.log entries"
+        }
+      ]
+    },
+    "evaluation": {
+      "verdict": "inconclusive",
+      "score": 0.0,
+      "passed_checks": [],
+      "failed_checks": [
+        "no_evaluator_for_scenario"
+      ]
+    },
+    "evidence_count": 10,
+    "action_log": [
+      {
+        "timestamp": 1785079928.5479207,
+        "action_id": "042434d88b2f3e95",
+        "target": "10.0.93.10",
+        "capability": "grep",
+        "decision": "allow",
+        "checks": [
+          {
+            "dimension": "target_authorization",
+            "decision": "allow",
+            "reason": "Target allowed by: 10.0.93.0/24",
+            "metadata": {
+              "target": "10.0.93.10"
+            }
+          },
+          {
+            "dimension": "roe_authorization",
+            "decision": "allow",
+            "reason": "Action type allowed: recon",
+            "metadata": {
+              "action_type": "recon"
+            }
+          },
+          {
+            "dimension": "capability_authorization",
+            "decision": "allow",
+            "reason": "Capability allowed: grep",
+            "metadata": {
+              "capability": "grep",
+              "method": "auto"
+            }
+          },
+          {
+            "dimension": "rate_authorization",
+            "decision": "allow",
+            "reason": "Rate limits OK",
+            "metadata": {
+              "recent_minute": 0,
+              "recent_hour": 0,
+              "concurrent": 0
+            }
+          },
+          {
+            "dimension": "impact_authorization",
+            "decision": "allow",
+            "reason": "Impact within budget",
+            "metadata": {
+              "action_impact": 1.0,
+              "cumulative_impact": 0.0
+            }
+          }
+        ]
+      },
+      {
+        "timestamp": 1785079928.5485275,
+        "action_id": "a860f72aba33a974",
+        "target": "10.0.93.10",
+        "capability": "grep",
+        "decision": "allow",
+        "checks": [
+          {
+            "dimension": "target_authorization",
+            "decision": "allow",
+            "reason": "Target allowed by: 10.0.93.0/24",
+            "metadata": {
+              "target": "10.0.93.10"
+            }
+          },
+          {
+            "dimension": "roe_authorization",
+            "decision": "allow",
+            "reason": "Action type allowed: recon",
+            "metadata": {
+              "action_type": "recon"
+            }
+          },
+          {
+            "dimension": "capability_authorization",
+            "decision": "allow",
+            "reason": "Capability allowed: grep",
+            "metadata": {
+              "capability": "grep",
+              "method": "auto"
+            }
+          },
+          {
+            "dimension": "rate_authorization",
+            "decision": "allow",
+            "reason": "Rate limits OK",
+            "metadata": {
+              "recent_minute": 1,
+              "recent_hour": 1,
+              "concurrent": 0
+            }
+          },
+          {
+            "dimension": "impact_authorization",
+            "decision": "allow",
+            "reason": "Impact within budget",
+            "metadata": {
+              "action_impact": 1.0,
+              "cumulative_impact": 1.0
+            }
+          }
+        ]
+      },
+      {
+        "timestamp": 1785079928.5490196,
+        "action_id": "35b4fdbe0c5837e9",
+        "target": "10.0.93.10",
+        "capability": "grep",
+        "decision": "allow",
+        "checks": [
+          {
+            "dimension": "target_authorization",
+            "decision": "allow",
+            "reason": "Target allowed by: 10.0.93.0/24",
+            "metadata": {
+              "target": "10.0.93.10"
+            }
+          },
+          {
+            "dimension": "roe_authorization",
+            "decision": "allow",
+            "reason": "Action type allowed: recon",
+            "metadata": {
+              "action_type": "recon"
+            }
+          },
+          {
+            "dimension": "capability_authorization",
+            "decision": "allow",
+            "reason": "Capability allowed: grep",
+            "metadata": {
+              "capability": "grep",
+              "method": "auto"
+            }
+          },
+          {
+            "dimension": "rate_authorization",
+            "decision": "allow",
+            "reason": "Rate limits OK",
+            "metadata": {
+              "recent_minute": 2,
+              "recent_hour": 2,
+              "concurrent": 0
+            }
+          },
+          {
+            "dimension": "impact_authorization",
+            "decision": "allow",
+            "reason": "Impact within budget",
+            "metadata": {
+              "action_impact": 1.0,
+              "cumulative_impact": 2.0
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "spec_id": "D7_PLANNER_RECEIPT_REPAIR_SPEC",
+  "title": "Minimal Repair: Planner DENIED Receipt Consumption",
+  "version": "1.0",
+  "status": "DRAFT",
+  "source": "D-6C holdout traces + DQ1-DQ4 diagnostic (confirmed OUTPUT_NOT_CONSUMED)",
+  "rule_references": [
+    "Rule 23 (STATE_UPDATE_FAILURE)",
+    "Rule 28 (Safety Invariants)",
+    "Rule 29 (ActionReceipt Invariants)",
+    "Rule 42 (No Feature Escape)",
+    "Rule 43 (Change-Scope Control)",
+    "Rule 44 (Minimal Repair Principle)"
+  ],
+  "defect_statement": "Planner proposes prohibited action types to CapabilityBroker. Broker returns DENIED ActionReceipts with receipt_id and reason. Planner does not consume these receipts as DECISION_RELEVANT feedback \u2014 it continues proposing the same action type at the same priority across all subsequent steps.",
+  "diagnostic_evidence": {
+    "confirmed_via": "DQ1-DQ4 on 9 non-confounded NO_PLANNER > FULL episodes (episodes.jsonl step traces)",
+    "universal_pattern": "9/9 episodes: Planner repeats same prohibited action type after DENIED receipt",
+    "worse_case": "T4|1301329782: Planner repeats http_get 5 consecutive times after DENIED. Zero adaptation.",
+    "candidates_unchanged": "9/9 episodes: Candidate action list identical before and after DENIED receipt",
+    "wm_updates_zero": "9/9 episodes: WorldModel updates = [0] after any DENIED receipt"
+  },
+  "change_objective": "Close the causal loop between Broker DENIED ActionReceipt and Planner PlanDecision. A DENIED receipt must alter subsequent planning behavior.",
+  "invariant_to_establish": "For any DENIED ActionReceipt with action_type X and target Y, the Planner MUST produce zero subsequent proposals for action_type X on target Y within the same episode.",
+  "files_expected_to_change": [
+    "arena/ablation_runner.py (Planner._process_receipt() or equivalent receipt-consumption path)",
+    "arena/ablation_runner.py (Planner candidate ranking \u2014 filter by capability availability before scoring)",
+    "arena/ablation_runner.py (Planner \u2192 WorldModel propagation \u2014 register denial as action_type X unavailable for target Y)"
+  ],
+  "files_that_must_not_change": [
+    "CapabilityBroker (sole authorization authority \u2014 must not be modified)",
+    "SafetyVerifier (non-bypassable safety boundary \u2014 must not be modified)",
+    "ActionReceipt contract (field schema \u2014 must not be modified)",
+    "Evaluator (scoring logic \u2014 must not be modified)",
+    "HypothesisManager (out of scope \u2014 must not be modified)",
+    "Falsification (out of scope \u2014 must not be modified)",
+    "Defeater (out of scope \u2014 must not be modified)",
+    "LLM/SemanticInference (out of scope \u2014 must not be modified)",
+    "WorldModel query interface (add denial registration only \u2014 do not modify existing queries)"
+  ],
+  "change_logic": {
+    "step_1": "On receiving ActionReceipt with decision=deny: register (action_type, target) as UNAVAILABLE in Planner internal state. This is a new in-memory attribute, not a persistent store.",
+    "step_2": "Before PlanDecision generation: filter candidate actions to exclude any action_type whose (action_type, target) is in the UNAVAILABLE set. Do not remove from all possible actions \u2014 only from the current candidate set for this target.",
+    "step_3": "Propagate denial to WorldModel: call world_model.mark_action_unavailable(action_type, target, reason). This is a new WorldModel method that stores the denial as a belief update.",
+    "step_4": "Re-rank remaining candidates: scores remain as Planner computed them, but the filtering in Step 2 ensures no prohibited action is selected."
+  },
+  "what_this_repair_does_not_do": [
+    "Does NOT implement a Planner-level safety allowlist (Rule 28)",
+    "Does NOT modify CapabilityBroker authorization logic (Rule 58)",
+    "Does NOT add new safety checks \u2014 only closes an existing causal loop",
+    "Does NOT modify Planner scoring or ranking logic \u2014 only filters out already-rejected candidates",
+    "Does NOT optimize for specific scenarios or episode IDs (Rule 42)"
+  ],
+  "regression_test": {
+    "description": "Re-run the 9 traced NO_PLANNER > FULL episodes with the repaired Planner",
+    "expected_results": {
+      "prohibited_attempted": "0/9 episodes (down from 9/9)",
+      "FULL_score_vs_NO_PLANNER": "FULL score >= NO_PLANNER score in all 9 episodes",
+      "zero_prohibited": "ALL 9 FULL episodes pass zero_prohibited check",
+      "any_denials_remaining": "Allowed \u2014 Broker may still deny some actions, but Planner must not repeat denied action types"
+    },
+    "execution_restriction": "Do not execute regression test until this spec is sealed by SENTINEL"
+  },
+  "provider_canary_result": {
+    "provider": "bjoernb/gemma4-31b-think:latest (local ollama)",
+    "success_rate": "19/20 (95%)",
+    "avg_response_time": "3.4s",
+    "threshold": ">=18/20 (90%)",
+    "status": "PASS",
+    "note": "Local inference preferred per SENTINEL. No network dependency, no 503 errors."
+  },
+  "llm_retest_provider": "bjoernb/gemma4-31b-think:latest (local ollama)",
+  "llm_retest_seed_source": "VALIDATION (holdout preserved)",
+  "llm_retest_templates": [
+    "T3_FALSIFICATION_SENSITIVE",
+    "T4_WORLD_MODEL_IDENTITY",
+    "T6_SEMANTIC_LLM"
+  ],
+  "llm_retest_total_episodes": 45,
+  "prohibited_until_seal": [
+    "Writing any repair code",
+    "Executing the 45-episode LLM re-test batch",
+    "Modifying any component outside the change scope",
+    "Running regression tests",
+    "Deploying to production"
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "spec_id": "D11_PLANNER_SCORING_REPAIR_SPEC",
+  "title": "Planner Scoring Calibration & Target Resolution for Falsification/Defeater Selection",
+  "version": "1.0",
+  "status": "DRAFT",
+  "source": "Falsification/Defeater Diagnostic (post-D10, 15 FULL_RAPHAEL episodes): 560 falsification discriminators proposed across 5 T4 episodes — 0 selected. 442 defeater triggers generated across all 15 episodes — 0 selected. ContradictionManager and DefeaterGenerator are structurally complete and actively producing candidates. The pipeline breaks at the Planner's decide() method: falsification/defeater candidates never win the scoring comparison against generic scan/recon actions.",
+  "rule_references": [
+    "Rule 3 (No Benchmark Optimization)",
+    "Rule 24 (Non-Bypassable Safety)",
+    "Rule 43 (Change-Scope Control)",
+    "Rule 44 (Minimal Repair Principle)",
+    "Charter Section 8 (Causal Architecture)",
+    "Charter Section 42 (Epistemic Diversity)",
+    "Charter Section 55 (Evidence Window Integrity)"
+  ],
+  "defect_statement": "Two defects prevent falsification and defeater components from producing observable outputs:\n\nDefect 1 — Target Resolution Gap (orchestrator/brain/action.py:890-892): The Planner resolves candidate targets to WorldModel entities via world.find_by_identifier(), which searches _by_identifier (IP/hostname → entity_id). However, falsification discriminators pass con.target_entity_id (entity_id strings like 'ent_xxx') as their target, and defeater candidates pass either entity_id or the literal string 'target'. Neither is an IP/hostname, so find_by_identifier() returns None, and the semantic_inference_driven boost (+0.5 at line 897) never fires for these candidates.\n\nDefect 2 — Scoring Calibration (orchestrator/brain/action.py:843-906): Standard scan/recon actions accumulate utility bonuses: +0.35 version detection, +0.3 known entity, +0.2 relationships, +0.5 semantic_inference_driven = 1.35 peak. Falsification candidates get +0.4 (falsification priority at line 844) + 0.2 (concrete action at line 866) = 0.6 base — plus +0.5 if entity resolves. Even with full bonuses (1.10), falsification loses to scans (1.35) when both target the same entity. Defeater candidates receive no special boost at all — only +0.2 concrete action. The Planner rationally prefers comprehensive scanning over targeted epistemic probes.",
+  "diagnostic_evidence": {
+    "confirmed_via": "Falsification/Defeater Diagnostic (arena/d10_falsification_defeater_diagnostic.py) run on 15 FULL_RAPHAEL episodes (T3 ×5, T4 ×5, T6 ×5). ContradictionManager.detect_contradictions() produces 100 contradictions across T4 episodes. propose_discriminators() produces 560 discriminators. DefeaterGenerator.generate() produces 442 triggers. All pass D8 scope filter. 0 selected by Planner. 0 FalsificationResult produced. 0 DefeaterResult produced. Root cause confirmed by tracing Planner utility scoring: scan actions consistently outrank falsification/defeater candidates.",
+    "defect_location_1": "orchestrator/brain/action.py:890-892 — world.find_by_identifier(c['target']) fails for entity_id or 'target' literal strings",
+    "defect_location_2": "orchestrator/brain/action.py:843-906 — falsification/defeater candidates lack sufficient scoring priority relative to scans when linked to active contradictions or defeater triggers",
+    "existing_infrastructure": "Planner has access to self.contradiction_manager.get_active_contradictions() and self.contradiction_manager.get_contradictions_for_entity(). WorldModel.get_entity(entity_id) can resolve entity_ids directly. Defeater trigger IDs are carried on defeater candidates via defeater_trigger_id field. Falsification candidates carry _is_falsification=True and target = con.target_entity_id."
+  },
+  "change_objective": "Recalibrate the Planner's candidate scoring function in decide() to prioritize falsification and defeater actions when linked to active contradictions or defeater conditions. Fix entity target resolution so defeater/falsification candidates receive the same semantic_inference_driven boost as base candidates. The goal is to ensure that when a falsification or defeater candidate is generated, it is selected in at least 1 PlanDecision per episode where it appears, producing measurable FalsificationResult and DefeaterResult objects.",
+  "invariant_to_establish": "In at least 5/5 T4 episodes (where contradictions are detected), at least 1 falsification candidate is selected and executed, producing FalsificationResult. In at least 5/15 FULL episodes, at least 1 defeater candidate is selected and executed, producing DefeaterResult. D7/D8/D9/D10 invariants remain satisfied.",
+  "architectural_constraint": {
+    "target_resolution": "The Planner must resolve entity_id strings (e.g., 'ent_xxx') passed as targets by falsification and defeater candidates into WorldModel entities. If find_by_identifier() returns None, check if target starts with 'ent_' and resolve via world.get_entity(). If target is the literal string 'target', look up entities associated with the active hypothesis via hypothesis_manager.get_hypothesis().entity_ids. This fix lives entirely in action.py — do NOT modify DefeaterGenerator or ContradictionManager.",
+    "scoring_calibration": "Falsification candidates linked to an active contradiction (via contradiction_manager.get_contradictions_for_entity()) must receive sufficient utility to rank >= generic scan/recon actions for that target. Defeater candidates must receive a similar boost. The calibration must be generic: no hardcoding of T3/T4/T6 or specific targets. Use the existing _is_falsification, _is_defeater flags and contradiction_manager state.",
+    "no_benchmark_optimization": "Do not hardcode 'If T3, select falsification' or any template-specific logic. The scoring boost must depend on architectural state (active contradictions, defeater triggers, hypothesis relevance), not scenario identity.",
+    "no_new_state": "Do not add new fields to Planner, PlanDecision, or any component. The calibration uses existing flags (_is_falsification, _is_defeater, defeater_trigger_id), existing methods (contradiction_manager.get_active_contradictions, get_contradictions_for_entity), and existing resolution logic (world.get_entity).",
+    "single_file_change": "All changes are in orchestrator/brain/action.py (Planner.decide() method). If a helper function is needed for target resolution, add it within action.py as a Planner method or module-level function.",
+    "defeater_target_scope": "The literal 'target' string appears in DefeaterTrigger.suggested_target when the trigger does not target a specific known entity (Rules 2-4 in defeater.py). The Planner must handle this gracefully: treat it as 'resolve to first hypothesis entity' rather than failing silently.",
+    "falsification_contradiction_link": "Falsification candidates already carry 'target' = con.target_entity_id. The Planner can check contradiction_manager.get_contradictions_for_entity(target_entity_id) to determine if an active contradiction exists. If yes, the falsification candidate gets an additional boost beyond the current +0.4.",
+    "no_downstream_changes": "CapabilityBroker, SafetyVerifier, Evaluator, WorldModel, HypothesisManager, LLM, FalsificationManager, DefeaterGenerator, DefeaterEvaluator, D7/D8/D9/D10 repair code — NONE may be modified."
+  },
+  "change_logic": {
+    "step_1": "Add a helper method _resolve_candidate_target() to Planner (or module-level function in action.py) that attempts three resolution strategies in order: (a) world.find_by_identifier(target) — IP/hostname look-up, (b) world.get_entity(target) if target starts with 'ent_' — entity_id direct look-up, (c) if target is 'target' literal, resolve to first entity associated with active hypotheses via hypothesis_manager. Returns (Entity or None, resolution_method_string).",
+    "step_2": "Replace the inline target resolution block at action.py:890-894 with a call to _resolve_candidate_target(). The entity_id for the semantic_inference_driven boost is now correctly resolved for all candidate types.",
+    "step_3": "Increase the falsification priority boost at action.py:844-845 from +0.4 to a dynamic value: if self.contradiction_manager.get_contradictions_for_entity(target_entity_id) returns active contradictions (status in {DETECTED, UNDER_INVESTIGATION}), add +0.6 (total = 0.4 + 0.6 = 1.0). If no active contradictions exist, keep the existing +0.4. This ensures falsification candidates targeting contradictory entities always have net utility >= 1.0, which exceeds the typical scan utility (~0.85 base, ~1.35 with hypothesis boost).",
+    "step_4": "Add a defeater priority boost at action.py (after the falsification block): if c.get('_is_defeater'), add +0.4 base boost. Additionally, if the defeater candidate targets an entity with an active contradiction, add +0.3. Also check if the defeater_trigger_id is present and not yet evaluated — if the trigger is fresh, add +0.3. This gives defeater candidates a utility floor of 0.4 + 0.2 (concrete) = 0.6, rising to 1.2 with hypothesis boost.",
+    "step_5": "Ensure rationale codes track the new boosts. Add 'falsification_contradiction_resolution' when the falsification boost fires due to active contradiction. Add 'defeater_priority' when the defeater boost fires.",
+    "step_6": "Verify at action.py:945-946 that _is_falsification rationale code is appended AFTER the selected candidate is chosen (this already exists — just verify it captures the new 'falsification_contradiction_resolution' code).",
+    "step_7": "Add analogous check for _is_defeater rationale at action.py (around line 946): if selected.get('_is_defeater'): rationale_codes.append('defeater_priority') and if linked to active contradiction, also append 'defeater_contradiction_resolution'.",
+    "state_change": "No new state. All changes are ephemeral scoring logic within a single method call."
+  },
+  "what_this_repair_does_not_do": [
+    "Does NOT modify ContradictionManager — contradiction detection and discriminator generation unchanged",
+    "Does NOT modify DefeaterGenerator — defeater trigger generation unchanged",
+    "Does NOT modify DefeaterEvaluator — defeater evaluation unchanged",
+    "Does NOT modify FalsificationManager — falsification result production unchanged",
+    "Does NOT modify CapabilityBroker — authorization logic unchanged",
+    "Does NOT modify SafetyVerifier — non-bypassable safety boundary unchanged",
+    "Does NOT modify HypothesisManager — hypothesis creation and consumption unchanged",
+    "Does NOT modify WorldModel — entity storage and resolution unchanged",
+    "Does NOT modify LLMService — LLM calls unchanged",
+    "Does NOT modify D7-R1 denial lifecycle logic",
+    "Does NOT modify D8 candidate generation scope filter",
+    "Does NOT modify D9 entity_id resolution (in ablation_runner.py — the resolution in Planner.decide() is separate)",
+    "Does NOT modify D10 evidence window or prompting repair",
+    "Does NOT modify ablation_runner.py candidate generation or execution (defeater execution at line 1442 stays)",
+    "Does NOT hardcode scenario-specific scoring (no 'if T3' or 'if target == 10.0.0.1')",
+    "Does NOT guarantee falsification/defeater output in every episode — only in episodes where contradictions/triggers exist (T4 for falsification, all 15 for defeater)",
+    "Does NOT fix the T3 contradiction detection gap — that is deferred to D12",
+    "Does NOT modify evaluation or scoring logic — Evaluator unchanged"
+  ],
+  "regression_test": {
+    "description": "Re-run the 15 FULL_RAPHAEL episodes (T3, T4, T6 × 5 validation seeds each) from the same schedule as D7-R1/D9/D10. D7/D8/D9/D10 invariants must hold. New D11 invariants: falsification and defeater candidates must be selected and produce outputs.",
+    "episodes": {
+      "T3_FALSIFICATION_SENSITIVE": [952316315, 368892695, 784510747, 92538387, 2028652336],
+      "T4_WORLD_MODEL_IDENTITY": [3723150, 1938425578, 1190122446, 34004644, 1122288798],
+      "T6_SEMANTIC_LLM": [310589826, 1568287767, 95656474, 476038189, 2017402118]
+    },
+    "architectures": ["FULL_RAPHAEL"],
+    "expectation_1": {
+      "metric": "Falsification selection and execution",
+      "description": "In T4 episodes (where contradictions are detected), at least 1 falsification candidate is selected and executed per episode, producing ≥1 FalsificationResult.",
+      "before": "0/5 T4 episodes (0%), 560 discriminators proposed but 0 selected",
+      "after": "≥4/5 T4 episodes (80%)",
+      "verification_method": "Parse falsification_results from arena_runner after each episode. Count episodes with len(falsification_results) > 0. Also check plan_decisions for 'falsification_priority' or 'falsification_contradiction_resolution' rationale codes.",
+      "rationale": "D11 directly targets the scoring calibration gap. Once falsification candidates receive sufficient utility relative to scans, the Planner should select them."
+    },
+    "expectation_2": {
+      "metric": "Defeater selection and execution",
+      "description": "In FULL_RAPHAEL episodes where defeater triggers are generated (all 15), at least 1 defeater candidate is selected and executed per episode, producing ≥1 DefeaterResult.",
+      "before": "0/15 episodes (0%), 442 triggers generated but 0 selected",
+      "after": "≥10/15 episodes (67%)",
+      "verification_method": "Parse defeater_results from arena_runner after each episode. Count episodes with len(defeater_results) > 0. Also check plan_decisions for 'defeater_priority' or 'defeater_contradiction_resolution' rationale codes.",
+      "rationale": "Defeater candidates now receive explicit utility boosts and correct target resolution, making them competitive with scan actions."
+    },
+    "expectation_3": {
+      "metric": "D7 invariant (no persistent denials)",
+      "action": "MUST still hold (0/15). Planner modification does not touch D7 denial lifecycle.",
+      "rationale": "D7 is unchanged. Denial state machine is in action_registry, not in scoring logic."
+    },
+    "expectation_4": {
+      "metric": "D8 invariant (no prohibited candidates)",
+      "action": "MUST still hold (0/15). Planner scoring does not modify candidate generation.",
+      "rationale": "D8 scope filter is upstream of the Planner. Scoring happens after candidates pass the filter."
+    },
+    "expectation_5": {
+      "metric": "D9 invariant (semantic_inference_driven rationale code)",
+      "action": "MUST still fire (≥1 per episode). The fix expands entity resolution, making D9 MORE likely to fire, not less.",
+      "rationale": "D9 depends on entity resolution. The target resolution fix in D11 makes entity resolution succeed for defeater/falsification targets that previously failed."
+    },
+    "expectation_6": {
+      "metric": "D10 invariant (non-tautological inference rate)",
+      "action": "MUST still hold (≥10/15 episodes). D11 does not modify LLM calling code.",
+      "rationale": "D10 evidence window and prompting repair are untouched."
+    },
+    "expectation_7": {
+      "metric": "FULL_RAPHAEL mean score",
+      "before": "0.500 (post-D10 regression test)",
+      "after": "any value (Rule 3 applies — behavioral superiority is not required)",
+      "rationale": "D11 targets falsification/defeater output, not benchmark score. Score may improve if resolving contradictions helps task completion, but this is not required."
+    },
+    "execution_restriction": "Do not execute regression test until this spec is sealed by SENTINEL"
+  },
+  "edge_cases": [
+    {
+      "case": "Defeater target is literal 'target' with no active hypotheses",
+      "behavior": "_resolve_candidate_target() tries find_by_identifier('target') → None, get_entity('target') → None, hypothesis_manager fallback → [] → no entity found. The candidate gets no entity-specific bonuses but still receives the base defeater boost (+0.4 + 0.2 concrete = 0.6). It ranks below scans with entity bonuses, which is acceptable — the candidate still exists and may be selected if no higher-utility scan targets exist.",
+      "verification": "No crash or KeyError. Candidate is scored and ranked. Scan action with entity bonuses is selected instead, which is correct behavior."
+    },
+    {
+      "case": "Falsification candidate targets an entity with no active contradiction (race condition — contradiction was just resolved)",
+      "behavior": "get_contradictions_for_entity() returns empty list (contradiction status no longer DETECTED/UNDER_INVESTIGATION). Falsification boost stays at +0.4 (no additional +0.6). The falsification candidate may not be selected, which is correct — no need to probe already-resolved contradictions.",
+      "verification": "Falsification candidate is scored at base priority level. Not selected if scans have higher utility."
+    },
+    {
+      "case": "Multiple falsification candidates exist for the same entity (multiple contradiction types)",
+      "behavior": "Each falsification candidate gets the +0.6 active-contradiction boost independently (checked per target entity). If they differ in action_type/capability, the highest-utility one is selected first. Subsequent PlanDecisions may select additional falsification candidates until the contradiction is resolved.",
+      "verification": "At least 1 falsification candidate selected per episode. Selection of multiple is acceptable and may improve contradiction resolution speed."
+    },
+    {
+      "case": "Both falsification and defeater candidates compete for the same entity in the same PlanDecision",
+      "behavior": "Both receive their respective boosts. Falsification (1.0 + 0.2 + possible SI boost = 1.7) slightly edges defeater (0.4 + 0.3 + 0.2 + SI boost = 1.4). Both are ranked above generic scans. The higher-utility candidate is selected. The other remains in the candidate set for future decisions.",
+      "verification": "The Planner selects the higher-utility candidate. No crash. The non-selected candidate is available for subsequent decisions in the episode."
+    },
+    {
+      "case": "No active contradictions in the episode (T3, T6 — current detector limitation)",
+      "behavior": "Falsification gets base +0.4 boost regardless. Defeater gets base +0.4 boost. Both remain lower than scans with entity bonuses. This is acceptable — D12 may fix the T3 contradiction detector to surface the SSH-vs-non-SSH contradiction, at which point falsification will activate for T3 as well.",
+      "verification": "No crash. Falsification/defeater candidates exist but are not selected (no active contradiction in current episode)."
+    },
+    {
+      "case": "Selected falsification action produces no useful evidence (timeout, connection refused, etc.)",
+      "behavior": "The FalsificationResult is still produced with an INCONCLUSIVE or NOT_TESTABLE outcome. This is valid — it proves the pipeline is live. The contradiction may not be resolved, but the falsification component produced output.",
+      "verification": "FalsificationResult exists (len > 0). Outcome may be INCONCLUSIVE if the action failed to gather discriminating evidence."
+    }
+  ],
+  "prohibited_until_seal": [
+    "Writing any repair code",
+    "Executing the regression test (15 FULL_RAPHAEL episodes)",
+    "Modifying any component outside the change scope (CapabilityBroker, SafetyVerifier, Evaluator, WorldModel, HypothesisManager, LLM, FalsificationManager, DefeaterGenerator, DefeaterEvaluator, D7/D8/D9/D10 code)",
+    "Modifying arena/ablation_runner.py — all changes are in orchestrator/brain/action.py",
+    "Deploying to production"
+  ]
+}

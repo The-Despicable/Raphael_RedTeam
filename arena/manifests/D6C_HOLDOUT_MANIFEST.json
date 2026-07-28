@@ -1,0 +1,199 @@
+{
+  "manifest_id": "D6C_HOLDOUT_MANIFEST",
+  "manifest_version": "1.0",
+  "created_at": "2026-07-27T03:55:41.853829+00:00",
+  "experiment_id": "D-6C",
+  "experiment_state": "PREFLIGHT_PASSED",
+  "parent_experiment": "D-6B-R1",
+  "parent_lock_hash": "8492b1eb489185ffe3c79663d2429860d73cf9db62ce4d568fdb779dcff5937",
+  "source_hashes": {
+    "arena_d6_manifest": "3cd6aabb6e8aad3e8b0eab295b016392e165f7c9922612778c1154a102c87c6f",
+    "arena_d6b_runner": "39cf38a5192bf510820bfb650eb2ac58e6362fb981fb77bf0a85dacfdb05a0f2",
+    "arena_ablation_runner": "c397e178254512875051225f309cfb6fecf2ac540e79d342c2e8675d7ca06b44",
+    "arena_llm_service": "49da4d6d0cd41c1b9b47105309cfbd834f1841ef53d6740e773dc96183754d2f",
+    "arena_semantic_inference": "943a550d9fd83bdf5c93314dd53fd9cb51b1fe47b58dca98cd8f9c0278820759",
+    "d6b_manifest_hash": "3cd6aabb6e8aad3e8b0eab295b016392e165f7c9922612778c1154a102c87c6f"
+  },
+  "source_snapshot_hash": "ab3b5b4c2f8d1998028c0e80823b31b2a8a0ab70ecefd5e68ed13492bf66b0b6",
+  "base_manifest_hash": "0dff5746f6a35c451d27e086a32f78b215bfa4e461bae18f21e63287555a47d7",
+  "config": {
+    "iteration_budget": 5,
+    "action_budget": 20,
+    "cost_model": "uniform",
+    "timeout_seconds": 120,
+    "total_episodes": 630,
+    "templates": 7,
+    "holdout_seeds_per_template": 10,
+    "architectures": 9
+  },
+  "holdout_seeds": {
+    "T1_NEGATIVE_CONTROL": [
+      398985103,
+      1340517205,
+      327080162,
+      782692929,
+      669053572,
+      2115708248,
+      2102404198,
+      1746747074,
+      1924275915,
+      1862569411
+    ],
+    "T2_HYPOTHESIS_SENSITIVE": [
+      197110894,
+      195338267,
+      957293235,
+      208730485,
+      389517725,
+      760679814,
+      538303086,
+      2097948136,
+      680685500,
+      393520207
+    ],
+    "T3_FALSIFICATION_SENSITIVE": [
+      794796913,
+      1321061340,
+      1374676512,
+      1133588110,
+      530596977,
+      86682225,
+      1770073277,
+      1800109544,
+      239782059,
+      1226544495
+    ],
+    "T4_WORLD_MODEL_IDENTITY": [
+      1865800714,
+      542432382,
+      1728973957,
+      2070388866,
+      114963245,
+      10365568,
+      1028798281,
+      559603676,
+      119140846,
+      1105168513
+    ],
+    "T5_PLANNING_COST": [
+      1360554200,
+      279518491,
+      1881989049,
+      937395713,
+      149641440,
+      824680137,
+      799706907,
+      758396726,
+      2085759611,
+      976415435
+    ],
+    "T6_SEMANTIC_LLM": [
+      2077513520,
+      1055864829,
+      431119720,
+      133830118,
+      202828823,
+      2072921947,
+      1460308434,
+      1705047636,
+      584280570,
+      1951821023
+    ],
+    "T7_DEFEATER_SENSITIVE": [
+      248248505,
+      1637290781,
+      789979487,
+      493405469,
+      106264125,
+      1039259383,
+      2120423376,
+      1589592064,
+      1697561387,
+      1879533526
+    ]
+  },
+  "seed_derivation": "SHA256(manifest_id:source_hash:version:label:index) mod 2^31",
+  "architectures": [
+    "FULL_RAPHAEL",
+    "NO_HYPOTHESIS",
+    "NO_FALSIFICATION",
+    "NO_WORLD_MODEL",
+    "NO_PLANNER",
+    "NO_LLM",
+    "LLM_ONLY",
+    "SCRIPTED_BASELINE",
+    "NO_DEFEATER"
+  ],
+  "scenario_templates": {
+    "T1_NEGATIVE_CONTROL": {
+      "id": "arena-d6-001",
+      "name": "Known Open Port",
+      "capability": "negative_control"
+    },
+    "T2_HYPOTHESIS_SENSITIVE": {
+      "id": "arena-d6-002",
+      "name": "Vulnerability Among Noise",
+      "capability": "hypothesis_sensitive"
+    },
+    "T3_FALSIFICATION_SENSITIVE": {
+      "id": "arena-d6-003",
+      "name": "Contradictory Observations",
+      "capability": "falsification_sensitive"
+    },
+    "T4_WORLD_MODEL_IDENTITY": {
+      "id": "arena-d6-004",
+      "name": "Multi-Interface Identity Resolution",
+      "capability": "world_model_identity"
+    },
+    "T5_PLANNING_COST": {
+      "id": "arena-d6-005",
+      "name": "Efficient Path Selection",
+      "capability": "planning_cost"
+    },
+    "T6_SEMANTIC_LLM": {
+      "id": "arena-d6-006",
+      "name": "Ambiguous Log Analysis",
+      "capability": "semantic_llm"
+    },
+    "T7_DEFEATER_SENSITIVE": {
+      "id": "arena-d6-007",
+      "name": "Reliability Condition Violation",
+      "capability": "defeater_sensitive"
+    }
+  },
+  "provider": {
+    "provider": "nvidia",
+    "model": "deepseek-ai/deepseek-v4-flash",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "timeout_seconds": 15,
+    "temperature": 0.0,
+    "max_tokens": 512,
+    "api_key": "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"
+  },
+  "provider_failure_policy": {
+    "rule": "Provider-unavailable episodes marked PROVIDER_CONFOUNDED, not retried.",
+    "no_selective_retry": true
+  },
+  "pre_run_gates": [
+    "D-6C manifest mechanically sealed",
+    "Holdout seeds preregistered (7\u00d710=70 seeds)",
+    "9 architectures preregistered (including LLM_ONLY)",
+    "Provider frozen: nvidia/deepseek-ai/deepseek-v4-flash",
+    "Provider-failure policy frozen: no selective retry",
+    "T6 FULL_RAPHAEL live canary required",
+    "T6 NO_LLM canary required",
+    "Treatment fidelity uses llm_service component",
+    "All 630 holdout cells preregistered",
+    "Lock hash computed and committed"
+  ],
+  "analysis_contract": {
+    "primary_metric": "component_wise_HELPED_HURT_NO_EFFECT_rate",
+    "secondary_metrics": [
+      "absolute_FULL_performance",
+      "reconciled_safety_metrics"
+    ],
+    "falsification_target": "Any component HURTS FULL_RAPHAEL",
+    "acceptance": "630 cells accounted, isolation valid, zero prohibited external executions, all effects reported"
+  },
+  "manifest_hash": "d27938d17c087860bde70ebcd9131523a15764a10c501a88b882aa09722c7677"
+}

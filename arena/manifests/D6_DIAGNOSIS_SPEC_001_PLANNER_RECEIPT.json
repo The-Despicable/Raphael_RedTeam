@@ -1,0 +1,103 @@
+{
+  "spec_id": "D-6_DIAGNOSIS_SPEC_001",
+  "title": "Architecture Diagnosis Specification: Planner Receipt Consumption",
+  "version": "1.0",
+  "source": "D-6C holdout traces, SENTINEL (GLM-5.2) disposition 2026-07-27",
+  "rule_references": [
+    "Rule 23 (STATE_UPDATE_FAILURE)",
+    "Rule 24 (First-Failure Principle)",
+    "Rule 28 (Safety Invariants)",
+    "Rule 29 (ActionReceipt Invariants)",
+    "Rule 42 (No Feature Escape)",
+    "Rule 58 (Security and Authorization)"
+  ],
+  "defect_statement": "The Planner proposes prohibited action types to the CapabilityBroker. The Broker returns DENIED ActionReceipts. The Planner does not consume these DENIED receipts as DECISION_RELEVANT feedback \u2014 it continues proposing actions of the same prohibited type across subsequent steps, failing to update its state or select alternative strategies.",
+  "evidence": {
+    "source": "9 non-confounded NO_PLANNER > FULL episodes (Q2 Steps 2-5 trace)",
+    "finding": "100% of episodes show FULL failing prohibited_attempted while NO_PLANNER passes zero_prohibited. Both architectures share identical cognitive failures (contradiction_not_detected). The entire score gap is the prohibited_attempted penalty.",
+    "key_observation": "FULL Planner invocations: 25 across all episodes. Multiple DENIED receipts per episode. Planner does not change action type after first denial."
+  },
+  "what_is_not_the_defect": [
+    "NOT an action-priority filtering defect \u2014 adding a Planner-level allowlist would violate Rule 28 (dual safety authority) and Rule 58 (security boundary)",
+    "NOT a strategic reasoning defect \u2014 Planner is not selecting worse actions, it is selecting unauthorized actions",
+    "NOT a provider confound \u2014 confound stratification confirmed 9/9 episodes are clean",
+    "NOT an LLM quality issue \u2014 LLM GIGO is present in 5/9 but secondary; the Planner defect exists independently"
+  ],
+  "diagnostic_scope": {
+    "components_under_diagnosis": [
+      "Planner",
+      "CapabilityBroker/ActionReceipt"
+    ],
+    "components_excluded_from_modification": [
+      "HypothesisManager",
+      "Falsification",
+      "WorldModel",
+      "Defeater",
+      "LLM/SemanticInference",
+      "ScriptedBaseline"
+    ],
+    "diagnostic_method": "Trace consumption of DENIED ActionReceipts through Planner state update cycle. This is observation-only \u2014 no code changes.",
+    "constraints": [
+      "No Planner-level safety filter or allowlist may be drafted (Rule 28, 58)",
+      "No modification to Planner logic is authorized \u2014 this is a diagnostic (Rule 42)",
+      "No aggregation of episodes until each trace is individually classified"
+    ]
+  },
+  "diagnostic_questions": [
+    {
+      "q_id": "DQ1",
+      "question": "Does the Planner register DENIED ActionReceipts?",
+      "method": "Trace each DENIED receipt through Planner._process_receipt() or equivalent. Check whether the denial status is logged to Planner internal state.",
+      "expected_evidence": "Presence/absence of denial state in Planner attributes after a DENIED receipt"
+    },
+    {
+      "q_id": "DQ2",
+      "question": "Does the Planner update WorldModel after receiving a DENIED receipt?",
+      "method": "Check whether Planner communicates the denial to WorldModel (e.g., marking action type as unavailable for target).",
+      "classification": {
+        "UPDATES_WM": "Planner correctly propagates denial to WorldModel \u2192 defect is upstream (WorldModel not consumed by subsequent planning)",
+        "DOES_NOT_UPDATE": "Planner fails to propagate \u2192 defect is at Planner\u2192WorldModel boundary"
+      }
+    },
+    {
+      "q_id": "DQ3",
+      "question": "Does the Planner propose a different action type after receiving a DENIED receipt?",
+      "method": "Compare action type of PlanDecision N vs PlanDecision N+1 after a DENIED receipt for action type X.",
+      "classification": {
+        "CHANGES_TYPE": "Planner acknowledges denial but selects another prohibited type \u2192 defect is in action-type selection logic",
+        "REPEATS_TYPE": "Planner ignores denial entirely \u2192 defect is in receipt consumption (OUTPUT_NOT_CONSUMED)",
+        "NO_FURTHER_ACTIONS": "Planner stops proposing actions after denial \u2192 defect is in task completion (premature termination)"
+      }
+    },
+    {
+      "q_id": "DQ4",
+      "question": "Does the Planner query CapabilityBroker for available capabilities before proposing an action?",
+      "method": "Check whether Planner calls broker.get_available_actions() or equivalent before PlanDecision generation.",
+      "classification": {
+        "QUERIES": "Planner queries but ignores result \u2192 defect is in capability-to-action mapping",
+        "DOES_NOT_QUERY": "Planner acts without knowing capabilities \u2192 defect is missing capability-awareness step"
+      }
+    }
+  ],
+  "expected_classification": {
+    "primary": "OUTPUT_NOT_CONSUMED \u2014 Planner receives DENIED receipts but does not update state or change action type",
+    "secondary": "STATE_UPDATE_FAILURE \u2014 denial not propagated to WorldModel or Planner internal state",
+    "ruled_out": [
+      "STRATEGIC_ERROR \u2014 Planner is not making bad choices, it is making unauthorized choices",
+      "CAPABILITY_GAP \u2014 CapabilityBroker correctly prohibits unauthorized actions; the gap is Planner ignoring the prohibition feedback"
+    ]
+  },
+  "success_criteria": "After diagnostic, we can trace a specific DENIED ActionReceipt through the Planner state-update loop and identify exactly where the receipt consumption fails.",
+  "post_diagnosis_path": "Diagnosis results will dictate which component is modified. If DQ3 shows REPEATS_TYPE (dominant), the Planner receipt-consumption path is the repair target. If DQ2 shows DOES_NOT_UPDATE, the Planner\u2192WorldModel interface is the repair target. If DQ4 shows DOES_NOT_QUERY, a capability-awareness step must be added (but only after SENTINEL review of diagnostic results).",
+  "prohibited_actions": [
+    "Implementing a Planner-level safety allowlist",
+    "Modifying CapabilityBroker authorization logic",
+    "Modifying any component outside the diagnostic scope",
+    "Optimizing Planner to recover the 9 NO_PLANNER > FULL episodes (Rule 42)",
+    "Rerunning D-6C holdout with modified Planner"
+  ],
+  "status": "SEALED",
+  "sealed_at": "2026-07-27T07:30:00+00:00",
+  "sealed_by": "SENTINEL (GLM-5.2)",
+  "authorized_work": "Execute DQ1-DQ4 diagnostic (observation only, no code changes)"
+}

@@ -1,0 +1,75 @@
+{
+  "diagnostic": "Q3_OBLIGATION2_CONFOUND_FILTERED_REANALYSIS",
+  "description": "Confound-filtered paired re-analysis preserving paired structure",
+  "method": "Drop BOTH FULL and ablation for each (template, seed) where FULL is PROVIDER_CONFOUNDED",
+  "confounded_pairs_removed": 24,
+  "filtered_n": 46,
+  "original_n": 70,
+  "results": {
+    "NO_HYPOTHESIS": {
+      "fb": 0,
+      "ab": 9,
+      "ne": 37,
+      "fb_o": 0,
+      "ab_o": 9,
+      "ne_o": 61
+    },
+    "NO_FALSIFICATION": {
+      "fb": 2,
+      "ab": 6,
+      "ne": 38,
+      "fb_o": 2,
+      "ab_o": 6,
+      "ne_o": 62
+    },
+    "NO_WORLD_MODEL": {
+      "fb": 2,
+      "ab": 3,
+      "ne": 41,
+      "fb_o": 2,
+      "ab_o": 3,
+      "ne_o": 65
+    },
+    "NO_PLANNER": {
+      "fb": 0,
+      "ab": 9,
+      "ne": 37,
+      "fb_o": 0,
+      "ab_o": 10,
+      "ne_o": 60
+    },
+    "NO_LLM": {
+      "fb": 0,
+      "ab": 9,
+      "ne": 37,
+      "fb_o": 0,
+      "ab_o": 10,
+      "ne_o": 60
+    },
+    "NO_DEFEATER": {
+      "fb": 1,
+      "ab": 5,
+      "ne": 40,
+      "fb_o": 1,
+      "ab_o": 6,
+      "ne_o": 63
+    },
+    "LLM_ONLY": {
+      "fb": 40,
+      "ab": 0,
+      "ne": 6,
+      "fb_o": 40,
+      "ab_o": 0,
+      "ne_o": 30
+    },
+    "SCRIPTED_BASELINE": {
+      "fb": 40,
+      "ab": 0,
+      "ne": 6,
+      "fb_o": 40,
+      "ab_o": 0,
+      "ne_o": 30
+    }
+  },
+  "conclusion": "Filtering does NOT change conclusion. FULL still has 0 wins against NO_HYPOTHESIS, NO_PLANNER, NO_LLM after confound removal. Result is robust to confound filtering."
+}

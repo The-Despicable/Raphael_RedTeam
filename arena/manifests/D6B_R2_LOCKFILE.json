@@ -1,0 +1,55 @@
+{
+  "lock_id": "D6B_R2_LOCKFILE",
+  "version": "2.0",
+  "timestamp": "2026-07-26T19:30:00Z",
+  "previous_lock": "72568d55d21cc8b506f551e75f8700ffad34349c5a9908584a8ade7196857523",
+  "previous_lock_hash": "72568d55d21cc8b506f551e75f8700ffad34349c5a9908584a8ade7196857523",
+  "patch": {
+    "file": "d6b_runner.py",
+    "type": "instrumentation_only",
+    "description": "Changed llm treatment-fidelity classifier from 'llm' (TracedLLM mock) to 'llm_service' (LLMService runtime)",
+    "changes": [
+      "extract_component_engagement(): component list 'llm' \u2192 'llm_service'",
+      "classify_treatment_fidelity(): config_to_comp mapping 'llm_enabled' \u2192 'llm_service'"
+    ]
+  },
+  "provider_substitution": {
+    "original": {
+      "provider": "opencode",
+      "model_id": "deepseek-v4-flash-free"
+    },
+    "replacement": {
+      "provider": "nvidia",
+      "model_id": "deepseek-ai/deepseek-v4-flash",
+      "api_base": "https://integrate.api.nvidia.com/v1"
+    },
+    "status": "resealed",
+    "temperature": 0.0,
+    "max_tokens": 512,
+    "timeout_seconds": 15
+  },
+  "source_hashes": {
+    "ablation_py": "61ee20718ab735ae0829972b8cf94db99a356cc12fe8df8943241b5ed9d303ef",
+    "ablation_runner_py": "c397e178254512875051225f309cfb6fecf2ac540e79d342c2e8675d7ca06b44",
+    "action_py": "bc71edd43eb4f113b855e19ea76aa2fe95fc28d2b449cc700ac186f56b765a6e",
+    "capability_broker_py": "19a0e618f3b3042d9efe5bff65c0da2a18ed015cc0c8da779bd7a5cc81d6d5a9",
+    "conclusion_adapters_py": "6f17f5b0499c0c8dac23239328da5fb2d2a4bed32831b9fb13ecda09cd95192e",
+    "conclusion_py": "eb443a1517afc625c8e4393c2b278a5ad4605a7c5629aaa6d4dc462ee4f00da4",
+    "contradiction_py": "b7a76c968e393b10d05d3da78c99be968f86a8bcd4f1186a4aefda24e6f96c4e",
+    "d6_manifest_py": "a6bd5a88bc98cb78a561382e6358df7429510fc9e943a32579377c6596f03d9e",
+    "d6b_runner_py": "39cf38a5192bf510820bfb650eb2ac58e6362fb981fb77bf0a85dacfdb05a0f2",
+    "defeater_py": "57dec0cd5440cb9d18f01946db7ca50ceae30c061d68762c53574445f85e472f",
+    "environment_py": "ad0018ab9bb392dfcf8d6bead54c10d4b2708edbabf37b4aecedc0699bc1944b",
+    "episode_py": "bf12a3318ece2eaf8c424eeff4af93b5f974103f92006f815c95417511d509ca",
+    "evaluator_py": "28b57c1fc324324bd0b30bcce6dc01c8b0b146e23756b11f864e278948a5873f",
+    "evidence_py": "7e3ff3ac41f894711007d8aa9b0add33a1f62321c1a1c21c23cb66d771efadd0",
+    "hypothesis_py": "d8d2e823c2e2e97c6e057a54ec6e6ca405a7ce47b228512fa29b6cd88450f896",
+    "llm_service_py": "49da4d6d0cd41c1b9b47105309cfbd834f1841ef53d6740e773dc96183754d2f",
+    "metrics_py": "125906ab6f2c12b2c8feb06bcad27e5f2efb76be4b75e9430b46846f91cdd2a3",
+    "runner_py": "9f1bb10897f5ed614b356bb91d07024b40e3a753a24638b234b6642362a16e20",
+    "semantic_inference_py": "943a550d9fd83bdf5c93314dd53fd9cb51b1fe47b58dca98cd8f9c0278820759",
+    "trust_py": "262e944ac1bdb2ca892d4185693e30d71675ce0b2de77aab3dcf234a4b86c9fa"
+  },
+  "module_count": 20,
+  "experiment_lock_hash": "8492b1eb489185ffe3c79663d2429860d73cf9db62ce4d568fdb779dcff59397"
+}

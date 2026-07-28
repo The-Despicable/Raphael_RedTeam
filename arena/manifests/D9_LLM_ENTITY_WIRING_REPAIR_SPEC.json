@@ -1,0 +1,152 @@
+{
+  "spec_id": "D9_LLM_ENTITY_WIRING_REPAIR_SPEC",
+  "title": "Minimal Repair: LLM Entity-ID Wiring for Causal Integration",
+  "version": "1.0",
+  "status": "DRAFT",
+  "source": "Cognitive Value Diagnosis (post-D8): 30-episode regression showed FULL_RAPHAEL mean=0.500 == NO_LLM mean=0.500. Cognitive trace of T3 episode confirmed 3/4 LLM SemanticInferenceSuccess objects consumed by HypothesisManager with semantic_inference_ids, but zero PlanDecisions carried semantic_inference_driven rationale code. Root cause: entity_ids=[] hardcoded at arena/ablation_runner.py:870.",
+  "rule_references": [
+    "Rule 24 (Non-Bypassable Safety)",
+    "Rule 43 (Change-Scope Control)",
+    "Rule 44 (Minimal Repair Principle)",
+    "Charter Section 8 (Causal Architecture)",
+    "Charter Section 26 (Cognitive Trace Integrity)"
+  ],
+  "defect_statement": "At arena/ablation_runner.py:868-872, runner.hypothesis_manager.consume_semantic_inference() is called with entity_ids=[], a hardcoded empty list. The comment reads '# Will be populated from evidence context' but this population was never implemented. The HypothesisManager correctly stores entity_ids in the Hypothesis object (hypothesis.py:482) and indexes hypotheses by entity_id (hypothesis.py:504-507). The Planner's scoring boost at action.py:890 checks c['target'] in hyp.entity_ids — this check NEVER fires because entity_ids is always empty. Additionally, the alternate boost path at action.py:895 (evidence-seeking action types) was closed by D8's scope filter. Result: LLM-derived hypotheses enter the HypothesisManager with semantic_inference_ids, are passed to the Planner via hypothesis_ids, but have zero behavioral effect. The LLM is causally isolated from action selection.",
+  "diagnostic_evidence": {
+    "confirmed_via": "D8 cognitive trace (T3 episode, seed 952316315): 3 SemanticInferenceSuccess produced with inference_ids ['si_5e401ce99b62', 'si_9e3891b07c6b', 'si_a8ad6f14cd2b']. All 3 consumed by HypothesisManager.consume_semantic_inference(). All 3 hypotheses have entity_ids=[]. Planner Decision 1 receives hypothesis_ids=['hyp_e33916dd535d', 'hyp_9a02fcdb54c3', 'hyp_a926dfc9ed10'] with semantic_inference_ids but applies zero semantic_inference_driven rationale codes. Entity_ids remain empty throughout episode.",
+    "defect_location": "arena/ablation_runner.py:870 — entity_ids=[] hardcoded in the consume_semantic_inference() call within the cognitive loop.",
+    "existing_infrastructure": "WorldModel.entities (world.py:242) is a dict[str, Entity]. Each Entity.evidence_ids (world.py:108) lists evidence IDs linked to that entity. WorldModel.relationships (world.py:243) also carry evidence_ids (world.py:137). The mapping from evidence_id -> entity_ids already exists in the data but is never queried. Entities are created with evidence_ids at ablation_runner.py:1935, 1951, 1967.",
+    "causal_chain_before_repair": "LLM -> SemanticInferenceSuccess -> HypothesisManager(consume, entity_ids=[]) -> Hypothesis(entity_ids=[]) -> Planner.decide(c['target'] in hyp.entity_ids) -> NEVER MATCHES -> no semantic_inference_driven boost -> FULL == NO_LLM"
+  },
+  "change_objective": "Populate entity_ids in the consume_semantic_inference() call at ablation_runner.py:868-872 with WorldModel entity IDs derived from the observation's evidence context. When the LLM produces a SemanticInferenceSuccess about evidence E (identified by obs_evidence_ids), resolve the WorldModel entities whose evidence_ids overlap with obs_evidence_ids. This completes the contract left open by the comment '# Will be populated from evidence context'.",
+  "invariant_to_establish": "When the LLM produces a SemanticInferenceSuccess about evidence E, the resulting Hypothesis must contain entity_ids that reference the WorldModel entities associated with evidence E via the entity.evidence_ids field. The semantic_inference_driven rationale code must appear in at least one PlanDecision per FULL_RAPHAEL episode where the LLM is invoked.",
+  "architectural_constraint": {
+    "entity_ids_from_existing_world_model_state": "entity_ids must be resolved by scanning WorldModel.entities for entities whose evidence_ids overlap with obs_evidence_ids. This is a query of existing state, not entity resolution logic. Do NOT create new entity resolution algorithms.",
+    "additional_entity_ids_from_relationships": "If a relationship's evidence_ids overlaps with obs_evidence_ids, both the source and target entity should also be included in entity_ids. This captures entities linked by relationships grounded in the same evidence.",
+    "no_fabrication": "Do not fabricate entity IDs. Do not create entities. Do not resolve targets from IP strings or hostnames in the observation. Only use the WorldModel's existing entity-to-evidence associations.",
+    "de_duplication": "Ensure entity_ids contains no duplicates. Use a set before converting to list.",
+    "no_world_model_modification": "WorldModel must not be modified. No new methods, no new indexes. The resolution is done inline in ablation_runner.py by iterating over existing WorldModel state.",
+    "empty_entity_ids_is_safe_fallback": "If obs_evidence_ids is empty, or if no WorldModel entities reference any evidence ID in obs_evidence_ids, entity_ids=[] is correct (falls back to current behavior). The Planner's boost simply won't fire for that hypothesis."
+  },
+  "files_expected_to_change": [
+    "arena/ablation_runner.py (lines ~868-872 — replace entity_ids=[] with resolved entity IDs from WorldModel)"
+  ],
+  "files_that_must_not_change": [
+    "Planner (action.py) — receives entity_ids via hypothesis_ids, operates identically. No change needed.",
+    "HypothesisManager (hypothesis.py) — consume_semantic_inference already handles entity_ids correctly. No change needed.",
+    "CapabilityBroker — authorization logic unchanged. No change needed.",
+    "SafetyVerifier — non-bypassable safety boundary. No change needed.",
+    "Evaluator — scoring logic unchanged. No change needed.",
+    "WorldModel (world.py) — SENTINEL directive: must not be modified. No change needed.",
+    "LLM/SemanticInference (semantic_inference.py, llm_service.py) — no change needed.",
+    "Falsification — out of scope for D9. No change needed.",
+    "Defeater — out of scope for D9. No change needed.",
+    "D7-R1 repair code — denial lifecycle unchanged. No change needed.",
+    "D8 repair code — candidate generation filter unchanged. No change needed.",
+    "arena/d6_manifest.py — scenario definitions unchanged. No change needed."
+  ],
+  "change_logic": {
+    "step_1": "Locate lines ~868-872 in arena/ablation_runner.py (inside _run_raphael, cognitive loop, Component 3: LLM section).",
+    "step_2": "Before the consume_semantic_inference call, resolve entity_ids from obs_evidence_ids using WorldModel state:",
+    "step_2_detail": "   obs_evidence_set = set(obs_evidence_ids)\n   entity_ids = list({e.entity_id for e in runner.world.entities.values() \n                      if obs_evidence_set.intersection(e.evidence_ids)})\n   # Also include entities linked via relationships with matching evidence\n   for rel in runner.world.relationships.values():\n       if obs_evidence_set.intersection(rel.evidence_ids):\n           if rel.source_entity_id not in entity_ids:\n               entity_ids.append(rel.source_entity_id)\n           if rel.target_entity_id not in entity_ids:\n               entity_ids.append(rel.target_entity_id)",
+    "step_3": "Replace entity_ids=[] with entity_ids=<resolved_list> in the consume_semantic_inference() call.",
+    "step_4": "Remove the stale comment '# Will be populated from evidence context' and replace with '# Resolved from WorldModel entity evidence_ids overlapping obs_evidence_ids'.",
+    "no_new_state": "This repair adds no new state to any component. It only queries existing WorldModel state that was already populated by the entity-from-observation logic."
+  },
+  "what_this_repair_does_not_do": [
+    "Does NOT modify Planner scoring, ranking, or decision logic",
+    "Does NOT modify HypothesisManager hypothesis creation logic",
+    "Does NOT add new methods to WorldModel",
+    "Does NOT create new entity resolution algorithms",
+    "Does NOT fabricate entity IDs from IP strings or hostnames",
+    "Does NOT modify CapabilityBroker authorization logic",
+    "Does NOT modify D7-R1 denial lifecycle logic",
+    "Does NOT modify D8 candidate generation scope filter",
+    "Does NOT change any evaluation or scoring logic",
+    "Does NOT change scenario definitions or episode schedules",
+    "Does NOT add new imports to ablation_runner.py (WorldModel and Entity are already imported)",
+    "Does NOT guarantee FULL_RAPHAEL will outperform NO_LLM — only that the LLM's causal path to the Planner is live (Rule 3 applies: behavioral superiority is not required)"
+  ],
+  "regression_test": {
+    "description": "Re-run the 15 FULL_RAPHAEL episodes from the D7-R1 Gemma re-test (T3, T4, T6 × 5 validation seeds each)",
+    "episodes": {
+      "T3_FALSIFICATION_SENSITIVE": [952316315, 368892695, 784510747, 92538387, 2028652336],
+      "T4_WORLD_MODEL_IDENTITY": [3723150, 1938425578, 1190122446, 34004644, 1122288798],
+      "T6_SEMANTIC_LLM": [310589826, 1568287767, 95656474, 476038189, 2017402118]
+    },
+    "architectures": ["FULL_RAPHAEL", "NO_LLM"],
+    "expectation_1": {
+      "metric": "semantic_inference_driven rationale code appearance",
+      "before": "0/15 episodes — zero PlanDecisions carried semantic_inference_driven",
+      "after": "≥1 PlanDecision per FULL_RAPHAEL episode carries semantic_inference_driven rationale code",
+      "verification_method": "Parse each PlanDecision in episode trace for 'semantic_inference_driven' in rationale_codes list",
+      "rationale": "entity_ids will no longer be empty. The c['target'] in hyp.entity_ids check will fire for candidates targeting entities that the LLM's evidence is about."
+    },
+    "expectation_2": {
+      "metric": "FULL_RAPHAEL mean score",
+      "before": "0.500 (tied with NO_LLM)",
+      "after": "any value (Rule 3 applies — behavioral superiority is not required)",
+      "rationale": "D9 establishes causal connection, not behavioral superiority. Score may increase, decrease, or stay the same."
+    },
+    "expectation_3": {
+      "metric": "NO_LLM mean score",
+      "before": "0.500",
+      "after": "unchanged (0.500 ± 0.05)",
+      "rationale": "NO_LLM does not call the LLM or create entity_ids. D9 changes only the LLM code path. NO_LLM must remain statistically identical."
+    },
+    "expectation_4": {
+      "metric": "D7 invariant (no denied repetitions)",
+      "action": "MUST still hold (0/15)",
+      "rationale": "D7-R1 is unchanged. Entity wiring is orthogonal to denial lifecycle."
+    },
+    "expectation_5": {
+      "metric": "D8 invariant (no prohibited candidates)",
+      "action": "MUST still hold (0/15)",
+      "rationale": "D8 is unchanged. Scope filter still filters prohibited action types."
+    },
+    "expectation_6": {
+      "metric": "prohibited_attempted",
+      "action": "MUST remain 0/15",
+      "rationale": "D8 already prevents prohibited candidates. D9 does not change candidate generation."
+    },
+    "execution_restriction": "Do not execute regression test until this spec is sealed by SENTINEL"
+  },
+  "edge_cases": [
+    {
+      "case": "obs_evidence_ids is empty",
+      "behavior": "entity_ids resolves to []. consume_semantic_inference receives entity_ids=[]. Planner boost does not fire. Falls back to current (pre-D9) behavior. This is safe.",
+      "verification": "Empty obs_evidence_ids should not occur when LLM is invoked with >= 3 evidence items, but guard handles it."
+    },
+    {
+      "case": "obs_evidence_ids don't match any WorldModel entity's evidence_ids",
+      "behavior": "entity_ids resolves to []. The entity creation pattern (ablation_runner.py:1935) always links entities to their discovery evidence, so this should not happen in practice unless the evidence is very stale and entities were garbage-collected.",
+      "verification": "If it does happen (e.g., test harness without entity creation), the empty list is safe."
+    },
+    {
+      "case": "Multiple entities share the same evidence_id",
+      "behavior": "Both entity IDs are included (deduplicated via set). The Planner's c['target'] in hyp.entity_ids check will match any of them. Correct behavior.",
+      "verification": "The entity_ids list may contain 2+ IDs for evidence shared across entities (e.g., IP and hostname entities from same observation)."
+    },
+    {
+      "case": "Relationships reference obs_evidence_ids but entities don't",
+      "behavior": "Source and target entity IDs from matching relationships are appended. This catches cases where the relationship is the primary evidence holder (e.g., a CONNECTS_TO relationship established from the observation).",
+      "verification": "Edge case: relationship evidence_ids may overlap but entity.evidence_ids may not. Both sources are checked."
+    },
+    {
+      "case": "Target of the candidate does not match any resolved entity_id",
+      "behavior": "The c['target'] in hyp.entity_ids check does not fire for that candidate. Other candidates targeting matching entities may still get the boost. No crash, no error.",
+      "verification": "This is expected when the candidate targets a different entity than the one the LLM analyzed. The boost is specific to relevant candidates."
+    },
+    {
+      "case": "LLM is invoked multiple times per iteration (loop over evidence_texts)",
+      "behavior": "The break at line 882 limits to one observation per iteration. Each invocation resolves entity_ids independently. No interference between iterations.",
+      "verification": "The entity_ids resolution is local to each LLM call and does not persist across iterations."
+    }
+  ],
+  "prohibited_until_seal": [
+    "Writing any repair code",
+    "Executing the regression test (15 FULL_RAPHAEL + 15 NO_LLM episodes)",
+    "Modifying any component outside the change scope (WorldModel, HypothesisManager, Planner, etc.)",
+    "Deploying to production"
+  ]
+}

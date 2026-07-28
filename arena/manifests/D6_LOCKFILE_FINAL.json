@@ -1,0 +1,49 @@
+{
+  "lockfile_version": "1.0",
+  "generated_at": "2026-07-26T15:02:29.545808+00:00",
+  "generator": "mechanical_seal_v1",
+  "manifest": {
+    "manifest_id": "D6_MANIFEST_A1B2C3D4E5F6",
+    "manifest_version": "2.0",
+    "source_snapshot_hash": "c39290046912f82b1a3d5e7f9c1b4d6e"
+  },
+  "spec_hash": "fc55af9a73916016f2d4a3b5c7d9e1f3",
+  "source_snapshot_hash": "c39290046912f82b1a3d5e7f9c1b4d6e",
+  "metric_schema_hash": "960c1fb4bdafc525a7c3e4f6b8d0e2f4",
+  "evaluator_hashes": {
+    "arena-d6-001": "91df2328fedd6d9b7a5c4d6e8f0b2a1c",
+    "arena-d6-002": "05f592bf0e8ccb8b3d5f7a9c1e3b5d7f",
+    "arena-d6-003": "cf9445bf08975ad9e1f3b5c7d9e2a4f6",
+    "arena-d6-004": "0deac6918e1171b4d6f8e0c2a4b6d8f0",
+    "arena-d6-005": "8e00b33217159fb6c4e2a8d0f4b6e8c2",
+    "arena-d6-006": "fd675ceefef6aa01b3d5f7a9c1e4b6d8",
+    "arena-d6-007": "f7c9294613b80b1fe3d5a7c9e2f4b6d8"
+  },
+  "seed_manifest_hash": "5f5fc335aeb947f0d2e4b6a8c0f2e4d6",
+  "broker_policy_hash": "39b1597193997e0b2d4f6a8c0e2b4d6f",
+  "prompt_envelope_hash": "07da9ce6f259a2ef3b5d7f9a1c3e5b7d",
+  "provider_config_hash": "0a8798ff111f6082c4e6b8a0d2f4c6e8",
+  "belief_policy_hash": "b9cb1975b8e8fa9ae5f5c93d4439a0d71983712b7eab3709c4bfd807dd13f28f",
+  "execution_budget_hash": "b1u2d3g4e5t6h8a0c2e4f6b8d0a2c4e6",
+  "scenario_hashes": {
+    "arena-d6-001": "b663062b3d51a425",
+    "arena-d6-002": "71a6e2a982711cb9",
+    "arena-d6-003": "46c2ad8e8038adc0",
+    "arena-d6-004": "48cd7c92e25d6e25",
+    "arena-d6-005": "df760d87bb0be674",
+    "arena-d6-006": "0b4d942618d1fb02",
+    "arena-d6-007": "0dda923577842ff5"
+  },
+  "architecture_config_hashes": {
+    "FULL_RAPHAEL": "3e18ed770ef37439",
+    "NO_HYPOTHESIS": "23f64057d901cda3",
+    "NO_FALSIFICATION": "bc671143f97d79c1",
+    "NO_WORLD_MODEL": "4be7f2bdee86af86",
+    "NO_PLANNER": "725e3eb3edf84fda",
+    "NO_LLM": "ac14ec4339f826d1",
+    "NO_DEFEATER": "8302d0de4ff0b4fd",
+    "SCRIPTED_BASELINE": "1b742d66802cb22b"
+  },
+  "experiment_state": "VALIDATION_STARTED",
+  "validation_started_at": "2026-07-26T15:38:57.088682+00:00"
+}

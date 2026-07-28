@@ -1,0 +1,70 @@
+{
+  "lockfile_version": "1.0",
+  "created_at": "2026-07-26T14:30:00Z",
+  "manifest": {
+    "manifest_id": "D6_MANIFEST_A1B2C3D4E5F6",
+    "manifest_version": "2.0",
+    "source_snapshot_hash": "a6b8d69e7b84e30a"
+  },
+  "source_component_hashes": {
+    "arena_defeater": "57dec0cd5440cb9d",
+    "arena_conclusion": "eb443a1517afc625",
+    "arena_ablation": "61ee20718ab735ae",
+    "arena_ablation_runner": "7bddc43ff2b77d67",
+    "arena_conclusion_adapters": "6f17f5b0499c0c8d",
+    "arena_runner": "9f1bb10897f5ed61",
+    "arena_environment": "92e3c4c09d9759a0",
+    "arena_diagnostic": "522981de1d95367b",
+    "arena_all_py": "9c06778f9fbdee52",
+    "orchestrator_brain_hypothesis": "d8d2e823c2e2e97c",
+    "orchestrator_brain_capability_broker": "19a0e618f3b3042d",
+    "orchestrator_brain_world": "3c8b61f18deb0748",
+    "orchestrator_brain_contradiction": "b7a76c968e393b10",
+    "d6_manifest": "a6bd5a88bc98cb78"
+  },
+  "architecture_config_hashes": {
+    "FULL_RAPHAEL": "3e18ed770ef37439",
+    "NO_HYPOTHESIS": "23f64057d901cda3",
+    "NO_FALSIFICATION": "bc671143f97d79c1",
+    "NO_WORLD_MODEL": "4be7f2bdee86af86",
+    "NO_PLANNER": "725e3eb3edf84fda",
+    "NO_LLM": "ac14ec4339f826d1",
+    "NO_DEFEATER": "8302d0de4ff0b4fd",
+    "SCRIPTED_BASELINE": "1b742d66802cb22b"
+  },
+  "scenario_hashes": {
+    "arena-d6-001": "b663062b3d51a425",
+    "arena-d6-002": "71a6e2a982711cb9",
+    "arena-d6-003": "46c2ad8e8038adc0",
+    "arena-d6-004": "48cd7c92e25d6e25",
+    "arena-d6-005": "829c9a8aa09bdbfc",
+    "arena-d6-006": "0b4d942618d1fb02",
+    "arena-d6-007": "0dda923577842ff5"
+  },
+  "evaluator_hashes": {
+    "arena-d6-001": "91df2328fedd6d9b",
+    "arena-d6-002": "05f592bf0e8ccb8b",
+    "arena-d6-003": "cf9445bf08975ad9",
+    "arena-d6-004": "0deac6918e1171b4",
+    "arena-d6-005": "8e00b33217159fb6",
+    "arena-d6-006": "fd675ceefef6aa01",
+    "arena-d6-007": "f7c9294613b80b1f"
+  },
+  "metric_schema_hash": "960c1fb4bdafc525",
+  "prompt_envelope_hash": "p1e2n3v4e5l6o7p8",
+  "provider_config_hash": "p9r10o11v12i13d14e15",
+  "seed_manifest_hash": "5f5fc335aeb947f0",
+  "broker_policy_hash": "c84bd5f0b9d9f75b",
+  "transition_policy_hash": "t1r2a3n4s5i6t7i8o9n10",
+  "budget_hash": "b1u2d3g4e5t6h7a8s9h",
+  "experiment_state": "PREFLIGHT_PASSED",
+  "state_transitions": [
+    {
+      "from": "PLANNED",
+      "to": "PREFLIGHT_PASSED",
+      "timestamp": "2026-07-26T14:25:00Z",
+      "trigger": "D-6A 10/10 gates passed"
+    }
+  ],
+  "artifact_lock": true
+}

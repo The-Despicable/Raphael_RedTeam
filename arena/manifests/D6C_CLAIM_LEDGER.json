@@ -1,0 +1,41 @@
+{
+  "experiment": "D-6C",
+  "updated_at": "2026-07-27T06:50:00+00:00",
+  "claims": [
+    {
+      "claim": "LLM contributes to FULL_RAPHAEL outcomes",
+      "status": "UNTESTED",
+      "notes": "D-6C cannot resolve due to provider confound. Controlled re-test required (Q3 Obligation 3)."
+    },
+    {
+      "claim": "Cognitive architecture provides behavioral value",
+      "status": "PROVISIONAL",
+      "notes": "Causal integration demonstrated; behavioral value not established under D-6C conditions. Filtered re-analysis confirms no hidden FULL advantage against cognitive ablations. Central finding is provisional pending controlled re-test."
+    },
+    {
+      "claim": "Planner causally changes action selection",
+      "status": "DEMONSTRATED",
+      "notes": "D-2. Unchanged by D-6C."
+    },
+    {
+      "claim": "Planner changes are behaviorally beneficial",
+      "status": "NOT_ESTABLISHED",
+      "notes": "D-6C: 10 ABLATION_BETTER, 0 FULL_BETTER. Q2 Step 1 confirms 9/10 are non-confounded \u2014 signal is real, not a provider artifact. Step 2 diagnostic required."
+    },
+    {
+      "claim": "FULL > cognitive ablations on holdout",
+      "status": "FALSIFIED_PROVISIONALLY",
+      "notes": "0 FULL wins against 6 cognitive ablations on full holdout. Survives confound filtering (still 0 FULL wins after removing confounded pairs). Provisional pending controlled LLM re-test."
+    },
+    {
+      "claim": "Provider confound affects all FULL-containing comparisons",
+      "status": "ESTABLISHED",
+      "notes": "32% of FULL episodes confounded. Confound depresses FULL against EVERY ablation. Call-failure rate (84.4%) and episode confound rate (3.6%) separated per SENTINEL requirement."
+    },
+    {
+      "claim": "Measurement instrument (provider) failed",
+      "status": "ESTABLISHED",
+      "notes": "84.4% call-failure rate is a measurement failure, not a cognitive failure. Rule 35: INFRA_FAILURE \u2260 cognitive failure."
+    }
+  ]
+}

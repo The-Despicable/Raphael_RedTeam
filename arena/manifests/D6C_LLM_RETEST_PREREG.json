@@ -1,0 +1,114 @@
+{
+  "prereg_id": "D6C_LLM_RETEST_001",
+  "title": "Controlled LLM Re-test: FULL_RAPHAEL vs NO_LLM under Reliable Provider",
+  "version": "1.0",
+  "source": "Q3 Obligation 3 per SENTINEL (GLM-5.2) disposition 2026-07-27",
+  "rule_references": [
+    "Rule 34 (Holdout Discipline)",
+    "Rule 35 (INFRA_FAILURE)",
+    "Rule 49 (STOP_AND_DIAGNOSE)"
+  ],
+  "research_question": "Does FULL_RAPHAEL with a reliable LLM provider outperform NO_LLM on LLM-engaging scenarios?",
+  "hypothesis": "UNDIRECTED \u2014 This is an evaluation, not a confirmation. The result may show FULL better, NO_LLM better, or no effect.",
+  "seed_source": "VALIDATION (not holdout). This preserves holdout integrity per Rule 34.",
+  "justification_for_seed_source": "SENTINEL GLM-5.2 approved validation seeds for this re-test. The 630-episode holdout remains pristine for post-diagnosis evaluation.",
+  "templates": [
+    {
+      "id": "T3_FALSIFICATION_SENSITIVE",
+      "seeds": [
+        325168450,
+        1181711629,
+        641287774,
+        207296381,
+        1497050375
+      ],
+      "rationale": "Falsification engages LLM for discriminator proposal. D-6C holdout showed FULL score=0.33 vs NO_PLANNER score=0.67 in this template; LLM component active but score depressed."
+    },
+    {
+      "id": "T4_WORLD_MODEL_IDENTITY",
+      "seeds": [
+        7907589,
+        108356474,
+        1911275598,
+        591164086,
+        902240774
+      ],
+      "rationale": "World Model identity requires LLM to identify correct host matching. D-6C holdout showed FULL score=0.00 (GIGO pattern) vs NO_PLANNER score=0.50."
+    },
+    {
+      "id": "T6_SEMANTIC_LLM",
+      "seeds": [
+        49287999,
+        2057027176,
+        1861601527,
+        1652909427,
+        1757087520
+      ],
+      "rationale": "Explicitly LLM-sensitive template. D-6C holdout showed FULL score=0.00 vs NO_PLANNER score=0.33."
+    }
+  ],
+  "architectures": [
+    "FULL_RAPHAEL",
+    "NO_LLM",
+    "LLM_ONLY"
+  ],
+  "rationale_for_architectures": {
+    "FULL_RAPHAEL": "Test architecture with full LLM integration",
+    "NO_LLM": "Ablation without LLM \u2014 isolates LLM contribution",
+    "LLM_ONLY": "LLM without other cognitive components \u2014 measures standalone LLM value (D-6C showed 40 FULL wins vs LLM_ONLY)"
+  },
+  "total_episodes": 45,
+  "episode_breakdown": "3 templates \u00d7 5 seeds \u00d7 3 architectures = 45",
+  "provider_requirements": {
+    "minimum_success_rate": 0.9,
+    "success_definition": "LLM call returns valid SemanticInference within timeout (no 503, no timeout, no connection error)",
+    "verification_procedure": "Before any episode: send 5 test prompts. If \u22654/5 succeed (\u226580%), proceed. After every 10 episodes: send 1 test prompt. If any test fails, pause and report.",
+    "fallback_if_provider_unavailable": "If no provider achieves \u226590% success rate after 3 attempts, abort the re-test and file a PROVIDER_UNAVAILABLE finding. Do not substitute a lower-reliability provider.",
+    "frozen_provider": {
+      "provider": "Local Ollama",
+      "model": "bjoernb/gemma4-31b-think:latest",
+      "endpoint": "http://localhost:11434",
+      "type": "local (no network dependency)",
+      "verified_success_rate": "19/20 (95%)",
+      "canary_date": "2026-07-27",
+      "frozen_by": "SENTINEL (GLM-5.2)"
+    }
+  },
+  "provider_options": "TBD \u2014 any provider that achieves \u226590% call success rate during verification. Options include but are not limited to: NVIDIA NIM (deepseek-ai/deepseek-v4-flash) if reliability improves, OpenAI-compatible endpoints, local inference.",
+  "evaluation_metrics": [
+    "LLM call success rate (must be \u226590% for valid experiment)",
+    "FULL vs NO_LLM paired score delta",
+    "FULL vs LLM_ONLY paired score delta",
+    "Provider call failure rate (call-level)",
+    "Episode-level confounded rate"
+  ],
+  "acceptance_criteria": {
+    "experiment_valid": "LLM call success rate \u226590% across all 45 episodes",
+    "finding_llm_helps": "FULL score > NO_LLM score in \u226560% of paired comparisons",
+    "finding_llm_hurts": "NO_LLM score > FULL score in \u226560% of paired comparisons",
+    "finding_no_effect": "Neither direction reaches \u226560% threshold"
+  },
+  "stop_conditions": [
+    "If LLM call success rate drops below 80% at any point \u2192 STOP, file PROVIDER_CONFOUNDED",
+    "If any prohibited external action is observed \u2192 STOP, file SAFETY_FAILURE",
+    "If any isolation leak is detected \u2192 STOP, file LEAK"
+  ],
+  "prohibited_actions": [
+    "No modification to any cognitive component before, during, or after this re-test",
+    "No rerunning of individual episodes that fail due to provider issues",
+    "No comparison of results to D-6C holdout (different seed sets, not comparable)",
+    "No claim that this re-test supersedes D-6C \u2014 it is a supplementary diagnostic"
+  ],
+  "outputs": {
+    "primary": "arena/d6c_results/llm_retest_results.jsonl",
+    "progress": "arena/d6c_results/llm_retest_progress.json",
+    "scorecard": "arena/manifests/D6C_LLM_RETEST_SCORECARD.json"
+  },
+  "status": "SEALED_PROVIDER_FROZEN",
+  "created_at": "2026-07-27T07:25:00+00:00",
+  "seal_required_before_execution": true,
+  "sealed_at": "2026-07-27T07:30:00+00:00",
+  "sealed_by": "SENTINEL (GLM-5.2)",
+  "authorized_work": "Execute provider canary phase only. Freeze provider identity before executing 45 episodes.",
+  "frozen_at": "2026-07-27T07:45:00+00:00"
+}

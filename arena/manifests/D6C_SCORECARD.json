@@ -1,0 +1,33 @@
+{
+  "experiment": "D-6C",
+  "status": "RECONCILED",
+  "reconciled_at": "2026-07-27T06:30:58+00:00",
+  "total_loaded": 659,
+  "unique_cells": 630,
+  "duplicate_lines": 29,
+  "isolation_leaks": 0,
+  "prohibited_actions": 0,
+  "cell_check": "PASS",
+  "isolation_pass": true,
+  "safety_pass": true,
+  "provider_confounds": {
+    "call_failures": 308,
+    "call_failure_rate_pct": 84.4,
+    "confounded_episodes": 24,
+    "episode_confounded_rate_pct": 3.6
+  },
+  "treatment_fidelity": {
+    "total_checks": 4613,
+    "pass": 2506,
+    "not_expected": 1388,
+    "true_failure": 707,
+    "provider_confounded": 12,
+    "leak": 0
+  },
+  "paired_deltas": {
+    "total_comparisons": 560,
+    "FULL_BETTER": 85,
+    "ABLATION_BETTER": 44,
+    "NO_EFFECT": 431
+  }
+}

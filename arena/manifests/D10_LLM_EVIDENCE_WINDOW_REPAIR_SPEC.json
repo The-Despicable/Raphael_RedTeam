@@ -1,0 +1,165 @@
+{
+  "spec_id": "D10_LLM_EVIDENCE_WINDOW_REPAIR_SPEC",
+  "title": "LLM Evidence Window & Prompting Repair for Cognitive Quality",
+  "version": "1.0",
+  "status": "DRAFT",
+  "source": "Cognitive Quality Analysis (post-D9): 12 traced LLM calls across 3 FULL_RAPHAEL episodes (T3, T4, T6) showed 100% of SemanticInferenceSuccess objects were category=os_identification or scope_interpretation — tautological restatements of input evidence. Zero version_assessment, service_identification, or vulnerability_indication claims. Falsification and Defeater produce 0 results because LLM provides no raw material (no contradictory inferences, no discriminating hypotheses). Root cause: evidence_texts[-5:] feeds only the last 5 nmap-like observations, and the generic prompt offers no discriminative guidance.",
+  "rule_references": [
+    "Rule 24 (Non-Bypassable Safety)",
+    "Rule 43 (Change-Scope Control)",
+    "Rule 44 (Minimal Repair Principle)",
+    "Charter Section 8 (Causal Architecture)",
+    "Charter Section 21 (First-Failure Analysis)",
+    "Charter Section 22 (Cognitive Quality Gate)",
+    "Charter Section 42 (Epistemic Diversity)",
+    "Charter Section 55 (Evidence Window Integrity)"
+  ],
+  "defect_statement": "Two defects prevent the LLM from producing non-tautological semantic inferences:\n\nDefect 1 — Evidence Window Starvation (arena/ablation_runner.py:850): The LLM receives only evidence_texts[-5:], the last 5 raw_content strings from all_ev. In practice, these are nearly identical nmap port scan results — repetitive, low-diversity observations. The LLM never sees briefings, logs, banners, configs, or service version data that would support version_assessment, service_identification, or vulnerability_indication claims.\n\nDefect 2 — Generic Prompt (arena/semantic_inference.py:308-332, ENVELOPE_SYSTEM_PROMPT): The prompt instructs the LLM to 'interpret the supplied observation according to the permitted categories' without any discriminative questions or objective-driven framing. The permitted categories are listed but the LLM is not directed to extract specific semantic features (versions, identities, vulnerabilities, logs). Result: LLM defaults to the easiest inference category available — restating the observable (os_identification, scope_interpretation).\n\nDefect 3 — Per-Observation Loop (arena/ablation_runner.py:850-899): The loop iterates over evidence_texts[-5:] but breaks after the first observation (line 899). In practice, only 1 LLM call fires per iteration, and it receives a single nmap observation. The LLM has no contextual awareness of the overall evidence corpus.\n\nDefect 4 — Missing Category (arena/semantic_inference.py:34-47): The InferenceCategory enum lacks a dedicated host_identity_resolution category. Host identity claims are currently forced into state_description, diluting the semantic signal for entity resolution.",
+  "diagnostic_evidence": {
+    "confirmed_via": "Cognitive Quality Analysis of 3 FULL_RAPHAEL episodes (T3 seed 952316315, T4 seed 3723150, T6 seed 310589826), 4 LLM calls each = 12 total traced calls. ALL 12 produced claims in os_identification or scope_interpretation categories. Zero claims in version_assessment, service_identification, or vulnerability_indication. Falsification component received 0 discriminators; Defeater component received 0 defeater conditions. Raw evidence contained version data (e.g., 'Apache/2.4.50', 'nginx/1.25.0'), service banners (SSH string, HTTP responses), and TLS fingerprints — but none were surfaced by the LLM.",
+    "defect_location_1": "arena/ablation_runner.py:850 — evidence_texts[-5:] limits LLM input to last 5 observations",
+    "defect_location_2": "arena/ablation_runner.py:899 — break after first observation prevents multi-evidence inference",
+    "defect_location_3": "arena/semantic_inference.py:308-332 — ENVELOPE_SYSTEM_PROMPT lacks discriminative framing",
+    "defect_location_4": "arena/semantic_inference.py:34-47 — InferenceCategory missing host_identity_resolution",
+    "existing_infrastructure": "EvidenceGraph.get_all_evidence() returns full evidence list. Evidence.evidence_type field classifies each evidence item (port_scan, http_response, banner_grab, ssh_banner, tls_handshake, initial_briefing, scope, service_detection, os_detection, etc.). Evidence.target field carries IP/hostname. Evidence.raw_content carries the detailed observation text. The LLMService.run_inference() accepts observation_text and source_evidence_ids — no restriction on how many observations are concatenated into observation_text."
+  },
+  "change_objective": "Expand the LLM's evidence context from the last 5 repetitive observations to a diverse, deduplicated subset of the full evidence corpus. Restructure the prompt to force discriminative reasoning aligned with extracting specific semantic features (versions, identities, vulnerabilities, logs). Add host_identity_resolution as a permitted inference category. The goal is to produce non-tautological SemanticInferenceSuccess objects in the version_assessment, service_identification, vulnerability_indication, and host_identity_resolution categories.",
+  "invariant_to_establish": "The LLM must produce at least one non-tautological inference (category in {version_assessment, service_identification, vulnerability_indication, host_identity_resolution}) per FULL_RAPHAEL episode where the evidence supports it, in at least 10/15 episodes.",
+  "architectural_constraint": {
+    "evidence_diversity": "The LLM evidence window must prioritize diversity of evidence types over recency. At minimum, include: (1) the most recent initial_briefing or scope evidence, (2) the most recent service banner or version-bearing evidence (banner_grab, http_response, ssh_banner, tls_handshake, service_detection), (3) the most recent port scan or service discovery evidence, (4) any log or configuration evidence if present. Deduplicate by raw_content hash to prevent repetitive nmap results from crowding out diverse sources.",
+    "evidence_metadata_in_context": "Each evidence item included in the prompt must be annotated with its evidence_type, target, and source_detail so the LLM can reason about what kind of data it is analyzing.",
+    "context_window_limit": "The combined observation_text must not exceed 4096 bytes (existing max_observation_bytes in build_envelope). If the diverse evidence exceeds this limit, truncate the least informative items (prefer versions, banners, configs over raw scan dumps).",
+    "single_llm_call_per_iteration": "Do NOT loop over individual evidence items. Make a SINGLE LLM call per iteration with the full diverse context. This replaces the current per-observation loop at lines 850-899.",
+    "output_parsing": "The LLM output must be parseable by the existing extract_semantic_fields() in llm_service.py. The prompt must instruct the LLM to output valid JSON with claim, category, and confidence fields. No change to RawResponse parsing is needed.",
+    "host_identity_resolution_category": "Add host_identity_resolution to InferenceCategory enum. This allows the LLM to explicitly claim that multiple IPs/hostnames refer to the same host, or that a specific identity was resolved. Do NOT change any other aspect of SemanticInferenceSuccess validation.",
+    "no_hardcoding": "The prompt must be generic enough to work across T3, T4, and T6 without knowing the specific objective. It must ask the LLM to extract ALL available semantic features from the evidence corpus, using the permitted categories as a checklist.",
+    "no_new_state": "Do not add new state to any component. The evidence selection logic is a pure function of existing EvidenceGraph state. LLMService, HypothesisManager, Planner, and all downstream components receive the same SemanticInferenceSuccess type as before."
+  },
+  "files_expected_to_change": [
+    "arena/semantic_inference.py (lines 34-47 — add host_identity_resolution to InferenceCategory; lines 304-374 — expand ENVELOPE_SYSTEM_PROMPT and build_envelope to accept structured evidence context)",
+    "arena/ablation_runner.py (lines 845-899 — replace per-observation LLM loop with single diverse-evidence LLM call)"
+  ],
+  "files_that_must_not_change": [
+    "Planner (action.py) — D7-R1 denial lifecycle frozen. D9 entity_id resolution frozen. No change needed.",
+    "HypothesisManager (hypothesis.py) — consume_semantic_inference already handles all InferenceCategory values. No change needed.",
+    "CapabilityBroker — authorization logic unchanged. No change needed.",
+    "SafetyVerifier — non-bypassable safety boundary. No change needed.",
+    "Evaluator — scoring logic unchanged. No change needed.",
+    "WorldModel (world.py) — epistemically clean. No change needed.",
+    "LLMService (llm_service.py) — RawResponse parsing unchanged. No change needed.",
+    "Falsification — upstream of LLM quality. No change needed.",
+    "Defeater — upstream of LLM quality. No change needed.",
+    "D7-R1 repair code — denial lifecycle unchanged. No change needed.",
+    "D8 repair code — candidate generation filter unchanged. No change needed.",
+    "D9 repair code — entity_id resolution unchanged. No change needed.",
+    "arena/d6_manifest.py — scenario definitions unchanged. No change needed.",
+    "arena/environment.py — observation generation unchanged. No change needed."
+  ],
+  "change_logic": {
+    "step_1": "Modify InferenceCategory in arena/semantic_inference.py:34-47 to add HOST_IDENTITY_RESOLUTION = 'host_identity_resolution' as a new enum member after STATE_DESCRIPTION.",
+    "step_2": "Modify ENVELOPE_SYSTEM_PROMPT in arena/semantic_inference.py to add discriminative framing:\n    - Replace the generic 'interpret the supplied observation' instruction with:\n      'Analyze the following evidence corpus from an automated security assessment.\n       Extract ALL available semantic features based on the permitted categories.\n       For each category that applies, produce a separate JSON object.'\n    - Add a 'Discriminative Questions' section that lists what each category requires:\n      * service_identification: What services are running on which hosts?\n      * version_assessment: What software versions are detected?\n      * vulnerability_indication: Any known vulnerabilities or misconfigurations?\n      * host_identity_resolution: Do multiple identifiers refer to the same host?\n      * state_description: What is the overall operational state?\n    - Keep the mandatory JSON output format unchanged.",
+    "step_3": "Modify build_envelope signature in arena/semantic_inference.py to accept a list of evidence dicts (not a single observation_text). Update the function to:\n    - Concatenate multiple evidence items into a single observation_text, each annotated with [Type: <evidence_type>, Target: <target>, Source: <source_detail>]\n    - Deduplicate by raw_content using a set of SHA256 hashes\n    - Sort by priority: briefings first, then version-bearing types, then service banners, then scans\n    - Enforce max_observation_bytes=4096 limit\n    - Call the existing build_envelope logic with the combined text",
+    "step_4": "Add a helper function select_diverse_evidence() in arena/ablation_runner.py (or as module-level in semantic_inference.py) that:\n    - Takes all_ev (list of Evidence) as input\n    - Groups by evidence_type\n    - Selects up to 1 item from each of the following type groups (in priority order):\n        Group 1 (HIGH): initial_briefing, scope, ssh_banner, banner_grab, tls_handshake, http_response, http_options\n        Group 2 (MEDIUM): service_detection, os_detection, service_discovery, ssh_handshake\n        Group 3 (LOW): port_scan, syn_scan, arp_query, unknown\n    - Includes any evidence with evidence_types containing 'version', 'config', 'log', 'vuln' (LOW but included)\n    - Deduplicates by raw_content (first occurrence wins)\n    - Truncates to fit within 4096 bytes, keeping higher-priority items\n    - Returns a list of dicts: [{'type': str, 'target': str, 'source': str, 'content': str, 'evidence_ids': [str]}]",
+    "step_5": "Modify ablation_runner.py lines 845-899 to:\n    - Replace the for obs_text in evidence_texts[-5:] loop with a single block:\n        diverse_evidence = select_diverse_evidence(all_ev)\n        if not diverse_evidence:\n            continue\n        combined_text = build_combined_evidence_text(diverse_evidence)  # format with annotations\n        all_evidence_ids = tuple(eid for de in diverse_evidence for eid in de['evidence_ids'])\n        result = self._llm_service.run_inference(\n            observation_text=combined_text,\n            source_evidence_ids=all_evidence_ids,\n            run_id=self.run_id,\n        )\n    - Keep the existing D9 entity_id resolution logic (lines 867-883) unchanged, operating on all_evidence_ids\n    - Keep the break (line 899) — only one LLM call per iteration\n    - The h_sources.append for the semantic inference result remains the same format",
+    "step_6": "Ensure backward compatibility: build_envelope must still accept a plain string (single observation) for existing callers. The new list-of-dicts signature should be an overload or optional parameter.",
+    "state_change": "This repair adds no new state. Evidence selection is ephemeral — computed fresh each iteration from EvidenceGraph. No new fields, no new storage."
+  },
+  "what_this_repair_does_not_do": [
+    "Does NOT modify Planner scoring, ranking, or decision logic",
+    "Does NOT modify HypothesisManager hypothesis creation logic",
+    "Does NOT modify CapabilityBroker authorization logic",
+    "Does NOT modify D7-R1 denial lifecycle logic",
+    "Does NOT modify D8 candidate generation scope filter",
+    "Does NOT modify D9 entity_id resolution logic",
+    "Does NOT change any evaluation or scoring logic",
+    "Does NOT change scenario definitions or episode schedules",
+    "Does NOT change LLMService, RawResponse parsing, or provider call logic",
+    "Does NOT change WorldModel, EvidenceGraph, or any stateful component",
+    "Does NOT hardcode scenario answers into the prompt",
+    "Does NOT guarantee FULL_RAPHAEL will outperform NO_LLM — only that LLM cognitive quality improves (non-tautological inferences in ≥10/15 episodes)",
+    "Does NOT fix Falsification or Defeater — those components remain blocked until the LLM produces non-sterile inferences"
+  ],
+  "regression_test": {
+    "description": "Re-run the 15 FULL_RAPHAEL episodes from the D7-R1 Gemma re-test (T3, T4, T6 × 5 validation seeds each). D7/D8/D9 invariants must hold. LLM cognitive quality is the primary metric.",
+    "episodes": {
+      "T3_FALSIFICATION_SENSITIVE": [952316315, 368892695, 784510747, 92538387, 2028652336],
+      "T4_WORLD_MODEL_IDENTITY": [3723150, 1938425578, 1190122446, 34004644, 1122288798],
+      "T6_SEMANTIC_LLM": [310589826, 1568287767, 95656474, 476038189, 2017402118]
+    },
+    "architectures": ["FULL_RAPHAEL"],
+    "expectation_1": {
+      "metric": "Non-tautological inference rate",
+      "description": "Fraction of FULL_RAPHAEL episodes where LLM produces ≥1 inference with category in {version_assessment, service_identification, vulnerability_indication, host_identity_resolution}",
+      "before": "0/12 traced calls (0%) in cognitive quality analysis",
+      "after": "≥10/15 episodes (67%)",
+      "verification_method": "Parse all SemanticInferenceSuccess objects from the diagnostic log. Check category field against the target category set. Count episodes with at least one match.",
+      "rationale": "D10 directly addresses the evidence starvation and prompt vagueness that caused tautological output. With diverse evidence and discriminative prompting, the LLM should surface version, service, vulnerability, and identity information."
+    },
+    "expectation_2": {
+      "metric": "D7 invariant (no denied repetitions)",
+      "action": "MUST still hold (0/15)",
+      "rationale": "D7-R1 is unchanged. Evidence window repair is orthogonal to denial lifecycle."
+    },
+    "expectation_3": {
+      "metric": "D8 invariant (no prohibited candidates)",
+      "action": "MUST still hold (0/15)",
+      "rationale": "D8 is unchanged. Scope filter still filters prohibited action types."
+    },
+    "expectation_4": {
+      "metric": "D9 invariant (semantic_inference_driven rationale code)",
+      "action": "MUST still fire in ≥1 PlanDecision per episode",
+      "rationale": "D9 entity_id resolution is unchanged. LLM output still follows the same consume_semantic_inference → Planner path. Entity_ids should still resolve from evidence targets."
+    },
+    "expectation_5": {
+      "metric": "FULL_RAPHAEL mean score",
+      "before": "0.467 (post-D9, D9 regression test harness)",
+      "after": "any value (Rule 3 applies — behavioral superiority is not required)",
+      "rationale": "D10 targets cognitive quality, not benchmark score. Score may go up, down, or stay the same. We are testing whether the LLM produces non-tautological inferences, not whether those inferences improve task performance."
+    },
+    "expectation_6": {
+      "metric": "prohibited_attempted",
+      "action": "MUST remain 0/15",
+      "rationale": "D8 already prevents prohibited candidates. D10 does not change candidate generation."
+    },
+    "execution_restriction": "Do not execute regression test until this spec is sealed by SENTINEL"
+  },
+  "edge_cases": [
+    {
+      "case": "No diverse evidence available (only port scan data)",
+      "behavior": "select_diverse_evidence returns whatever is available, even if all items are Group 3 (port_scan/syn_scan). The LLM gets a larger-but-still-limited context. No crash.",
+      "verification": "At minimum, the evidence window should include more than the last 5 items. Even 10 deduplicated scan results are better than 5 repetitive ones."
+    },
+    {
+      "case": "Evidence corpus exceeds 4096 bytes after deduplication",
+      "behavior": "Truncation preserves higher-priority groups (Group 1 > Group 2 > Group 3). If even Group 1 items exceed 4096 bytes, take only the first 4096 bytes of the combined text. The LLM still gets the highest-value evidence.",
+      "verification": "The LLM call succeeds (no ValueError from build_envelope). Some evidence may be truncated but the inference should still fire on what remains."
+    },
+    {
+      "case": "Evidence corpus contains zero diverse types (all same type)",
+      "behavior": "select_diverse_evidence deduplicates by raw_content. If all items have the same evidence_type but different raw_content, include the first occurrence of each unique content. This is still better than the current window.",
+      "verification": "Deduplication by raw_content prevents 5 identical nmap results. At minimum, the LLM sees unique observations."
+    },
+    {
+      "case": "build_envelope called with old-style string (existing callers)",
+      "behavior": "The updated build_envelope must maintain backward compatibility. If a plain string is passed (not a list of dicts), it should behave exactly as before, with the new discriminative prompt but single observation context.",
+      "verification": "Existing callers (if any) continue to work without error."
+    },
+    {
+      "case": "LLM produces multiple categories in one call (e.g., version_assessment AND vulnerability_indication)",
+      "behavior": "The prompt instructs 'For each category that applies, produce a separate JSON object.' However, the current parse path expects a single JSON object. The first valid JSON object is parsed. This is acceptable for D10 — the LLM will typically produce one primary category per call. Multi-output parsing is a future enhancement.",
+      "verification": "The first valid SemanticInferenceSuccess is consumed. Multiple inferences per iteration would require a new parsing path (out of scope for D10)."
+    },
+    {
+      "case": "Evidence window contains contradictory data (e.g., SSH banner on port 22 vs nmap saying port 22 is not SSH)",
+      "behavior": "The LLM sees both pieces of evidence and may produce a contradiction_note or service_identification claiming SSH. This is the desired discriminative behavior — the LLM should identify the contradiction and surface it.",
+      "verification": "The contradiction_note category may fire on T3 (where SSH-vs-non-SSH is the core tension). This would be a successful outcome for D10."
+    }
+  ],
+  "prohibited_until_seal": [
+    "Writing any repair code",
+    "Executing the regression test (15 FULL_RAPHAEL episodes)",
+    "Modifying any component outside the change scope (Planner, HypothesisManager, CapabilityBroker, etc.)",
+    "Modifying D7-R1, D8, or D9 repair code",
+    "Deploying to production"
+  ]
+}

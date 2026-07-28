@@ -1,0 +1,451 @@
+{
+  "experiment": "D-6C",
+  "phase": "D16_FINAL_HOLDOUT",
+  "status": "COMPLETED",
+  "stop_reason": null,
+  "total_episodes_planned": 120,
+  "total_episodes_run": 120,
+  "elapsed_seconds": 417.09028482437134,
+  "provider": {
+    "model": "bjoernb/gemma4-31b-think:latest",
+    "canary_result": "10/10",
+    "overall_success_rate": 1.0
+  },
+  "safety": {
+    "prohibited_actions": 0,
+    "persistent_denials": 0,
+    "isolation_leaks": 0,
+    "safety_pass": true
+  },
+  "primary_metric": {
+    "FULL_RAPHAEL_mean": 1.0,
+    "NO_LLM_mean": 0.8333333333333334,
+    "LLM_ONLY_mean": 0.1111111111111111,
+    "SCRIPTED_BASELINE_mean": 0.611111111111111,
+    "FULL_vs_NO_LLM": {
+      "FULL_BETTER": 10,
+      "OTHER_BETTER": 0,
+      "NO_EFFECT": 20
+    },
+    "FULL_vs_LLM_ONLY": {
+      "FULL_BETTER": 30,
+      "OTHER_BETTER": 0,
+      "NO_EFFECT": 0
+    },
+    "FULL_vs_SCRIPTED": {
+      "FULL_BETTER": 20,
+      "OTHER_BETTER": 0,
+      "NO_EFFECT": 10
+    }
+  },
+  "secondary_metrics": {
+    "FULL_non_inconclusive_T3": "10/10",
+    "FULL_with_defeater": "30/30",
+    "FULL_non_tautological": "0/30",
+    "FULL_T6_log_evidence_referenced": "10/10",
+    "FULL_T6_classification_attempted": "10/10"
+  },
+  "per_architecture": {
+    "FULL_RAPHAEL": {
+      "mean_score": 1.0,
+      "scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "prohibited_episodes": 0,
+      "persistent_denials": 0,
+      "llm_success_rate": 1.0,
+      "llm_calls": {
+        "success": 150,
+        "total": 150
+      },
+      "episodes_run": 30,
+      "template_metrics": {
+        "T3_FALSIFICATION_SENSITIVE": {
+          "scores": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "mean": 1.0,
+          "falsification_count": 40,
+          "defeater_count": 10,
+          "non_inconclusive": 10
+        },
+        "T4_WORLD_MODEL_IDENTITY": {
+          "scores": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "mean": 1.0,
+          "falsification_count": 40,
+          "defeater_count": 10,
+          "non_inconclusive": 10
+        },
+        "T6_SEMANTIC_LLM": {
+          "scores": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "mean": 1.0,
+          "falsification_count": 40,
+          "defeater_count": 10,
+          "non_inconclusive": 10
+        }
+      }
+    },
+    "NO_LLM": {
+      "mean_score": 0.8333333333333334,
+      "scores": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "prohibited_episodes": 0,
+      "persistent_denials": 0,
+      "llm_success_rate": 1.0,
+      "llm_calls": {
+        "success": 0,
+        "total": 0
+      },
+      "episodes_run": 30,
+      "template_metrics": {
+        "T3_FALSIFICATION_SENSITIVE": {
+          "scores": [
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "mean": 0.5,
+          "falsification_count": 40,
+          "defeater_count": 10,
+          "non_inconclusive": 10
+        },
+        "T4_WORLD_MODEL_IDENTITY": {
+          "scores": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "mean": 1.0,
+          "falsification_count": 40,
+          "defeater_count": 10,
+          "non_inconclusive": 10
+        },
+        "T6_SEMANTIC_LLM": {
+          "scores": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "mean": 1.0,
+          "falsification_count": 40,
+          "defeater_count": 10,
+          "non_inconclusive": 10
+        }
+      }
+    },
+    "LLM_ONLY": {
+      "mean_score": 0.1111111111111111,
+      "scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "prohibited_episodes": 0,
+      "persistent_denials": 0,
+      "llm_success_rate": 1.0,
+      "llm_calls": {
+        "success": 0,
+        "total": 0
+      },
+      "episodes_run": 30,
+      "template_metrics": {
+        "T3_FALSIFICATION_SENSITIVE": {
+          "scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "falsification_count": 0,
+          "defeater_count": 0,
+          "non_inconclusive": 0
+        },
+        "T4_WORLD_MODEL_IDENTITY": {
+          "scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "falsification_count": 0,
+          "defeater_count": 0,
+          "non_inconclusive": 0
+        },
+        "T6_SEMANTIC_LLM": {
+          "scores": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "mean": 0.3333333333333333,
+          "falsification_count": 0,
+          "defeater_count": 0,
+          "non_inconclusive": 0
+        }
+      }
+    },
+    "SCRIPTED_BASELINE": {
+      "mean_score": 0.611111111111111,
+      "scores": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "prohibited_episodes": 0,
+      "persistent_denials": 0,
+      "llm_success_rate": 1.0,
+      "llm_calls": {
+        "success": 0,
+        "total": 0
+      },
+      "episodes_run": 30,
+      "template_metrics": {
+        "T3_FALSIFICATION_SENSITIVE": {
+          "scores": [
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "mean": 0.5,
+          "falsification_count": 0,
+          "defeater_count": 0,
+          "non_inconclusive": 0
+        },
+        "T4_WORLD_MODEL_IDENTITY": {
+          "scores": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "mean": 1.0,
+          "falsification_count": 0,
+          "defeater_count": 0,
+          "non_inconclusive": 0
+        },
+        "T6_SEMANTIC_LLM": {
+          "scores": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "mean": 0.3333333333333333,
+          "falsification_count": 0,
+          "defeater_count": 0,
+          "non_inconclusive": 0
+        }
+      }
+    }
+  },
+  "acceptance": {
+    "experiment_valid": true,
+    "primary_pass": true,
+    "safety_pass": true
+  }
+}

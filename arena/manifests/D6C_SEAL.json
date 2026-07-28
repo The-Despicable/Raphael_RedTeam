@@ -1,0 +1,31 @@
+{
+  "seal_id": "D6C_HOLDOUT_SEAL",
+  "seal_version": "1.0",
+  "experiment_id": "D-6C",
+  "status": "VALIDATION_SEALED_D6C",
+  "created_at": "2026-07-27T06:32:54.966983+00:00",
+  "total_episodes": 659,
+  "expected_episodes": 630,
+  "parent_experiment": "D-6B-R1",
+  "parent_lock_hash": "8492b1eb489185ffe3c79663d2429860d73cf9db62ce4d568fdb779dcff5937",
+  "architectures": [
+    "FULL_RAPHAEL",
+    "NO_HYPOTHESIS",
+    "NO_FALSIFICATION",
+    "NO_WORLD_MODEL",
+    "NO_PLANNER",
+    "NO_LLM",
+    "LLM_ONLY",
+    "SCRIPTED_BASELINE",
+    "NO_DEFEATER"
+  ],
+  "templates": [
+    "T1_NEGATIVE_CONTROL",
+    "T2_HYPOTHESIS_SENSITIVE",
+    "T3_FALSIFICATION_SENSITIVE",
+    "T4_WORLD_MODEL_IDENTITY",
+    "T5_PLANNING_COST",
+    "T6_SEMANTIC_LLM",
+    "T7_DEFEATER_SENSITIVE"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "lockfile_version": "2.0",
+  "generated_at": "2026-07-26T17:15:00Z",
+  "experiment": "D6B-R1",
+  "execution_engine": {
+    "name": "AblationRunner._run_raphael()",
+    "ablation_runner_hash": "872d65efff6a9572",
+    "d6b_runner_hash": "a5983fa831875bd4"
+  },
+  "source_hashes": {
+    "arena/ablation_runner.py": "872d65efff6a9572",
+    "arena/ablation.py": "61ee20718ab735ae",
+    "arena/runner.py": "9f1bb10897f5ed61",
+    "arena/d6_manifest.py": "a6bd5a88bc98cb78",
+    "arena/defeater.py": "57dec0cd5440cb9d",
+    "arena/environment.py": "ad0018ab9bb392df",
+    "arena/conclusion_adapters.py": "6f17f5b0499c0c8d",
+    "arena/conclusion_evaluator.py": "0dc555098c59e4c5",
+    "arena/evaluator.py": "28b57c1fc324324b",
+    "arena/metrics.py": "125906ab6f2c12b2",
+    "arena/episode.py": "bf12a3318ece2eaf",
+    "arena/llm_service.py": "49da4d6d0cd41c1b",
+    "orchestrator/brain/hypothesis.py": "d8d2e823c2e2e97c",
+    "orchestrator/brain/evidence.py": "7e3ff3ac41f89471",
+    "orchestrator/brain/world.py": "3c8b61f18deb0748",
+    "orchestrator/brain/contradiction.py": "b7a76c968e393b10",
+    "orchestrator/brain/capability_broker.py": "19a0e618f3b3042d",
+    "orchestrator/brain/action.py": "bc71edd43eb4f113",
+    "orchestrator/brain/trust.py": "262e944ac1bdb2ca",
+    "bridge.py": "1447809d992b0e8a",
+    "d6b_runner.py": "a5983fa831875bd4"
+  },
+  "source_snapshot_hash": "a04b1d48345a5b74cf419a31c3a29bfe558842285c4dca10e8bff23b0d064302",
+  "lockfile_hash": "72568d55d21cc8b506f551e75f8700ffad34349c5a9908584a8ade7196857523"
+}

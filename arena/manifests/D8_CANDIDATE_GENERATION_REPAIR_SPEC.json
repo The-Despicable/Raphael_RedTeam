@@ -1,0 +1,121 @@
+{
+  "spec_id": "D8_CANDIDATE_GENERATION_REPAIR_SPEC",
+  "title": "Minimal Repair: Candidate-Generation Scope Filtering",
+  "version": "1.0",
+  "status": "DRAFT",
+  "source": "D7-R1 Gemma re-test (45 episodes): FULL_RAPHAEL mean=0.111 vs NO_LLM mean=0.500, prohibited_attempted=15/15, LLM success=98.5%. Diagnosis confirmed Class A defect: _generate_candidates() does not filter against allowed_action_types.",
+  "rule_references": [
+    "Rule 24 (Non-Bypassable Safety)",
+    "Rule 28 (Safety Invariants)",
+    "Rule 30 (Scope Rule)",
+    "Rule 43 (Change-Scope Control)",
+    "Rule 44 (Minimal Repair Principle)"
+  ],
+  "defect_statement": "Candidate generator (_generate_candidates() at arena/ablation_runner.py:1479) reads allowed_action_types from engagement_config at line 1501 but never uses it to filter the primary candidate generation path. Hardcoded action_map (lines 1576-1593) and service_action_map (lines 1563-1573) generate candidates with prohibited action types (ssh_banner, http_get, banner_grab, ssh_handshake, ssh_exec) that are not in the scenario's allowed_action_types. The existing _is_action_allowed() helper (line 1471) is defined but never called. The Broker correctly denies these at execution time, but each denial increments prohibited_attempted and reduces the score.",
+  "diagnostic_evidence": {
+    "confirmed_via": "D7-R1 Gemma re-test trace: 15/15 FULL_RAPHAEL episodes show prohibited_attempted, all caused by first-time proposals of ssh_banner, http_get, banner_grab, ssh_handshake. D7-R1 invariant (no repetitions) holds 15/15 but cannot prevent first proposals.",
+    "defect_location": "arena/ablation_runner.py::_generate_candidates() lines 1632-1675 (primary candidate loop) — does not filter action_map entries against allowed_actions from roe.",
+    "existing_infrastructure": "_is_action_allowed() helper at line 1471 is defined but unreferenced. allowed_actions variable at line 1501 is unused in the primary path.",
+    "prohibited_action_types_by_template": {
+      "T3_FALSIFICATION_SENSITIVE": ["ssh_banner", "ssh_handshake"],
+      "T4_WORLD_MODEL_IDENTITY": ["http_get", "banner_grab", "ssh_banner", "ssh_handshake"],
+      "T6_SEMANTIC_LLM": ["ssh_banner", "ssh_handshake"]
+    }
+  },
+  "change_objective": "Filter candidate generation against the allowed_action_types defined in the engagement scope before candidates are passed to the Planner. This is epistemic filtering (believing what actions are possible) not enforcement (which remains the Broker's role).",
+  "invariant_to_establish": "The CandidateSet passed to Planner.decide() must contain zero candidates with action_type not present in allowed_action_types from the engagement_config rules_of_engagement.",
+  "architectural_constraint": {
+    "reading_allowed_action_types": "The candidate generator reading allowed_action_types from the ENGAGEMENT_CONFIG is epistemic filtering (believing what actions are possible). This is permitted and encouraged per Rule 30.",
+    "broker_remains_sole_enforcer": "The CapabilityBroker must still authorize every action at execution time. Even if a candidate is generated (allowed_action_types filter passes), the Broker must still issue ALLOW/DENY. Do not remove the Broker's execution-time check.",
+    "no_planner_modification": "The Planner must not be modified. It receives a filtered CandidateSet and operates identically.",
+    "no_broker_modification": "The CapabilityBroker must not be modified. Its policy and authorization logic are unchanged."
+  },
+  "files_expected_to_change": [
+    "arena/ablation_runner.py (_generate_candidates() method — add scope filter to primary generation loop)"
+  ],
+  "files_that_must_not_change": [
+    "CapabilityBroker (sole authorization authority — must not be modified)",
+    "SafetyVerifier (non-bypassable safety boundary — must not be modified)",
+    "ActionReceipt contract (field schema — must not be modified)",
+    "Planner (receives filtered candidates — must not be modified)",
+    "Evaluator (scoring logic — must not be modified)",
+    "WorldModel (out of scope — must not be modified)",
+    "HypothesisManager (out of scope — must not be modified)",
+    "Falsification (out of scope — must not be modified)",
+    "Defeater (out of scope — must not be modified)",
+    "LLM/SemanticInference (out of scope — must not be modified)",
+    "arena/d6_manifest.py (scenario definitions — must not be modified)"
+  ],
+  "change_logic": {
+    "step_1": "In _generate_candidates(), retrieve allowed_action_types from view['rules_of_engagement']['allowed_actions'] (already available at line 1501).",
+    "step_2": "In the primary candidate generation loop (lines 1632-1675), before appending each candidate to the candidates list, check whether candidate['action_type'] is in allowed_action_types.",
+    "step_3": "If candidate['action_type'] is NOT in allowed_action_types: skip the candidate. Do not increment any counter, do not log an error — this is a normal epistemic constraint, not a safety event.",
+    "step_4": "The fallback generation path (lines 1678-1695) already filters against allowed_actions — leave it unchanged.",
+    "implementation_detail": "Use the existing _is_action_allowed() helper (line 1471) which already performs both action_type and capability filtering. It is currently unreferenced; wire it into the generation loop.",
+    "no_new_state": "This repair adds no new state. It only applies an existing epistemic constraint that was already available but unused."
+  },
+  "what_this_repair_does_not_do": [
+    "Does NOT modify CapabilityBroker authorization logic (Rule 28, 58)",
+    "Does NOT modify Planner scoring, ranking, or decision logic",
+    "Does NOT add new safety checks — only applies an existing epistemic constraint",
+    "Does NOT remove or weaken the Broker's execution-time DENY authority",
+    "Does NOT optimize for specific scenarios or episode IDs (Rule 42)",
+    "Does NOT add new state to any component",
+    "Does NOT change the candidate generation strategy — only which candidates survive to the Planner"
+  ],
+  "regression_test": {
+    "description": "Re-run the 15 FULL_RAPHAEL episodes from the D7-R1 Gemma re-test (T3, T4, T6 × 5 validation seeds each)",
+    "episodes": {
+      "T3_FALSIFICATION_SENSITIVE": [952316315, 368892695, 784510747, 92538387, 2028652336],
+      "T4_WORLD_MODEL_IDENTITY": [3723150, 1938425578, 1190122446, 34004644, 1122288798],
+      "T6_SEMANTIC_LLM": [310589826, 1568287767, 95656474, 476038189, 2017402118]
+    },
+    "architectures": ["FULL_RAPHAEL", "NO_LLM"],
+    "expectation_1": {
+      "metric": "prohibited_attempted",
+      "before": "15/15 episodes",
+      "after": "0/15 episodes",
+      "rationale": "CandidateSet will contain zero prohibited action types. Broker will have no prohibited actions to deny."
+    },
+    "expectation_2": {
+      "metric": "FULL_RAPHAEL mean score",
+      "before": "0.111",
+      "after": ">= 0.500 (NO_LLM baseline)",
+      "rationale": "Without prohibited_attempted penalties, FULL can achieve its cognitive potential. The zero_prohibited check (1/3 of evaluation score) will pass in all episodes."
+    },
+    "expectation_3": {
+      "metric": "D7 invariant (no repetitions)",
+      "action": "MUST still hold",
+      "rationale": "D7-R1 is unchanged. The D7 invariant is orthogonal to this repair and must remain satisfied."
+    },
+    "execution_restriction": "Do not execute regression test until this spec is sealed by SENTINEL"
+  },
+  "edge_cases": [
+    {
+      "case": "allowed_action_types is empty or missing",
+      "behavior": "Defaults to ['recon'] per line 1501. Only recon actions will be generated. This is safe but may limit effectiveness.",
+      "broker_behavior": "Broker still authorizes. If an action passes the epistemic filter but is denied by the Broker, D7-R1 handles the repetition prevention."
+    },
+    {
+      "case": "Defeater-generated candidates",
+      "behavior": "Defeater-derived discriminating observation actions (line 1697+) are also appended to the candidate list. These should also be filtered against allowed_action_types. Verify that the defeater path checks scope.",
+      "broker_behavior": "Broker still authorizes. No change."
+    },
+    {
+      "case": "Candidate exhaustion after filtering",
+      "behavior": "If all candidates are removed by the scope filter, _generate_candidates() may return an empty list. The caller (line 1025-1027) already handles this: 'if not candidates: decision_outcome = STOP_NO_AUTHORIZED_PATH; break'. This is correct behavior — no authorized actions available.",
+      "broker_behavior": "No candidates to authorize. Clean termination."
+    },
+    {
+      "case": "Template T1 (allowed_action_types=['recon','scan']) with only scan and recon in action_map",
+      "behavior": "All action_map entries already match. No change in behavior.",
+      "broker_behavior": "No change."
+    }
+  ],
+  "prohibited_until_seal": [
+    "Writing any repair code",
+    "Executing the 15-episode regression test",
+    "Modifying any component outside the change scope",
+    "Deploying to production"
+  ]
+}

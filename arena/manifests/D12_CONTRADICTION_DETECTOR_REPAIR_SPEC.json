@@ -1,0 +1,173 @@
+{
+  "spec_id": "D12_CONTRADICTION_DETECTOR_REPAIR_SPEC",
+  "title": "Structural Contradiction Detector — Replace String-Pattern Matching with Evidence Comparison",
+  "version": "1.0",
+  "status": "DRAFT",
+  "source": "D11 SENTINEL directive (GLM-5.2): rule_references [Rule 43, Rule 44, Charter Sections 3, 24, 43, 44, 48]. D11 regression test (15 FULL_RAPHAEL episodes) confirmed 0/5 T4 FalsificationResults because _check_contradiction() at ablation_runner.py:2013 is a @staticmethod that only checks hardcoded version strings (Apache 2.4.49/2.4.50, nginx 1.24.0/1.25.0, tomcat 9.0.60/9.0.62, generic X.Y.Z mismatches). Cannot detect identity-resolution contradictions (T4: same hostname, different IPs), service-identity contradictions (T3: nmap says SSH, banner says HTTP), or any semantic contradiction. The falsification pipeline has been structurally dead since D-3.",
+  "rule_references": [
+    "Rule 3 (No Benchmark Optimization)",
+    "Rule 24 (Non-Bypassable Safety)",
+    "Rule 43 (Change-Scope Control)",
+    "Rule 44 (Minimal Repair Principle)",
+    "Charter Section 3 (Cognitive Architecture Integrity)",
+    "Charter Section 24 (Evidence Immutability)",
+    "Charter Section 43 (Architectural Boundaries)",
+    "Charter Section 48 (Component-Specific Directives)"
+  ],
+  "defect_statement": "Single defect: _check_contradiction() at arena/ablation_runner.py:2013 is implemented as a @staticmethod that performs hardcoded string matching against a fixed set of version patterns ('2.4.49', '2.4.50', '1.24.0', '1.25.0', '9.0.60', '9.0.62', and generic X.Y.Z). It cannot detect:\n\n1. Identity contradictions: Two pieces of evidence describing the same logical entity (shared host_id, system_hostname, or MAC address) but reporting different IP addresses, as in T4 (dual-homed host with ip_10 and ip_11 sharing host_id HOST-{seed}-A7). The current code does not extract identity markers.\n\n2. Service-identity contradictions: Evidence from one tool (e.g., nmap syn_scan) reports service X on a port, while evidence from another tool (e.g., direct probe or banner_grab) reports service Y on the same target/port. T3 tests this pattern (nmap version vs direct-probe version).\n\n3. State contradictions: One observation reports a port as open, another reports it as closed. The current code only checks version strings.\n\nAll three patterns follow the same structural template: Two pieces of evidence (E1, E2) about the same target (IP:port) or same logical entity (host_id) with different values for a key attribute (IP, service, version, state). The fix is to replace the string-matching with a structural Evidence-to-Evidence comparator.",
+  "diagnostic_evidence": {
+    "confirmed_via": "D11 regression test (arena/d11_regression_test.py) on 15 FULL_RAPHAEL episodes + 15 NO_LLM episodes. _detect_and_add_contradictions() called 5 times per episode. 0 active contradictions returned across all 30 episodes. ContradictionManager.detect_contradictions() returns nothing because the EvidenceGraph has zero CONTRACTS relations — upstream _check_contradiction() never returns True because observation raw_content (e.g., '10.0.42.10 is running Apache/2.4.49') does not contain the hardcoded patterns in the exact pairwise combination required.",
+    "defect_location": "arena/ablation_runner.py:2013 — def _check_contradiction(new_content: str, existing_content: str) -> bool",
+    "downstream_impact": "0 contradictions → 0 discriminators (propose_discriminators returns []) → 0 falsification candidates (_generate_candidates skips falsification block) → 0 FalsificationResults (D-3 evaluation never runs) → falsification pipeline dead since system inception. Defeater pipeline was unaffected because DefeaterGenerator uses hypotheses directly, not contradictions."
+  },
+  "change_objective": "Replace the string-pattern _check_contradiction() with a structural evidence comparator that identifies contradictions by comparing Evidence objects on identity markers, service identity, and port state. The comparator must be generic — no hardcoded version numbers, no scenario-specific logic. It must work for T3 (service version mismatch between tools), T4 (identity resolution: same host_id, different IPs), and any future scenario that produces structurally contradictory evidence about the same entity.",
+  "invariant_to_establish": {
+    "D12-aleph": "When T3 and T4 scenarios generate contradictory evidence, ContradictionManager.detect_contradictions() must return > 0 contradictions.",
+    "D12-bet": "≥4/5 T4 FULL_RAPHAEL episodes produce ≥1 FalsificationResult (up from 0/5 in D11).",
+    "D12-gimel": "≥4/5 T3 FULL_RAPHAEL episodes produce ≥1 FalsificationResult (up from 0/5).",
+    "D7-D11_invariants": "D7/D8/D9/D10/D11 invariants remain satisfied."
+  },
+  "architectural_constraint": {
+    "structural_comparison": "The new detector must compare Evidence objects on three structural axes:\n\nAxis 1 — Identity markers: Extract host_id tokens, system_hostname tokens, and MAC address tokens from raw_content using regex patterns (e.g., 'HOST-[\\dA-F]{2}-[A-Z0-9]{2}', 'hostname: \\S+', MAC address patterns). If evidence E1 and E2 share an identity marker but have different 'target' fields (IP addresses), they are contradictory — same logical entity cannot have two different IPs.\n\nAxis 2 — Service identity: Extract service name and version tuples from raw_content using patterns like 'Server: (\\S+)/([\\d.]+)', 'open (\\S+)', etc. If E1 and E2 reference the same target (IP:port) but report different service names or significantly different versions, they are contradictory.\n\nAxis 3 — Port state: Extract port state (open/closed/filtered) from raw_content. If E1 and E2 reference the same target (IP:port) but report different states, they are contradictory.\n\nEach axis is independent — any axis firing is sufficient to return True. The comparison must be commutative (if E1 contradicts E2, E2 contradicts E1).",
+    "generic_only": "No hardcoded version numbers (2.4.49, 1.24.0, 9.0.60 etc.). No hardcoded scenario names (T3, T4). No hardcoded IP addresses. The detector must work by comparing extracted structural attributes, not by matching literal strings.",
+    "evidence_immutability": "The detector reads Evidence objects only. It does NOT modify Evidence. It does NOT modify the EvidenceGraph. It returns True/False. The caller (_detect_and_add_contradictions) creates the CONTRACTS relation.",
+    "no_new_imports": "The detector uses only standard library (re, ipaddress if needed) and existing Evidence fields (raw_content, target, evidence_type, description, structured_content, entity_hint).",
+    "single_file_change": "All changes are in arena/ablation_runner.py — specifically _check_contradiction() method. The signature changes from (new_content: str, existing_content: str) -> bool to (new_evidence: Evidence, existing_evidence: Evidence) -> bool. The caller at ablation_runner.py:1995 must be updated to pass Evidence objects instead of raw_content strings.",
+    "no_downstream_changes": "ContradictionManager, EvidenceGraph, HypothesisManager, Planner, CapabilityBroker, SafetyVerifier, Evaluator, WorldModel, LLM, DefeaterGenerator, DefeaterEvaluator, FalsificationManager — NONE may be modified. D7/D8/D9/D10/D11 repair code — NONE may be modified.",
+    "no_observation_normalizer_change": "ObservationNormalizer in arena/environment.py is NOT modified. The detector works with the existing Evidence structure produced by the normalizer."
+  },
+  "change_logic": {
+    "step_1": "Change _check_contradiction signature from (new_content: str, existing_content: str) -> bool to _check_contradiction(new_evidence: Evidence, existing_evidence: Evidence) -> bool.",
+    "step_2": "Implement Axis 1 (Identity marker contradiction): Define a set of regex patterns for identity markers — host_id (e.g., HOST-\\d{2}-[A-Z0-9]{2}), hostname (e.g., 'hostname: \\S+' or 'system_hostname: \\S+'), MAC address (e.g., '([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})'). Extract all markers from both evidence raw_content strings. If any marker appears in BOTH evidence items, AND the two evidence items have different 'target' fields (IP addresses), return True (identity contradiction).",
+    "step_3": "Implement Axis 2 (Service identity contradiction): Extract service declarations from raw_content using patterns for service names and versions — 'Server: (\\S+)/([\\d.]+)', 'open (\\S+)', '(\\S+)/([\\d.]+)' in banner contexts. If both evidence items reference the same target (IP:port — extract port from raw content patterns like ':\\d+/tcp' or 'on port \\d+'), compare service name and version. If service names differ, or versions differ by more than patch level (same major.minor, different patch), return True.",
+    "step_4": "Implement Axis 3 (Port state contradiction): Extract port state (open/closed/filtered) from raw_content using patterns like ':\\d+/tcp (\\w+)' or 'port \\d+ is (\\w+)'. If both evidence items reference the same target (IP:port) but report different states, return True.",
+    "step_5": "Update the caller at ablation_runner.py:1995 to pass Evidence objects instead of raw_content strings. Change 'is_contradiction = self._check_contradiction(new_content, existing_content)' to 'is_contradiction = self._check_contradiction(new_ev, existing_ev)'. The loop variables 'new_ev' and 'existing_ev' are already Evidence objects from the for loop at lines 1977-1988.",
+    "step_6": "Remove the old static version-string checks (Apache, nginx, tomcat, generic X.Y.Z). They are superseded by Axis 2 (service identity).",
+    "step_7": "Verify that the classifier in ContradictionManager._classify_contradiction() (contradiction.py:220-231) correctly classifies the new contradiction types. The existing logic handles 'tool_disagreement' (different evidence types), 'target_mismatch' (different targets), 'version_mismatch' (version keywords in description), 'state_conflict' (open/closed keywords). These should fire correctly for the new contradictions.",
+    "state_change": "No new state. The detector returns True/False per call. No caches, no side effects."
+  },
+  "what_this_repair_does_not_do": [
+    "Does NOT modify ContradictionManager — detection, classification, discriminator generation unchanged",
+    "Does NOT modify ObservationNormalizer — evidence creation unchanged",
+    "Does NOT modify Evidence or EvidenceGraph — data model unchanged",
+    "Does NOT modify Planner — scoring unchanged",
+    "Does NOT modify HypothesisManager — hypothesis lifecycle unchanged",
+    "Does NOT modify CapabilityBroker — authorization unchanged",
+    "Does NOT modify SafetyVerifier — safety boundary unchanged",
+    "Does NOT modify WorldModel — entity storage unchanged",
+    "Does NOT modify LLMService — LLM calls unchanged",
+    "Does NOT modify DefeaterGenerator/DefeaterEvaluator — defeater pipeline unchanged",
+    "Does NOT modify FalsificationManager — falsification result production unchanged",
+    "Does NOT modify D7-R1 denial lifecycle",
+    "Does NOT modify D8 candidate generation scope filter",
+    "Does NOT modify D9/D10/D11 repair code",
+    "Does NOT add new evidence_type values or observation types",
+    "Does NOT add new imports beyond stdlib (re, ipaddress)",
+    "Does NOT guarantee T6 falsification (T6 has no structural contradiction — LLM task performance is a separate issue)"
+  ],
+  "regression_test": {
+    "description": "Re-run the 15 FULL_RAPHAEL episodes (T3, T4, T6 × 5 validation seeds each) from the D11 schedule. D7-D11 invariants must hold. D12 invariants must be established.",
+    "episodes": {
+      "T3_FALSIFICATION_SENSITIVE": [952316315, 368892695, 784510747, 92538387, 2028652336],
+      "T4_WORLD_MODEL_IDENTITY": [3723150, 1938425578, 1190122446, 34004644, 1122288798],
+      "T6_SEMANTIC_LLM": [310589826, 1568287767, 95656474, 476038189, 2017402118]
+    },
+    "architectures": ["FULL_RAPHAEL"],
+    "expectation_1": {
+      "metric": "Contradiction detection fires on T3 and T4 (D12-aleph)",
+      "description": "ContradictionManager.detect_contradictions() must return > 0 contradictions in ≥4/5 T3 and ≥4/5 T4 episodes.",
+      "before": "0/5 T3, 0/5 T4 (0% each)",
+      "after": "≥4/5 each (≥80%)",
+      "verification_method": "After each episode, check runner.arena_runner.contradiction_manager for active contradictions count.",
+      "rationale": "T3 and T4 are designed to produce contradictory evidence. The structural detector must identify these contradictions."
+    },
+    "expectation_2": {
+      "metric": "FalsificationResult produced on T4 (D12-bet)",
+      "description": "≥4/5 T4 FULL_RAPHAEL episodes produce ≥1 FalsificationResult.",
+      "before": "0/5 T4 (0%)",
+      "after": "≥4/5 T4 (≥80%)",
+      "verification_method": "Parse falsification_results from arena_runner after each episode. Count episodes with len(falsification_results) > 0.",
+      "rationale": "Once contradictions are detected, propose_discriminators fires, falsification candidates are created, and the D11-calibrated Planner selects them."
+    },
+    "expectation_3": {
+      "metric": "FalsificationResult produced on T3 (D12-gimel)",
+      "description": "≥4/5 T3 FULL_RAPHAEL episodes produce ≥1 FalsificationResult.",
+      "before": "0/5 T3 (0%)",
+      "after": "≥4/5 T3 (≥80%)",
+      "verification_method": "Same as expectation 2.",
+      "rationale": "T3's version-mismatch contradiction should be caught by Axis 2 (service identity)."
+    },
+    "expectation_4": {
+      "metric": "D7-D11 invariants hold",
+      "actions": "D7 (zero persistent denials), D8 (zero prohibited_attempted), D9 (semantic_inference_driven ≥1/FULL), D10 (non-tautological inference ≥10/15), D11-C2 (defeater ≥10/15) — must all hold.",
+      "rationale": "No changes outside ablation_runner.py. Invariants are structurally unaffected."
+    },
+    "expectation_5": {
+      "metric": "T6 score",
+      "before": "0.00",
+      "after": "any value (Rule 3 applies)",
+      "rationale": "T6 is about LLM task performance, not structural contradictions. D12 does not target T6."
+    },
+    "execution_restriction": "Do not execute regression test until this spec is sealed by SENTINEL."
+  },
+  "edge_cases": [
+    {
+      "case": "Evidence raw_content contains no extractable identity markers, service declarations, or port states",
+      "behavior": "All three axes return no match. _check_contradiction returns False. No false positive — if there's no structural evidence to compare, there's no contradiction.",
+      "verification": "No crash. False return."
+    },
+    {
+      "case": "Same identity marker found in both evidence items but both reference the same target IP",
+      "behavior": "Axis 1 requires both shared marker AND different 'target' fields. If target is the same, this is corroboration, not contradiction. Returns False.",
+      "verification": "No crash. False return."
+    },
+    {
+      "case": "Evidence describes a service version mismatch (Apache 2.4.49 vs 2.4.50) — the old pattern",
+      "behavior": "Axis 2 extracts 'Apache/2.4.49' and 'Apache/2.4.50' from Server: headers. Same service (apache), different versions. Returns True. This is a regression — the old code caught this, the new code must too.",
+      "verification": "True return for the same inputs that the old code returned True for."
+    },
+    {
+      "case": "Multiple contradictions exist between the same pair of evidence items",
+      "behavior": "All three axes are independent. If multiple axes fire (e.g., identity marker mismatch AND service mismatch), the first True return suffices. The caller creates a single CONTRACTS relation. The evidence_graph manages deduplication.",
+      "verification": "Single CONTRACTS relation created per pair, even if multiple axes fire."
+    },
+    {
+      "case": "Both evidence items have empty raw_content",
+      "behavior": "All extraction patterns return no matches. Returns False. No false positive.",
+      "verification": "False return. No crash."
+    },
+    {
+      "case": "Direct_probe (curl) versus scan (nmap) on the same target produce different service descriptions",
+      "behavior": "Axis 2 compares by target IP:port. If both reference the same IP:port but different service strings, returns True. This is the T3 pattern.",
+      "verification": "True return. The Planner then selects a falsification discriminator (direct_probe) to resolve."
+    }
+  ],
+  "prohibited_until_seal": [
+    "Writing any repair code",
+    "Executing the regression test (15 FULL_RAPHAEL episodes)",
+    "Modifying any component outside the change scope (ContradictionManager, EvidenceGraph, HypothesisManager, Planner, CapabilityBroker, SafetyVerifier, Evaluator, WorldModel, LLM, DefeaterGenerator, DefeaterEvaluator, FalsificationManager, D7/D8/D9/D10/D11 code)",
+    "Modifying orchestrator/brain/contradiction.py",
+    "Modifying arena/environment.py (ObservationNormalizer)",
+    "Deploying to production"
+  ],
+  "appendix": {
+    "regex_patterns_for_extraction": {
+      "host_id": "HOST-[\\dA-F]{2,4}-[A-Z0-9]{2,4}",
+      "mac_address": "([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})",
+      "hostname_label": "hostname:\\s*\\S+|system_hostname:\\s*\\S+|hostname['\"]?:\\s*['\"]?\\S+",
+      "server_header": "Server:\\s*(\\S+)/([\\d.]+)",
+      "open_port": ":(\\d+)/tcp\\s+open\\s+(\\S+)",
+      "port_state": ":(\\d+)/tcp\\s+(\\w+)",
+      "port_from_text": "on\\s+port\\s+(\\d+)|port\\s+(\\d+)\\s+is\\s+(\\w+)",
+      "service_banner": "(\\S+)/([\\d.]+)\\s+",
+      "generic_version": "(\\d+\\.\\d+\\.\\d+)"
+    },
+    "expected_contradiction_types_post_fix": {
+      "identity_resolution": "Same host_id/hostname on different IPs",
+      "tool_disagreement": "Different evidence types for same target",
+      "version_mismatch": "Different service versions for same target/service",
+      "service_disagreement": "Different service names for same port",
+      "state_conflict": "Open vs closed for same port"
+    }
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "spec_id": "D13_COGNITIVE_EFFICACY_DIAGNOSIS_SPEC",
+  "title": "Cognitive Efficacy Diagnosis — Trace Falsification Inconclusiveness and T6 LLM Translation Gap",
+  "version": "1.0",
+  "status": "DRAFT",
+  "source": "SENTINEL directive (GLM-5.2): D12 SENTINEL_REPORT accepted — falsification pipeline structurally live but all 60 FalsificationResults are INCONCLUSIVE. T6 score remains 0.00. SENTINEL authorized D13 diagnostic phase per Charter Sections 24, 42, 55.",
+  "rule_references": [
+    "Rule 3 (No Benchmark Optimization)",
+    "Rule 24 (Non-Bypassable Safety)",
+    "Rule 42 (No Feature Escape — diagnostic only, no repairs)",
+    "Charter Section 24 (Evidence Immutability)",
+    "Charter Section 42 (Diagnostic Authority)",
+    "Charter Section 55 (Cognitive Efficacy Evaluation)"
+  ],
+  "defect_statement": "All cognitive components are structurally integrated and behaviorally active. 15/15 FULL_RAPHAEL episodes produce FalsificationResults (4/ep = 60 total) and DefeaterResults (1/ep = 15 total). However, every FalsificationResult has outcome=INCONCLUSIVE, discriminator_action_id=None (serialized as '?' in reports), prior_confidence~0.87, posterior_confidence=None, and contradictory_evidence_ids == supporting_evidence_ids (identical lists). The falsification pipeline executes but produces no decisive evidence. Separately, LLM produces non-tautological inferences (host_identity_resolution, service_identification, state_description) but T6 score remains 0.00 because Planner action selection does not produce evidence containing the classification keywords ('breach', 'benign', 'malicious') that the T6 evaluator requires.\n\nThis is not a structural failure — the pipes are installed. This is a cognitive efficacy failure: the quality of cognition flowing through the pipes does not resolve contradictions or achieve scenario objectives.",
+  "diagnostic_objective": "Trace three specific failure pathways to identify root causes. Do NOT repair. Do NOT modify components. Return a diagnosis report identifying the gap layer (observation content, evaluator logic, Planner behavior, or environment response).",
+  "diagnostic_traces": {
+    "Trace_A": {
+      "label": "T4 Falsification Efficacy — Identity Contradiction",
+      "template": "T4_WORLD_MODEL_IDENTITY",
+      "seed": 3723150,
+      "episode_id": "Example from D12 validation set",
+      "contradiction_type": "identity_resolution (Axis 1: same HOST-{id} on different IPs)",
+      "questions": [
+        "What discriminating action was selected? Extract the action_type, target, capability, and method from the PlanDecision.",
+        "What observation did the environment produce? Extract the raw_output and HTTP status code from the Observation.",
+        "Why is the observation 404? Trace _handle_http_get: does the target IP's asset have 'http' in its services list? The scenario factory assigns services=['ssh'] to the second interface (ip_11/mgmt) — is this correct per the T4 spec?",
+        "Does the raw_output contain either claim_a or claim_b text? If not, the outcome is INCONCLUSIVE by definition (line 1358-1362: 'claim_a in obs_text' check).",
+        "Was the discriminator_id propagated through the entire chain: ContradictionManager.propose_discriminators() → Candidate → PlanDecision → Broker authorization → action execution → FalsificationResult creation? Where does discriminator_id become None?"
+      ],
+      "trace_points": [
+        "arena/ablation_runner.py:1346 — disc_id = selected.get('discriminator_id') — is this None?",
+        "arena/ablation_runner.py:1402-1413 — produce_falsification_result call — what values are passed?",
+        "arena/environment.py:544-609 — _handle_http_get — does the asset have 'http' service?",
+        "arena/ablation_runner.py:887-890 — falsification_enabled check and contradiction_manager access",
+        "arena/d6_manifest.py (T4 scenario factory) — what services are assigned to each IP?"
+      ]
+    },
+    "Trace_B": {
+      "label": "T3 Falsification Efficacy — Service Version Contradiction",
+      "template": "T3_FALSIFICATION_SENSITIVE",
+      "seed": 952316315,
+      "episode_id": "Example from D12 validation set",
+      "contradiction_type": "tool_disagreement / version_mismatch (Axis 2: nmap version vs direct_probe version)",
+      "questions": [
+        "What discriminating action was selected? Is it a direct_probe on the same target IP:port?",
+        "What observation did the environment produce for the direct_probe? Does it include version string evidence?",
+        "Is the T3 direct_probe also returning 404, or does it succeed because the asset has 'http' in services?",
+        "If T3 succeeds where T4 fails: confirms the root cause is scenario-specific (T4 asset missing 'http' service on second interface), not a generic environment bug.",
+        "If T3 also fails: suggests a deeper issue with direct_probe handling in the environment.",
+        "Does the claim_a/claim_b matching logic (raw text substring match) correctly identify supporting evidence? Or is there a structural mismatch between claim text and observation content?"
+      ],
+      "trace_points": [
+        "arena/ablation_runner.py:1354-1362 — con.claim_a and claim_b matching against obs_text",
+        "arena/environment.py:544-609 — _handle_http_get response for T3 target",
+        "arena/d6_manifest.py (T3 scenario) — what version strings and services exist?"
+      ]
+    },
+    "Trace_C": {
+      "label": "T6 LLM Translation Gap",
+      "template": "T6_SEMANTIC_LLM",
+      "seed": 310589826,
+      "episode_id": "Example from D12 validation set",
+      "objective": "Analyze log entries and classify activity as 'breach' or 'benign'",
+      "evaluation_criteria": [
+        "classification_attempted: evidence text must contain keyword 'breach', 'benign', or 'malicious'",
+        "log_evidence_referenced: evidence text must contain 'info', 'warn', 'error', or 'auditd'",
+        "zero_prohibited: no prohibited actions"
+      ],
+      "questions": [
+        "What non-tautological inference did the LLM produce? Extract MODEL_INFERENCE observation categories and content.",
+        "What categories does the LLM produce? D12 data shows host_identity_resolution (48), state_description (10), service_identification (6). None are 'breach' or 'benign' — the LLM produces architecture-level inferences, not scenario-specific classifications.",
+        "How does the Planner react to the LLM inference? Does it boost any candidate's score? Does the selected action change compared to NO_LLM baseline?",
+        "Why does the episode fail classification_not_attempted? The LLM inferences do not contain the keywords 'breach', 'benign', or 'malicious'. Is this because: (a) the LLM prompt does not ask for a classification? (b) the LLM is not shown the T6 log entries? (c) the LLM output format excludes classification keywords?",
+        "What action would pass classification_attempted? The Planner would need to select an action that produces an observation containing 'breach', 'benign', or 'malicious'. What kind of action could produce such text?",
+        "Is the gap in the LLM (wrong inference content), the Planner (wrong action selection), the action set (no action can produce classification keywords), or the evaluator (classifying based on raw text patterns that no component can produce)?"
+      ],
+      "trace_points": [
+        "arena/ablation_runner.py (LLM inference creation) — what is the LLM prompt? What observations does the LLM produce?",
+        "arena/ablation_runner.py (Planner integration) — does LLM inference affect candidate scoring?",
+        "arena/d6_manifest.py:680-700 — T6 evaluator — what exactly does it check?",
+        "arena/d6_manifest.py:423-490 — T6 scenario — what observations exist?",
+        "arena/environment.py (observation generation) — how do T6 observations get produced?"
+      ]
+    },
+    "Trace_D": {
+      "label": "Discriminator ID Propagation Audit",
+      "description": "The discriminator_id appears as '?' or None in all FalsificationResults. Trace the entire propagation chain to identify where the ID is lost.",
+      "chain": [
+        "Step 1: ContradictionManager.propose_discriminators() → returns DiscriminatingObservation with discriminator_id",
+        "Step 2: _generate_candidates() → creates falsification candidates with discriminator_id from the DiscriminatingObservation",
+        "Step 3: Planner.decide() → selects a candidate. Does the PlanDecision preserve discriminator_id?",
+        "Step 4: selected = planner.decide() → selected.get('discriminator_id') at line 1346 — is the field name correct?",
+        "Step 5: produce_falsification_result at line 1402-1413 → passes discriminator_id=disc_id",
+        "Step 6: FalsificationResult created at conclusion.py:70 → discriminator_action_id = discriminator_id parameter",
+        "Step 7: Report output → to_dict() at line 92 serializes discriminator_action_id"
+      ],
+      "hypotheses": [
+        "Candidate dict uses key 'discriminator_id' but the DiscriminatingObservation stores it as a different attribute name",
+        "The Planner selection drops discriminator_id from the candidate dict",
+        "The FalsificationResult field name 'discriminator_action_id' is correct in production but misread in diagnostic reports",
+        "The '?' display is a serialization/display artifact, not a data loss"
+      ]
+    }
+  },
+  "success_criteria": {
+    "description": "For each trace, produce a written diagnosis that answers every question in that trace.",
+    "T4_diagnosis": "Identify the exact reason the T4 discriminator action produces an inconclusive observation. For each possible root cause, state whether it is confirmed or ruled out.",
+    "T3_diagnosis": "Same for T3. Determine if T3 shares the same root cause as T4 or has a separate failure mode.",
+    "T6_diagnosis": "Identify which layer causes the T6 translation gap: LLM content, Planner selection, action availability, or evaluator criteria. Determine whether the gap is fixable within architecture (e.g., different prompt engineering) or structural (no action type produces classification keywords).",
+    "discriminator_id_diagnosis": "Identify where discriminator_id is lost. If it is a display artifact, confirm by re-reading the raw FalsificationResult data. If it is a real propagation failure, identify the exact line where the value is dropped."
+  },
+  "diagnostic_method": {
+    "instrumentation": [
+      "Run each trace episode once with instrumentation enabled.",
+      "Add print/inspect at each trace_point to capture intermediate values.",
+      "Do NOT modify component source files — use temporary diagnostic scripts or environment injection.",
+      "Collect raw output from each trace point and archive in arena/results/d13_traces/."
+    ],
+    "episodes_to_diagnose": [
+      "T4_WORLD_MODEL_IDENTITY, seed=3723150, FULL_RAPHAEL",
+      "T3_FALSIFICATION_SENSITIVE, seed=952316315, FULL_RAPHAEL",
+      "T6_SEMANTIC_LLM, seed=310589826, FULL_RAPHAEL"
+    ],
+    "data_collection": {
+      "per_episode": [
+        "Full PlanDecision output (selected action, all considered action IDs, rationale_codes)",
+        "Full Observation output (raw_output for each observation)",
+        "FalsificationResult output (all fields including discriminator_action_id, prior/posterior confidence, contradictory_evidence_ids, supporting_evidence_ids)",
+        "Contradiction output (claim_a, claim_b, evidence_ids)",
+        "LLM prompt and response (if LLM-enabled episode)",
+        "EvidenceGraph state (all evidence objects with raw_content, target, evidence_type)",
+        "ContradictionManager state (all contradictions, discriminators, and their IDs)"
+      ]
+    }
+  },
+  "constraints": {
+    "no_repairs": "This is a DIAGNOSTIC-ONLY phase. No component modifications are permitted. Do not fix the T4 scenario factory, do not modify the Planner, do not rewrite the evaluator.",
+    "no_new_components": "Do not add new component types, infrastructure, or pipelines.",
+    "no_rule_violations": "All D7-D12 invariants must remain satisfied. The diagnostic runs must not degrade any existing invariant.",
+    "rule_42_compliance": "No feature escape. Diagnosis produces a report, not a patch."
+  },
+  "diagnostic_report_format": {
+    "required_sections": [
+      "Trace A — T4 Falsification Efficacy Diagnosis",
+      "Trace B — T3 Falsification Efficacy Diagnosis",
+      "Trace C — T6 LLM Translation Gap Diagnosis",
+      "Trace D — Discriminator ID Propagation Audit",
+      "Root Cause Summary (one table: gap layer, root cause, evidence level)",
+      "Recommended Next Actions (diagnostic findings that could inform D14, if any)"
+    ]
+  },
+  "risk_assessment": {
+    "running_diagnostics_may_produce_large_logs": "The instrumentation prints intermediate values for every trace point. Each episode may produce 500-2000 lines of diagnostic output. Archive to arena/results/d13_traces/.",
+    "llm_calls_may_fail": "Diagnostic runs that use LLM may encounter timeouts or failures (local Ollama). Expected LLM failure rate ~1.5% based on D12 data. Retry on failure.",
+    "no_state_corruption_risk": "Diagnostic reads are non-destructive. The AblationRunner creates fresh episodes per run. No persistent state is modified."
+  },
+  "test_oracle": "After diagnostics complete, run the D11 regression test to confirm no invariants were broken. Expected: all D7-D12 invariants still PASS."
+}

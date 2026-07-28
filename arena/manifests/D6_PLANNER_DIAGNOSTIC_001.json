@@ -1,0 +1,90 @@
+{
+  "diagnostic_id": "D6_PLANNER_DIAGNOSTIC_001",
+  "title": "Planner Receipt Consumption Diagnostic \u2014 DQ1-DQ4 Results",
+  "status": "COMPLETE",
+  "source": "D-6C holdout step-by-step trace files (episodes.jsonl)",
+  "rule_references": [
+    "Rule 23 (STATE_UPDATE_FAILURE)",
+    "Rule 24 (First-Failure Principle)",
+    "Rule 26 (Causal Trace Standard)",
+    "Rule 29 (ActionReceipt Invariants)",
+    "Rule 42 (No Feature Escape)"
+  ],
+  "total_episodes_traced": 9,
+  "non_confounded_episodes": 9,
+  "confounded_episodes": 0,
+  "dq_results": {
+    "DQ1_receipt_registration": {
+      "finding": "Planner receives DENIED receipts (authorization_result populated) but does not change subsequent action selection",
+      "rate": "9/9"
+    },
+    "DQ2_worldmodel_update": {
+      "finding": "Zero WorldModel updates after DENIED receipts across ALL episodes. Denial never propagates to belief state.",
+      "rate": "9/9"
+    },
+    "DQ3_action_type_change": {
+      "finding": "Same prohibited action type repeated after DENIED (ssh_banner or http_get). Planner never selects a different action type.",
+      "rate": "9/9"
+    },
+    "DQ4_capability_query": {
+      "finding": "Candidate action list remains IDENTICAL before and after DENIED. Planner does not re-query or filter capabilities.",
+      "rate": "9/9"
+    }
+  },
+  "confirmed_defect": "OUTPUT_NOT_CONSUMED + STATE_UPDATE_FAILURE",
+  "defect_description": "The Planner proposes prohibited action types to the CapabilityBroker. The Broker returns DENIED with a receipt and reason. The Planner does not consume this receipt as decision-relevant feedback \u2014 it continues proposing the same action type at the same priority across all subsequent steps. The DENIED receipt is received but not consumed.",
+  "episode_traces": [
+    {
+      "key": "T3|1002575656",
+      "actions": "scan -> ssh_banner(DENIED) -> ssh_banner(DENIED) -> ssh_banner(DENIED) -> ssh_banner(DENIED)",
+      "pattern": "ssh_banner repeated 3x after DENIED"
+    },
+    {
+      "key": "T3|1502335794",
+      "actions": "scan -> ssh_banner(DENIED) -> ssh_banner(DENIED)",
+      "pattern": "ssh_banner repeated 1x after DENIED"
+    },
+    {
+      "key": "T3|630822989",
+      "actions": "scan -> ssh_banner(DENIED) -> ssh_banner(DENIED) -> ssh_banner(DENIED) -> ssh_banner(DENIED)",
+      "pattern": "ssh_banner repeated 3x after DENIED"
+    },
+    {
+      "key": "T3|993538949",
+      "actions": "scan -> recon -> ssh_banner(DENIED) -> ssh_banner(DENIED) -> ssh_banner(DENIED)",
+      "pattern": "ssh_banner repeated 2x after DENIED"
+    },
+    {
+      "key": "T4|1301329782",
+      "actions": "http_get(DENIED) -> http_get(DENIED) -> http_get(DENIED) -> http_get(DENIED) -> http_get(DENIED)",
+      "pattern": "ALL actions DENIED; never tries anything else"
+    },
+    {
+      "key": "T4|1733893407",
+      "actions": "http_get(DENIED) -> http_get(DENIED) -> http_get(DENIED) -> http_get(DENIED) -> http_get(DENIED)",
+      "pattern": "ALL actions DENIED; never tries anything else"
+    },
+    {
+      "key": "T4|1757322124",
+      "actions": "scan -> http_get(DENIED) -> http_get(DENIED) -> http_get(DENIED) -> http_get(DENIED)",
+      "pattern": "http_get repeated 3x after DENIED"
+    },
+    {
+      "key": "T6|1533198380",
+      "actions": "scan -> recon -> recon -> ssh_banner(DENIED) -> ssh_banner(DENIED)",
+      "pattern": "ssh_banner repeated 1x after DENIED"
+    },
+    {
+      "key": "T6|740856003",
+      "actions": "scan -> recon -> recon -> ssh_banner(DENIED) -> ssh_banner(DENIED)",
+      "pattern": "ssh_banner repeated 1x after DENIED"
+    }
+  ],
+  "worse_case_identification": "T4|1301329782 and T4|1733893407: Planner attempts http_get as its FIRST action, gets DENIED, then repeats http_get for ALL 4 remaining steps. Zero adaptation across the entire episode.",
+  "recommendation": "Minimal repair target: Planner must consume DENIED ActionReceipts as DECISION_RELEVANT feedback. Specifically: (1) register denial in Planner internal state, (2) propagate denial to WorldModel (action type X is unavailable for target Y), (3) filter candidate actions by capabilility availability before ranking. No Planner-level allowlist \u2014 the CapabilityBroker remains the sole authorization authority.",
+  "prohibited": [
+    "No Planner-level safety filter or allowlist",
+    "No modification to CapabilityBroker",
+    "No optimization for these 9 specific episodes"
+  ]
+}
