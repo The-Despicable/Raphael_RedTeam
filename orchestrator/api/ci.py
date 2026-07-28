@@ -7,7 +7,8 @@ from pydantic import BaseModel, Field
 
 from orchestrator.auth import require_scope
 from orchestrator.audit_trail import record_event
-from orchestrator.engagement_queue import Engagement, get_queue
+from orchestrator.engagement_queue import get_queue
+from orchestrator.engagement_queue import EngagementQueue
 from orchestrator.modes.autonomous import handle as autonomous_handle
 from orchestrator.scope import default_scope
 from orchestrator.webhook import deliver as deliver_webhook

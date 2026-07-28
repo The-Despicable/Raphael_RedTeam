@@ -114,7 +114,7 @@ class KaliToolsClient:
         if result.get("returncode") is not None and result.get("returncode") != -127:
             return result
         if result.get("error") and "not found" in result.get("error", "").lower():
-            pass
+            raise RuntimeError("Not implemented")
         return await self.run("python3", f"-m impacket.examples.{script} {args}", timeout=timeout)
 
     async def run_hashcat(self, args: str = "", timeout: int = 600) -> dict:

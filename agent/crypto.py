@@ -23,14 +23,22 @@ def decrypt(key: bytes, wire: str) -> bytes:
 
 # AES-CTR for sleep mask (no authentication tag, for performance)
 def aes_ctr_encrypt(key: bytes, nonce: bytes, plaintext: bytes) -> bytes:
-    """Encrypt using AES-CTR (for sleep mask heap encryption)."""
+    """Encrypt using AES-CTR (for sleep mask heap encryption).
+    nonce must be exactly 16 bytes (the IV for CTR mode).
+    """
+    if len(nonce) != 16:
+        raise ValueError("Nonce must be exactly 16 bytes for AES-CTR")
     cipher = Cipher(algorithms.AES(key[:32]), modes.CTR(nonce))
     encryptor = cipher.encryptor()
     return encryptor.update(plaintext) + encryptor.finalize()
 
 
 def aes_ctr_decrypt(key: bytes, nonce: bytes, ciphertext: bytes) -> bytes:
-    """Decrypt using AES-CTR (for sleep mask heap decryption)."""
+    """Decrypt using AES-CTR (for sleep mask heap decryption).
+    nonce must be exactly 16 bytes (the IV for CTR mode).
+    """
+    if len(nonce) != 16:
+        raise ValueError("Nonce must be exactly 16 bytes for AES-CTR")
     cipher = Cipher(algorithms.AES(key[:32]), modes.CTR(nonce))
     decryptor = cipher.decryptor()
     return decryptor.update(ciphertext) + decryptor.finalize()

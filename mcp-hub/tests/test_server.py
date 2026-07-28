@@ -1,6 +1,6 @@
 import pytest
 from httpx import AsyncClient, ASGITransport
-from core.server import MCPServer
+from mcp_hub.core.server import MCPServer
 
 
 @pytest.fixture

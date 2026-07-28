@@ -1,7 +1,7 @@
 import subprocess
 import json
-from schemas.tools import SQLMapParams, SQLMapResult
-from core.registry import BaseTool
+from ...schemas.tools import SQLMapParams, SQLMapResult
+from ...core.registry import BaseTool
 
 
 class Sqlmap(BaseTool):

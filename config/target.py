@@ -32,3 +32,12 @@ class TargetConfig:
             web_root=os.getenv("TARGET_WEB_ROOT", "/var/www/html"),
             session_path=os.getenv("TARGET_SESSION_PATH", "/var/lib/php/sessions"),
         )
+
+
+_active_target: str | None = None
+
+
+def set_target(target: str) -> None:
+    global _active_target
+    _active_target = target
+    os.environ["TARGET_IP"] = target

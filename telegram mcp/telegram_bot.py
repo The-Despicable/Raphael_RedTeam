@@ -6,14 +6,19 @@ Control your WSL2 OpenCode environment from your phone.
 
 import os, subprocess, asyncio, json, shlex
 import httpx
-from telegram.request import HTTPXRequest
 from pathlib import Path
 from datetime import datetime
-from telegram import Update, BotCommand
-from telegram.ext import (
-    Application, CommandHandler, MessageHandler,
-    filters, ContextTypes
-)
+
+try:
+    from telegram.request import HTTPXRequest
+    from telegram import Update, BotCommand
+    from telegram.ext import (
+        Application, CommandHandler, MessageHandler,
+        filters, ContextTypes
+    )
+    TELEGRAM_AVAILABLE = True
+except ImportError:
+    TELEGRAM_AVAILABLE = False
 
 TOKEN         = os.getenv("TELEGRAM_TOKEN", "")
 ALLOWED_ID    = int(os.getenv("TELEGRAM_CHAT_ID", "0"))

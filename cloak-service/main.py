@@ -11,15 +11,19 @@ import httpx
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from cloakbrowser import launch_async
+from .cloakbrowser import launch_async
 from pydantic import BaseModel, Field
-from stem import Signal
-from stem.control import Controller
+try:
+    from stem import Signal
+    from stem.control import Controller
+    TOR_AVAILABLE = True
+except ImportError:
+    TOR_AVAILABLE = False
 
 TOR_PROXY = os.environ.get("TOR_PROXY", "socks5h://tor-proxy:9050")
 TOR_CONTROL = os.environ.get("TOR_CONTROL", "tor-proxy:9051")
 TOR_PASSWORD = os.environ.get("TOR_PASSWORD", "")
-PORT = int(os.environ.get("PORT", 3400))
+PORT = int(os.environ.get("PORT", 3401))
 
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
@@ -151,6 +155,9 @@ async def get_tor_ip():
 
 
 def rotate_tor_identity():
+    if not TOR_AVAILABLE:
+        logger.warning("Tor (stem) not available — skipping identity rotation")
+        return False
     try:
         host, port_str = TOR_CONTROL.split(":")
         port = int(port_str)
@@ -162,7 +169,7 @@ def rotate_tor_identity():
             controller.signal(Signal.NEWNYM)
         return True
     except Exception as e:
-        logger.error(f"Tor identity rotation failed: %s", e)
+        logger.error("Tor identity rotation failed: %s", e)
         return False
 
 

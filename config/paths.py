@@ -26,5 +26,12 @@ def get_data_dir() -> Path:
 def get_tool_registry_path() -> Path:
     return BASE_DIR / "mcp-hub" / "static" / "tool-registry.json"
 
+_scope_cache: dict = {}
+
+def set_scope(scope: dict) -> None:
+    """Set operational scope (targets, limits, exclusions)."""
+    global _scope_cache
+    _scope_cache = scope
+
 # For backward compatibility with existing code
 PROJECT_ROOT = Path(__file__).parent.parent

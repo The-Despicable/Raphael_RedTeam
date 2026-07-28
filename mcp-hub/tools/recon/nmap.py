@@ -1,7 +1,7 @@
 import subprocess
 import re
-from schemas.tools import NmapParams, NmapResult
-from core.registry import BaseTool
+from ...schemas.tools import NmapParams, NmapResult
+from ...core.registry import BaseTool
 
 
 class Nmap(BaseTool):

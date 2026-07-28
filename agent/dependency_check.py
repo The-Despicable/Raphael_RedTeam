@@ -286,7 +286,10 @@ def check_python_package(dep: Dependency) -> tuple[bool, str]:
         try:
             installed = getattr(module, "__version__", "")
             if installed:
-                from packaging.version import Version
+                try:
+                    from packaging.version import Version
+                except ImportError:
+                    return False, "packaging library not installed (required for version check)"
                 if Version(installed) < Version(dep.min_version):
                     return False, (
                         f"Version {installed} < required {dep.min_version}"

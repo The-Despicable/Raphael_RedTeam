@@ -69,7 +69,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 app = FastAPI(
     title="Raphael 2.0 Orchestrator API",
     version="2.0.0",
-    description="Offensive security orchestration API with Z3R0/Ghost/Stealth personas",
+    description="Offensive security orchestration API with Z3R0/Ghost/Stealth/FORGE personas",
     lifespan=lifespan,
 )
 

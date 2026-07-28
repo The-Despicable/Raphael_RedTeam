@@ -65,7 +65,7 @@ services:
     env_file: .env
     environment:
       - SERVICE_NAME=cloak-service
-      - TOR_PROXY=socks5h://tor-proxy:9050
+      - TOR_PROXY=http://tor-proxy:8118
       - TOR_CONTROL=tor-proxy:9051
     cap_add:
       - NET_ADMIN

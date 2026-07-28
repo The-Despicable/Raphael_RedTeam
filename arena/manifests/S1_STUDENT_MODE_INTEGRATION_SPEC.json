@@ -1,0 +1,200 @@
+{
+  "spec_id": "S1_STUDENT_MODE_INTEGRATION_SPEC",
+  "title": "Student Mode Integration — Converting a Rogue Executor into a Cognitive Candidate Generator",
+  "version": "1.0",
+  "status": "DRAFT",
+  "source": "SENTINEL (GLM-5.2) directive: D-series closed. Authorize S-series per Charter Sections 55, 57, 58.",
+  "rule_references": [
+    "Rule 3 (No Benchmark Optimization)",
+    "Rule 24 (Non-Bypassable Safety)",
+    "Rule 43 (Change-Scope Control)",
+    "Rule 44 (Minimal Repair)",
+    "Rule 49 (STOP_AND_DIAGNOSE)",
+    "Charter Section 55 (Capability Assessment)",
+    "Charter Section 57 (Knowledge Integration)",
+    "Charter Section 58 (Execution Safety)"
+  ],
+  "defect_statement": "The Student module (orchestrator/modes/student.py, orchestrator/student/*) currently operates as a rogue execution agent that bypasses the entire D-series cognitive architecture. Its _test_hypothesis() method (lines 264-334) directly executes hardcoded exploit payloads (test_map, lines 283-293) via kali.run() with no CapabilityBroker authorization, no Planner oversight, no Falsification resolution, and no Defeater checks. This creates a parallel execution path that undermines the safety guarantees established in D7-D16. The Student's valuable components — StackMatcher (fuzzy stack→hypothesis matching), ChainSynthesizer (attack unit BFS chaining), ResearchScheduler (continuous CVE/writeup ingestion), and StudentKB (persistent SQLite knowledge store) — are architecturally isolated from the cognitive loop and cannot contribute to or benefit from the validated reasoning pipeline.",
+  "change_objective": "Refactor the Student module from a standalone rogue executor into a cognitive candidate generator that feeds the Planner through the CapabilityBroker. All execution must route through the established safety/cognitive pipeline. Student knowledge components (research, stack matching, chain synthesis) become advisory inputs to the Planner, not autonomous execution agents.",
+  "architectural_constraint": {
+    "no_new_execution_paths": "The Student module must NOT create any new execution path. All tool invocation must route through orchestrator.brain.CapabilityBroker.authorize_action() and the Planner's action selection loop.",
+    "preserve_knowledge_components": "StackMatcher, ChainSynthesizer, ResearchScheduler, CoverageGapFiller, and StudentKB must be preserved as knowledge/suggestion components. They produce Candidates and advice, not commands.",
+    "single_integration_point": "The Student integrates into the cognitive architecture at exactly two points: (1) as a CandidateGenerator providing Candidate objects to the Planner, and (2) as a KnowledgeUpdater feeding the WorldModel and GrowthDB.",
+    "no_scenario_factory_changes": "The arena/ evaluation framework (D-series) remains unchanged. Student integration is an orchestrator-level concern."
+  },
+  "current_architecture": {
+    "student_mode_flow": {
+      "phase_1_profile": "_profile_target() uses whatweb + heuristics to build a tech stack profile",
+      "phase_2_hypothesis": "StackMatcher.get_ranked_hypotheses() matches stack against vulnerability signatures, returns ranked hypothesis list",
+      "phase_3_execution": "_test_hypothesis() maps hypothesis.technique_id to hardcoded test_map (curl commands), executes via kali.run() — NO AUTHORIZATION",
+      "phase_4_chain": "ChainSynthesizer.synthesize() builds attack chains from confirmed findings via BFS through AttackUnit pre/post conditions",
+      "phase_5_reflect": "_reflect() updates GrowthDB with success/failure, identifies knowledge gaps"
+    },
+    "critical_defects": [
+      {
+        "location": "orchestrator/modes/student.py:283-293",
+        "defect": "Hardcoded test_map with 10 exploit payloads (JWT alg none, SSRF IMDS, SQLi UNION, LFI, file upload, etc.) executed directly without CapabilityBroker",
+        "fix": "Convert test_map entries into Candidate templates registered with the Planner's candidate generator interface"
+      },
+      {
+        "location": "orchestrator/modes/student.py:295-315",
+        "defect": "Direct kali.run() calls bypass all safety gating, scope enforcement, and rate limiting",
+        "fix": "Replace with CapabilityBroker.authorize_action() + Planner.enqueue_candidate()"
+      },
+      {
+        "location": "orchestrator/modes/student.py:317-319",
+        "defect": "Simulation fallback: 'result['success'] = hypothesis.get('confidence', 0) > 0.6' produces false positives when tools unavailable",
+        "fix": "Remove simulation. If tool unavailable, mark as CANDIDATE_NOT_EXECUTABLE and return to Planner for re-prioritization"
+      },
+      {
+        "location": "orchestrator/modes/student.py:89-103",
+        "defect": "Hypothesis testing loop bypasses Planner entirely — directly iterates and executes top 15 hypotheses",
+        "fix": "Submit hypotheses as Candidate objects to Planner. Let Planner select via action selection loop."
+      },
+      {
+        "location": "orchestrator/modes/student.py:228-261",
+        "defect": "_generate_hypotheses() calls StackMatcher directly and adds harvester results without going through the Planner's candidate pipeline",
+        "fix": "StackMatcher becomes a CandidateGenerator plugin. Its output goes to Planner.combine_candidates(), not direct execution."
+      }
+    ],
+    "valuable_components_to_preserve": [
+      {
+        "component": "StackMatcher",
+        "file": "orchestrator/student/stack_matcher.py",
+        "value": "Fuzzy stack-to-signature matching with F1 scoring. Maps tech components (nginx, django, jwt) to vulnerability hypotheses with confidence and impact estimates.",
+        "integration": "Implement CandidateGenerator interface. StackMatcher.get_ranked_hypotheses() → list[PlanningCandidate]"
+      },
+      {
+        "component": "ChainSynthesizer",
+        "file": "orchestrator/student/chain_synthesizer.py",
+        "value": "Attack-Unit BFS chaining engine. Models techniques as preconditions→postconditions transitions. Finds multi-step attack paths and suggests next steps.",
+        "integration": "Implement PlannerAdvisor interface. ChainSynthesizer.suggest_next_steps() → plan scoring hints for Planner"
+      },
+      {
+        "component": "ResearchScheduler",
+        "file": "orchestrator/student/research_scheduler.py",
+        "value": "Continuous CVE/writeup/technique ingestion from RSS feeds (Krebs, BleepingComputer, PortSwigger, etc.). Identifies knowledge gaps.",
+        "integration": "Background KnowledgeUpdater service. Feeds new techniques into StudentKB, which triggers WorldModel updates."
+      },
+      {
+        "component": "StudentKB",
+        "file": "orchestrator/student/integration_pipeline.py",
+        "value": "SQLite-backed persistent knowledge base with schema validation (REQUIRED_FIELDS contract), staging→MERGE pipeline, and reconciliation logging.",
+        "integration": "Replace in-memory GrowthDB with StudentKB as the shared technique store. Both Planner and Student read from the same KB."
+      },
+      {
+        "component": "CoverageGapFiller",
+        "file": "orchestrator/student/coverage_gap_filler.py",
+        "value": "Identifies weak knowledge areas and generates structured study plans with targeted research queries and target stack profiles.",
+        "integration": "Post-reflection gap analysis triggers ResearchScheduler queries. Keeps the knowledge base self-improving."
+      }
+    ]
+  },
+  "target_architecture": {
+    "overview": "The Student becomes a cognitive subsystem within the validated Raphael architecture. It generates Candidates, maintains knowledge, and suggests plans — but never executes directly.",
+    "integration_points": [
+      {
+        "point": "CandidateGenerator Interface",
+        "location": "orchestrator/brain/ (new file: candidate_generators/student_generator.py)",
+        "description": "StackMatcher implements a CandidateGenerator that produces PlanningCandidate objects. Each test_map entry becomes a Candidate with action_type, capability, target, and action_spec. The Planner's combine_candidates() merges Student candidates with those from other generators.",
+        "contract": {
+          "input": "engagement_view (current target state, evidence graph, world model entities)",
+          "output": "list[PlanningCandidate] where each candidate has: candidate_id, action_type, capability, target, priority_score, estimated_impact, metadata (source='student', confidence, technique_id, detection_patterns)",
+          "safety": "All candidates flow through CapabilityBroker.authorize_action() before execution. No direct tool invocation."
+        }
+      },
+      {
+        "point": "PlannerAdvisor Interface",
+        "location": "orchestrator/brain/planner.py (extend scoring)",
+        "description": "ChainSynthesizer.suggest_next_steps() provides alternative scoring signals to the Planner. The Planner's scoring function considers: (1) standard exploration score, (2) falsification priority, (3) defeater priority, (4) chain_readiness from ChainSynthesizer.",
+        "contract": {
+          "input": "confirmed_findings (from evidence graph), target_features (from world model), current_plan",
+          "output": "list[ChainSuggestion] with: technique_id, readiness (0-1), expected_value, satisfied_conditions, missing_conditions",
+          "integration": "Planner weights chain_suggestions at 0.15 (standard) vs other scoring factors at 0.85. Adjustable via config."
+        }
+      },
+      {
+        "point": "KnowledgeUpdater Service",
+        "location": "orchestrator/student/ (refactored as background service)",
+        "description": "ResearchScheduler runs as an async background task. It periodically (configurable: every 6-24 hours) scans RSS feeds, extracts techniques, validates against StudentKB schema, and merges into the shared technique store. Discovered techniques automatically become available as Candidate templates.",
+        "contract": {
+          "schedule": "Configurable interval (default: 3600 seconds / 1 hour minimum between cycles)",
+          "output": "Technique records written to StudentKB (SQLite). Each record has REQUIRED_FIELDS per integration_pipeline.py schema contract.",
+          "trigger": "CoverageGapFiller can request immediate research cycle when gap thresholds exceeded."
+        }
+      }
+    ],
+    "execution_flow": {
+      "step_1": "Student mode starts. ResearchScheduler runs a background research cycle (if due).",
+      "step_2": "StackMatcher (as CandidateGenerator) produces Candidates from target tech stack → Planner.combine_candidates()",
+      "step_3": "Planner scores candidates using standard scoring + ChainSynthesizer readiness hints + CapabilityBroker authorization",
+      "step_4": "Planner selects highest-scoring authorized candidate → executes via CapabilityBroker (not kali.run())",
+      "step_5": "Result enters evidence graph → Falsification detects contradictions → Defeater checks reliability conditions",
+      "step_6": "ChainSynthesizer suggests next steps based on confirmed findings → Planner re-scores remaining candidates",
+      "step_7": "Post-engagement: CoverageGapFiller identifies knowledge gaps → ResearchScheduler queues study queries"
+    }
+  },
+  "migration_plan": {
+    "phase_1_candidate_generator": {
+      "label": "S1-A: Convert StackMatcher + test_map into CandidateGenerator",
+      "files_changed": [
+        "orchestrator/modes/student.py",
+        "orchestrator/student/stack_matcher.py",
+        "orchestrator/brain/ (new: candidate_generators/student_generator.py)"
+      ],
+      "change": "Extract test_map payloads (lines 283-293) into Candidate template registry. Each template maps technique_id → action_type + capability + default_action_spec. StackMatcher.get_ranked_hypotheses() produces PlanningCandidate objects instead of hypothesis dicts.",
+      "verification": "Student-generated candidates appear in Planner's candidate pool. CapabilityBroker can authorize or deny them. No direct kali.run() calls remain.",
+      "risk": "Some test_map payloads may not map cleanly to existing action_types (ssh_banner, direct_probe, etc.). New action_types may need registration in the CapabilityBroker."
+    },
+    "phase_2_planner_advisor": {
+      "label": "S1-B: Integrate ChainSynthesizer as Planner scoring plugin",
+      "files_changed": [
+        "orchestrator/brain/planner.py",
+        "orchestrator/student/chain_synthesizer.py"
+      ],
+      "change": "ChainSynthesizer.suggest_next_steps() output feeds into Planner's candidate scoring as a weighted factor. Planner scores = base_score * (1 + 0.15 * chain_readiness).",
+      "verification": "Planner demonstrably prefers candidates that ChainSynthesizer marks as high-readiness. Score diffs measurable in Planner decision traces.",
+      "risk": "ChainSynthesizer may produce conflicting advice with existing scoring factors. Weight must be calibrated to avoid Planner paralysis."
+    },
+    "phase_3_background_knowledge": {
+      "label": "S1-C: ResearchScheduler as background KnowledgeUpdater",
+      "files_changed": [
+        "orchestrator/student/research_scheduler.py",
+        "orchestrator/student/coverage_gap_filler.py",
+        "orchestrator/student/integration_pipeline.py"
+      ],
+      "change": "ResearchScheduler becomes an async service launched at orchestrator startup. Runs research cycles on schedule. Writes discovered techniques to StudentKB (SQLite). CoverageGapFiler triggers on-demand cycles when gaps detected.",
+      "verification": "Techniques discovered by ResearchScheduler appear in StudentKB and are available as CandidateGenerator templates in subsequent engagements.",
+      "risk": "Research may ingest malicious or incorrect techniques. Schema validation (integration_pipeline.py) mitigates but doesn't eliminate this risk."
+    }
+  },
+  "what_this_repair_does_not_do": [
+    "Does NOT change the D-series cognitive architecture — that is frozen and sealed.",
+    "Does NOT create new execution paths — all execution routes through the existing Planner + CapabilityBroker.",
+    "Does NOT modify the arena evaluation framework.",
+    "Does NOT convert the Student into an autonomous mode outside the orchestrator.",
+    "Does NOT remove the Student's research/knowledge capabilities — those are preserved and enhanced.",
+    "Does NOT add interactive shell capability (that is reserved for the E-Series).",
+    "Does NOT scale the WorldModel for large bug bounty scopes (that is reserved for the M-Series)."
+  ],
+  "prerequisites": [
+    "D-series (D0-D16) frozen and accepted — COMPLETE",
+    "CapabilityBroker supports action_type registration for new capability types — PARTIAL (ssh_banner, direct_probe exist; test_map payloads may need new types)",
+    "StudentKB schema contract defined — COMPLETE (integration_pipeline.py lines 30-43)",
+    "Planner supports pluggable candidate generators — CHECK REQUIRED (may need refactoring to support external generator registration)"
+  ],
+  "success_criteria": {
+    "S1-A": "All test_map payloads converted to Candidate templates. Zero direct kali.run() calls in student.py. All execution authorized by CapabilityBroker.",
+    "S1-B": "ChainSynthesizer.planner_adjustment produces measurable score deltas in Planner decisions. Planner traces show chain_readiness factor influencing candidate ranking.",
+    "S1-C": "ResearchScheduler runs as background service. Techniques persist across orchestrator restarts via StudentKB SQLite. CoverageGapFiller triggers research cycles when gaps exceed threshold."
+  },
+  "risk_assessment": {
+    "scope": "Medium. The integration touches 5+ files in orchestrator/ but zero files in arena/. The cognitive architecture is untouched.",
+    "execution_safety": "Low risk. All new execution routes are gated by the existing CapabilityBroker. The Student can only execute what the Broker authorizes.",
+    "knowledge_integrity": "Medium risk. ResearchScheduler ingests external data (RSS feeds, web sources). Schema validation and staging→MERGE pipeline mitigate but do not eliminate data quality risk.",
+    "planner_performance": "Low risk. ChainSynthesizer advisor weight starts at 0.15. Can be tuned or disabled if it degrades Planner decision quality."
+  },
+  "status": "DRAFT",
+  "sealed_by": null,
+  "sealed_at": null
+}

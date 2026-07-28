@@ -1,7 +1,7 @@
 import subprocess
 import json
-from schemas.tools import NucleiParams, NucleiResult
-from core.registry import BaseTool
+from ...schemas.tools import NucleiParams, NucleiResult
+from ...core.registry import BaseTool
 
 
 class Nuclei(BaseTool):

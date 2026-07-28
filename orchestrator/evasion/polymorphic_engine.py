@@ -238,7 +238,7 @@ class PolymorphicEngine:
             payload = payload.replace('{{', '{%').replace('}}', '%}')
             payload = payload.replace('{{7*7}}', '{% print 7*7 %}')
         elif '${' in payload and random.random() < 0.3:
-            pass
+            raise RuntimeError("Not implemented")
         return payload
 
     def _ssti_obfuscate(self, payload: str) -> str:

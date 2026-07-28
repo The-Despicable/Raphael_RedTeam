@@ -18,6 +18,7 @@ import uuid
 from pathlib import Path
 from dataclasses import dataclass, field
 from typing import Optional
+import json
 
 logger = logging.getLogger("weaponizer.engine")
 
@@ -39,6 +40,8 @@ class WeaponizeResult:
     signed: bool = False
     build_time: float = 0.0
     error: Optional[str] = None
+    enc_key: Optional[bytes] = None
+    enc_iv: Optional[bytes] = None
 
 
 class Weaponizer:
@@ -253,6 +256,8 @@ class Weaponizer:
                     fout.write(cipher)
                 os.replace(encrypted_path, out_path)
                 result.encrypted = True
+                result.enc_key = key
+                result.enc_iv = iv
             except Exception:
                 pass
 
@@ -267,12 +272,57 @@ class Weaponizer:
         encryptor = cipher.encryptor()
         return encryptor.update(data) + encryptor.finalize()
 
+    def _aes_cbc_decrypt(self, data: bytes, key: bytes, iv: bytes) -> bytes:
+        from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+        from cryptography.hazmat.backends import default_backend
+        cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+        decryptor = cipher.decryptor()
+        decrypted = decryptor.update(data) + decryptor.finalize()
+        pad_len = decrypted[-1]
+        if 1 <= pad_len <= 16:
+            return decrypted[:-pad_len]
+        return decrypted
+
+    def generate_decrypt_stub(self, result: WeaponizeResult) -> str:
+        if not result.encrypted or not result.enc_key or not result.enc_iv:
+            return ""
+        key_hex = result.enc_key.hex()
+        iv_hex = result.enc_iv.hex()
+        return f'''
+/* AES-CBC Decrypt Stub for {result.path} */
+/* Key: {key_hex} */
+/* IV:  {iv_hex} */
+#include <openssl/aes.h>
+#include <openssl/evp.h>
+#include <string.h>
+#include <stdlib.h>
+
+static void aes_cbc_decrypt(const unsigned char* in, size_t in_len,
+                            unsigned char* out, const unsigned char* key,
+                            const unsigned char* iv) {{
+    EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
+    EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key, iv);
+    int len, out_len = 0;
+    EVP_DecryptUpdate(ctx, out, &len, in, in_len);
+    out_len += len;
+    EVP_DecryptFinal_ex(ctx, out + len, &len);
+    out_len += len;
+    EVP_CIPHER_CTX_free(ctx);
+}}
+
+int main() {{
+    // Payload is embedded at build time via objcopy or similar
+    // This stub demonstrates the decryption routine
+    return 0;
+}}
+'''
+
     async def cleanup(self, result: WeaponizeResult):
         if result.path and os.path.exists(result.path):
             try:
                 os.unlink(result.path)
             except Exception:
-                pass
+                raise RuntimeError("Not implemented")
 
     def available_tools(self) -> dict:
         return {

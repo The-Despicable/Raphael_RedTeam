@@ -15,7 +15,11 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
-import fakeredis
+try:
+    import fakeredis
+    FAKEREDIS_AVAILABLE = True
+except ImportError:
+    FAKEREDIS_AVAILABLE = False
 
 from raphael.eventbus import EventBus, EventBusConfig
 from raphael.blackboard import Blackboard

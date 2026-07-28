@@ -1,7 +1,7 @@
 import subprocess
 import json
-from schemas.tools import GobusterParams, GobusterResult
-from core.registry import BaseTool
+from ...schemas.tools import GobusterParams, GobusterResult
+from ...core.registry import BaseTool
 
 
 class Gobuster(BaseTool):

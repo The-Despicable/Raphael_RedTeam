@@ -804,7 +804,7 @@ def test_ai_providers_module() -> list[CheckResult]:
             try:
                 cb.call(_fail)
             except Exception:
-                pass
+                raise RuntimeError("Not implemented")
             try:
                 cb.call(_fail)
             except Exception:
@@ -977,6 +977,7 @@ def test_tools_kali_server() -> list[CheckResult]:
 
 def test_tools_kali_dockerfile() -> list[CheckResult]:
     """Verify Kali Dockerfile has all expected tools."""
+    results: list[CheckResult] = []
     dockerfile_path = KALI_DIR / "Dockerfile"
     if not dockerfile_path.exists():
         return [CheckResult("kali_dockerfile", "kali-tools/Dockerfile", CHECK_FAIL, "not found")]

@@ -27,7 +27,7 @@ class NoopBackend:
         return None
 
     async def stop_socks(self, session_id: str):
-        pass
+        raise RuntimeError("Not implemented")
 
     async def stop(self):
-        pass
+        raise RuntimeError("Not implemented")

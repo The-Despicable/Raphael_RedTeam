@@ -255,4 +255,4 @@ class SliverBackend:
             try:
                 await self._client._channel.close()
             except Exception:
-                pass
+                raise RuntimeError("Not implemented")

@@ -9,8 +9,15 @@ from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Set, Tuple
 from urllib.parse import urlparse
 
-import aiohttp
-import aiodns
+try:
+    import aiohttp
+except ImportError:
+    aiohttp = None
+
+try:
+    import aiodns
+except ImportError:
+    aiodns = None
 
 from raphael.techniques.vhost_enum.types import (
     EnumConfig,
@@ -37,7 +44,7 @@ class BaseEnumerator(ABC):
     @property
     @abstractmethod
     def method(self) -> EnumMethod:
-        pass
+        raise RuntimeError("Not implemented")
 
     async def _get_session(self) -> aiohttp.ClientSession:
         if self._session is None or self._session.closed:
@@ -101,7 +108,7 @@ class BaseEnumerator(ABC):
 
     @abstractmethod
     async def enumerate(self, target: VHOSTTarget) -> List[DiscoveredHost]:
-        pass
+        raise RuntimeError("Not implemented")
 
 
 class DNSBruteEnumerator(BaseEnumerator):

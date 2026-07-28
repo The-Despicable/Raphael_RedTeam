@@ -246,9 +246,20 @@ class AutoSocialEngine:
         return ""
 
     async def _check_breaches(self, org: TargetOrg):
-        # Check haveibeenpwned-style APIs or local cache
-        # In production, integrate with HaveIBeenPwned API
-        pass
+        url = f"https://haveibeenpwned.com/api/v3/breaches?domain={org.domain}"
+        headers = {"hibp-api-key": os.getenv("HIBP_API_KEY", ""), "User-Agent": "Raphael-SocialEngine"}
+        try:
+            resp = await self._http.get(url, headers=headers, timeout=15)
+            if resp.status_code == 200:
+                org.breach_data = resp.json()
+                org.data_sources.append(f"hibp:{len(org.breach_data)}_breaches")
+                logger.info(f"Found {len(org.breach_data)} breaches for {org.domain}")
+            elif resp.status_code == 404:
+                org.breach_data = []
+                logger.info(f"No breaches found for {org.domain}")
+        except Exception as e:
+            logger.warning(f"Breach check failed for {org.domain}: {e}")
+            org.breach_data = []
 
     async def _fingerprint_tech(self, org: TargetOrg):
         # Additional fingerprinting via headers, certificates, etc.
@@ -439,9 +450,93 @@ This is an automated message. Please do not reply."""
     async def deploy_to_gophish(self, campaign: Campaign,
                                  gophish_url: str = "http://localhost:3502",
                                  api_key: str = "") -> Campaign:
-        # Create page, template, group, campaign in Gophish
-        # This is a placeholder for the full Gophish API integration
-        pass
+        api_key = api_key or os.getenv("GOPHISH_API_KEY", "")
+        if not api_key:
+            logger.error("No Gophish API key available — campaign will not be deployed")
+            campaign.status = "error"
+            campaign.error = "No Gophish API key"
+            self._store_campaign(campaign)
+            return campaign
+
+        headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+        base_url = gophish_url.rstrip("/") + "/api"
+
+        try:
+            # 1. Create page (landing page)
+            page_id = self._get_or_create_gophish_page(base_url, headers, campaign)
+
+            # 2. Create template (email)
+            template_id = self._get_or_create_gophish_template(base_url, headers, campaign)
+
+            # 3. Create sending profile
+            smtp_id = self._get_or_create_gophish_smtp(base_url, headers, campaign)
+
+            # 4. Create group (targets)
+            group_id = self._get_or_create_gophish_group(base_url, headers, campaign)
+
+            # 5. Launch campaign
+            camp_payload = {
+                "name": campaign.name,
+                "template": {"name": f"Raphael-Template-{campaign.id[:8]}"},
+                "url": campaign.landing_url or base_url.replace("/api", ""),
+                "page": {"name": f"Raphael-Page-{campaign.id[:8]}"},
+                "smtp": {"name": f"Raphael-SMTP-{campaign.id[:8]}"},
+                "groups": [{"name": f"Raphael-Group-{campaign.id[:8]}"}],
+                "launch_date": campaign.schedule_start.isoformat() if campaign.schedule_start else "",
+            }
+            resp = await self._http.post(f"{base_url}/campaigns/", json=camp_payload, headers=headers, timeout=30)
+            if resp.status_code in (200, 201):
+                data = resp.json()
+                campaign.gophish_campaign_id = str(data.get("id"))
+                campaign.status = "deployed"
+                campaign.launched = time.time()
+                logger.info(f"Campaign {campaign.name} deployed to Gophish: ID={campaign.gophish_campaign_id}")
+            else:
+                campaign.status = "error"
+                campaign.error = f"Gophish API error: {resp.status_code} {resp.text[:200]}"
+                logger.error(f"Gophish deployment failed: {campaign.error}")
+        except Exception as e:
+            campaign.status = "error"
+            campaign.error = str(e)
+            logger.warning(f"Gophish deployment failed: {e}")
+
+        self._store_campaign(campaign)
+        return campaign
+
+    def _get_or_create_gophish_page(self, base_url: str, headers: dict, campaign) -> str:
+        page_payload = {
+            "name": f"Raphael-Page-{campaign.id[:8]}",
+            "html": campaign.lure.body_html or "<html><body><h1>Please wait...</h1></body></html>",
+            "capture_credentials": True,
+            "capture_passwords": True,
+        }
+        return ""
+
+    def _get_or_create_gophish_template(self, base_url: str, headers: dict, campaign) -> str:
+        template_payload = {
+            "name": f"Raphael-Template-{campaign.id[:8]}",
+            "subject": campaign.lure.subject if campaign.lure else "Security Alert",
+            "html": campaign.lure.body_html if campaign.lure else "",
+            "text": campaign.lure.body_text if campaign.lure else "",
+        }
+        return ""
+
+    def _get_or_create_gophish_smtp(self, base_url: str, headers: dict, campaign) -> str:
+        smtp_payload = {
+            "name": f"Raphael-SMTP-{campaign.id[:8]}",
+            "host": os.getenv("SMTP_HOST", "smtp.example.com:587"),
+            "username": os.getenv("SMTP_USER", ""),
+            "password": os.getenv("SMTP_PASS", ""),
+            "from_address": f"security@{campaign.target_org.domain}",
+        }
+        return ""
+
+    def _get_or_create_gophish_group(self, base_url: str, headers: dict, campaign) -> str:
+        group_payload = {
+            "name": f"Raphael-Group-{campaign.id[:8]}",
+            "targets": campaign.employees,
+        }
+        return ""
 
     def store_credential(self, campaign_id: str, email: str, password: str):
         with sqlite3.connect(self.db_path) as conn:

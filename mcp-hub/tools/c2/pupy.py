@@ -1,4 +1,4 @@
-from core.registry import BaseTool
+from ...core.registry import BaseTool
 
 
 class Pupy(BaseTool):

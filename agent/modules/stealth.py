@@ -20,6 +20,7 @@ import time
 import hashlib
 import platform
 import subprocess
+import shutil
 import logging
 from pathlib import Path
 
@@ -195,7 +196,7 @@ class Stealth:
                     pass
 
         # Windows VM detection
-        if Stealth.IS_WINDOWS:
+        if Stealth.IS_WINDOWS and shutil.which("wmic"):
             try:
                 r = subprocess.run(
                     ["wmic", "computersystem", "get", "model"],

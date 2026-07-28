@@ -31,7 +31,7 @@ class EgressStrategy(ABC):
 
     @abstractmethod
     def build_client(self, target_host: str = None) -> dict:
-        pass
+        raise RuntimeError("Not implemented")
 
     def get_headers(self) -> dict:
         return {

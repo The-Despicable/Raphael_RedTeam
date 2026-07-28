@@ -836,6 +836,13 @@ class AblationRunner:
             runner.add_entity(entity)
             self.metrics.pipeline_coverage["world_update_count"] += 1
         
+        # ── E2: Shell Candidate Generator ──
+        from orchestrator.brain.candidate_generators.shell_generator import ShellCandidateGenerator
+        self._shell_generator = ShellCandidateGenerator(
+            chain_synthesizer=runner.chain_synthesizer if hasattr(runner, 'chain_synthesizer') else None,
+        )
+        self._active_sessions = []  # Track active shell session IDs for E2
+
         # ── Phase 2: Cognitive Loop ──
         max_iterations = 5  # Budget for pilot
         iteration = 0
@@ -1367,6 +1374,27 @@ class AblationRunner:
                     runner.evidence_graph.add_evidence(ev)
                     obs_evidence_ids.append(ev.evidence_id)
                     self.metrics.pipeline_coverage["evidence_creation_count"] += 1
+                    
+                    # ── E2: Ingest shell-derived evidence into WorldModel ──
+                    ev_type = getattr(ev, 'evidence_type', '') or ''
+                    if ev_type in ('command_executed', 'command_output', 'file_content',
+                                   'process_list', 'network_connections', 'user_accounts',
+                                   'credential', 'vulnerability_indicator'):
+                        try:
+                            if (hasattr(runner, 'world_model') and runner.world_model
+                                and hasattr(runner.world_model, 'ingest_shell_evidence')):
+                                # Find active shell session for this target
+                                session_id = self._active_sessions[0] if self._active_sessions else ""
+                                if session_id:
+                                    runner.world_model.ingest_shell_evidence(
+                                        evidence=ev,
+                                        session_entity_id=session_id,
+                                        host_asset_id="",
+                                        collected_by=getattr(ev, 'collected_by', ''),
+                                    )
+                        except Exception as iev_err:
+                            logger.debug("[E2] Evidence ingestion: %s", iev_err)
+                            
                 self.metrics.pipeline_coverage["observation_ingestion_count"] += 1
             
             # D-3: Detect contradictions between new evidence and existing evidence
@@ -2031,6 +2059,34 @@ class AblationRunner:
                                       input_ids=[trigger.defeater_id],
                                       output_ids=[disc_action_id])
         
+        # ── E2: Shell Candidate Generation ──
+        if hasattr(self, '_shell_generator') and self._shell_generator:
+            try:
+                # shell_connect candidates from triggers
+                shell_connect_candidates = self._shell_generator.generate_connect_candidates(
+                    world=runner.world_model if hasattr(runner, 'world_model') else None,
+                    evidence_graph=runner.evidence_graph if hasattr(runner, 'evidence_graph') else None,
+                    hypothesis_manager=runner.hypothesis_manager if hasattr(runner, 'hypothesis_manager') else None,
+                    targets=targets,
+                )
+                # shell_command candidates for active sessions
+                current_objective = view.get("objective", "")
+                shell_command_candidates = self._shell_generator.generate_command_candidates(
+                    objective=current_objective,
+                    world=runner.world_model if hasattr(runner, 'world_model') else None,
+                )
+                # shell_disconnect candidates
+                shell_disconnect_candidates = self._shell_generator.generate_disconnect_candidates(
+                    world=runner.world_model if hasattr(runner, 'world_model') else None,
+                )
+
+                # Filter shell candidates against scope (D8)
+                for c in shell_connect_candidates + shell_command_candidates + shell_disconnect_candidates:
+                    if self._is_action_allowed(c, view) and len(candidates) < 15:
+                        candidates.append(c)
+            except Exception as e:
+                print(f'[E2-DEBUG] Shell candidate generation error: {e}')
+
         # Ensure base candidates have origin marker
         for c in candidates:
             if "candidate_origin" not in c:

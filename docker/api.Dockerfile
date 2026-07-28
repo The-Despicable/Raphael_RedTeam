@@ -19,8 +19,6 @@ RUN groupadd -r appuser -g 1000 && \
     mkdir -p /home/appuser /data && \
     chown -R appuser:appuser /home/appuser /raphael /data
 
-RUN chmod +x /raphael/cli/raphael_ci.py
-
 USER 1000:1000
 
 EXPOSE 3900

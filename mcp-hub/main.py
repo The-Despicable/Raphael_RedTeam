@@ -2,8 +2,12 @@ import argparse
 import asyncio
 import uvicorn
 
-from core.server import MCPServer
-from core.transport import StdioTransport
+try:
+    from mcp_hub.core.server import MCPServer
+    from mcp_hub.core.transport import StdioTransport
+except ImportError:
+    from mcp_hub.core.server import MCPServer
+    from mcp_hub.core.transport import StdioTransport
 
 
 def create_app():

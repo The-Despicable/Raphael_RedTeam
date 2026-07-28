@@ -308,6 +308,13 @@ async def list_personas(auth=Depends(require_scope("agent:read"))):
                 "default": False,
                 "tools": "ask-permission for non-recon tools",
             },
+            {
+                "id": "student",
+                "name": "Student",
+                "description": "Autonomous pentest learning agent — continuous research, stack profiling, chain synthesis",
+                "default": False,
+                "tools": "all tools + research scheduler + stack matcher + chain synthesizer",
+            },
         ],
         "default": "z3r0",
     }

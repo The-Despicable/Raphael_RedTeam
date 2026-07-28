@@ -15,9 +15,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from case_api import router as case_router
+from .case_api import router as case_router
 
-sys.path.insert(0, "/raphael")
+sys.path.insert(0, "/home/yaser/raphael-2.0/raphael")
 
 from orchestrator.scanners.nmap_scanner import NmapScanner
 from orchestrator.scanners.nuclei_scanner import NucleiScanner

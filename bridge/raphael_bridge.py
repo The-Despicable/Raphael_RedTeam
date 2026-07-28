@@ -14,7 +14,7 @@ from dataclasses import dataclass, asdict
 # Import all Raphael modules
 sys.path.insert(0, "/home/yaser/raphael-2.0")
 
-from orchestrator.modes import autonomous, community, debate, deep_research, scan
+from orchestrator.modes import autonomous, community, debate, deep_research, scan, student
 from orchestrator.agents import recon, exploit, postex, engage
 from orchestrator.c2 import manager, beacon, implant_builder, sliver_backend
 from orchestrator.exploit import llm_exploit_engine, relay_chain, pipeline
@@ -51,6 +51,7 @@ class RaphaelBridge:
             "mode.debate": self.mode_debate,
             "mode.deep_research": self.mode_deep_research,
             "mode.scan": self.mode_scan,
+            "mode.student": self.mode_student,
 
             # === AGENTS ===
             "agent.recon": self.agent_recon,
@@ -69,6 +70,8 @@ class RaphaelBridge:
             "exploit.generate": self.exploit_generate,
             "exploit.relay_chain": self.exploit_relay_chain,
             "exploit.payload_db": self.exploit_payload_db,
+            "exploit.mcp_start": self.exploit_mcp_start,
+            "exploit.mcp_exploit": self.exploit_mcp_exploit,
 
             # === KALI TOOLS ===
             "kali.run": self.kali_run,
@@ -129,6 +132,9 @@ class RaphaelBridge:
     async def mode_scan(self, target: str, **kwargs):
         return await scan.handle(target, **kwargs)
 
+    async def mode_student(self, target: str, target_type: str = "web", deep: bool = True, do_research: bool = True, **kwargs):
+        return await student.handle(target, target_type=target_type, deep=deep, do_research=do_research, **kwargs)
+
     # === AGENT IMPLEMENTATIONS ===
     async def agent_recon(self, target: str, depth: str = "full", **kwargs):
         return await recon.handle(target, depth, **kwargs)
@@ -168,6 +174,29 @@ class RaphaelBridge:
     async def exploit_payload_db(self, query: str = "", category: str = None):
         from orchestrator.exploit.payloads_db import search_payloads
         return search_payloads(query, category)
+
+    async def exploit_mcp_start(self, port: int = 9500):
+        """Start the MCP bridge HTTP server on a background thread."""
+        from orchestrator.exploit.mcp_bridge import MCPBridge
+        self._mcp_bridge = MCPBridge(port=port)
+        self._mcp_bridge.start()
+        return {"status": "started", "port": port, "url": f"http://127.0.0.1:{port}/health"}
+
+    async def exploit_mcp_exploit(self, target: str, url: str = None):
+        """Trigger exploitation through the MCP bridge HTTP API."""
+        import httpx
+        if not hasattr(self, '_mcp_bridge') or not self._mcp_bridge:
+            return {"error": "MCP bridge not started. Call exploit.mcp_start first."}
+        port = self._mcp_bridge.port
+        try:
+            async with httpx.AsyncClient(timeout=120) as c:
+                resp = await c.post(
+                    f"http://127.0.0.1:{port}/exploit",
+                    json={"target": target, "url": url or f"http://{target}:80"},
+                )
+                return resp.json()
+        except Exception as e:
+            return {"error": f"MCP bridge request failed: {e}"}
 
     # === KALI TOOLS ===
     async def kali_run(self, tool: str, args: str = "", timeout: int = 300):

@@ -4,17 +4,30 @@ uvicorn[standard]>=0.29.0
 httpx>=0.27.0
 pydantic>=2.0.0
 requests>=2.31.0
-python-dotenv>=1.0.0
-cachetools>=5.3.0
 pyyaml>=6.0
 dnspython>=2.6.0
-rich>=13.0.0
-prompt_toolkit>=3.0.0
-numpy>=1.24.0
-duckduckgo-search>=6.0.0
 cryptography>=41.0.0
 jinja2>=3.1.0
-aiofiles>=23.0.0
+aiohttp>=3.9.0
 python-multipart>=0.0.9
-mcp>=1.0.0
+redis>=5.0.0
+stem>=1.8.0
+psutil>=5.9.0
+neo4j>=5.0.0
+python-telegram-bot>=20.0
+fakeredis>=2.0.0
 pytest>=8.0.0
+
+# Optional (guarded by try/except ImportError)
+# packaging - used in dependency_check.py
+# secretstorage - used in credtheft.py (Linux keyring)
+# boto3 - used in exfil.py (AWS S3)
+# azure-storage-blob - used in exfil.py (Azure Blob)
+# google-cloud-storage - used in exfil.py (GCP)
+# urllib3 - used in stealth.py, exploit.py
+# pymssql - used in mssql_rce
+# duckduckgo-search - used in deep_research.py
+# r2pipe - used in binary_analyzer.py
+# caido-sdk-client - used in caido_bootstrap.py
+# docker - used in docker_client.py
+# aiodns - used in vhost_enum

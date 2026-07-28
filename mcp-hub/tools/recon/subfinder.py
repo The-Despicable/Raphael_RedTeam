@@ -1,6 +1,6 @@
 import subprocess
-from schemas.tools import SubfinderParams, SubfinderResult
-from core.registry import BaseTool
+from ...schemas.tools import SubfinderParams, SubfinderResult
+from ...core.registry import BaseTool
 
 
 class Subfinder(BaseTool):

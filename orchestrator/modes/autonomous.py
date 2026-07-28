@@ -24,7 +24,7 @@ from orchestrator.hardening.timeout_guard import get_timeout_guard
 
 logger = logging.getLogger("autonomous")
 
-PHASES = ["harvest", "recon", "scan", "exploit", "postex", "lateral", "credential", "exfil", "phish"]
+PHASES = ["harvest", "recon", "cicd", "ml_attack", "cloud_abuse", "container_escape", "scan", "exploit", "postex", "lateral", "credential", "exfil", "phish"]
 
 _RL_ACTIVE = os.getenv("RAPHAEL_RL_STRATEGY", "1") == "1"
 

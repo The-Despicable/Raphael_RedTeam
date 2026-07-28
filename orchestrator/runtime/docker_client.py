@@ -14,7 +14,10 @@ class DockerSandbox:
 
     def _get_client(self):
         if self._client is None:
-            import docker
+            try:
+                import docker
+            except ImportError:
+                raise RuntimeError("docker Python package is not installed")
             self._client = docker.from_env()
         return self._client
 

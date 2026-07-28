@@ -3,7 +3,7 @@
 import sys
 import json
 import socket
-from raphael.scripts.chaos_matrix import ChaosMatrix
+from raphael.techniques.payloads.chaos_matrix import ChaosMatrix
 
 
 def run_blind_probe(target_ip: str, port: int, timeout: float = 2.0) -> dict:

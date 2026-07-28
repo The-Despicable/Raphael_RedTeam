@@ -30,17 +30,17 @@ class BaseChannel(ABC):
     @abstractmethod
     async def start(self, **kwargs) -> None:
         """Start the channel listener."""
-        pass
+        raise RuntimeError("Not implemented")
 
     @abstractmethod
     async def stop(self) -> None:
         """Stop the channel listener."""
-        pass
+        raise RuntimeError("Not implemented")
 
     @abstractmethod
     async def observe(self, preflight: PreflightRecord, timeout: float) -> ChannelObservation:
         """Observe for a result within timeout."""
-        pass
+        raise RuntimeError("Not implemented")
 
 
 class TCPListenerChannel(BaseChannel):

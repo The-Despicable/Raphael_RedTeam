@@ -101,10 +101,11 @@ class NativeC2Backend:
         return None
 
     async def socks_stop(self, session_id: str):
-        pass
+        logger.debug(f"socks_stop called for session {session_id} - no SOCKS proxy in native backend")
 
     async def stop(self):
-        pass
+        self._available = False
+        logger.info("NativeC2Backend stopped - cleared session state")
 
     def get_dead_drop_urls(self, count: int = 5) -> list[str]:
         return self._dga.generate_c2_urls(count=count)
