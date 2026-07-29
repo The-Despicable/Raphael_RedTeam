@@ -232,8 +232,8 @@ class LLMIntentClassifier:
     """
     Tier 2: LLM-based intent classification for ambiguous commands.
 
-    Uses the same LLM provider as the D-series (bjoernb/gemma4-31b-think:latest)
-    but with a specialized prompt for command safety classification.
+    Uses the NVIDIA NIM-hosted Llama 3.1 8B by default
+    with a specialized prompt for command safety classification.
 
     Output: ALLOW / ESCALATE / DENY with confidence and rationale.
     """
@@ -290,7 +290,7 @@ Command to classify: {command}
     def __init__(
         self,
         llm_provider=None,
-        model: str = "bjoernb/gemma4-31b-think:latest",
+        model: str = "meta/llama-3.1-8b-instruct",
         timeout: float = 10.0,
     ):
         self.llm_provider = llm_provider
@@ -415,7 +415,7 @@ class CommandFilterPipeline:
         custom_allowlist: List[str] = None,
         custom_denylist: List[str] = None,
         llm_provider=None,
-        llm_model: str = "bjoernb/gemma4-31b-think:latest",
+        llm_model: str = "meta/llama-3.1-8b-instruct",
     ):
         self.static = StaticAllowlist(
             custom_allowlist=custom_allowlist,

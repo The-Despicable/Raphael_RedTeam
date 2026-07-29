@@ -12,6 +12,17 @@ OLLAMA_BASE = os.getenv("OLLAMA_HOST", "http://localhost:11434")
 OPENAI_BASE = os.getenv("OPENAI_BASE_URL", "")
 OPENAI_KEY = os.getenv("OPENAI_API_KEY", "")
 
+# NVIDIA NIM configuration (OpenAI-compatible API)
+NVIDIA_BASE = os.getenv("NVIDIA_API_BASE", "https://integrate.api.nvidia.com/v1")
+NVIDIA_KEY = os.getenv(
+    "NVIDIA_API_KEY",
+    "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",
+)
+NVIDIA_DEFAULT_MODEL = os.getenv("NVIDIA_MODEL", "meta/llama-3.1-8b-instruct")
+
+# Models known to be on NVIDIA NIM (routed automatically)
+NVIDIA_MODEL_PREFIXES = ("deepseek-", "nvidia/", "z-ai/", "meta/llama", "mistralai/")
+
 
 async def _call_ollama(messages: list[dict], max_tokens: int, temperature: float) -> str:
     system = None
@@ -52,6 +63,54 @@ async def _call_openai(messages: list[dict], max_tokens: int, temperature: float
     return ""
 
 
+async def _call_nvidia(
+    messages: list[dict],
+    max_tokens: int,
+    temperature: float,
+    model: str,
+) -> str:
+    """Call NVIDIA NIM API (OpenAI-compatible)."""
+    headers = {
+        "Authorization": f"Bearer {NVIDIA_KEY}",
+        "Content-Type": "application/json",
+    }
+    payload = {
+        "model": model,
+        "messages": messages,
+        "max_tokens": max_tokens,
+        "temperature": temperature,
+    }
+    async with aiohttp.ClientSession(headers=headers) as sess:
+        async with sess.post(
+            f"{NVIDIA_BASE}/chat/completions",
+            json=payload,
+            timeout=aiohttp.ClientTimeout(total=30),
+        ) as resp:
+            if resp.status == 200:
+                data = await resp.json()
+                return data["choices"][0]["message"]["content"]
+            elif resp.status == 429:
+                logger.warning("[NVIDIA] Rate limited")
+            else:
+                text = await resp.text()
+                logger.warning(f"[NVIDIA] HTTP {resp.status}: {text[:200]}")
+    return ""
+
+
+def _is_nvidia_model(model: str) -> bool:
+    """Check if a model identifier should be routed to NVIDIA NIM."""
+    if not model:
+        return False
+    model_lower = model.lower()
+    for prefix in NVIDIA_MODEL_PREFIXES:
+        if model_lower.startswith(prefix):
+            return True
+    # oc-* aliases that map to NVIDIA-hosted models
+    if model_lower.startswith("oc-deepseek") or model_lower.startswith("oc-nemotron"):
+        return True
+    return False
+
+
 async def call_model(
     model: str, messages: list[dict],
     max_tokens: int = 1024, temperature: float = 0.7,
@@ -62,8 +121,27 @@ async def call_model(
         msgs = [{"role": "system", "content": system_override}] + messages
     else:
         msgs = messages
+
+    # 1. Route NVIDIA-known models through NVIDIA NIM
+    if _is_nvidia_model(model):
+        result = await _call_nvidia(msgs, max_tokens, temperature, model)
+        if result:
+            return result
+        logger.warning(f"NVIDIA call failed for {model}, trying fallbacks")
+
+    # 2. OpenAI-compatible endpoint (explicitly configured)
     if OPENAI_KEY and OPENAI_BASE:
-        return await _call_openai(msgs, max_tokens, temperature, model)
+        result = await _call_openai(msgs, max_tokens, temperature, model)
+        if result:
+            return result
+
+    # 3. NVIDIA as default provider when model is unknown / no other provider configured
+    if NVIDIA_KEY and not (OPENAI_KEY and OPENAI_BASE):
+        result = await _call_nvidia(msgs, max_tokens, temperature, NVIDIA_DEFAULT_MODEL)
+        if result:
+            return result
+
+    # 4. Ollama fallback
     try:
         return await _call_ollama(msgs, max_tokens, temperature)
     except Exception as e:
