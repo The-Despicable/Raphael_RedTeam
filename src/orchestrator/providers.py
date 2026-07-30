@@ -14,11 +14,8 @@ OPENAI_KEY = os.getenv("OPENAI_API_KEY", "")
 
 # NVIDIA NIM configuration (OpenAI-compatible API)
 NVIDIA_BASE = os.getenv("NVIDIA_API_BASE", "https://integrate.api.nvidia.com/v1")
-NVIDIA_KEY = os.getenv(
-    "NVIDIA_API_KEY",
-    "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",
-)
-NVIDIA_DEFAULT_MODEL = os.getenv("NVIDIA_MODEL", "meta/llama-3.1-8b-instruct")
+NVIDIA_KEY = os.getenv("NVIDIA_API_KEY", "")
+NVIDIA_DEFAULT_MODEL = os.getenv("NVIDIA_MODEL", "deepseek-ai/deepseek-v4-flash")
 
 # Models known to be on NVIDIA NIM (routed automatically)
 NVIDIA_MODEL_PREFIXES = ("deepseek-", "nvidia/", "z-ai/", "meta/llama", "mistralai/")

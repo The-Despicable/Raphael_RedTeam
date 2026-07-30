@@ -25,7 +25,9 @@ import traceback
 from datetime import datetime, timezone
 from pathlib import Path
 
-sys.path.insert(0, '/home/yaser/raphael-2.0')
+_SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = _SCRIPT_DIR.parent
+sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from arena.d6_manifest import (
     D6_SCENARIO_FACTORIES, D6_SCENARIO_EVALUATORS,
@@ -40,7 +42,7 @@ from arena.runner import ArenaRunner
 _GLOBAL_EVALUATORS.update(D6_SCENARIO_EVALUATORS)
 
 # ── Paths ───────────────────────────────────────────────────
-OUTPUT_DIR = Path('/home/yaser/raphael-2.0/arena/d6c_results')
+OUTPUT_DIR = PROJECT_ROOT / 'arena' / 'd6c_results'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 RESULTS_FILE = OUTPUT_DIR / 'd6c_holdout_results.jsonl'
@@ -52,18 +54,20 @@ FAILED_FILE = OUTPUT_DIR / 'd6c_failed.jsonl'
 
 # ── Engine Identity (for audit trail) ────────────────────────
 def _file_hash(path):
+    if not path.exists():
+        return "FILE_NOT_FOUND"
     with open(path, 'rb') as f:
         return hashlib.sha256(f.read()).hexdigest()
 
 ENGINE_HASHES = {
-    "ablation_runner": _file_hash('/home/yaser/raphael-2.0/arena/ablation_runner.py'),
-    "ablation_runner_hash": _file_hash('/home/yaser/raphael-2.0/arena/ablation_runner.py')[:16],
-    "d6c_holdout_runner": _file_hash('/home/yaser/raphael-2.0/d6c_holdout_runner.py'),
-    "d6c_holdout_runner_hash": _file_hash('/home/yaser/raphael-2.0/d6c_holdout_runner.py')[:16],
-    "d6b_runner": _file_hash('/home/yaser/raphael-2.0/d6b_runner.py'),
-    "d6b_runner_hash": _file_hash('/home/yaser/raphael-2.0/d6b_runner.py')[:16],
-    "ablation": _file_hash('/home/yaser/raphael-2.0/arena/ablation.py'),
-    "d6_manifest": _file_hash('/home/yaser/raphael-2.0/arena/d6_manifest.py'),
+    "ablation_runner": _file_hash(PROJECT_ROOT / 'src' / 'arena' / 'ablation_runner.py'),
+    "ablation_runner_hash": _file_hash(PROJECT_ROOT / 'src' / 'arena' / 'ablation_runner.py')[:16],
+    "d6c_holdout_runner": _file_hash(_SCRIPT_DIR / 'd6c_holdout_runner.py'),
+    "d6c_holdout_runner_hash": _file_hash(_SCRIPT_DIR / 'd6c_holdout_runner.py')[:16],
+    "d6b_runner": _file_hash(_SCRIPT_DIR / 'd6b_runner.py'),
+    "d6b_runner_hash": _file_hash(_SCRIPT_DIR / 'd6b_runner.py')[:16],
+    "ablation": _file_hash(PROJECT_ROOT / 'src' / 'arena' / 'ablation.py'),
+    "d6_manifest": _file_hash(PROJECT_ROOT / 'src' / 'arena' / 'd6_manifest.py'),
 }
 
 ARCH_NAMES = list(ABLATION_PRESETS.keys())
