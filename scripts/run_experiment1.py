@@ -3,7 +3,10 @@
 Experiment 1: Architecture Value - Compare FULL_RAPHAEL vs PLAIN_LLM vs SCRIPTED baseline
 """
 import sys, json, os
-sys.path.insert(0, '/home/yaser/raphael-2.0')
+from pathlib import Path
+_REPO_ROOT = str(Path(__file__).resolve().parent.parent)
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
 
 from arena.ablation_runner import AblationRunner
 from arena.d6_manifest import D6_SCENARIO_FACTORIES, SCENARIO_TEMPLATES

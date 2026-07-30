@@ -24,12 +24,12 @@ def run_engagement(seed, run_id, target="dvwa"):
     env["RAPHAEL_TARGET"] = target
     env["RAPHAEL_MAX_ACTIONS"] = "20"
     env["RAPHAEL_TIMEOUT"] = "300"
-    env["PYTHONPATH"] = "/home/yaser/raphael-2.0/src"
+    env["PYTHONPATH"] = str(REPO_ROOT / "src")
     
     cmd = [
         "python3", "-c", f"""
 import sys
-sys.path.insert(0, '/home/yaser/raphael-2.0/src')
+sys.path.insert(0, '{REPO_ROOT / "src"}')
 import asyncio
 from orchestrator.modes.autonomous import handle
 
@@ -49,7 +49,7 @@ if __name__ == '__main__':
     ]
     
     start = time.time()
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=300, cwd="/home/yaser/raphael-2.0", env=env)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=300, cwd=REPO_ROOT, env=env)
     elapsed = time.time() - start
     
     return {

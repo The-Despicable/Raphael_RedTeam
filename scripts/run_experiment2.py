@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """Experiment 2: Ablation Study"""
 import sys, json, os
-sys.path.insert(0, '/home/yaser/raphael-2.0')
+from pathlib import Path
+_REPO_ROOT = str(Path(__file__).resolve().parent.parent)
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
 
 from arena.ablation_runner import AblationRunner
 from arena.d6_manifest import D6_SCENARIO_FACTORIES, SCENARIO_TEMPLATES
