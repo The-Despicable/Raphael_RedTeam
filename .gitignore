@@ -13,3 +13,5 @@ __pycache__/
 challenge.zip
 data/
 challenge_1245/
+# Generated evaluation outputs — not source
+evaluations/
