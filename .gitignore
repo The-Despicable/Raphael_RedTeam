@@ -19,3 +19,4 @@ evaluations/
 scripts/judge_report.json
 # Ablation runner temp artifacts
 arena/
+evaluations.zip
