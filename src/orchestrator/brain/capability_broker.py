@@ -40,6 +40,7 @@ import uuid
 import json
 import hashlib
 import logging
+import os
 from dataclasses import dataclass, field, asdict
 from enum import Enum
 from typing import Any, Callable, Optional
@@ -191,9 +192,13 @@ class BrokerPolicy:
         return False, f"Target not in allowed scope: {self.allowed_targets}"
     
     def _target_matches(self, target: str, pattern: str) -> bool:
-        """Match target against pattern (supports CIDR, wildcards, exact)."""
-        # Exact match
-        if target == pattern:
+        """Match target against pattern (supports CIDR, wildcards, exact, host:port)."""
+        # Strip port from target (e.g., "dvwa:80" -> test "dvwa" first)
+        import re
+        host_only = re.sub(r':\d+$', '', target)
+        
+        # Exact match (try host:port first, then host-only)
+        if target == pattern or host_only == pattern:
             return True
         # CIDR match (if pattern contains /)
         if '/' in pattern:
@@ -548,10 +553,16 @@ class CapabilityBroker:
         return receipt
 
     # ── Tool Adapters ──────────────────────────────────────────
+    # Kali-Tools HTTP adapter
+    KALI_TOOLS_URL = "http://kali-tools:3800"
 
     def create_tool_adapter(self, tool_name: str) -> 'ToolAdapter':
         """Create a tool adapter that enforces broker authorization."""
         return ToolAdapter(self, tool_name)
+    
+    def create_kali_adapter(self, tool_name: str) -> 'KaliToolAdapter':
+        """Create a kali-tools HTTP adapter for external tool execution."""
+        return KaliToolAdapter(self, tool_name)
 
     # ── Inspection ─────────────────────────────────────────────
 
@@ -1359,3 +1370,121 @@ def create_brokered_engine(
     return BrokeredExecutionEngine(
         world, evidence_graph, hypothesis_manager, contradiction_manager, broker
     )
+
+
+# ── Kali-Tools HTTP Adapter ────────────────────────────────────
+
+class KaliToolAdapter:
+    """
+    Adapter for executing tools via the kali-tools HTTP service.
+    
+    Usage:
+        adapter = broker.create_kali_adapter("sqlmap")
+        result = adapter.call(target="http://dvwa/vuln/sqli/?id=1", args="-u {target} --batch")
+    
+    The adapter:
+    1. Proposes action through broker (dual-gate authorization)
+    2. On authorization, calls kali-tools HTTP service
+    3. Returns standardized result with receipt
+    """
+    
+    def __init__(
+        self, 
+        broker: CapabilityBroker, 
+        tool_name: str,
+        kali_url: str = None,
+    ):
+        self.broker = broker
+        self.tool_name = tool_name
+        self.kali_url = kali_url or os.environ.get("KALI_TOOLS_URL", "http://kali-tools:3800")
+    
+    def call(
+        self,
+        target: str,
+        args: str = "",
+        action_type: str = "scan",
+        impact_estimate: float = 1.0,
+        metadata: dict = None,
+    ) -> dict:
+        """
+        Execute a kali tool through the broker + kali-tools service.
+        
+        Args:
+            target: Target identifier (URL, IP, hostname)
+            args: Tool arguments (can contain {target} placeholder)
+            action_type: Action type for RoE check
+            impact_estimate: Impact score for budget check
+            metadata: Additional metadata
+        
+        Returns:
+            {"receipt": ActionReceipt, "result": ToolRunResponse, "authorized": bool}
+        """
+        import httpx
+        
+        # Normalize impact_estimate: convert string categories to numeric
+        impact_map = {"low": 0.5, "moderate": 3.0, "high": 8.0, "critical": 15.0}
+        if isinstance(impact_estimate, str):
+            numeric_impact = impact_map.get(impact_estimate.lower(), 5.0)
+        elif isinstance(impact_estimate, (int, float)):
+            numeric_impact = float(impact_estimate)
+        else:
+            numeric_impact = 1.0
+        
+        # Resolve args with target
+        resolved_args = args.replace("{target}", target) if "{target}" in args else f"{args} {target}".strip()
+        
+        # Propose action through broker
+        receipt = self.broker.propose_action(
+            target=target,
+            action_type=action_type,
+            capability=self.tool_name,
+            method=f"kali-tools:{self.tool_name}",
+            impact_estimate=numeric_impact,
+            metadata={"tool": self.tool_name, "args": resolved_args, "metadata": metadata or {}},
+        )
+        
+        if receipt.decision != "allow":
+            return {
+                "receipt": receipt,
+                "result": None,
+                "authorized": False,
+                "error": receipt.reason,
+            }
+        
+        # Start execution
+        receipt = self.broker.start_execution(receipt)
+        
+        try:
+            # Call kali-tools HTTP service
+            with httpx.Client(timeout=300.0) as client:
+                resp = client.post(
+                    f"{self.kali_url}/run",
+                    params={"tool": self.tool_name, "args": resolved_args, "timeout": 300},
+                )
+                resp.raise_for_status()
+                tool_result = resp.json()
+            
+            success = tool_result.get("returncode") == 0
+            output = tool_result.get("stdout", "")
+            error = tool_result.get("stderr", "") if not success else None
+            
+        except httpx.TimeoutException:
+            success = False
+            output = ""
+            error = "kali-tools request timed out"
+        except Exception as e:
+            success = False
+            output = ""
+            error = str(e)
+        
+        # Complete execution
+        receipt = self.broker.complete_execution(
+            receipt, success=success, result=output, evidence_ids=[]
+        )
+        
+        return {
+            "receipt": receipt,
+            "result": tool_result if success else None,
+            "authorized": True,
+            "error": error,
+        }

@@ -48,6 +48,13 @@ sys.path.insert(0, str(ROOT))
 SOURCEDIR = ROOT.parent / "src"
 sys.path.insert(0, str(SOURCEDIR))
 
+# Python version guard (SENTINEL Rule 50 - Run-Count Accountability)
+import sys
+if sys.version_info >= (3, 13):
+    raise RuntimeError(f"Unsupported Python {sys.version_info.major}.{sys.version_info.minor}. "
+                       f"Raphael requires Python >=3.11,<3.13. "
+                       f"See pyproject.toml requires-python.")
+
 SKIP_DIRS = {
     ".git", "__pycache__", "node_modules", ".local", ".hermes", ".pytest_cache",
     ".ssh", "data", "benchmarks", "references", "challenge", "challenge_1245",
@@ -748,7 +755,7 @@ def safe_load_module(path: Path, unique: str):
 def test_crypto_roundtrips() -> None:
     check = "crypto_roundtrip"
     candidates = [
-        ("orchestrator/weaponizer/weaponizer_engine.py", "aes_cbc_encrypt", "aes_cbc_decrypt"),
+        ("orchestrator/weaponizer/weaponizer_engine.py", "_aes_cbc_encrypt", "_aes_cbc_decrypt"),
         ("agent/crypto.py", "encrypt", "decrypt"),
         ("agent/crypto.py", "aes_ctr_encrypt", "aes_ctr_decrypt"),
     ]

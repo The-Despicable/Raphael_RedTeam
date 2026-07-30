@@ -186,6 +186,47 @@ async def get_latest_sentinel_message(page):
     return {"id": message_id, "text": text.strip()}
 
 
+async def is_sentinel_generating(page):
+    """Check if SENTINEL (ChatGPT) is still generating a response.
+    
+    Returns True if the model is still streaming output.
+    The bridge must wait for completion before reading partial messages.
+    """
+    # Method 1: Check for the "Stop Generating" button
+    # ChatGPT displays a specific button while streaming
+    stop_btn = await page.query_selector(
+        'button[data-testid="stop-button"], '
+        'button[aria-label="Stop generating"], '
+        '[data-testid="stop-button"]'
+    )
+    if stop_btn:
+        return True
+    
+    # Method 2: Fallback — check if the latest message text is still changing
+    selectors = [
+        '[data-message-author-role="assistant"]',
+        'article[data-testid*="conversation"]',
+        '[class*="assistant"]',
+    ]
+    messages = []
+    for sel in selectors:
+        messages = await page.query_selector_all(sel)
+        if messages:
+            break
+    if not messages:
+        return False
+    
+    latest = messages[-1]
+    try:
+        text1 = await latest.inner_text()
+        await asyncio.sleep(1.0)  # Wait 1 second
+        text2 = await latest.inner_text()
+        # If the text length changed, it's still streaming
+        return len(text1) != len(text2)
+    except Exception:
+        return False
+
+
 def extract_command(text: str) -> str | None:
     for line in text.split("\n"):
         line = line.strip()
@@ -299,7 +340,13 @@ def update_state(key: str, value):
 
 
 async def main():
-    from playwright.async_api import async_playwright
+    # Rule 3: Guard heavyweight playwright import
+    try:
+        from playwright.async_api import async_playwright
+    except ImportError:
+        print("[bridge] playwright not installed. Install with: "
+              "pip install playwright && python3 -m playwright install chromium")
+        sys.exit(1)
 
     print("=" * 60)
     print("  Raphael Bridge — FORGE ↔ SENTINEL Two-Way Network")
@@ -370,6 +417,12 @@ async def main():
             try:
                 # Check outbox (FORGE-initiated messages)
                 await process_outbox(page)
+
+                # NEW: Wait for generation to complete before reading
+                if await is_sentinel_generating(page):
+                    print(f"[bridge] SENTINEL is generating... waiting for completion.")
+                    await asyncio.sleep(2.0)
+                    continue
 
                 # Check for new SENTINEL messages
                 msg = await get_latest_sentinel_message(page)

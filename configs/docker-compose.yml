@@ -291,6 +291,40 @@ services:
     logging: *default-logging
     restart: unless-stopped
 
+  dvwa:
+    image: vulnerables/web-dvwa
+    container_name: dvwa
+    hostname: dvwa
+    networks:
+      - raphael-net
+    ports:
+      - "4280:80"
+    environment:
+      - DB_SERVER=db
+      - DB_DATABASE=dvwa
+      - DB_USERNAME=dvwa
+      - DB_PASSWORD=p@ssw0rd
+    depends_on:
+      - dvwa-db
+    logging: *default-logging
+    restart: unless-stopped
+
+  dvwa-db:
+    image: mysql:8.0
+    container_name: dvwa-db
+    hostname: db
+    networks:
+      - raphael-net
+    environment:
+      - MYSQL_DATABASE=dvwa
+      - MYSQL_USER=dvwa
+      - MYSQL_PASSWORD=p@ssw0rd
+      - MYSQL_ROOT_PASSWORD=rootp@ssw0rd
+    volumes:
+      - dvwa-db-data:/var/lib/mysql
+    logging: *default-logging
+    restart: unless-stopped
+
   raphael-api:
     <<: *host-config
     build:
@@ -343,3 +377,4 @@ volumes:
   neo4j-data:
   sliver-config:
   sliver-data:
+  dvwa-db-data:

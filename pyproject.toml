@@ -7,7 +7,7 @@ name = "raphael-v2"
 version = "2.0.0"
 description = "Autonomous Cognitive Offensive AI Platform"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.11,<3.13"
 dependencies = [
     "torch>=2.3.0",
     "transformers>=4.41.0",
