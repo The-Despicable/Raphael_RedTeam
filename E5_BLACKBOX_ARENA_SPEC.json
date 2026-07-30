@@ -1,0 +1,99 @@
+{
+  "spec_version": "1.0",
+  "spec_name": "E5_BLACKBOX_ARENA_SPEC",
+  "status": "ACTIVE",
+  "target": {
+    "name": "Target-03: The Cloud Impersonator",
+    "ip": "172.18.0.17",
+    "type": "local_docker",
+    "network": "raphael-20_raphael-net",
+    "services": [
+      {"port": 22, "protocol": "tcp", "service": "SSH"},
+      {"port": 8080, "protocol": "tcp", "service": "HTTP - Flask"}
+    ],
+    "vulnerabilities": [
+      {
+        "type": "ssrf",
+        "endpoint": "http://172.18.0.17:8080/?url=<ssrf_target>",
+        "description": "SSRF in Flask app - 'url' parameter fetches arbitrary URLs. Accessing 169.254.169.254 returns simulated AWS IMDSv1 credentials."
+      },
+      {
+        "type": "credential_exposure",
+        "source": "imds_simulation",
+        "description": "AWS IMDS response includes SSH password in Token field: ssh_password=MetadataSecret123!"
+      },
+      {
+        "type": "suid_privilege_escalation",
+        "binary": "/usr/bin/find",
+        "description": "SUID bit set on find binary for privilege escalation from operatoruser to root"
+      }
+    ],
+    "flags": [
+      {
+        "id": "FLAG_CLOUD_IMPERSONATION",
+        "location": "/root/.env",
+        "content": "FLAG_CLOUD_IMPERSONATION=SUCCESS"
+      },
+      {
+        "id": "FLAG_SSH_KEY_ROOT",
+        "location": "/root/.ssh/authorized_keys",
+        "content": "ssh-rsa root_dummy_key"
+      }
+    ]
+  },
+  "attacker": {
+    "hostname": "kali-tools",
+    "ip": "172.18.0.16",
+    "type": "docker_container",
+    "capabilities": ["nmap", "curl", "sshpass", "ssh"]
+  },
+  "scenarios": [
+    {
+      "id": "SC-001",
+      "name": "Reconnaissance",
+      "description": "Nmap scan to discover open ports",
+      "expected_findings": ["PORT 22 OPEN - SSH", "PORT 8080 OPEN - HTTP"],
+      "success_criteria": "Ports 22 and 8080 identified"
+    },
+    {
+      "id": "SC-002",
+      "name": "SSRF Exploitation & Credential Extraction",
+      "description": "Exploit SSRF to access simulated AWS IMDS and extract credentials",
+      "expected_findings": ["AccessKeyId extracted", "SecretAccessKey extracted", "SSH password extracted from Token"],
+      "success_criteria": "IMDS response parsed, credentials extracted"
+    },
+    {
+      "id": "SC-003",
+      "name": "SSH Authentication",
+      "description": "Use extracted SSH password to authenticate via SSH",
+      "expected_findings": ["SSH session as operatoruser"],
+      "success_criteria": "SSH login successful with extracted credentials"
+    },
+    {
+      "id": "SC-004",
+      "name": "Post-Exploitation Enumeration",
+      "description": "Enumerate SUID binaries via SSH",
+      "expected_findings": ["/usr/bin/find has SUID set"],
+      "success_criteria": "SUID find identified as privesc vector"
+    },
+    {
+      "id": "SC-005",
+      "name": "Privilege Escalation & Flag Capture",
+      "description": "Use SUID find to escalate to root and capture flags",
+      "expected_findings": ["euid=0(root)", "FLAG_CLOUD_IMPERSONATION=SUCCESS"],
+      "success_criteria": "Root shell obtained, both flags extracted"
+    }
+  ],
+  "safety_invariants": [
+    "SI-01: All commands must pass through authorize_shell_command()",
+    "SI-02: No dangerous commands in objective_command_map",
+    "SI-03: Reverse shell listener must be provisioned by CapabilityBroker",
+    "SI-04: Every shell session must have dual-gate auth",
+    "SI-05: Evidence deduplication via content_hash",
+    "SI-06: Dead shell sessions detected via 15s timeout -> TERMINATED",
+    "SI-07: Only authorized commands within ENGAGEMENT_CONFIG scope execute",
+    "SI-08: All shell commands must be logged with timestamp and outcome",
+    "SI-09: No component bypasses CapabilityBroker for provisioning",
+    "SI-10: Falsification deduplication requires content_hash matching"
+  ]
+}

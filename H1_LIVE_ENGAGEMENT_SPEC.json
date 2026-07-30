@@ -1,0 +1,120 @@
+{
+  "spec_version": "1.0",
+  "spec_name": "H1_LIVE_ENGAGEMENT_SPEC",
+  "status": "SEALED",
+  "sealed": true,
+  "overview": "First live HackerOne engagement — Nextcloud cognitive run. Deploy local Docker Nextcloud instance, run Raphael cognitive loop (recon → technique proposal → execution), validate end-to-end kill chain against real-world PHP/MySQL web application.",
+  "target": {
+    "program": "nextcloud",
+    "deployment": "local_docker",
+    "image": "nextcloud:stable",
+    "hostname": "raphael-target-nextcloud",
+    "port": 8085,
+    "network": "raphael-20_raphael-net",
+    "internal_ip": "172.18.0.20",
+    "stack": ["php", "mariadb", "apache", "nextcloud"],
+    "version": "stable (latest)",
+    "database": {
+      "engine": "mariadb",
+      "version": "10.11",
+      "container": "raphael-target-mariadb",
+      "internal_ip": "172.18.0.21",
+      "root_password": "nextcloud_root",
+      "database": "nextcloud",
+      "user": "nextcloud",
+      "password": "nextcloud_pass"
+    },
+    "accounts": {
+      "admin": { "username": "admin", "password": "admin_password", "role": "admin" },
+      "operator": { "username": "operator", "password": "operator_password", "role": "user" }
+    },
+    "scope_cidr": ["172.18.0.0/16"]
+  },
+  "why_nextcloud": {
+    "stack_alignment": "PHP/MySQL/Apache matches Raphael STACK_MAP (file_upload, lfi, sqli, idor)",
+    "open_source": "VDP-friendly, tolerant of automated research",
+    "attack_surface": "File handling, sharing links (IDOR), authentication, user management",
+    "non_critical": "File sync platform — not financial/healthcare, low regulatory risk"
+  },
+  "cognitive_loop": {
+    "phase_1_recon": {
+      "objective": "Profile target stack, identify running services, extract version info",
+      "techniques": ["http_headers", "stack_fingerprint", "directory_enumeration"],
+      "expected_findings": ["Apache/Nginx version", "PHP version", "Nextcloud version", "Available endpoints"]
+    },
+    "phase_2_technique_proposal": {
+      "objective": "Generate candidate techniques matching Nextcloud stack",
+      "techniques": [
+        "file_upload_shell",
+        "lfi_rfi",
+        "sqli_union_basic",
+        "idor_parameter_manipulation"
+      ],
+      "student_role": "StudentCandidateGenerator.generate_candidates() with stack profile",
+      "broker_role": "CapabilityBroker.propose_action() with rate limiting (10-20s jitter)"
+    },
+    "phase_3_execution": {
+      "objective": "Execute authorized candidates, collect evidence, flag findings",
+      "max_actions": 20,
+      "rate_limit_jitter_seconds": [10, 20],
+      "evidence_types": [
+        "http_response",
+        "credential_evidence",
+        "vulnerability_indicator",
+        "file_content"
+      ]
+    },
+    "phase_4_reflection": {
+      "objective": "Persist lessons learned, update Student KB, identify gaps",
+      "target_entity_types": ["host", "web_service", "credential", "vulnerability"]
+    }
+  },
+  "p1_integration": {
+    "waf_detector": {
+      "enabled": true,
+      "probe_target": "http://raphael-target-nextcloud:80",
+      "expected_waf_type": "none_or_cloudflare"
+    },
+    "rate_limiter": {
+      "enabled": true,
+      "min_delay": 10,
+      "max_delay": 20,
+      "reason": "Respectful pacing for live web application"
+    },
+    "scope_parser": {
+      "enabled": true,
+      "allowed_cidr": ["172.18.0.0/16"],
+      "behavior": "fail_closed"
+    },
+    "payload_mutator": {
+      "enabled": true,
+      "max_rounds": 3,
+      "trigger": "403_406_509_status"
+    }
+  },
+  "safety_invariants": [
+    "SI-H1-01: ScopeParser must DENY if target not in 172.18.0.0/16",
+    "SI-H1-02: RateLimiter jitter must be 10-20s minimum",
+    "SI-H1-03: No destructive actions (DELETE, DROP, FORMAT, SHUTDOWN)",
+    "SI-H1-04: All http responses stored as Evidence with trust_level=TOOL_OBSERVATION",
+    "SI-H1-05: Flag findings must include HTTP status, body snippet, and evidence_id",
+    "SI-H1-06: Max 20 actions per engagement (rate-limited to ~5-10 minutes)",
+    "SI-H1-07: Any 5xx response triggers CapabilityBroker review"
+  ],
+  "expected_kill_chain": [
+    "1. Recon: http_headers → Nextcloud version, Apache/PHP versions",
+    "2. Technique proposal: Student proposes file_upload_shell, lfi_rfi, sqli, idor",
+    "3. Upload test: Attempt file upload via /remote.php/dav/files/ (WebDAV)",
+    "4. LFI test: Attempt path traversal in file preview endpoint",
+    "5. IDOR test: Attempt share link enumeration",
+    "6. Auth test: Default credentials check (admin:admin)",
+    "7. Evidence collection: All findings stored in WorldModel + EvidenceGraph",
+    "8. Reflection: Student KB updated with Nextcloud-specific results"
+  ],
+  "llm_provider": {
+    "name": "NVIDIA NIM",
+    "model": "meta/llama-3.1-8b-instruct",
+    "endpoint": "https://integrate.api.nvidia.com/v1",
+    "key_env": "NVIDIA_API_KEY"
+  }
+}

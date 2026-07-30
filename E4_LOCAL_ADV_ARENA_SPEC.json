@@ -1,0 +1,105 @@
+{
+  "spec_version": "1.0",
+  "spec_name": "E4_LOCAL_ADV_ARENA_SPEC",
+  "status": "ACTIVE",
+  "target": {
+    "name": "Raphael-Target-02",
+    "ip": "172.18.0.17",
+    "type": "local_docker",
+    "network": "raphael-20_raphael-net",
+    "vulnerabilities": [
+      {
+        "type": "command_injection",
+        "endpoint": "http://172.18.0.17:8080/api/ping?host=<injection>",
+        "description": "Python HTTP server with unsanitized subprocess shell=True in ping endpoint"
+      },
+      {
+        "type": "suid_privilege_escalation",
+        "binary": "/usr/bin/find",
+        "description": "SUID bit set on find binary for privilege escalation from webuser to root"
+      }
+    ],
+    "flags": [
+      {
+        "id": "FLAG_CREDENTIAL",
+        "location": "/root/.env",
+        "content": "AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+        "description": "Simulated AWS credential in root's environment file"
+      },
+      {
+        "id": "FLAG_SSH_KEY",
+        "location": "/root/.ssh/authorized_keys",
+        "content": "ssh-rsa root_dummy_key",
+        "description": "Simulated SSH authorized key for root"
+      }
+    ]
+  },
+  "attacker": {
+    "hostname": "kali-tools",
+    "ip": "172.18.0.16",
+    "type": "docker_container",
+    "capabilities": [
+      "nmap",
+      "curl",
+      "nc",
+      "python3",
+      "bash"
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "SC-001",
+      "name": "Reconnaissance",
+      "description": "Nmap scan of target to discover open ports and services",
+      "expected_findings": ["PORT 8080 OPEN", "Python HTTP server"],
+      "success_criteria": "Port 8080 identified as HTTP with Python server"
+    },
+    {
+      "id": "SC-002",
+      "name": "Vulnerability Discovery",
+      "description": "Probe the /api/ping endpoint for command injection",
+      "expected_findings": ["RCE confirmed: uid=1000(webuser)"],
+      "success_criteria": "Command injection confirmed via id command"
+    },
+    {
+      "id": "SC-003",
+      "name": "Reverse Shell Establishment",
+      "description": "Execute reverse shell payload through command injection. Listener on kali-tools (172.18.0.16).",
+      "expected_findings": ["Reverse shell connected", "Shell session authorized"],
+      "success_criteria": "Interactive reverse shell session established and authorized by CapabilityBroker"
+    },
+    {
+      "id": "SC-004",
+      "name": "Post-Exploitation Enumeration",
+      "description": "Enumerate SUID binaries to identify privilege escalation vector",
+      "expected_findings": ["/usr/bin/find has SUID set"],
+      "success_criteria": "SUID on find identified as privesc vector"
+    },
+    {
+      "id": "SC-005",
+      "name": "Privilege Escalation",
+      "description": "Use SUID find to escalate to root: find . -exec /bin/sh -p \\; -quit",
+      "expected_findings": ["uid=0(root)", "Access to /root/.env"],
+      "success_criteria": "Root shell obtained and /root/.env contents extracted"
+    },
+    {
+      "id": "SC-006",
+      "name": "Evidence Collection & Cleanup",
+      "description": "Extract flags, ingest evidence into WorldModel, cleanup artifacts",
+      "expected_findings": ["FLAG_CREDENTIAL ingested", "FLAG_SSH_KEY ingested", "Session cleaned up"],
+      "success_criteria": "Both flags extracted and ingested, reverse shell terminated"
+    }
+  ],
+  "safety_invariants": [
+    "SI-01: All commands must pass through authorize_shell_command()",
+    "SI-02: No dangerous commands (rm -rf, dd, mkfs, shutdown) in objective_command_map",
+    "SI-03: Reverse shell listener must be provisioned by CapabilityBroker",
+    "SI-04: Every shell session must have dual-gate auth (connection + per-command)",
+    "SI-05: Evidence deduplication via content_hash",
+    "SI-06: Dead shell sessions detected via 15s timeout → TERMINATED",
+    "SI-07: Only authorized commands within ENGAGEMENT_CONFIG scope execute",
+    "SI-08: All shell commands must be logged with timestamp and outcome",
+    "SI-09: No component bypasses CapabilityBroker for reverse shell provisioning",
+    "SI-10: Falsification deduplication requires content_hash matching"
+  ]
+}

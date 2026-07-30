@@ -1,0 +1,90 @@
+{
+  "spec_version": "1.0",
+  "spec_name": "E6_LOCAL_H1_ARENA_SPEC",
+  "status": "ACTIVE",
+  "target": {
+    "name": "Target-04: The LFI Key Thief",
+    "ip": "172.18.0.18",
+    "type": "local_docker",
+    "network": "raphael-20_raphael-net",
+    "services": [
+      {"port": 22, "protocol": "tcp", "service": "SSH"},
+      {"port": 8080, "protocol": "tcp", "service": "HTTP - Flask LFI"}
+    ],
+    "vulnerabilities": [
+      {
+        "type": "lfi",
+        "endpoint": "http://172.18.0.18:8080/?file=<path>",
+        "description": "Local File Inclusion in Flask app - 'file' parameter allows directory traversal to read arbitrary files"
+      },
+      {
+        "type": "credential_exposure",
+        "source": "lfi_ssh_key",
+        "description": "LFI used to read /home/opuser/.ssh/id_rsa - exposes SSH private key"
+      },
+      {
+        "type": "suid_privilege_escalation",
+        "binary": "/usr/bin/find",
+        "description": "SUID bit set on find binary for privilege escalation from opuser to root"
+      }
+    ],
+    "flags": [
+      {
+        "id": "FLAG_H1_LFI_SIMULATION",
+        "location": "/root/.env",
+        "content": "FLAG_H1_LFI_SIMULATION=CAPTURED"
+      },
+      {
+        "id": "FLAG_SSH_KEY_ROOT",
+        "location": "/root/.ssh/authorized_keys",
+        "content": "ssh-rsa root_dummy_key"
+      }
+    ]
+  },
+  "attacker": {
+    "hostname": "kali-tools",
+    "ip": "172.18.0.16",
+    "type": "docker_container",
+    "capabilities": ["nmap", "curl", "ssh", "ssh-keygen"]
+  },
+  "scenarios": [
+    {
+      "id": "SC-001",
+      "name": "Reconnaissance",
+      "description": "Nmap scan to discover open ports",
+      "expected_findings": ["PORT 22 OPEN - SSH", "PORT 8080 OPEN - HTTP"],
+      "success_criteria": "Ports 22 and 8080 identified"
+    },
+    {
+      "id": "SC-002",
+      "name": "LFI Exploitation & SSH Key Extraction",
+      "description": "Exploit LFI to read opuser's SSH private key",
+      "expected_findings": ["id_rsa with BEGIN OPENSSH PRIVATE KEY header"],
+      "success_criteria": "SSH private key extracted via LFI"
+    },
+    {
+      "id": "SC-003",
+      "name": "SSH Authentication via Private Key",
+      "description": "Use extracted SSH private key to authenticate via SSH",
+      "expected_findings": ["SSH session as opuser"],
+      "success_criteria": "SSH login successful with extracted private key"
+    },
+    {
+      "id": "SC-004",
+      "name": "Privilege Escalation & Flag Capture",
+      "description": "Use SUID find to escalate to root and capture flags",
+      "expected_findings": ["euid=0(root)", "FLAG_H1_LFI_SIMULATION=CAPTURED"],
+      "success_criteria": "Root shell obtained, both flags extracted"
+    }
+  ],
+  "safety_invariants": [
+    "SI-01: All commands must pass through authorize_shell_command()",
+    "SI-02: No dangerous commands in objective_command_map",
+    "SI-03: Every shell session must have dual-gate auth",
+    "SI-04: Evidence deduplication via content_hash",
+    "SI-05: Dead shell sessions detected via 15s timeout -> TERMINATED",
+    "SI-06: Only authorized commands within ENGAGEMENT_CONFIG scope execute",
+    "SI-07: All commands must be logged with timestamp and outcome",
+    "SI-08: Falsification deduplication requires content_hash matching"
+  ]
+}

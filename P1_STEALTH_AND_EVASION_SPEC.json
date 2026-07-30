@@ -1,0 +1,211 @@
+{
+  "spec_version": "1.0",
+  "spec_name": "P1_STEALTH_AND_EVASION_SPEC",
+  "status": "DRAFT",
+  "sealed": false,
+  "overview": "Transition Raphael from brute-force execution to surgical, phantom-like operation. Integrate OPSEC, rate limiting, WAF evasion, and strict scope adherence into the existing cognitive loop without modifying D-series core.",
+  "governing_principles": [
+    "CapabilityBroker remains the sole authority for all execution decisions",
+    "RateLimiter and ScopeParser are extensions of Broker — not separate components",
+    "Fail closed: ambiguous scope status => DENY",
+    "Do not modify D-series core cognitive loop (Planner, WorldModel, HypothesisEngine)",
+    "All stealth modifications must be reversible for lab testing"
+  ],
+  "spec_sections": [
+    {
+      "id": "P1-SS-01",
+      "name": "Strict Scope Parser",
+      "component": "orchestrator/brain/scope_parser.py (NEW)",
+      "defect": "CapabilityBroker uses simple CIDR/hostname lists. HackerOne scopes are complex: wildcard domains, exclusions, URL-path scoping, and structured policy documents.",
+      "required_change": "Implement a dedicated ScopeParser module that ingests structured scope definitions and compiles them into a rigorous authorization policy.",
+      "acceptance_criteria": [
+        "Parse wildcard domains: *.example.com matches any subdomain",
+        "Parse exclusion rules: !support.example.com denies that specific host",
+        "Parse URL-path scoping: example.com/api/* limits to path prefix",
+        "Parse CIDR notation: 10.0.0.0/24",
+        "Parse HackerOne JSON export format: in_scope, out_of_scope arrays",
+        "Fail closed: if target cannot be definitively classified => DENY",
+        "Cache compiled rules for O(1) lookup per authorization check",
+        "Export compiled policy as EngagementPolicy.allowed_targets / prohibited_targets"
+      ],
+      "interface": {
+        "class": "ScopeParser",
+        "methods": [
+          "parse_hackerone_json(json_data: dict) -> None",
+          "parse_markdown(markdown_text: str) -> None",
+          "parse_cidr_list(cidrs: list[str]) -> None",
+          "is_target_allowed(target: str) -> tuple[bool, str]",
+          "export_policy() -> EngagementPolicy"
+        ],
+        "integration": "CapabilityBroker.__init__() accepts optional ScopeParser. If provided, is_target_allowed() delegates to ScopeParser instead of raw list matching."
+      },
+      "risk_assessment": {
+        "false_positive": "Overly broad wildcard may inadvertently allow out-of-scope subdomain. Mitigation: require explicit wildcard + explicit exclusion pairs.",
+        "false_negative": "Complex URL pattern may not match due to normalization differences (e.g., trailing slash). Mitigation: normalize all targets before matching.",
+        "performance": "Policy compilation is O(n) at init. Lookup is O(1) amortized via compiled trie."
+      }
+    },
+    {
+      "id": "P1-SS-02",
+      "name": "Rate Limiting & Temporal Jitter",
+      "component": "orchestrator/brain/rate_limiter.py (NEW) + CapabilityBroker extension",
+      "defect": "AblationRunner executes actions as fast as LLM and tools allow, triggering WAF thresholds.",
+      "required_change": "Introduce a RateLimiter module into CapabilityBroker. Every authorize_action and authorize_shell_command call must be subject to configurable delay with jitter.",
+      "acceptance_criteria": [
+        "Configurable min_delay (default 5s) and max_delay (default 15s) per action",
+        "Random jitter within [min_delay, max_delay] applied before returning authorization",
+        "Per-target rate tracking: separate rate limits for each target IP",
+        "Global rate limit: max actions per minute/hour across all targets",
+        "Shell session keep-alive: heartbeat (empty \n) sent during rate limiter wait to prevent timeout",
+        "Rate limit stats exposed via GET /v1/rate-limiter/status",
+        "Emergency brake: if >10 DENY in 60s, auto-pause for 300s"
+      ],
+      "interface": {
+        "class": "RateLimiter",
+        "methods": [
+          "authorize_with_delay(target: str, action_type: str) -> tuple[bool, str, float]",
+          "record_denial(target: str) -> None",
+          "get_status() -> dict",
+          "reset() -> None"
+        ],
+        "config_schema": {
+          "min_delay_seconds": 5.0,
+          "max_delay_seconds": 15.0,
+          "max_actions_per_minute": 10,
+          "max_actions_per_hour": 200,
+          "emergency_brake_denials": 10,
+          "emergency_brake_window_seconds": 60,
+          "emergency_brake_cooldown_seconds": 300,
+          "shell_keepalive_interval_seconds": 10
+        },
+        "integration": "CapabilityBroker.propose_action() and authorize_shell_command() call rate_limiter.authorize_with_delay() before returning authorization decision. ShellSession.send_command() sends keepalive during delay."
+      },
+      "risk_assessment": {
+        "false_positive": "Excessive delay may cause shell session timeout. Mitigation: keepalive heartbeat maintains session.",
+        "false_negative": "Per-target tracking may allow multi-target burst. Mitigation: global rollup counter caps total throughput.",
+        "performance": "time.sleep() is blocking. Mitigation: use asyncio.sleep() in async context, threaded sleep in sync."
+      }
+    },
+    {
+      "id": "P1-SS-03",
+      "name": "WAF Detection & Fingerprinting",
+      "component": "orchestrator/brain/waf_detector.py (NEW) + Student/WorlModel integration",
+      "defect": "Student proposes static payloads. If WAF blocks them, FalsificationManager records failure and Raphael moves on, missing the vulnerability.",
+      "required_change": "Before Planner proposes an exploit payload, fingerprint the target's WAF. Store WAF identity in WorldModel. Select WAF-specific encoded payloads.",
+      "acceptance_criteria": [
+        "WAF probe on first encounter: send GET with X-Forwarded-For: 127.0.0.1 and check response headers",
+        "Detect Cloudflare: Server header, cf-ray header, 403 with '__cf_chl_' in body",
+        "Detect AWS WAF: x-amzn-RequestId header, 403 with 'RequestBlocked' body",
+        "Detect Akamai: Server: AkamaiGHost, 403 with 'Reference' number",
+        "Detect ModSecurity: 406 Not Acceptable, 'ModSecurity' in body",
+        "Detect imperva/Incapsula: 'incapsula' in body, 509 Bandwidth Limit",
+        "Store WAF type as TARGET_ATTRIBUTE on target entity in WorldModel",
+        "Student.technique_proposer() queries WorldModel for WAF type before selecting payload variant",
+        "Payload variants indexed by WAF type in STACK_MAP"
+      ],
+      "interface": {
+        "class": "WAFDetector",
+        "methods": [
+          "fingerprint(target: str) -> dict",
+          "detect_cloudflare(headers: dict, body: str) -> bool",
+          "detect_aws_waf(headers: dict, body: str) -> bool",
+          "detect_akamai(headers: dict, body: str) -> bool",
+          "detect_modsecurity(headers: dict, body: str) -> bool",
+          "detect_imperva(headers: dict, body: str) -> bool",
+          "select_payload_variant(waf_type: str, technique: str) -> str"
+        ],
+        "integration": "Student.technique_proposer() calls WAFDetector.fingerprint(target) before generating candidates. Results stored in WorldModel via store_target_attribute(). Planner queries WorldModel for waf_type when scoring exploit candidates."
+      },
+      "risk_assessment": {
+        "false_positive": "WAF fingerprint probe may alert defender. Mitigation: probe uses legitimate-looking X-Forwarded-For header; plain GET to /.",
+        "false_negative": "WAF may be undetectable or custom. Mitigation: fall back to baseline payloads if no WAF detected; LLM mutation as secondary path.",
+        "performance": "Single HTTP request per target at recon phase. Negligible overhead."
+      }
+    },
+    {
+      "id": "P1-SS-04",
+      "name": "LLM-Driven Payload Mutation",
+      "component": "orchestrator/student/payload_mutator.py (NEW) + FalsificationManager integration",
+      "defect": "STACK_MAP contains one payload per technique. If blocked, no fallback.",
+      "required_change": "If payload blocked by WAF, FalsificationManager signals Student to mutate payload via LLM. Alternative encodings generated and proposed as new Candidates.",
+      "acceptance_criteria": [
+        "FalsificationManager detects WAF block (403/406/509 status code, blocked keywords in response)",
+        "FalsificationManager sets falsification.metadata['waf_blocked'] = True",
+        "Student module receives waf_blocked signal and calls PayloadMutator",
+        "PayloadMutator.mutate() sends original payload + WAF type to LLM with prompt for N alternative encodings",
+        "Supported mutation techniques: double URL encoding, case variation, comment insertion (SQL), whitespace obfuscation, hex encoding, base64 wrapping, charset bypass",
+        "Returned mutations proposed as new Candidates via existing Candidate proposal path",
+        "Max 3 mutation rounds per original payload to prevent infinite loops",
+        "Caching: same payload + WAF type returns cached mutations within 5-minute TTL"
+      ],
+      "interface": {
+        "class": "PayloadMutator",
+        "methods": [
+          "mutate(original_payload: str, waf_type: str, technique: str) -> list[str]",
+          "_url_encode(payload: str) -> str",
+          "_double_url_encode(payload: str) -> str",
+          "_case_vary(payload: str) -> str",
+          "_comment_insert(payload: str) -> str",
+          "_whitespace_obfuscate(payload: str) -> str",
+          "_hex_encode(payload: str) -> str",
+          "_llm_mutate(original_payload: str, waf_type: str) -> list[str]"
+        ],
+        "integration": "FalsificationManager.complete_falsification() checks metadata for waf_blocked. If true, calls Student.propose_mutations(original_candidate). Student calls PayloadMutator.mutate() and submits new Candidates to Planner."
+      },
+      "risk_assessment": {
+        "false_positive": "LLM may generate invalid/malformed payloads. Mitigation: syntax validation before Candidate proposal; max 3 rounds prevents infinite loops.",
+        "false_negative": "LLM may fail to generate effective bypass. Mitigation: fallback to dynamic techniques (time-based, out-of-band) rather than repeated mutation.",
+        "cost": "Each LLM mutation call costs tokens. Mitigation: cache mutations per (payload, waf_type) with 5-min TTL."
+      }
+    }
+  ],
+  "implementation_order": [
+    {
+      "priority": 1,
+      "section": "P1-SS-01",
+      "rationale": "Scope safety is the highest priority. Parser must exist before any engagement."
+    },
+    {
+      "priority": 2,
+      "section": "P1-SS-02",
+      "rationale": "Rate limiting prevents WAF triggering and bans. Must be active before any exploit action."
+    },
+    {
+      "priority": 3,
+      "section": "P1-SS-03",
+      "rationale": "WAF detection informs payload selection. Must run during recon phase."
+    },
+    {
+      "priority": 4,
+      "section": "P1-SS-04",
+      "rationale": "Payload mutation is the fallback when initial payloads are blocked. Depends on WAF type from P1-SS-03."
+    }
+  ],
+  "modified_files": [
+    "orchestrator/brain/scope_parser.py (NEW)",
+    "orchestrator/brain/rate_limiter.py (NEW)",
+    "orchestrator/brain/waf_detector.py (NEW)",
+    "orchestrator/student/payload_mutator.py (NEW)",
+    "orchestrator/brain/capability_broker.py (MODIFIED - 3 integration points)",
+    "orchestrator/student/student.py (MODIFIED - WAF-aware technique proposal)",
+    "orchestrator/brain/evidence.py (MINOR - waf_blocked metadata field)"
+  ],
+  "frozen_files": [
+    "orchestrator/brain/action.py",
+    "orchestrator/brain/world.py",
+    "orchestrator/brain/hypothesis.py",
+    "orchestrator/brain/reasoning.py",
+    "orchestrator/brain/reflection.py",
+    "orchestrator/brain/neural_memory.py",
+    "orchestrator/capabilities/interactive_shell/*"
+  ],
+  "safety_invariants": [
+    "SI-P1-01: ScopeParser must DENY if target status is ambiguous",
+    "SI-P1-02: RateLimiter must never block emergency shutdown (kill -9 style termination)",
+    "SI-P1-03: WAF detection probes must not contain exploit payloads",
+    "SI-P1-04: Payload mutation must not exceed 3 rounds per original payload",
+    "SI-P1-05: CapabilityBroker remains the sole authorization authority",
+    "SI-P1-06: All stealth modules log every decision for audit trail",
+    "SI-P1-07: RateLimiter keepalive must not execute commands — only send empty newline"
+  ]
+}

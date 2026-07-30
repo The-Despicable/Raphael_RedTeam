@@ -103,10 +103,10 @@ The Brain is the cognitive core. It perceives the target environment, plans acti
 |--------|-------------|
 | `action.py` | Action planner — scores candidates (shell, recon, exploit) by utility/cost/risk. Rationale codes drive transparency. |
 | `world.py` | WorldModel — entity store with 20+ `EntityType`s (HOST, PORT, SERVICE, PROCESS, FILE, CREDENTIAL, VULNERABILITY, etc.) and 15+ `RelationshipType`s. Factory functions for evidence ingestion. |
-| `capability_broker.py` | Brokered authorization — dual-gate for shell sessions (connection + per-command), termination, cleanup. Reverse shell listeners are Broker-exclusive. |
-| `candidate_generators/` | Generates action candidates from triggers: `shell_generator.py` (E2) for T1/T2/T3 shell triggers + M1/M2 command proposals; `student_generator.py` for technique proposals from S-Series. |
+| `capability_broker.py` | Brokered authorization — dual-gate for shell sessions (connection + per-command), termination, cleanup. Extended with P1 RateLimiter, ScopeParser, PayloadMutator, and Student integration. |
+| `candidate_generators/` | Generates action candidates from triggers: `shell_generator.py` (E2) for T1/T2/T3 shell triggers + M1/M2 command proposals; `student_generator.py` for technique proposals from S-Series (with P1 WAF-aware confidence adjustments). |
 | `contradiction.py` | ContradictionManager — detects `CONTRADICTS` relationships between evidence, generates falsification tasks for continuous belief resolution. |
-| `evidence.py` | Evidence dataclass — captures observations with type, content, confidence, source. 8 shell-specific evidence types. |
+| `evidence.py` | Evidence dataclass — captures observations with type, content, confidence, source. 8 shell-specific evidence types + `waf_blocked` type. |
 | `hypothesis.py` | Hypothesis generation — forms conjectures from partial evidence patterns. |
 | `reasoning.py` | Reasoning engine — multi-step inference over WorldModel entities and relationships. |
 | `reflection.py` | Post-engagement reflection — updates strategy weights, prunes stale beliefs. |
@@ -117,6 +117,9 @@ The Brain is the cognitive core. It perceives the target environment, plans acti
 | `skill_indexer.py` | Skill indexer — maps technique names to capability implementations. |
 | `adaptive_brain.py` | Adaptive brain — orchestrates the cognitive loop with dynamic cadence. |
 | `phases/` | Phase-specific executors: CICD pipeline poisoning, cloud abuse, container escape, ML model attack. Each phase has a plan→authorize→execute→ingest lifecycle. |
+| `scope_parser.py` | **P1-SS-01** — HackerOne JSON/Markdown scope parsing. Wildcard domains, CIDR, exclusions, URL-path prefixes. Fail-closed on ambiguous targets. |
+| `rate_limiter.py` | **P1-SS-02** — Per-target + global rate limiting. Configurable jitter (5-15s), emergency brake, shell keepalive bypass. Async-safe with `asyncio.Lock`. |
+| `waf_detector.py` | **P1-SS-03** — 7 WAF signature fingerprints (Cloudflare, ModSecurity, AWS WAF, F5, Akamai, Sucuri, Wordfence). Benign probe-based detection with 5-min TTL cache. |
 
 ---
 
@@ -133,8 +136,10 @@ The Student continuously researches the threat landscape and proposes operationa
 | `stack_matcher.py` | Matches target software stack (nginx 1.2, PostgreSQL 15, etc.) to known CVEs and technique applicability. |
 | `scihub.py` | Scientific paper ingestion — parses PDF research papers for technique extraction. |
 | `integration_pipeline.py` | End-to-end pipeline: research → categorize → synthesize → propose to Planner. |
+| `payload_mutator.py` | **P1-SS-04** — 7 deterministic mutation methods (case variation, comment injection, encoding, whitespace, unicode, parameter pollution, boundary) + LLM-based fuzzing. WAF-specific strategy maps. Max 3 mutation rounds. |
+| `student.py` | `Student` class — WAF-aware `technique_proposer()` delegates to WAFDetector before candidate generation. `propose_mutations()` wraps PayloadMutator for WAF-blocked command retry. |
 
-**Student→Brain integration:** The Student submits `technique_proposal` candidates to the CandidateGenerator pool. The Planner scores these alongside shell candidates and recon actions. Accepted techniques are ingested into the WorldModel as `TECHNIQUE` entities.
+**Student→Brain integration:** The Student submits `technique_proposal` candidates to the CandidateGenerator pool. The Planner scores these alongside shell candidates and recon actions. Accepted techniques are ingested into the WorldModel as `TECHNIQUE` entities. WAF detection results from P1 flow through StudentGenerator to tag candidates with `waf_type`, `waf_confidence`, and adjusted confidence scores.
 
 ---
 
@@ -309,7 +314,51 @@ python -m pytest tests/e1_interactive_shell_test.py -v  # E1 only (34 tests)
 | E1 Interactive Shell | Session lifecycle, auth, filter, TTY (34) | ✅ 34/34 | ✅ Sealed |
 | E2 Shell Candidate Gen | T1/T2/T3 triggers, M1/M2 proposals, invariants (36) | ✅ 36/36 | ✅ Accepted |
 | D-Series Arena | D3–D13 regression diagnostics (10 suites) | ✅ All pass | ✅ Verified |
-| **Total** | **88 regression tests** | **✅ 88/88** | **🛡️ Governance locked** |
+| P1 Stealth & Evasion | ScopeParser (7), RateLimiter (7), WAFDetector (6), PayloadMutator (all) | ✅ All pass | ✅ Sealed |
+| P1 Integration | CapabilityBroker + P1 modules (6) | ✅ 6/6 | ✅ Verified |
+| P1 Operational Val. | WAF Bypass Arena (Target-05) | ✅ 37/37 | ✅ FLAG=SUCCESS |
+| **Total** | **158 regression + integration + operational tests** | **✅ 158/158** | **🛡️ Governance locked** |
+
+---
+
+## P-Series — Stealth & Evasion (`orchestrator/brain/`, `orchestrator/student/`)
+
+P1 adds four stealth and evasion modules that harden Raphael against operational detection. These integrate into the existing CapabilityBroker authorization flow without modifying core D-Series logic.
+
+| Module | Location | Description |
+|--------|----------|-------------|
+| **P1-SS-01 ScopeParser** | `orchestrator/brain/scope_parser.py` | Parses HackerOne JSON/Markdown scope definitions. Supports wildcard domains, CIDR notation, exclusions, URL-path prefixes. Fail-closed — ambiguous or out-of-scope targets are denied. Self-test: 7/7. |
+| **P1-SS-02 RateLimiter** | `orchestrator/brain/rate_limiter.py` | Per-target + global rate tracking with configurable jitter (5-15s default). Emergency brake halts all actions when anomaly threshold exceeded. Shell keepalive heartbeat bypasses limiter. Async-safe with `asyncio.Lock`. Self-test: 7/7. |
+| **P1-SS-03 WAFDetector** | `orchestrator/brain/waf_detector.py` | Fingerprints 7 WAF types (Cloudflare, ModSecurity, AWS WAF, F5 ASM, Akamai, Sucuri, Wordfence) via benign probe responses. Cached per target with 5-min TTL. Self-test: 6/6. |
+| **P1-SS-04 PayloadMutator** | `orchestrator/student/payload_mutator.py` | 7 deterministic mutation methods (case, comment injection, encoding, whitespace, unicode, parameter pollution, boundary) plus LLM-based fuzzing. WAF-specific strategy selection. Max 3 rounds. |
+
+### Integration Architecture
+
+```
+  ┌──────────────┐    ┌─────────────┐    ┌────────────────┐
+  │  WAFDetector  │───>│   Student   │───>│ PayloadMutator │
+  │  (fingerprint)│    │(technique   │    │ (7 mutations)  │
+  └──────────────┘    │ proposer)   │    └────────────────┘
+                      └──────┬──────┘
+                             │ waf_info
+  ┌──────────────┐    ┌──────▼──────┐    ┌────────────────┐
+  │  ScopeParser  │───>│ Capability  │───>│  RateLimiter   │
+  │  (fail-closed)│    │ Broker      │    │ (5-15s jitter) │
+  └──────────────┘    └─────────────┘    └────────────────┘
+```
+
+### H1 Live Engagement Spec
+
+| Parameter | Value |
+|-----------|-------|
+| **Target** | Nextcloud 34.0.2 (Local Docker, 172.18.0.20) |
+| **Spec** | `H1_LIVE_ENGAGEMENT_SPEC.json` (SEALED) |
+| **Stack** | Apache 2.4.68 + PHP 8.5.8 + MariaDB 10.11 |
+| **Accounts** | admin:admin_password, operator:operator_password |
+| **Scope** | 172.18.0.0/16 (fail-closed) |
+| **Rate Limit** | 10-20s jitter |
+| **Max Actions** | 20 per engagement |
+| **Policy Constraints** | No destructive actions, all HTTP responses stored as Evidence |
 
 ## Operational Security
 

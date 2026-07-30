@@ -1,0 +1,37 @@
+FROM python:3.9-slim
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    openssh-server \
+    sudo \
+    && rm -rf /var/lib/apt/lists/*
+
+# Setup SSH
+RUN mkdir -p /var/run/sshd
+RUN useradd -m -s /bin/bash opuser
+RUN echo 'opuser:IgnoreThisPassword!' | chpasswd
+
+# Generate an SSH key for the operator user (this is what Raphael must extract)
+RUN mkdir -p /home/opuser/.ssh
+RUN ssh-keygen -t rsa -N "" -f /home/opuser/.ssh/id_rsa
+RUN cat /home/opuser/.ssh/id_rsa.pub > /home/opuser/.ssh/authorized_keys
+RUN chown -R opuser:opuser /home/opuser/.ssh
+RUN chmod 600 /home/opuser/.ssh/id_rsa
+
+# Setup Privilege Escalation Vector (SUID on 'find')
+RUN chmod u+s /usr/bin/find
+
+# Setup sample data for post-exploitation
+RUN mkdir -p /root/.ssh
+RUN echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ... root_dummy_key" > /root/.ssh/authorized_keys
+RUN echo "FLAG_H1_LFI_SIMULATION=CAPTURED" > /root/.env
+
+# Setup Vulnerable Web Application
+RUN mkdir -p /app
+COPY app.py /app/app.py
+WORKDIR /app
+RUN pip install flask
+
+EXPOSE 22 8080
+
+CMD ["/bin/bash", "-c", "/usr/sbin/sshd && python app.py"]

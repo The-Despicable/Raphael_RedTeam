@@ -80,7 +80,7 @@ class Evidence:
     phase: str = ""                 # Phase that produced this
 
     # Type classification
-    evidence_type: str = ""         # e.g., "port_scan", "http_response", "file_content"
+    evidence_type: str = ""         # e.g., "port_scan", "http_response", "file_content", "waf_blocked"
     description: str = ""           # Human-readable summary
 
     def __post_init__(self):

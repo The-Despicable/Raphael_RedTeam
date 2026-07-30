@@ -44,6 +44,24 @@ from dataclasses import dataclass, field, asdict
 from enum import Enum
 from typing import Any, Callable, Optional
 
+from orchestrator.brain.rate_limiter import RateLimiter, RateLimiterConfig, ShellKeepAlive
+from orchestrator.brain.scope_parser import ScopeParser
+
+# Optional P1 imports (guarded)
+try:
+    from orchestrator.student.payload_mutator import PayloadMutator
+    HAS_PAYLOAD_MUTATOR = True
+except ImportError:
+    HAS_PAYLOAD_MUTATOR = False
+    PayloadMutator = None
+
+try:
+    from orchestrator.student.student import Student
+    HAS_STUDENT = True
+except ImportError:
+    HAS_STUDENT = False
+    Student = None
+
 from orchestrator.hardening.action_receipt import (
     ActionReceipt, ActionProposalStatus, create_proposal, authorize, deny,
     start_execution, complete_execution, timeout_execution, get_receipt, verify_chain,
@@ -250,8 +268,19 @@ class CapabilityBroker:
     No executor, tool, or module may bypass the broker.
     """
     
-    def __init__(self, policy: BrokerPolicy):
+    def __init__(
+        self, 
+        policy: BrokerPolicy,
+        rate_limiter: Optional[RateLimiter] = None,
+        scope_parser: Optional[ScopeParser] = None,
+        payload_mutator: Optional[Any] = None,
+        student: Optional[Any] = None,
+    ):
         self.policy = policy
+        self.rate_limiter = rate_limiter
+        self.scope_parser = scope_parser
+        self.payload_mutator = payload_mutator
+        self.student = student
         self.receipt_store: dict[str, ActionReceipt] = {}
         self._rate_tracker: dict[str, list[float]] = {}  # target -> [timestamps]
         self._concurrent_count: int = 0
@@ -311,6 +340,32 @@ class CapabilityBroker:
                 authorized_by="capability_broker",
             )
             logger.info(f"ALLOWED: {action_type} on {target} via {capability}")
+            
+            # 3b. Apply RateLimiter delay if configured
+            if self.rate_limiter:
+                # Determine target type for rate limiting
+                target_type = "web"
+                if "shell" in capability.lower() or "ssh" in capability.lower():
+                    target_type = "shell"
+                elif "dns" in capability.lower():
+                    target_type = "dns"
+                
+                allowed, reason, delay = self.rate_limiter.authorize_with_delay(
+                    target=target,
+                    action_type=action_type,
+                    target_type=target_type
+                )
+                if not allowed:
+                    # Rate limiter denied - update receipt
+                    receipt = deny(
+                        receipt,
+                        reason=f"RateLimiter denied: {reason}",
+                        policy_version=str(self.policy.version),
+                        authorized_by="capability_broker",
+                    )
+                    logger.warning(f"RATE LIMIT DENIED: {action_type} on {target} — {reason}")
+                    return receipt
+                logger.debug(f"RateLimiter delay applied: {delay:.2f}s for {target}")
         else:
             deny_reasons = [c.reason for c in checks if c.decision == AuthorizationDecision.DENY]
             receipt = deny(
@@ -334,8 +389,11 @@ class CapabilityBroker:
         """Run all five authorization dimension checks."""
         checks = []
         
-        # 1. Target Authorization
-        allowed, reason = self.policy.is_target_allowed(target)
+        # 1. Target Authorization - use ScopeParser if available
+        if self.scope_parser:
+            allowed, reason = self.scope_parser.is_target_allowed(target)
+        else:
+            allowed, reason = self.policy.is_target_allowed(target)
         checks.append(AuthorizationCheck(
             dimension=AuthorizationDimension.TARGET_AUTHORIZATION,
             decision=AuthorizationDecision.ALLOW if allowed else AuthorizationDecision.DENY,
@@ -361,14 +419,34 @@ class CapabilityBroker:
             metadata={"capability": capability, "method": method},
         ))
         
-        # 4. Rate Authorization
-        recent_minute = self._count_recent_actions(60)
-        recent_hour = self._count_recent_actions(3600)
-        allowed, reason = self.policy.check_rate_limits(
-            recent_count_minute=recent_minute,
-            recent_count_hour=recent_hour,
-            concurrent=self._concurrent_count,
-        )
+        # 4. Rate Authorization - use RateLimiter if available
+        if self.rate_limiter:
+            # Map capability to target_type
+            target_type = "web"
+            if "shell" in capability.lower() or "ssh" in capability.lower():
+                target_type = "shell"
+            elif "dns" in capability.lower():
+                target_type = "dns"
+            
+            # Note: RateLimiter delay is applied in propose_action, not here
+            # This check just verifies limits aren't exceeded
+            recent_minute = self._count_recent_actions(60)
+            recent_hour = self._count_recent_actions(3600)
+            allowed, reason = self.policy.check_rate_limits(
+                recent_count_minute=recent_minute,
+                recent_count_hour=recent_hour,
+                concurrent=self._concurrent_count,
+            )
+            if not allowed:
+                reason = f"RateLimiter: {reason}"
+        else:
+            recent_minute = self._count_recent_actions(60)
+            recent_hour = self._count_recent_actions(3600)
+            allowed, reason = self.policy.check_rate_limits(
+                recent_count_minute=recent_minute,
+                recent_count_hour=recent_hour,
+                concurrent=self._concurrent_count,
+            )
         checks.append(AuthorizationCheck(
             dimension=AuthorizationDimension.RATE_AUTHORIZATION,
             decision=AuthorizationDecision.ALLOW if allowed else AuthorizationDecision.DENY,
@@ -732,6 +810,26 @@ class CapabilityBroker:
         if filter_result.decision == FilterDecision.ALLOW:
             session.record_command(denied=False)
             self._shell_session_store.save(session)
+            
+            # Apply RateLimiter delay if configured
+            if self.rate_limiter:
+                allowed, reason, delay = self.rate_limiter.authorize_with_delay(
+                    target=session.target,
+                    action_type="shell_command",
+                    target_type="shell"
+                )
+                if not allowed:
+                    return CommandReceipt(
+                        command_id=f"cmd_{uuid.uuid4().hex[:12]}",
+                        session_id=session_id,
+                        command=command,
+                        authorized=False,
+                        decision=CommandFilterDecision.DENY,
+                        reason=f"RateLimiter denied: {reason}",
+                        session_status=session.status,
+                    )
+                logger.debug(f"RateLimiter delay applied: {delay:.2f}s for shell command")
+            
             return CommandReceipt(
                 command_id=f"cmd_{uuid.uuid4().hex[:12]}",
                 session_id=session_id,
@@ -779,11 +877,25 @@ class CapabilityBroker:
         falsification_task_id: str,
         passed: bool,
         evidence_ids: list = None,
+        metadata: dict = None,
     ) -> CommandReceipt:
         """
         Resolve a falsification task for an escalated command.
 
         Called by Planner after falsification completes.
+
+        If the falsification metadata indicates a WAF block (waf_blocked=True),
+        and a Student/PayloadMutator is configured, mutated command variants
+        are generated automatically. These can be retrieved via the receipt's
+        'mutated_commands' field (added to receipt metadata).
+
+        Args:
+            session_id: The session ID
+            command_id: The command ID
+            falsification_task_id: The falsification task ID
+            passed: True if falsification passed (command is safe)
+            evidence_ids: Optional list of evidence IDs supporting the decision
+            metadata: Optional metadata dict (may contain waf_blocked, original_candidate, etc.)
         """
         session = self._shell_sessions.get(session_id)
         if not session:
@@ -801,7 +913,8 @@ class CapabilityBroker:
             # Re-authorize the command
             session.record_command(denied=False)
             self._shell_session_store.save(session)
-            return CommandReceipt(
+            
+            receipt = CommandReceipt(
                 command_id=command_id,
                 session_id=session_id,
                 command="",
@@ -810,10 +923,18 @@ class CapabilityBroker:
                 reason="Falsification passed — command authorized",
                 session_status=session.status,
             )
+            
+            # If WAF was blocked, generate mutations
+            if metadata and metadata.get("waf_blocked") and self.student:
+                self._handle_waf_block(metadata, session, receipt)
+            
+            return receipt
         else:
             session.record_command(denied=True)
             self._shell_session_store.save(session)
-            return CommandReceipt(
+            
+            # Even if falsification failed, generate mutations if WAF blocked
+            receipt = CommandReceipt(
                 command_id=command_id,
                 session_id=session_id,
                 command="",
@@ -822,6 +943,38 @@ class CapabilityBroker:
                 reason="Falsification failed — command denied",
                 session_status=session.status,
             )
+            
+            if metadata and metadata.get("waf_blocked") and self.student:
+                self._handle_waf_block(metadata, session, receipt)
+            
+            return receipt
+
+    def _handle_waf_block(self, metadata: dict, session: Any, receipt: CommandReceipt) -> None:
+        """Handle WAF block: generate mutated command variants via Student."""
+        original_candidate = metadata.get("original_candidate", {})
+        waf_type = metadata.get("waf_type", "unknown")
+        technique = metadata.get("technique", original_candidate.get("technique_id", ""))
+        sid = session.session_id if hasattr(session, 'session_id') else "unknown"
+
+        try:
+            mutations = self.student.propose_mutations(
+                original_candidate=original_candidate,
+                waf_type=waf_type,
+                technique=technique,
+            )
+            if mutations:
+                # Attach mutations to receipt metadata
+                if not hasattr(receipt, 'metadata') or not isinstance(getattr(receipt, 'metadata', None), dict):
+                    object.__setattr__(receipt, 'metadata', {})
+                receipt.metadata["mutated_commands"] = mutations
+                receipt.metadata["waf_handled"] = True
+                receipt.metadata["waf_type"] = waf_type
+                logger.info(
+                    "[Broker] Generated %d mutations for WAF-bypass on session %s",
+                    len(mutations), sid
+                )
+        except Exception as e:
+            logger.warning(f"[Broker] Failed to generate WAF mutations: {e}")
 
     def terminate_shell_session(
         self,

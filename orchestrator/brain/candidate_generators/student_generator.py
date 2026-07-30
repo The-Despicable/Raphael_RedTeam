@@ -264,6 +264,7 @@ class StudentCandidateGenerator:
         profile: dict,
         max_candidates: int = 15,
         min_confidence: float = 0.2,
+        waf_info: Optional[dict] = None,
     ) -> list[dict]:
         """Generate Candidate dicts from a target profile.
         
@@ -272,6 +273,7 @@ class StudentCandidateGenerator:
             profile: Target profile dict with 'stack_components' list
             max_candidates: Maximum number of candidates to produce
             min_confidence: Minimum confidence threshold for inclusion
+            waf_info: Optional WAF detection result dict (from WAFDetector.fingerprint)
         
         Returns:
             List of Candidate dicts in the format expected by Planner.decide()
@@ -332,6 +334,19 @@ class StudentCandidateGenerator:
             
             candidates.append(candidate)
         
+        # Tag with WAF info if available
+        if waf_info:
+            waf_type = waf_info.get("waf_type", "unknown")
+            waf_confidence = waf_info.get("confidence", 0.0)
+            for candidate in candidates:
+                candidate["waf_type"] = waf_type
+                candidate["waf_confidence"] = waf_confidence
+                candidate["waf_details"] = waf_info.get("details", {})
+                # WAF presence reduces confidence
+                if waf_confidence > 0.5:
+                    candidate["confidence"] = candidate.get("confidence", 0.5) * 0.85
+                candidate["rationale"] += f" [WAF: {waf_type}]"
+
         # Sort by confidence descending (highest confidence first)
         candidates.sort(key=lambda c: c.get("confidence", 0), reverse=True)
         

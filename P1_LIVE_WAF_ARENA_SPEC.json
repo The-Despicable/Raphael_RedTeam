@@ -1,0 +1,107 @@
+{
+  "spec_version": "1.0",
+  "spec_name": "P1_LIVE_WAF_ARENA_SPEC",
+  "status": "SEALED",
+  "sealed": true,
+  "overview": "P1 Operational Validation — WAF Bypass via PayloadMutator on Target-05. Validates the full P1 chain: WAFDetector fingerprinting → Student candidate tagging → PayloadMutator mutation → CapabilityBroker authorization → successful bypass → flag capture.",
+  "target": {
+    "id": "target-05",
+    "ip": "localhost",
+    "port": 8081,
+    "type": "web",
+    "protocol": "http",
+    "endpoint": "/?id=",
+    "vulnerability": "SQL Injection (behind simulated WAF)",
+    "bypass_technique": "Case variation (UnIoN SeLeCt)"
+  },
+  "waf_profile": {
+    "type": "custom_simulated",
+    "blocked_patterns": [
+      "union select",
+      "or 1=1",
+      "' or",
+      "select * from",
+      "information_schema"
+    ],
+    "detection_mechanism": "Case-sensitive substring match on raw input",
+    "bypass": "Case variation of blocked patterns"
+  },
+  "attack_scenarios": [
+    {
+      "id": "P1-VAL-01",
+      "name": "WAF Block — Direct SQLi",
+      "input": "1' union select 1,2,3",
+      "expected_status": 403,
+      "expected_body": "WAF: SQL Injection Attempt Detected",
+      "p1_component": "P1-SS-03 (WAF Detection)",
+      "description": "Direct SQLi with lowercase patterns is blocked by WAF. WAFDetector fingerprints the block response."
+    },
+    {
+      "id": "P1-VAL-02",
+      "name": "WAF Bypass — Case Variation",
+      "input": "1' UnIoN SeLeCt 1,2,3",
+      "expected_status": 200,
+      "expected_body": "FLAG_WAF_BYPASS=SUCCESS",
+      "p1_component": "P1-SS-04 (Payload Mutation)",
+      "description": "Case variation bypasses the case-sensitive WAF. PayloadMutator should generate this variant."
+    },
+    {
+      "id": "P1-VAL-03",
+      "name": "Flag Capture Validation",
+      "input": "1' UnIoN SeLeCt 1,2,3",
+      "expected_flag": "FLAG_WAF_BYPASS=SUCCESS",
+      "p1_component": "P1-SS-04 (Payload Mutation)",
+      "description": "Successful bypass returns the flag in the response body."
+    },
+    {
+      "id": "P1-VAL-04",
+      "name": "Rate Limiter Active",
+      "input": "1' UnIoN SeLeCt 1,2,3 (repeated × 3)",
+      "expected_delay": "5-15s between actions",
+      "p1_component": "P1-SS-02 (Rate Limiter)",
+      "description": "RateLimiter applies jitter between repeat bypass attempts."
+    }
+  ],
+  "p1_components_validated": [
+    {
+      "component": "P1-SS-01 ScopeParser",
+      "validation": "Scope is set to 172.18.0.0/16 including localhost. Target-05 at localhost:8081 is in scope.",
+      "expected": "is_target_allowed('localhost') → (True, 'in-scope')"
+    },
+    {
+      "component": "P1-SS-02 RateLimiter",
+      "validation": "RateLimiter delays between mutation attempts. ShellKeepAlive sends \\n during delay.",
+      "expected": "Delay of 5-15s between authorized commands"
+    },
+    {
+      "component": "P1-SS-03 WAFDetector",
+      "validation": "WAFDetector probes target-05, detects 403 with WAF signature in body.",
+      "expected": "WAF type detected as 'unknown' or 'custom' with confidence > 0.6"
+    },
+    {
+      "component": "P1-SS-04 PayloadMutator",
+      "validation": "PayloadMutator generates case variation for 'union select' → 'UnIoN SeLeCt'.",
+      "expected": "At least 1 mutation variant produced"
+    }
+  ],
+  "expected_p1_flow": [
+    "1. Probe target-05 with '1' union select 1,2,3' → 403 (WAF blocks)",
+    "2. WAFDetector.fingerprint('localhost:8081') → waf_type='custom', confidence>0.6",
+    "3. FalsificationManager detects 403 → sets metadata['waf_blocked']=True",
+    "4. CapabilityBroker.resolve_falsification() calls Student.propose_mutations()",
+    "5. PayloadMutator.mutate('union select', 'custom', 'sqli') → ['UnIoN SeLeCt', ...]",
+    "6. Student returns mutated Candidates to Planner",
+    "7. CapabilityBroker authorizes with RateLimiter delay (5-15s)",
+    "8. Execute bypass payload → 200 → FLAG_WAF_BYPASS=SUCCESS",
+    "9. EvidenceExtractor captures flag → WorldModel stores as CREDENTIAL flag"
+  ],
+  "safety_invariants": [
+    "SI-P1-01: ScopeParser DENY if target ambiguous",
+    "SI-P1-02: RateLimiter never blocks emergency shutdown",
+    "SI-P1-03: WAF detection probes contain no exploit payloads",
+    "SI-P1-04: Max 3 mutation rounds per original payload",
+    "SI-P1-05: CapabilityBroker remains sole authorization authority",
+    "SI-P1-06: All stealth modules log every decision",
+    "SI-P1-07: Keepalive sends empty newline only"
+  ]
+}
