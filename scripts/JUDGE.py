@@ -45,6 +45,8 @@ from typing import Any, Iterable
 START = time.time()
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
+SOURCEDIR = ROOT.parent / "src"
+sys.path.insert(0, str(SOURCEDIR))
 
 SKIP_DIRS = {
     ".git", "__pycache__", "node_modules", ".local", ".hermes", ".pytest_cache",
@@ -154,6 +156,14 @@ def discover_local_roots() -> set[str]:
                 roots.add(child.name.replace("-", "_"))
         elif child.suffix == ".py":
             roots.add(child.stem)
+    # Also scan src/ for packages
+    if SOURCEDIR.exists():
+        for child in sorted(SOURCEDIR.iterdir()):
+            if child.is_dir() and child.name not in SKIP_DIRS:
+                if (child / "__init__.py").exists():
+                    roots.add(child.name.replace("-", "_"))
+            elif child.suffix == ".py":
+                roots.add(child.stem)
     return roots
 
 
@@ -443,7 +453,7 @@ def test_ablation_noops() -> None:
     Complementary check: if a NoOp method IS reachable from FULL_RAPHAEL → FAIL.
     """
     check = "ablation_noops"
-    ablation_runner_path = ROOT / "arena" / "ablation_runner.py"
+    ablation_runner_path = SOURCEDIR / "arena" / "ablation_runner.py"
 
     if not ablation_runner_path.exists():
         add("INFO", check, "arena/ablation_runner.py", "-",
@@ -744,7 +754,7 @@ def test_crypto_roundtrips() -> None:
     ]
     vector = b"judge_v2_roundtrip_vector"
     for idx, (rp, enc_name, dec_name) in enumerate(candidates):
-        path = ROOT / rp
+        path = SOURCEDIR / rp
         if not path.exists():
             add("INFO", check, rp, "-", "Crypto target absent; check not applicable.")
             continue
@@ -818,7 +828,7 @@ def test_crypto_roundtrips() -> None:
 def test_action_receipt_contract() -> None:
     """Best-effort semantic test. It adapts by introspection and never performs an external action."""
     check = "action_receipt_contract"
-    path = ROOT / "orchestrator/hardening/action_receipt.py"
+    path = SOURCEDIR / "orchestrator/hardening/action_receipt.py"
     if not path.exists():
         add("INFO", check, rel(path), "-", "ActionReceipt module absent.")
         return
@@ -866,7 +876,7 @@ def test_action_receipt_contract() -> None:
 
 def test_arena_separation() -> None:
     check = "arena_isolation"
-    path = ROOT / "arena/scenario.py"
+    path = SOURCEDIR / "arena/scenario.py"
     if not path.exists():
         add("INFO", check, rel(path), "-", "Arena scenario module absent.")
         return
@@ -903,8 +913,8 @@ def test_arena_separation() -> None:
 def test_capability_broker_fail_closed() -> None:
     check = "broker_fail_closed"
     candidates = [
-        ROOT / "orchestrator/brain/capability_broker.py",
-        ROOT / "orchestrator/hardening/capability_broker.py",
+        SOURCEDIR / "orchestrator/brain/capability_broker.py",
+        SOURCEDIR / "orchestrator/hardening/capability_broker.py",
     ]
     path = next((p for p in candidates if p.exists()), None)
     if path is None:
@@ -962,7 +972,7 @@ def test_test_suite() -> None:
         cp = subprocess.run(
             [sys.executable, "-m", "pytest", "-q", str(tests)],
             cwd=ROOT, capture_output=True, text=True, timeout=120,
-            env={**os.environ, "PYTHONPATH": str(ROOT)},
+            env={**os.environ, "PYTHONPATH": str(SOURCEDIR)},
         )
         tail = (cp.stdout + "\n" + cp.stderr)[-4000:]
         if cp.returncode == 0:
