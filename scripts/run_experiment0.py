@@ -13,8 +13,8 @@ import os
 from pathlib import Path
 from datetime import datetime
 
-REPO_ROOT = Path("/home/yaser/raphael-2.0")
-RESULTS_DIR = Path("/home/yaser/raphael-2.0/evaluations/Phase0")
+REPO_ROOT = Path(__file__).resolve().parent.parent
+RESULTS_DIR = REPO_ROOT / "evaluations" / "Phase0"
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 def run_engagement(seed, run_id, target="dvwa"):

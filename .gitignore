@@ -17,3 +17,5 @@ challenge_1245/
 evaluations/
 # JUDGE report output
 scripts/judge_report.json
+# Ablation runner temp artifacts
+arena/

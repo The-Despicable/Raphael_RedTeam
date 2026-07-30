@@ -1,0 +1,35 @@
+{
+  "campaign_id": "RBS-v1-ollama-nemotron",
+  "timestamp": "2026-07-30T15:18:34.300380",
+  "provider": "ollama:nemotron-3-ultra:cloud",
+  "results": {
+    "T1_NEGATIVE_CONTROL": {
+      "score": 0.5,
+      "actions": 70
+    },
+    "T2_HYPOTHESIS_SENSITIVE": {
+      "score": 0.0,
+      "actions": 74
+    },
+    "T3_FALSIFICATION_SENSITIVE": {
+      "score": 0.5,
+      "actions": 69
+    },
+    "T4_WORLD_MODEL_IDENTITY": {
+      "score": 1.0,
+      "actions": 73
+    },
+    "T5_PLANNING_COST": {
+      "score": 0.0,
+      "actions": 72
+    },
+    "T6_SEMANTIC_LLM": {
+      "score": 1.0,
+      "actions": 69
+    },
+    "T7_DEFEATER_SENSITIVE": {
+      "score": 0.5,
+      "actions": 63
+    }
+  }
+}

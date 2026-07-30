@@ -1,0 +1,10 @@
+{
+    "FULL_RAPHAEL": {
+        "score": 1.0,
+        "actions": 69
+    },
+    "NO_LLM": {
+        "score": 0.5,
+        "actions": 69
+    }
+}

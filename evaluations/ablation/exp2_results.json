@@ -1,0 +1,34 @@
+{
+    "FULL_RAPHAEL": {
+        "score": 1.0,
+        "actions": 73
+    },
+    "NO_WORLD_MODEL": {
+        "score": 1.0,
+        "actions": 73
+    },
+    "NO_HYPOTHESIS": {
+        "score": 0.0,
+        "actions": 25
+    },
+    "NO_PLANNER": {
+        "score": 1.0,
+        "actions": 73
+    },
+    "NO_FALSIFICATION": {
+        "score": 0.0,
+        "actions": 0
+    },
+    "NO_LLM": {
+        "score": 1.0,
+        "actions": 73
+    },
+    "LLM_ONLY": {
+        "score": 0.0,
+        "actions": 0
+    },
+    "NO_DEFEATER": {
+        "score": 1.0,
+        "actions": 70
+    }
+}
