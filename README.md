@@ -4,11 +4,11 @@ A self-growing offensive AI organism that autonomously probes targets, builds be
 
 ## Architecture
 
-Raphael V3 is a **unified cognitive agent**. Three series operate asynchronously, communicate through shared WorldModel state, and converge on a single objective: find a weakness, validate it, exploit it, and learn from it.
+Raphael V3 is a **unified cognitive agent**. Three core series (D, S, E) operate asynchronously with a **P-Series** stealth layer embedded within them — all communicating through shared WorldModel state, converging on a single objective: find a weakness, validate it, exploit it, and learn from it.
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│                        RAPHAEL COGNITIVE AGENT v2                        │
+│                        RAPHAEL COGNITIVE AGENT v3                        │
 │                                                                          │
 │  ┌──────────────────────────────────────────────────────────────────┐    │
 │  │  D-SERIES — BRAIN  (orchestrator/brain/)                         │    │
@@ -20,6 +20,10 @@ Raphael V3 is a **unified cognitive agent**. Three series operate asynchronously
 │  │  │Candidate │  │ Contradict │  │ Reflection│  │ Strategy     │  │    │
 │  │  │Generator │  │ Detection  │  │ Engine    │  │ Learner      │  │    │
 │  │  └──────────┘  └────────────┘  └───────────┘  └──────────────┘  │    │
+│  │  ┌──────────────┐  ┌────────────┐  ┌──────────────┐             │    │
+│  │  │ ScopeParser  │  │RateLimiter │  │ WAFDetector  │  ← P1       │    │
+│  │  │ (SS-01)      │  │ (SS-02)    │  │ (SS-03)      │             │    │
+│  │  └──────────────┘  └────────────┘  └──────────────┘             │    │
 │  └──────────────────────────────────────────────────────────────────┘    │
 │                                                                          │
 │  ┌──────────────────────────────────────────────────────────────────┐    │
@@ -29,8 +33,8 @@ Raphael V3 is a **unified cognitive agent**. Three series operate asynchronously
 │  │  │ Scheduler      │  │ Synthesizer    │  │ Background Service │  │    │
 │  │  └────────────────┘  └────────────────┘  └────────────────────┘  │    │
 │  │  ┌────────────────┐  ┌────────────────┐  ┌────────────────────┐  │    │
-│  │  │ Coverage Gap   │  │ Stack          │  │ SciHub             │  │    │
-│  │  │ Filler         │  │ Matcher        │  │ Integration        │  │    │
+│  │  │ Coverage Gap   │  │ Stack          │  │ PayloadMutator     │  │    │
+│  │  │ Filler         │  │ Matcher        │  │ (SS-04)     ← P1   │  │    │
 │  │  └────────────────┘  └────────────────┘  └────────────────────┘  │    │
 │  └──────────────────────────────────────────────────────────────────┘    │
 │                                                                          │
@@ -372,7 +376,7 @@ P1 adds four stealth and evasion modules that harden Raphael against operational
 
 ## Key Design Decisions
 
-- **Three-series cognitive architecture** — D-Series (Brain) plans and falsifies, S-Series (Student) researches and advises, E-Series (Hands) executes within brokered envelope
+- **Four-series cognitive architecture** — D-Series (Brain) plans and falsifies, S-Series (Student) researches and advises, E-Series (Hands) executes within brokered envelope, P-Series (Phantom) provides stealth and evasion across all layers
 - **No unbrokered execution path** — every shell action passes through `authorize_shell_session()` + `authorize_shell_command()`
 - **Shell injection chars cause ESCALATE, not DENY** — `;`, `|`, `&`, `` ` `` trigger Tier 2 LLM classification rather than blind rejection
 - **Evidence drives cognition** — 8 shell evidence types continuously ingested into WorldModel, contradictions generate falsification tasks
