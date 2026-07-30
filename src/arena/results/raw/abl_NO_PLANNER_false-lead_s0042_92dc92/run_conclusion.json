@@ -1,0 +1,289 @@
+{
+  "run_id": "abl_NO_PLANNER_false-lead_s0042_92dc92",
+  "scenario_id": "false-lead-s0042",
+  "decision": "STOP_BUDGET_EXHAUSTED",
+  "claims": [
+    {
+      "claim_id": "cl_8dfc27af9258",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "accessible",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_d724f336c722",
+        "ev_cc61bdbd2db1",
+        "ev_b30d1d297b56",
+        "ev_022339e97e91",
+        "ev_b26305531e52"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_8147183f18b7",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "accessible",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_d724f336c722",
+        "ev_cc61bdbd2db1",
+        "ev_b30d1d297b56",
+        "ev_022339e97e91",
+        "ev_b26305531e52"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_d97bf8343bdf",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "accessible",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_d724f336c722",
+        "ev_cc61bdbd2db1",
+        "ev_b30d1d297b56",
+        "ev_022339e97e91",
+        "ev_b26305531e52"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_2a209414e087",
+      "subject_id": "ent_c9c9110ad3a4",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_b2f2369d7eca"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_022339e97e91"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_ec113e4daa48",
+      "subject_id": "ent_124d2b527e49",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_b2f2369d7eca"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_022339e97e91"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_6824e336bb2c",
+      "subject_id": "ent_22bab5ce7959",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_b2f2369d7eca"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_b26305531e52"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_4c66c64d9096",
+      "subject_id": "ent_8ae734c6225a",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_b2f2369d7eca"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_b26305531e52"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_f089ffbe2e70",
+      "subject_id": "ent_0f89d136c35c",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_b2f2369d7eca"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_bd819678a986"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_3bfed2708947",
+      "subject_id": "ent_6768f57cd412",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_b2f2369d7eca"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_bd819678a986"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_2ed0e8cc44ab",
+      "subject_id": "ent_8c9b0e47cf7b",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_b2f2369d7eca"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_63ffe96fa0b5"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_e88b99754880",
+      "subject_id": "ent_433573cb41d4",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_b2f2369d7eca"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_63ffe96fa0b5"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_9d60b73fbc64",
+      "subject_id": "ent_fffa648e3b33",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_b2f2369d7eca"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_eb26da7217a3"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_99b4048b17b1",
+      "subject_id": "ent_47a849fe258e",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_b2f2369d7eca"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_eb26da7217a3"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_67d824b38949",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "http",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_d724f336c722",
+        "ev_cc61bdbd2db1",
+        "ev_b30d1d297b56",
+        "ev_022339e97e91",
+        "ev_b26305531e52",
+        "ev_b097619a8170",
+        "ev_bd819678a986",
+        "ev_fb8b743c9383",
+        "ev_63ffe96fa0b5",
+        "ev_5b1933523500",
+        "ev_eb26da7217a3"
+      ],
+      "provenance": {
+        "producer": "direct_observation",
+        "derivation_type": "direct_observation"
+      }
+    },
+    {
+      "claim_id": "cl_51f0160cb885",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "Category A",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_b097619a8170"
+      ],
+      "provenance": {
+        "producer": "llm_interpretation",
+        "derivation_type": "llm_interpretation"
+      }
+    },
+    {
+      "claim_id": "cl_4b112e0c4178",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "Category A",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_fb8b743c9383"
+      ],
+      "provenance": {
+        "producer": "llm_interpretation",
+        "derivation_type": "llm_interpretation"
+      }
+    },
+    {
+      "claim_id": "cl_ae66e497a1e0",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "Category A",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_5b1933523500"
+      ],
+      "provenance": {
+        "producer": "llm_interpretation",
+        "derivation_type": "llm_interpretation"
+      }
+    }
+  ],
+  "architecture_id": "NO_PLANNER",
+  "abstention_reason": null
+}

@@ -1,0 +1,169 @@
+{
+  "run_id": "abl_NO_PLANNER_signal-noise_s0000_693264",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_75db4ac97139"
+      ],
+      "timestamp": 1784946973.034195,
+      "run_id": "abl_NO_PLANNER_signal-noise_s0000_693264"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_97e7b4897172"
+      ],
+      "timestamp": 1784946973.034215,
+      "run_id": "abl_NO_PLANNER_signal-noise_s0000_693264"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_814b86b4efbb"
+      ],
+      "timestamp": 1784946973.0342257,
+      "run_id": "abl_NO_PLANNER_signal-noise_s0000_693264"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_18f6222582d6"
+      ],
+      "timestamp": 1784946973.0342364,
+      "run_id": "abl_NO_PLANNER_signal-noise_s0000_693264"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_5dabe7ef3b77"
+      ],
+      "timestamp": 1784946973.034246,
+      "run_id": "abl_NO_PLANNER_signal-noise_s0000_693264"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_1a6790e10f87"
+      ],
+      "timestamp": 1784946973.0342565,
+      "run_id": "abl_NO_PLANNER_signal-noise_s0000_693264"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_e5aabd51b0b0"
+      ],
+      "timestamp": 1784946973.034266,
+      "run_id": "abl_NO_PLANNER_signal-noise_s0000_693264"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_88ba889c40dc"
+      ],
+      "timestamp": 1784946973.0342748,
+      "run_id": "abl_NO_PLANNER_signal-noise_s0000_693264"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_1a4b2d284608"
+      ],
+      "timestamp": 1784946973.034284,
+      "run_id": "abl_NO_PLANNER_signal-noise_s0000_693264"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_0ab21d466720"
+      ],
+      "timestamp": 1784946973.0342927,
+      "run_id": "abl_NO_PLANNER_signal-noise_s0000_693264"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_b046e57c2e8b"
+      ],
+      "timestamp": 1784946973.0343025,
+      "run_id": "abl_NO_PLANNER_signal-noise_s0000_693264"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946973.034708,
+      "run_id": "abl_NO_PLANNER_signal-noise_s0000_693264"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946973.0347128,
+      "run_id": "abl_NO_PLANNER_signal-noise_s0000_693264"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "vuln-host",
+        "host-0",
+        "host-1",
+        "host-2",
+        "host-3",
+        "host-4",
+        "host-5",
+        "host-6",
+        "host-7",
+        "host-8",
+        "host-9"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946973.0347197,
+      "run_id": "abl_NO_PLANNER_signal-noise_s0000_693264"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_ac7adb05f58d"
+      ],
+      "output_ids": [
+        "hyp_ac7adb05f58d"
+      ],
+      "timestamp": 1784946973.0348399,
+      "run_id": "abl_NO_PLANNER_signal-noise_s0000_693264"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_NO_HYPOTHESIS_llm-sensitive_s0000_62c081",
+  "config_id": "NO_HYPOTHESIS",
+  "template_family": "llm-sensitive",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784954685.0341418,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 6
+}

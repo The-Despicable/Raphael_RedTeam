@@ -1,0 +1,229 @@
+{
+  "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_b8b019084966"
+      ],
+      "timestamp": 1784954807.04291,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-service",
+        "ev_a4c41086285f",
+        "ev_cf4c7cea667e"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954807.0429232,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_0a73726c25ef"
+      ],
+      "output_ids": [
+        "hyp_0a73726c25ef"
+      ],
+      "timestamp": 1784954807.0429769,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_0a73726c25ef"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954807.0433295,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954807.0441296,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-service",
+        "ev_a4c41086285f",
+        "ev_cf4c7cea667e",
+        "ev_e39bcf8777cf"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954807.0441415,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_fcb260b3179e"
+      ],
+      "output_ids": [
+        "hyp_fcb260b3179e"
+      ],
+      "timestamp": 1784954807.0441961,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_0a73726c25ef"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954807.0446212,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954807.0448666,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-service",
+        "ev_a4c41086285f",
+        "ev_cf4c7cea667e",
+        "ev_e39bcf8777cf"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954807.0448804,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_33b2891937a6"
+      ],
+      "output_ids": [
+        "hyp_33b2891937a6"
+      ],
+      "timestamp": 1784954807.044931,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_0a73726c25ef"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954807.0452163,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954807.0454576,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-service",
+        "ev_a4c41086285f",
+        "ev_cf4c7cea667e",
+        "ev_e39bcf8777cf"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954807.0454679,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_8d5caf9626c1"
+      ],
+      "output_ids": [
+        "hyp_8d5caf9626c1"
+      ],
+      "timestamp": 1784954807.0455148,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_0a73726c25ef"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954807.0457878,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954807.0460093,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-service",
+        "ev_a4c41086285f",
+        "ev_cf4c7cea667e",
+        "ev_e39bcf8777cf"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954807.0460186,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_f7c5b7ea608c"
+      ],
+      "output_ids": [
+        "hyp_f7c5b7ea608c"
+      ],
+      "timestamp": 1784954807.0460653,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_0a73726c25ef"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954807.046338,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954807.0465775,
+      "run_id": "abl_NO_LLM_llm-sensitive_s0000_987196"
+    }
+  ]
+}

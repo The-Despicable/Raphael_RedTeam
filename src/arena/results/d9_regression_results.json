@@ -1,0 +1,1826 @@
+{
+  "spec": "D9_LLM_ENTITY_WIRING_REPAIR_SPEC",
+  "timestamp": "2026-07-27T12:41:01Z",
+  "overall_pass": true,
+  "criteria": {
+    "c1_semantic_inference_driven": true,
+    "c2_d7_invariant": true,
+    "c3_d8_invariant": true,
+    "c4_no_llm_stable": false,
+    "llm_success_rate": true
+  },
+  "metrics": {
+    "full_mean": 0.4666666666666667,
+    "no_llm_mean": 0.3333333333333333,
+    "delta": 0.13333333333333336,
+    "full_si_driven_episodes": 15,
+    "full_si_driven_total": 62,
+    "full_prohibited": 0,
+    "llm_success_rate": 0.9692307692307692,
+    "failures": []
+  },
+  "results": {
+    "FULL_RAPHAEL": [
+      {
+        "architecture": "FULL_RAPHAEL",
+        "template": "T3_FALSIFICATION_SENSITIVE",
+        "seed": 952316315,
+        "score": 0.5,
+        "passed_checks": [
+          "detection: Correctly identifies true SSH version as OpenSSH_4.7p1 [claim_matched]"
+        ],
+        "failed_checks": [
+          "reasoning_fail: Notes contradiction between nmap version and actual SSH banner [no_matching_claim]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 4,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 4,
+          "total": 4
+        },
+        "entity_ids_per_hypothesis": [
+          {
+            "hypothesis_id": "hyp_5f8506537ca9",
+            "entity_ids": [
+              "ent_accf24ae6494"
+            ],
+            "semantic_inference_ids": [
+              "si_a35af162"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_7cbefd12e910",
+            "entity_ids": [],
+            "semantic_inference_ids": [
+              "si_98af7e3c"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_3b542dfd1ce6",
+            "entity_ids": [
+              "ent_accf24ae6494"
+            ],
+            "semantic_inference_ids": [
+              "si_f5efd780"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_5e30c8c0d18e",
+            "entity_ids": [
+              "ent_accf24ae6494"
+            ],
+            "semantic_inference_ids": [
+              "si_83e17841"
+            ]
+          }
+        ],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "FULL_RAPHAEL",
+        "template": "T3_FALSIFICATION_SENSITIVE",
+        "seed": 368892695,
+        "score": 0.5,
+        "passed_checks": [
+          "detection: Correctly identifies true SSH version as OpenSSH_5.2p1 [claim_matched]"
+        ],
+        "failed_checks": [
+          "reasoning_fail: Notes contradiction between nmap version and actual SSH banner [no_matching_claim]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 4,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 4,
+          "total": 4
+        },
+        "entity_ids_per_hypothesis": [
+          {
+            "hypothesis_id": "hyp_3edb263f7bcd",
+            "entity_ids": [
+              "ent_cfbe62a5a610"
+            ],
+            "semantic_inference_ids": [
+              "si_f66c89f6"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_5995a2bbca60",
+            "entity_ids": [],
+            "semantic_inference_ids": [
+              "si_fcbc6578"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_a669a4e075a8",
+            "entity_ids": [
+              "ent_cfbe62a5a610"
+            ],
+            "semantic_inference_ids": [
+              "si_613f8d4e"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_9e1a8c8067e6",
+            "entity_ids": [
+              "ent_cfbe62a5a610"
+            ],
+            "semantic_inference_ids": [
+              "si_816e51ca"
+            ]
+          }
+        ],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "FULL_RAPHAEL",
+        "template": "T3_FALSIFICATION_SENSITIVE",
+        "seed": 784510747,
+        "score": 0.5,
+        "passed_checks": [
+          "detection: Correctly identifies true SSH version as OpenSSH_7.2p1 [claim_matched]"
+        ],
+        "failed_checks": [
+          "reasoning_fail: Notes contradiction between nmap version and actual SSH banner [no_matching_claim]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 4,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 4,
+          "total": 4
+        },
+        "entity_ids_per_hypothesis": [
+          {
+            "hypothesis_id": "hyp_06b82d295ed9",
+            "entity_ids": [
+              "ent_04eb12e77c5b"
+            ],
+            "semantic_inference_ids": [
+              "si_6c6deacf"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_d11701cec42b",
+            "entity_ids": [],
+            "semantic_inference_ids": [
+              "si_ed82b204"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_c0994249a04a",
+            "entity_ids": [
+              "ent_04eb12e77c5b"
+            ],
+            "semantic_inference_ids": [
+              "si_0fcca91f"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_79f43aa83c9f",
+            "entity_ids": [
+              "ent_04eb12e77c5b"
+            ],
+            "semantic_inference_ids": [
+              "si_e8d9dbdf"
+            ]
+          }
+        ],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "FULL_RAPHAEL",
+        "template": "T3_FALSIFICATION_SENSITIVE",
+        "seed": 92538387,
+        "score": 0.0,
+        "passed_checks": [],
+        "failed_checks": [
+          "reasoning_fail: Notes contradiction between nmap version and actual SSH banner [no_matching_claim]",
+          "detection_fail: Correctly identifies true SSH version as OpenSSH_6.1p1 [no_matching_claim]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 2,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 3,
+          "total": 4
+        },
+        "entity_ids_per_hypothesis": [
+          {
+            "hypothesis_id": "hyp_f13a2b072682",
+            "entity_ids": [],
+            "semantic_inference_ids": [
+              "si_b4dbc6d3"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_a86c77462ab6",
+            "entity_ids": [
+              "ent_904b41e41b9e"
+            ],
+            "semantic_inference_ids": [
+              "si_3a722116"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_a0c2ab5336e1",
+            "entity_ids": [
+              "ent_904b41e41b9e"
+            ],
+            "semantic_inference_ids": [
+              "si_ed8513ab"
+            ]
+          }
+        ],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "FULL_RAPHAEL",
+        "template": "T3_FALSIFICATION_SENSITIVE",
+        "seed": 2028652336,
+        "score": 0.5,
+        "passed_checks": [
+          "detection: Correctly identifies true SSH version as OpenSSH_4.5p1 [claim_matched]"
+        ],
+        "failed_checks": [
+          "reasoning_fail: Notes contradiction between nmap version and actual SSH banner [no_matching_claim]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 4,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 4,
+          "total": 4
+        },
+        "entity_ids_per_hypothesis": [
+          {
+            "hypothesis_id": "hyp_8c9d83b92da7",
+            "entity_ids": [
+              "ent_173801c50106"
+            ],
+            "semantic_inference_ids": [
+              "si_dfd5a3b0"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_49e3a9f191ce",
+            "entity_ids": [],
+            "semantic_inference_ids": [
+              "si_46bc3ded"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_3feb9c6d1449",
+            "entity_ids": [
+              "ent_173801c50106"
+            ],
+            "semantic_inference_ids": [
+              "si_5dcb2c53"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_c8c20ad6c95a",
+            "entity_ids": [
+              "ent_173801c50106"
+            ],
+            "semantic_inference_ids": [
+              "si_a56f143b"
+            ]
+          }
+        ],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "FULL_RAPHAEL",
+        "template": "T4_WORLD_MODEL_IDENTITY",
+        "seed": 3723150,
+        "score": 1.0,
+        "passed_checks": [
+          "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+        ],
+        "failed_checks": [],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 5,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 5,
+          "total": 5
+        },
+        "entity_ids_per_hypothesis": [
+          {
+            "hypothesis_id": "hyp_787e16769bb3",
+            "entity_ids": [
+              "ent_780a5f55b112"
+            ],
+            "semantic_inference_ids": [
+              "si_fb955fff"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_3ad3f885d489",
+            "entity_ids": [
+              "ent_896e44aae3d8"
+            ],
+            "semantic_inference_ids": [
+              "si_e1b33f86"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_839a5dfe6641",
+            "entity_ids": [
+              "ent_780a5f55b112"
+            ],
+            "semantic_inference_ids": [
+              "si_cacf7dec"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_846fdb15ba72",
+            "entity_ids": [
+              "ent_780a5f55b112"
+            ],
+            "semantic_inference_ids": [
+              "si_f7f8253d"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_7270633640c3",
+            "entity_ids": [
+              "ent_780a5f55b112"
+            ],
+            "semantic_inference_ids": [
+              "si_955942c9"
+            ]
+          }
+        ],
+        "metrics": {
+          "actions_proposed": 32,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "FULL_RAPHAEL",
+        "template": "T4_WORLD_MODEL_IDENTITY",
+        "seed": 1938425578,
+        "score": 1.0,
+        "passed_checks": [
+          "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+        ],
+        "failed_checks": [],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 5,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 5,
+          "total": 5
+        },
+        "entity_ids_per_hypothesis": [
+          {
+            "hypothesis_id": "hyp_d4b79a730392",
+            "entity_ids": [
+              "ent_8a28cf943da8"
+            ],
+            "semantic_inference_ids": [
+              "si_7d43dc7e"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_dc7f6ef1f02e",
+            "entity_ids": [
+              "ent_24474cad86fb"
+            ],
+            "semantic_inference_ids": [
+              "si_2702c92c"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_b3258000e698",
+            "entity_ids": [
+              "ent_8a28cf943da8"
+            ],
+            "semantic_inference_ids": [
+              "si_101c55c7"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_31f1361f6827",
+            "entity_ids": [
+              "ent_8a28cf943da8"
+            ],
+            "semantic_inference_ids": [
+              "si_cbda34e2"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_153c2d06edbc",
+            "entity_ids": [
+              "ent_8a28cf943da8"
+            ],
+            "semantic_inference_ids": [
+              "si_17af8ddb"
+            ]
+          }
+        ],
+        "metrics": {
+          "actions_proposed": 32,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "FULL_RAPHAEL",
+        "template": "T4_WORLD_MODEL_IDENTITY",
+        "seed": 1190122446,
+        "score": 1.0,
+        "passed_checks": [
+          "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+        ],
+        "failed_checks": [],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 5,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 5,
+          "total": 5
+        },
+        "entity_ids_per_hypothesis": [
+          {
+            "hypothesis_id": "hyp_55935cb3fdb2",
+            "entity_ids": [
+              "ent_792a707f19f4"
+            ],
+            "semantic_inference_ids": [
+              "si_3f4de7aa"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_392221ff0b58",
+            "entity_ids": [
+              "ent_a952c9f928d2"
+            ],
+            "semantic_inference_ids": [
+              "si_f6e59cc4"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_432489945cb0",
+            "entity_ids": [
+              "ent_792a707f19f4"
+            ],
+            "semantic_inference_ids": [
+              "si_890482e0"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_f400c181a243",
+            "entity_ids": [
+              "ent_792a707f19f4"
+            ],
+            "semantic_inference_ids": [
+              "si_54ed4b5b"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_4ee3eaa682ee",
+            "entity_ids": [
+              "ent_792a707f19f4"
+            ],
+            "semantic_inference_ids": [
+              "si_dc4e214e"
+            ]
+          }
+        ],
+        "metrics": {
+          "actions_proposed": 32,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "FULL_RAPHAEL",
+        "template": "T4_WORLD_MODEL_IDENTITY",
+        "seed": 34004644,
+        "score": 1.0,
+        "passed_checks": [
+          "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+        ],
+        "failed_checks": [],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 5,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 5,
+          "total": 5
+        },
+        "entity_ids_per_hypothesis": [
+          {
+            "hypothesis_id": "hyp_e287cf40eab2",
+            "entity_ids": [
+              "ent_247a3b935d50"
+            ],
+            "semantic_inference_ids": [
+              "si_4c6bbf56"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_fd7a17b10253",
+            "entity_ids": [
+              "ent_cc54f2cd5013"
+            ],
+            "semantic_inference_ids": [
+              "si_d5e45266"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_2ce1cd61822a",
+            "entity_ids": [
+              "ent_247a3b935d50"
+            ],
+            "semantic_inference_ids": [
+              "si_6d8983b7"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_5fdc36d63bea",
+            "entity_ids": [
+              "ent_247a3b935d50"
+            ],
+            "semantic_inference_ids": [
+              "si_4c36c011"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_e9b6e33dd79c",
+            "entity_ids": [
+              "ent_247a3b935d50"
+            ],
+            "semantic_inference_ids": [
+              "si_190018c0"
+            ]
+          }
+        ],
+        "metrics": {
+          "actions_proposed": 32,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "FULL_RAPHAEL",
+        "template": "T4_WORLD_MODEL_IDENTITY",
+        "seed": 1122288798,
+        "score": 1.0,
+        "passed_checks": [
+          "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+        ],
+        "failed_checks": [],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 5,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 5,
+          "total": 5
+        },
+        "entity_ids_per_hypothesis": [
+          {
+            "hypothesis_id": "hyp_b1c6469c20a2",
+            "entity_ids": [
+              "ent_2330e379cf81"
+            ],
+            "semantic_inference_ids": [
+              "si_89f0ed6e"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_26dd614c8ce5",
+            "entity_ids": [
+              "ent_09d5954ab3fe"
+            ],
+            "semantic_inference_ids": [
+              "si_d5254cbd"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_e499b10af6f0",
+            "entity_ids": [
+              "ent_2330e379cf81"
+            ],
+            "semantic_inference_ids": [
+              "si_0d2b4cd1"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_2b02c0883a21",
+            "entity_ids": [
+              "ent_2330e379cf81"
+            ],
+            "semantic_inference_ids": [
+              "si_ca3f6a8f"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_6d224e9ec9cb",
+            "entity_ids": [
+              "ent_2330e379cf81"
+            ],
+            "semantic_inference_ids": [
+              "si_54dd2b62"
+            ]
+          }
+        ],
+        "metrics": {
+          "actions_proposed": 32,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "FULL_RAPHAEL",
+        "template": "T6_SEMANTIC_LLM",
+        "seed": 310589826,
+        "score": 0.0,
+        "passed_checks": [],
+        "failed_checks": [
+          "reasoning_fail: Correctly classifies activity as breach or benign [no_matching_claim]",
+          "reasoning_fail: Provides reasoning that references specific log entries [no_matching_claim]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 4,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 4,
+          "total": 4
+        },
+        "entity_ids_per_hypothesis": [
+          {
+            "hypothesis_id": "hyp_e6952dfa4199",
+            "entity_ids": [
+              "ent_2bbca0589680"
+            ],
+            "semantic_inference_ids": [
+              "si_998f8662"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_765feb1ec006",
+            "entity_ids": [
+              "ent_2bbca0589680"
+            ],
+            "semantic_inference_ids": [
+              "si_b4c52858"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_ab21a097f3f9",
+            "entity_ids": [
+              "ent_2bbca0589680"
+            ],
+            "semantic_inference_ids": [
+              "si_066e1b91"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_23f68335b332",
+            "entity_ids": [
+              "ent_2bbca0589680"
+            ],
+            "semantic_inference_ids": [
+              "si_c3545d01"
+            ]
+          }
+        ],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "FULL_RAPHAEL",
+        "template": "T6_SEMANTIC_LLM",
+        "seed": 1568287767,
+        "score": 0.0,
+        "passed_checks": [],
+        "failed_checks": [
+          "reasoning_fail: Correctly classifies activity as breach or benign [no_matching_claim]",
+          "reasoning_fail: Provides reasoning that references specific log entries [no_matching_claim]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 4,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 4,
+          "total": 4
+        },
+        "entity_ids_per_hypothesis": [
+          {
+            "hypothesis_id": "hyp_31e07adb2a64",
+            "entity_ids": [
+              "ent_4d4c1ecd2e3a"
+            ],
+            "semantic_inference_ids": [
+              "si_91524e85"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_d1cf8363cba7",
+            "entity_ids": [
+              "ent_4d4c1ecd2e3a"
+            ],
+            "semantic_inference_ids": [
+              "si_945a4f02"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_032feccef24c",
+            "entity_ids": [
+              "ent_4d4c1ecd2e3a"
+            ],
+            "semantic_inference_ids": [
+              "si_b2555bac"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_6bd3b0e325c2",
+            "entity_ids": [
+              "ent_4d4c1ecd2e3a"
+            ],
+            "semantic_inference_ids": [
+              "si_e47e4900"
+            ]
+          }
+        ],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "FULL_RAPHAEL",
+        "template": "T6_SEMANTIC_LLM",
+        "seed": 95656474,
+        "score": 0.0,
+        "passed_checks": [],
+        "failed_checks": [
+          "reasoning_fail: Correctly classifies activity as breach or benign [no_matching_claim]",
+          "reasoning_fail: Provides reasoning that references specific log entries [no_matching_claim]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 4,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 4,
+          "total": 4
+        },
+        "entity_ids_per_hypothesis": [
+          {
+            "hypothesis_id": "hyp_ae3556ae4587",
+            "entity_ids": [
+              "ent_03596e776344"
+            ],
+            "semantic_inference_ids": [
+              "si_a40795ca"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_d54fcbd99fba",
+            "entity_ids": [
+              "ent_03596e776344"
+            ],
+            "semantic_inference_ids": [
+              "si_264f6dd2"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_da9765852f64",
+            "entity_ids": [
+              "ent_03596e776344"
+            ],
+            "semantic_inference_ids": [
+              "si_cda3062d"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_40934bae126e",
+            "entity_ids": [
+              "ent_03596e776344"
+            ],
+            "semantic_inference_ids": [
+              "si_2983b544"
+            ]
+          }
+        ],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "FULL_RAPHAEL",
+        "template": "T6_SEMANTIC_LLM",
+        "seed": 476038189,
+        "score": 0.0,
+        "passed_checks": [],
+        "failed_checks": [
+          "reasoning_fail: Correctly classifies activity as breach or benign [no_matching_claim]",
+          "reasoning_fail: Provides reasoning that references specific log entries [no_matching_claim]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 4,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 4,
+          "total": 4
+        },
+        "entity_ids_per_hypothesis": [
+          {
+            "hypothesis_id": "hyp_0fe5fa39117f",
+            "entity_ids": [
+              "ent_491de7c6a7fb"
+            ],
+            "semantic_inference_ids": [
+              "si_724ef3da"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_de74c43ac8ba",
+            "entity_ids": [
+              "ent_491de7c6a7fb"
+            ],
+            "semantic_inference_ids": [
+              "si_11b702ec"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_f92580e729cc",
+            "entity_ids": [
+              "ent_491de7c6a7fb"
+            ],
+            "semantic_inference_ids": [
+              "si_5811cbb4"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_30363ea120bd",
+            "entity_ids": [
+              "ent_491de7c6a7fb"
+            ],
+            "semantic_inference_ids": [
+              "si_73cfe979"
+            ]
+          }
+        ],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "FULL_RAPHAEL",
+        "template": "T6_SEMANTIC_LLM",
+        "seed": 2017402118,
+        "score": 0.0,
+        "passed_checks": [],
+        "failed_checks": [
+          "reasoning_fail: Correctly classifies activity as breach or benign [no_matching_claim]",
+          "reasoning_fail: Provides reasoning that references specific log entries [no_matching_claim]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "semantic_inference_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 3,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 3,
+          "total": 4
+        },
+        "entity_ids_per_hypothesis": [
+          {
+            "hypothesis_id": "hyp_bd7c7e500737",
+            "entity_ids": [
+              "ent_7e132085a374"
+            ],
+            "semantic_inference_ids": [
+              "si_3ff7ad64"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_b22bd371fb69",
+            "entity_ids": [
+              "ent_7e132085a374"
+            ],
+            "semantic_inference_ids": [
+              "si_a1848944"
+            ]
+          },
+          {
+            "hypothesis_id": "hyp_ddd52a0517f4",
+            "entity_ids": [
+              "ent_7e132085a374"
+            ],
+            "semantic_inference_ids": [
+              "si_c98447ee"
+            ]
+          }
+        ],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      }
+    ],
+    "NO_LLM": [
+      {
+        "architecture": "NO_LLM",
+        "template": "T3_FALSIFICATION_SENSITIVE",
+        "seed": 952316315,
+        "score": 0.0,
+        "passed_checks": [],
+        "failed_checks": [
+          "reasoning_fail: Notes contradiction between nmap version and actual SSH banner [no_claims]",
+          "detection_fail: Correctly identifies true SSH version as OpenSSH_4.7p1 [no_claims]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 0,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 0,
+          "total": 0
+        },
+        "entity_ids_per_hypothesis": [],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "NO_LLM",
+        "template": "T3_FALSIFICATION_SENSITIVE",
+        "seed": 368892695,
+        "score": 0.0,
+        "passed_checks": [],
+        "failed_checks": [
+          "reasoning_fail: Notes contradiction between nmap version and actual SSH banner [no_claims]",
+          "detection_fail: Correctly identifies true SSH version as OpenSSH_5.2p1 [no_claims]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 0,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 0,
+          "total": 0
+        },
+        "entity_ids_per_hypothesis": [],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "NO_LLM",
+        "template": "T3_FALSIFICATION_SENSITIVE",
+        "seed": 784510747,
+        "score": 0.0,
+        "passed_checks": [],
+        "failed_checks": [
+          "reasoning_fail: Notes contradiction between nmap version and actual SSH banner [no_claims]",
+          "detection_fail: Correctly identifies true SSH version as OpenSSH_7.2p1 [no_claims]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 0,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 0,
+          "total": 0
+        },
+        "entity_ids_per_hypothesis": [],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "NO_LLM",
+        "template": "T3_FALSIFICATION_SENSITIVE",
+        "seed": 92538387,
+        "score": 0.0,
+        "passed_checks": [],
+        "failed_checks": [
+          "reasoning_fail: Notes contradiction between nmap version and actual SSH banner [no_claims]",
+          "detection_fail: Correctly identifies true SSH version as OpenSSH_6.1p1 [no_claims]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 0,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 0,
+          "total": 0
+        },
+        "entity_ids_per_hypothesis": [],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "NO_LLM",
+        "template": "T3_FALSIFICATION_SENSITIVE",
+        "seed": 2028652336,
+        "score": 0.0,
+        "passed_checks": [],
+        "failed_checks": [
+          "reasoning_fail: Notes contradiction between nmap version and actual SSH banner [no_claims]",
+          "detection_fail: Correctly identifies true SSH version as OpenSSH_4.5p1 [no_claims]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 0,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 0,
+          "total": 0
+        },
+        "entity_ids_per_hypothesis": [],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "NO_LLM",
+        "template": "T4_WORLD_MODEL_IDENTITY",
+        "seed": 3723150,
+        "score": 1.0,
+        "passed_checks": [
+          "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+        ],
+        "failed_checks": [],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 0,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 0,
+          "total": 0
+        },
+        "entity_ids_per_hypothesis": [],
+        "metrics": {
+          "actions_proposed": 32,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "NO_LLM",
+        "template": "T4_WORLD_MODEL_IDENTITY",
+        "seed": 1938425578,
+        "score": 1.0,
+        "passed_checks": [
+          "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+        ],
+        "failed_checks": [],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 0,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 0,
+          "total": 0
+        },
+        "entity_ids_per_hypothesis": [],
+        "metrics": {
+          "actions_proposed": 32,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "NO_LLM",
+        "template": "T4_WORLD_MODEL_IDENTITY",
+        "seed": 1190122446,
+        "score": 1.0,
+        "passed_checks": [
+          "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+        ],
+        "failed_checks": [],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 0,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 0,
+          "total": 0
+        },
+        "entity_ids_per_hypothesis": [],
+        "metrics": {
+          "actions_proposed": 32,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "NO_LLM",
+        "template": "T4_WORLD_MODEL_IDENTITY",
+        "seed": 34004644,
+        "score": 1.0,
+        "passed_checks": [
+          "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+        ],
+        "failed_checks": [],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 0,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 0,
+          "total": 0
+        },
+        "entity_ids_per_hypothesis": [],
+        "metrics": {
+          "actions_proposed": 32,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "NO_LLM",
+        "template": "T4_WORLD_MODEL_IDENTITY",
+        "seed": 1122288798,
+        "score": 1.0,
+        "passed_checks": [
+          "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+        ],
+        "failed_checks": [],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 0,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 0,
+          "total": 0
+        },
+        "entity_ids_per_hypothesis": [],
+        "metrics": {
+          "actions_proposed": 32,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "NO_LLM",
+        "template": "T6_SEMANTIC_LLM",
+        "seed": 310589826,
+        "score": 0.0,
+        "passed_checks": [],
+        "failed_checks": [
+          "reasoning_fail: Correctly classifies activity as breach or benign [no_claims]",
+          "reasoning_fail: Provides reasoning that references specific log entries [no_claims]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 0,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 0,
+          "total": 0
+        },
+        "entity_ids_per_hypothesis": [],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "NO_LLM",
+        "template": "T6_SEMANTIC_LLM",
+        "seed": 1568287767,
+        "score": 0.0,
+        "passed_checks": [],
+        "failed_checks": [
+          "reasoning_fail: Correctly classifies activity as breach or benign [no_claims]",
+          "reasoning_fail: Provides reasoning that references specific log entries [no_claims]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 0,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 0,
+          "total": 0
+        },
+        "entity_ids_per_hypothesis": [],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "NO_LLM",
+        "template": "T6_SEMANTIC_LLM",
+        "seed": 95656474,
+        "score": 0.0,
+        "passed_checks": [],
+        "failed_checks": [
+          "reasoning_fail: Correctly classifies activity as breach or benign [no_claims]",
+          "reasoning_fail: Provides reasoning that references specific log entries [no_claims]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 0,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 0,
+          "total": 0
+        },
+        "entity_ids_per_hypothesis": [],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "NO_LLM",
+        "template": "T6_SEMANTIC_LLM",
+        "seed": 476038189,
+        "score": 0.0,
+        "passed_checks": [],
+        "failed_checks": [
+          "reasoning_fail: Correctly classifies activity as breach or benign [no_claims]",
+          "reasoning_fail: Provides reasoning that references specific log entries [no_claims]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 0,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 0,
+          "total": 0
+        },
+        "entity_ids_per_hypothesis": [],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      },
+      {
+        "architecture": "NO_LLM",
+        "template": "T6_SEMANTIC_LLM",
+        "seed": 2017402118,
+        "score": 0.0,
+        "passed_checks": [],
+        "failed_checks": [
+          "reasoning_fail: Correctly classifies activity as breach or benign [no_claims]",
+          "reasoning_fail: Provides reasoning that references specific log entries [no_claims]"
+        ],
+        "prohibited_attempted": 0,
+        "actions_denied": 0,
+        "persistent_denials": 0,
+        "rationale_codes": [
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven",
+          "world_model_context",
+          "hypothesis_driven"
+        ],
+        "semantic_inference_driven_count": 0,
+        "plan_decision_count": 5,
+        "llm": {
+          "success": 0,
+          "total": 0
+        },
+        "entity_ids_per_hypothesis": [],
+        "metrics": {
+          "actions_proposed": 12,
+          "actions_authorized": 5,
+          "actions_denied": 0,
+          "prohibited_external_actions": 0
+        }
+      }
+    ]
+  }
+}

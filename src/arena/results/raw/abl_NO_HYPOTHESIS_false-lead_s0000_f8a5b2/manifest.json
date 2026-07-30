@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_NO_HYPOTHESIS_false-lead_s0000_f8a5b2",
+  "config_id": "NO_HYPOTHESIS",
+  "template_family": "false-lead",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784950516.2596445,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 6
+}

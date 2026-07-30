@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_92f413",
+  "config_id": "FULL_RAPHAEL",
+  "template_family": "known-observable",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784946945.9406352,
+  "metrics_schema_version": "1.0",
+  "episode_count": 1,
+  "trace_count": 7
+}

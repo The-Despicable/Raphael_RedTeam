@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_NO_PLANNER_world-model-sensitive_s0000_32686d",
+  "config_id": "NO_PLANNER",
+  "template_family": "world-model-sensitive",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784955362.4896655,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 22
+}

@@ -1,0 +1,229 @@
+{
+  "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_d713ce570d02"
+      ],
+      "timestamp": 1784954861.1748033,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "bastion-host",
+        "ev_0437a09f2092",
+        "ev_df0fbabef0fc"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954861.1748118,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_716319332c51"
+      ],
+      "output_ids": [
+        "hyp_716319332c51"
+      ],
+      "timestamp": 1784954861.1748466,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_716319332c51"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954861.1750886,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954861.1755967,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "bastion-host",
+        "ev_0437a09f2092",
+        "ev_df0fbabef0fc",
+        "ev_71ad11a482b2"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954861.1756046,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_4274f886cfed"
+      ],
+      "output_ids": [
+        "hyp_4274f886cfed"
+      ],
+      "timestamp": 1784954861.1756399,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_716319332c51"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954861.175859,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954861.1760068,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "bastion-host",
+        "ev_0437a09f2092",
+        "ev_df0fbabef0fc",
+        "ev_71ad11a482b2"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954861.1760137,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_bc93e67b802c"
+      ],
+      "output_ids": [
+        "hyp_bc93e67b802c"
+      ],
+      "timestamp": 1784954861.1760437,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_716319332c51"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954861.1762857,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954861.1764328,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "bastion-host",
+        "ev_0437a09f2092",
+        "ev_df0fbabef0fc",
+        "ev_71ad11a482b2"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954861.1764393,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_e49d2e6f9b07"
+      ],
+      "output_ids": [
+        "hyp_e49d2e6f9b07"
+      ],
+      "timestamp": 1784954861.1764696,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_716319332c51"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954861.176664,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954861.1767943,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "bastion-host",
+        "ev_0437a09f2092",
+        "ev_df0fbabef0fc",
+        "ev_71ad11a482b2"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954861.1768003,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_1cc2b94d8f1f"
+      ],
+      "output_ids": [
+        "hyp_1cc2b94d8f1f"
+      ],
+      "timestamp": 1784954861.1768298,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_716319332c51"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954861.1770453,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954861.1771832,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_bd5c4a"
+    }
+  ]
+}

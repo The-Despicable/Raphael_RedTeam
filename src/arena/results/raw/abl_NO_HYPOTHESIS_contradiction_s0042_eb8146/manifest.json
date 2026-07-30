@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_NO_HYPOTHESIS_contradiction_s0042_eb8146",
+  "config_id": "NO_HYPOTHESIS",
+  "template_family": "contradiction",
+  "seed": 42,
+  "split": "dev",
+  "timestamp": 1784995274.3240259,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 27
+}

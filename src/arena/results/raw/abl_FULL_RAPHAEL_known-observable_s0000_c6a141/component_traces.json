@@ -1,0 +1,50 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_c6a141",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_0395aabcc56b"
+      ],
+      "timestamp": 1784947310.4384909,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_c6a141"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_b26638a18a31"
+      ],
+      "timestamp": 1784947310.438559,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_c6a141"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_37f639ee4aa5"
+      ],
+      "timestamp": 1784947310.438594,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_c6a141"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "extra-1",
+        "extra-2",
+        "ev_7d07d7b559be",
+        "ev_41a59b8073c9",
+        "ev_cd226912f951"
+      ],
+      "output_ids": [],
+      "timestamp": 1784947310.4386187,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_c6a141"
+    }
+  ]
+}

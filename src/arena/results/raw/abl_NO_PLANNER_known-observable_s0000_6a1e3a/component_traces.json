@@ -1,0 +1,81 @@
+{
+  "run_id": "abl_NO_PLANNER_known-observable_s0000_6a1e3a",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_86950507ddda"
+      ],
+      "timestamp": 1784946972.9967215,
+      "run_id": "abl_NO_PLANNER_known-observable_s0000_6a1e3a"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_b2d3c2033de6"
+      ],
+      "timestamp": 1784946972.996734,
+      "run_id": "abl_NO_PLANNER_known-observable_s0000_6a1e3a"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_cb73fed551a9"
+      ],
+      "timestamp": 1784946972.9967408,
+      "run_id": "abl_NO_PLANNER_known-observable_s0000_6a1e3a"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946972.9969974,
+      "run_id": "abl_NO_PLANNER_known-observable_s0000_6a1e3a"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946972.9970007,
+      "run_id": "abl_NO_PLANNER_known-observable_s0000_6a1e3a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "extra-1",
+        "extra-2"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946972.9970045,
+      "run_id": "abl_NO_PLANNER_known-observable_s0000_6a1e3a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_2982fff2dd81"
+      ],
+      "output_ids": [
+        "hyp_2982fff2dd81"
+      ],
+      "timestamp": 1784946972.9970434,
+      "run_id": "abl_NO_PLANNER_known-observable_s0000_6a1e3a"
+    }
+  ]
+}

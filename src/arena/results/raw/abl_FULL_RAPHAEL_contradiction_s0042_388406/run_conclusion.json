@@ -1,0 +1,121 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_contradiction_s0042_388406",
+  "scenario_id": "contradiction-s0042",
+  "decision": "STOP_BUDGET_EXHAUSTED",
+  "claims": [
+    {
+      "claim_id": "cl_c1fc7f02572a",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "accessible",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_0aa11dee19b1",
+        "ev_d2ed326900ef",
+        "ev_9f963d2650df",
+        "ev_d0c26ec5cdc1",
+        "ev_621cc2e66c5a"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_0be87243d8cc",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "accessible",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_0aa11dee19b1",
+        "ev_d2ed326900ef",
+        "ev_9f963d2650df",
+        "ev_d0c26ec5cdc1",
+        "ev_621cc2e66c5a"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_e486bdb3ec1c",
+      "subject_id": "ent_62d4a9fac401",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_9c764e6ea315"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_d0c26ec5cdc1"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_df47daa0320f",
+      "subject_id": "ent_de049d38d999",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_9c764e6ea315"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_621cc2e66c5a"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_52aee5894544",
+      "subject_id": "ent_2a44c1635555",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_9c764e6ea315"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_b8fc38eaf8f7"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_f2ec3c3dc043",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "Category A",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_d09ee967ffcb"
+      ],
+      "provenance": {
+        "producer": "llm_interpretation",
+        "derivation_type": "llm_interpretation"
+      }
+    },
+    {
+      "claim_id": "cl_fd6b302670d3",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "Category A",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_574179e00894"
+      ],
+      "provenance": {
+        "producer": "llm_interpretation",
+        "derivation_type": "llm_interpretation"
+      }
+    }
+  ],
+  "architecture_id": "FULL_RAPHAEL",
+  "abstention_reason": null
+}

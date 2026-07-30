@@ -1,0 +1,24 @@
+{
+  "spec_id": "P1_LIVE_WAF_ARENA_SPEC",
+  "version": "1.0.0",
+  "status": "SEALED",
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-29",
+    "authority": "SENTINEL Charter §24, §30, §49, §58"
+  },
+  "title": "P1 Live WAF Arena — Target-05 Validation",
+  "target": "Flask app with case-sensitive WAF (blocks 'union select', 'or 1=1')",
+  "description": "P1 operational validation: WAFDetector fingerprints → PayloadMutator bypasses case-sensitive WAF → FLAG_WAF_BYPASS captured.",
+  "waf_type": "case_sensitive",
+  "blocked_patterns": ["union select", "or 1=1"],
+  "bypass_method": "case_variation",
+  "expected_flag": "FLAG_WAF_BYPASS=SUCCESS",
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-29",
+    "authority": "SENTINEL Charter §24, §30, §49, §58"
+  }
+}

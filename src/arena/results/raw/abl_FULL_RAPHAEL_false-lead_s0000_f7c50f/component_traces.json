@@ -1,0 +1,59 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_false-lead_s0000_f7c50f",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_a86b1c7fdaef"
+      ],
+      "timestamp": 1784946973.0548751,
+      "run_id": "abl_FULL_RAPHAEL_false-lead_s0000_f7c50f"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946973.0551014,
+      "run_id": "abl_FULL_RAPHAEL_false-lead_s0000_f7c50f"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946973.0551054,
+      "run_id": "abl_FULL_RAPHAEL_false-lead_s0000_f7c50f"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "bastion-host"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946973.0551093,
+      "run_id": "abl_FULL_RAPHAEL_false-lead_s0000_f7c50f"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_5d53b6e356f2"
+      ],
+      "output_ids": [
+        "hyp_5d53b6e356f2"
+      ],
+      "timestamp": 1784946973.0551503,
+      "run_id": "abl_FULL_RAPHAEL_false-lead_s0000_f7c50f"
+    }
+  ]
+}

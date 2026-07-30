@@ -1,0 +1,17 @@
+{
+  "run_id": "abl_LLM_ONLY_false-lead_s0000_5050b2",
+  "traces": [
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784947486.481588,
+      "run_id": "abl_LLM_ONLY_false-lead_s0000_5050b2"
+    }
+  ]
+}

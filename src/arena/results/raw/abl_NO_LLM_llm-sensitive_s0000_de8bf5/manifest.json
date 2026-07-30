@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_NO_LLM_llm-sensitive_s0000_de8bf5",
+  "config_id": "NO_LLM",
+  "template_family": "llm-sensitive",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784958741.9300377,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 21
+}

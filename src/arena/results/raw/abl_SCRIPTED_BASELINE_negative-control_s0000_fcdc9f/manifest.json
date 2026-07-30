@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_SCRIPTED_BASELINE_negative-control_s0000_fcdc9f",
+  "config_id": "SCRIPTED_BASELINE",
+  "template_family": "negative-control",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784957203.9051678,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 0
+}

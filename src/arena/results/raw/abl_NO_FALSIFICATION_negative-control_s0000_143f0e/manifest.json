@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_NO_FALSIFICATION_negative-control_s0000_143f0e",
+  "config_id": "NO_FALSIFICATION",
+  "template_family": "negative-control",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784954807.0864367,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 21
+}

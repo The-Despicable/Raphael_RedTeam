@@ -1,0 +1,12 @@
+{
+    "name": "DVWA-Medium",
+    "url": "http://192.168.1.100:4280",
+    "flags": {
+        "user": "",
+        "root": ""
+    },
+    "difficulty": "medium",
+    "phase_requirements": ["recon", "scan", "exploit", "postex"],
+    "known_vulnerabilities": ["SQLi", "XSS", "File Inclusion", "Command Injection"],
+    "skip_reason": ""
+}

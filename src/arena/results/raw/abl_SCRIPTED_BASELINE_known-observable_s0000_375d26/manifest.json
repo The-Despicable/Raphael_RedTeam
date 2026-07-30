@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_SCRIPTED_BASELINE_known-observable_s0000_375d26",
+  "config_id": "SCRIPTED_BASELINE",
+  "template_family": "known-observable",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784950582.6981559,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 0
+}

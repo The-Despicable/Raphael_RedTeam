@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_NO_LLM_falsification-sensitive_s0000_88aabf",
+  "config_id": "NO_LLM",
+  "template_family": "falsification-sensitive",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784954437.80844,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 21
+}

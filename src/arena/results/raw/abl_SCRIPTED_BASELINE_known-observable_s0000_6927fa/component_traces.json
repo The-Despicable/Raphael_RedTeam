@@ -1,0 +1,15 @@
+{
+  "run_id": "abl_SCRIPTED_BASELINE_known-observable_s0000_6927fa",
+  "traces": [
+    {
+      "component": "scripted",
+      "operation": "scan_targets",
+      "input_ids": [
+        "10.0.10.0/24"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946945.95045,
+      "run_id": "abl_SCRIPTED_BASELINE_known-observable_s0000_6927fa"
+    }
+  ]
+}

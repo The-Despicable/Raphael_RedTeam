@@ -1,0 +1,75 @@
+{
+  "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_c90068",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_328916d4e73a"
+      ],
+      "timestamp": 1784955361.960632,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_c90068"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_9c3318c77845"
+      ],
+      "timestamp": 1784955361.9606416,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_c90068"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_f2682a9dd735"
+      ],
+      "timestamp": 1784955361.960647,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_c90068"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784955361.9619472,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_c90068"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784955361.9624884,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_c90068"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784955361.962949,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_c90068"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784955361.9633694,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_c90068"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784955361.963847,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_c90068"
+    }
+  ]
+}

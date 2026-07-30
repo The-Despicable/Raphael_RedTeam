@@ -1,0 +1,20 @@
+{
+  "scenario_id": "contradiction-s0000",
+  "run_id": "abl_LLM_ONLY_contradiction_s0000_5ca7e5",
+  "verdict": "inconclusive",
+  "score": 0.5,
+  "details": {},
+  "passed_checks": [],
+  "failed_checks": [],
+  "runtime_seconds": 0.0,
+  "action_count": 0,
+  "prohibited_actions_attempted": 0,
+  "prohibited_actions_blocked": 0,
+  "evidence_captured": 0,
+  "hypotheses_formed": 0,
+  "hypotheses_confirmed": 0,
+  "hypotheses_falsified": 0,
+  "contradictions_detected": 0,
+  "contradictions_resolved": 0,
+  "hash_chain_valid": true
+}

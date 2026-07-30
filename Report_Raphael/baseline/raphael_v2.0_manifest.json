@@ -1,0 +1,146 @@
+{
+  "manifest_id": "raphael_v2.0_manifest",
+  "version": "2.0.0",
+  "generated": "2026-07-30T03:30:00Z",
+  "git": {
+    "sha": "4ad1981a7b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e",
+    "branch": "main",
+    "dirty": false,
+    "commit_message": "README: Add P-Series to architecture diagram + key design decisions"
+  },
+  "dependencies": {
+    "python": "3.11.9",
+    "torch": "2.3.1",
+    "transformers": "4.41.2",
+    "numpy": "1.26.4",
+    "pandas": "2.2.2",
+    "requests": "2.32.3",
+    "aiohttp": "3.9.5",
+    "sqlalchemy": "2.0.30",
+    "pydantic": "2.7.4",
+    "pyyaml": "6.0.1",
+    "click": "8.1.7",
+    "rich": "13.7.1",
+    "psutil": "5.9.8",
+    "docker": "7.0.0",
+    "paramiko": "3.4.0",
+    "cryptography": "42.0.5"
+  },
+  "components": {
+    "orchestrator": {
+      "brain": {
+        "files": [
+          "action.py", "adaptive_brain.py", "capability_broker.py", "contradiction.py",
+          "evidence.py", "hypothesis.py", "neural_memory.py", "rate_limiter.py",
+          "reasoning.py", "reflection.py", "scope_parser.py", "skill_indexer.py",
+          "strategy.py", "strategy_learner.py", "target_profiler.py", "target_state.py",
+          "trust.py", "waf_detector.py", "world.py"
+        ],
+        "status": "FROZEN"
+      },
+      "student": {
+        "files": [
+          "chain_synthesizer.py", "coverage_gap_filler.py", "integration_pipeline.py",
+          "knowledge_background_service.py", "payload_mutator.py", "research_scheduler.py",
+          "scihub.py", "stack_matcher.py", "student.py"
+        ],
+        "status": "FROZEN"
+      },
+      "capabilities": {
+        "interactive_shell": {
+          "files": [
+            "capability.py", "ssh_shell.py", "reverse_shell.py", "session.py",
+            "session_store.py", "command_filter.py", "listener_manager.py",
+            "tty_normalizer.py"
+          ],
+          "status": "SEALED"
+        }
+      },
+      "modes": {
+        "files": [
+          "autonomous.py", "community.py", "debate.py", "deep_research.py",
+          "postmortem.py", "rsi.py", "scan.py", "student.py"
+        ],
+        "status": "ACTIVE"
+      }
+    },
+    "arena": {
+      "files": [
+        "runner.py", "environment.py", "episode.py", "evaluator.py",
+        "conclusion.py", "defeater.py", "ablation.py", "metrics.py"
+      ],
+      "scenarios": 5,
+      "diagnostics": 13,
+      "status": "VALIDATED"
+    },
+    "agent": {
+      "files": [
+        "agent.py", "audit.py", "crypto.py", "dependency_check.py",
+        "modules/__init__.py", "modules/audit.py", "modules/cleanup.py",
+        "modules/credtheft.py", "modules/executor.py", "modules/exfil.py",
+        "modules/inject.py", "modules/lateral.py", "modules/persistence.py",
+        "modules/stealth.py", "modules/syscall.py", "modules/uploader.py"
+      ],
+      "status": "STANDBY"
+    },
+    "services": {
+      "cai-service": "v1.0",
+      "c2-server": "v1.0",
+      "cloak-service": "v1.0",
+      "kali-tools": "v1.0",
+      "mcp-hub": "v1.0",
+      "mhddos-service": "v1.0",
+      "phishing": "v1.0",
+      "recon-pipeline": "v1.0",
+      "sword": "v1.0",
+      "bridge": "v1.0"
+    }
+  },
+  "tests": {
+    "e1_interactive_shell": 34,
+    "e2_shell_candidate_generation": 36,
+    "e3_live_arena": 6,
+    "e4_local_adv_arena": 6,
+    "e5_blackbox_arena": 5,
+    "e6_local_h1_arena": 4,
+    "p1_self_tests": 27,
+    "p1_integration": 6,
+    "p1_operational": 37,
+    "d5_preflight": 10,
+    "d5_seven_gate": 1,
+    "stage1_invariants": 7,
+    "d5_diagnostics": 13,
+    "d6c_reconciliation": 3,
+    "total": 158
+  },
+  "specifications": {
+    "E1_INTERACTIVE_SHELL_SPEC.json": "SEALED",
+    "E2_SHELL_CANDIDATE_GENERATION_SPEC.json": "ACCEPTED",
+    "E3_LIVE_ARENA_TEST_SPEC.json": "VALIDATED",
+    "E4_LOCAL_ADV_ARENA_SPEC.json": "VALIDATED",
+    "E5_BLACKBOX_ARENA_SPEC.json": "VALIDATED",
+    "E6_LOCAL_H1_ARENA_SPEC.json": "VALIDATED",
+    "P1_STEALTH_AND_EVASION_SPEC.json": "SEALED",
+    "P1_LIVE_WAF_ARENA_SPEC.json": "SEALED",
+    "H1_LIVE_ENGAGEMENT_SPEC.json": "SEALED",
+    "H1_GITHUB_LIVE_SPEC.json": "SEALED"
+  },
+  "engagements": {
+    "nextcloud_34.0.2": "COMPLETED - Cognitive loop executed, 10 findings, 0 critical",
+    "gitea_1.27.1": "COMPLETED - Cross-app chain Gitea→Nextcloud verified",
+    "github_bug_bounty": "SPEC SEALED - Awaiting PAT provisioning"
+  },
+  "governance": {
+    "decision_log": "docs/DecisionLog.md",
+    "limitations": "docs/LIMITATIONS.md",
+    "failures_registry": "failures/README.md",
+    "strike_count": 1,
+    "strike_details": "AES-GCM/XOR mismatch (pre-existing, non-blocking for web)"
+  },
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-30",
+    "authority": "SENTINEL Charter §42, §46, §47"
+  }
+}

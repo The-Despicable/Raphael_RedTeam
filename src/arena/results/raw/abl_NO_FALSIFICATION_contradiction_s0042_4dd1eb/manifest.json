@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_NO_FALSIFICATION_contradiction_s0042_4dd1eb",
+  "config_id": "NO_FALSIFICATION",
+  "template_family": "contradiction",
+  "seed": 42,
+  "split": "dev",
+  "timestamp": 1784995274.4101093,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 45
+}

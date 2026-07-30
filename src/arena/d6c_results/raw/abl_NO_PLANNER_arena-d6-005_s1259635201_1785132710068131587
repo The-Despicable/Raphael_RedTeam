@@ -1,0 +1,104 @@
+{
+  "run_id": "d6c_holdout_NO_PLANNER_arena-d6-005_s1259635201",
+  "batch": "D6C-HOLDOUT",
+  "timestamp": "2026-07-27T06:11:50.067990+00:00",
+  "architecture": "NO_PLANNER",
+  "template": "T5_PLANNING_COST",
+  "scenario_id": "arena-d6-005",
+  "seed": 1259635201,
+  "config": {
+    "hypothesis_enabled": true,
+    "falsification_enabled": true,
+    "world_model_enabled": true,
+    "planner_enabled": false,
+    "llm_enabled": true,
+    "structured_reasoning_enabled": true,
+    "defeater_enabled": true,
+    "baseline_type": "raphael"
+  },
+  "evaluation": {
+    "verdict": "pass",
+    "score": 1.0,
+    "passed_checks": [
+      "evidence_collected",
+      "zero_prohibited"
+    ],
+    "failed_checks": []
+  },
+  "treatment_fidelity": {
+    "overall": "FAIL",
+    "components": {
+      "hypothesis": {
+        "status": "PASS",
+        "invoked": 15
+      },
+      "falsification": {
+        "status": "FAIL",
+        "invoked": 0,
+        "note": "Component expected but never invoked \u2014 treatment not applied"
+      },
+      "world_model": {
+        "status": "PASS",
+        "invoked": 46
+      },
+      "planner": {
+        "status": "NOT_EXPECTED",
+        "invoked": 0
+      },
+      "llm_service": {
+        "status": "PASS",
+        "invoked": 4
+      },
+      "structured_reasoning": {
+        "status": "PASS",
+        "invoked": 5
+      },
+      "defeater": {
+        "status": "PASS",
+        "invoked": 90
+      }
+    }
+  },
+  "component_engagement": {
+    "hypothesis": {
+      "invoked": 15
+    },
+    "falsification": {
+      "invoked": 0
+    },
+    "world_model": {
+      "invoked": 46
+    },
+    "planner": {
+      "invoked": 0
+    },
+    "llm_service": {
+      "invoked": 4
+    },
+    "structured_reasoning": {
+      "invoked": 5
+    },
+    "defeater": {
+      "invoked": 90
+    }
+  },
+  "execution_engine": {
+    "name": "AblationRunner._run_raphael",
+    "entrypoint": "_run_raphael",
+    "ablation_runner_hash": "c397e17825451287",
+    "d6c_holdout_runner_hash": "66f576fa637e8a5f"
+  },
+  "metrics": {
+    "outcome": "INCORRECT",
+    "hypotheses_created": 6,
+    "llm_calls": 0,
+    "actions_proposed": 55,
+    "actions_authorized": 5,
+    "actions_denied": 0,
+    "prohibited_external_actions": 0,
+    "wall_time_seconds": 0.0928952693939209,
+    "provider_failures": 0
+  },
+  "provider_confounded": false,
+  "provider_failure_count": 0
+}

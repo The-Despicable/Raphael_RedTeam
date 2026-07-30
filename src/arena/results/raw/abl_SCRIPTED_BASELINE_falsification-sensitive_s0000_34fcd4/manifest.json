@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_SCRIPTED_BASELINE_falsification-sensitive_s0000_34fcd4",
+  "config_id": "SCRIPTED_BASELINE",
+  "template_family": "falsification-sensitive",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784955573.3185463,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 0
+}

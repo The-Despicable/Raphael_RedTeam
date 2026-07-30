@@ -1,0 +1,81 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_95d4e3",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_bcb9c3a6bd7d"
+      ],
+      "timestamp": 1784946905.997991,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_95d4e3"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_5abcdbd8d966"
+      ],
+      "timestamp": 1784946905.998011,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_95d4e3"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_30be34d253b8"
+      ],
+      "timestamp": 1784946905.9980252,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_95d4e3"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946905.99837,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_95d4e3"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946905.998374,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_95d4e3"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "extra-1",
+        "extra-2"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946905.9983807,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_95d4e3"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_4bce3307f926"
+      ],
+      "output_ids": [
+        "hyp_4bce3307f926"
+      ],
+      "timestamp": 1784946905.9984474,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_95d4e3"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_daf8fc",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_7a3fb6013e15"
+      ],
+      "timestamp": 1784946906.0036464,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_daf8fc"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_779035d10853"
+      ],
+      "timestamp": 1784946906.0036595,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_daf8fc"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_d5feb75bdf33"
+      ],
+      "timestamp": 1784946906.003667,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_daf8fc"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946906.0039787,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_daf8fc"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946906.003983,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_daf8fc"
+    }
+  ]
+}

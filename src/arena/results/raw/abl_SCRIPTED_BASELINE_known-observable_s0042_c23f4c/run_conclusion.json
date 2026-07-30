@@ -1,0 +1,30 @@
+{
+  "run_id": "abl_SCRIPTED_BASELINE_known-observable_s0042_c23f4c",
+  "scenario_id": "known-observable-s0042",
+  "decision": "STOP_BUDGET_EXHAUSTED",
+  "claims": [
+    {
+      "claim_id": "cl_018970d03a29",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_5779d422baea",
+        "ev_7eed88e60543",
+        "ev_a0b06abdb657",
+        "ev_89445e2f2cf1",
+        "ev_4681bbded1de",
+        "ev_cb4be1625a3d",
+        "ev_0d0dd0789126",
+        "ev_f482f6ae8209"
+      ],
+      "provenance": {
+        "producer": "direct_observation",
+        "derivation_type": "direct_observation"
+      }
+    }
+  ],
+  "architecture_id": "SCRIPTED_BASELINE",
+  "abstention_reason": null
+}

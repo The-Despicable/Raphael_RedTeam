@@ -1,0 +1,69 @@
+{
+  "run_id": "abl_NO_HYPOTHESIS_known-observable_s0042_00297d",
+  "scenario_id": "known-observable-s0042",
+  "decision": "STOP_BUDGET_EXHAUSTED",
+  "claims": [
+    {
+      "claim_id": "cl_4e038b1d7387",
+      "subject_id": "ent_698792feee86",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_bfe82e1d547f"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_fd790fb43295"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_2b6d2d6ac113",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_a65ed7b8fe08",
+        "ev_801cd2d87720",
+        "ev_3a049d0c3a02",
+        "ev_5c7690fbc237",
+        "ev_47689ceb39e3",
+        "ev_e8addc513642",
+        "ev_be308b02e93f",
+        "ev_1c33b40f6c1e",
+        "ev_fd790fb43295"
+      ],
+      "provenance": {
+        "producer": "direct_observation",
+        "derivation_type": "direct_observation"
+      }
+    },
+    {
+      "claim_id": "cl_5db7e724a75e",
+      "subject_id": "host",
+      "predicate": "host_identity",
+      "object_value": "HOST-40-A7",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_a65ed7b8fe08",
+        "ev_801cd2d87720",
+        "ev_3a049d0c3a02",
+        "ev_5c7690fbc237",
+        "ev_47689ceb39e3",
+        "ev_e8addc513642",
+        "ev_be308b02e93f",
+        "ev_1c33b40f6c1e",
+        "ev_fd790fb43295"
+      ],
+      "provenance": {
+        "producer": "direct_observation",
+        "derivation_type": "direct_observation"
+      }
+    }
+  ],
+  "architecture_id": "NO_HYPOTHESIS",
+  "abstention_reason": "Hypothesis formation disabled"
+}

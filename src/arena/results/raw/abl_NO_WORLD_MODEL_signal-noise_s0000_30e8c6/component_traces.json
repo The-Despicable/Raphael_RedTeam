@@ -1,0 +1,59 @@
+{
+  "run_id": "abl_NO_WORLD_MODEL_signal-noise_s0000_30e8c6",
+  "traces": [
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946973.0291834,
+      "run_id": "abl_NO_WORLD_MODEL_signal-noise_s0000_30e8c6"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946973.029188,
+      "run_id": "abl_NO_WORLD_MODEL_signal-noise_s0000_30e8c6"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "vuln-host",
+        "host-0",
+        "host-1",
+        "host-2",
+        "host-3",
+        "host-4",
+        "host-5",
+        "host-6",
+        "host-7",
+        "host-8",
+        "host-9"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946973.029192,
+      "run_id": "abl_NO_WORLD_MODEL_signal-noise_s0000_30e8c6"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_1b29bccd47e5"
+      ],
+      "output_ids": [
+        "hyp_1b29bccd47e5"
+      ],
+      "timestamp": 1784946973.0292335,
+      "run_id": "abl_NO_WORLD_MODEL_signal-noise_s0000_30e8c6"
+    }
+  ]
+}

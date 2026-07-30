@@ -1,0 +1,34 @@
+FROM ubuntu:22.04
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    python3 \
+    sudo \
+    iproute2 \
+    iputils-ping \
+    net-tools \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create unprivileged user for the web server
+RUN useradd -m -s /bin/bash webuser
+
+# Setup Privilege Escalation Vector (SUID on 'find')
+RUN chmod u+s /usr/bin/find
+
+# Setup sample data for post-exploitation (credential access)
+RUN mkdir -p /root/.ssh
+RUN echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ... root_dummy_key" > /root/.ssh/authorized_keys
+RUN echo "AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" > /root/.env
+
+# Setup Vulnerable Web Application
+RUN mkdir -p /opt/webapp
+COPY app.py /opt/webapp/app.py
+RUN chown -R webuser:webuser /opt/webapp
+
+# Expose HTTP port
+EXPOSE 8080
+
+# Start as webuser
+USER webuser
+WORKDIR /opt/webapp
+CMD ["python3", "/opt/webapp/app.py"]

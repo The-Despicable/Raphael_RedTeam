@@ -1,0 +1,48 @@
+{
+  "method": "Paired FULL-vs-ablation, per template\u00d7seed",
+  "basis": "score_difference (CORRECT=1, ABSTAIN_CORRECT=0.75, ABSTAIN_INCORRECT=0.5, INCORRECT=0)",
+  "full_raphael_stats": {
+    "total": 12,
+    "correct": 0,
+    "rate": 0.0,
+    "outcomes": {}
+  },
+  "taxonomy": {
+    "hypothesis": {
+      "NO_EFFECT": 9,
+      "HELPED": 3
+    },
+    "falsification": {
+      "NO_EFFECT": 7,
+      "HELPED": 1
+    },
+    "world_model": {
+      "NO_EFFECT": 7,
+      "HELPED": 1
+    },
+    "planner": {
+      "NO_EFFECT": 12
+    },
+    "llm": {
+      "NO_EFFECT": 9,
+      "HELPED": 3
+    },
+    "LLM_ONLY": {
+      "NO_EFFECT": 9,
+      "HELPED": 3
+    },
+    "baseline": {
+      "NO_EFFECT": 5
+    },
+    "defeater": {
+      "NO_EFFECT": 9,
+      "HELPED": 2
+    }
+  },
+  "skipped_infra_safety": {
+    "SCRIPTED_BASELINE": 7,
+    "NO_DEFEATER": 1,
+    "NO_FALSIFICATION": 4,
+    "NO_WORLD_MODEL": 4
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_NO_PLANNER_known-observable_s0042_3d800b",
+  "config_id": "NO_PLANNER",
+  "template_family": "known-observable",
+  "seed": 42,
+  "split": "dev",
+  "timestamp": 1784995209.0421455,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 50
+}

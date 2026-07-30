@@ -1,0 +1,1698 @@
+{
+  "trace_name": "Trace_B_T3",
+  "trace_label": "T3 Falsification Efficacy \u2014 Version Contradiction",
+  "template": "T3_FALSIFICATION_SENSITIVE",
+  "seed": 952316315,
+  "trace_points": {
+    "environment_http_get": [
+      {
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "method": "auto",
+        "receipt_id": "758001ef1cb78825",
+        "status": "404 Not Found",
+        "raw_output_preview": "HTTP/1.1 404 Not Found\nContent-Type: text/html\n\nNot Found",
+        "observation_id": "obs_3"
+      },
+      {
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "method": "auto",
+        "receipt_id": "2f1d9c40b0de0306",
+        "status": "404 Not Found",
+        "raw_output_preview": "HTTP/1.1 404 Not Found\nContent-Type: text/html\n\nNot Found",
+        "observation_id": "obs_4"
+      },
+      {
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "method": "auto",
+        "receipt_id": "97f393abc2822d1c",
+        "status": "404 Not Found",
+        "raw_output_preview": "HTTP/1.1 404 Not Found\nContent-Type: text/html\n\nNot Found",
+        "observation_id": "obs_5"
+      },
+      {
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "method": "auto",
+        "receipt_id": "3fcc74ee41114634",
+        "status": "404 Not Found",
+        "raw_output_preview": "HTTP/1.1 404 Not Found\nContent-Type: text/html\n\nNot Found",
+        "observation_id": "obs_6"
+      },
+      {
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "method": "auto",
+        "receipt_id": "de1e3df5f12fc33f",
+        "status": "404 Not Found",
+        "raw_output_preview": "HTTP/1.1 404 Not Found\nContent-Type: text/html\n\nNot Found",
+        "observation_id": "obs_7"
+      }
+    ],
+    "falsification_candidate_creation": [
+      {
+        "action_id": "direct_probe_10.0.63.10_con_389b",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_61e67c3e8b51",
+        "contradiction_id": "con_389b028bffcb",
+        "rationale": "Falsification: Direct probe of 10.0.63.10 to resolve tool_disagreement"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_389b",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_716404e339e4",
+        "contradiction_id": "con_389b028bffcb",
+        "rationale": "Falsification: Use alternative tool to verify 10.0.63.10"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_389b",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_a6e87321a943",
+        "contradiction_id": "con_389b028bffcb",
+        "rationale": "Falsification: Re-check 10.0.63.10 after delay (state may have changed)"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_389b",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_612334e3814b",
+        "contradiction_id": "con_389b028bffcb",
+        "rationale": "Falsification: Find third independent source for 10.0.63.10"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_389b",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_593f4932b5eb",
+        "contradiction_id": "con_389b028bffcb",
+        "rationale": "Falsification: Direct probe of 10.0.63.10 to resolve tool_disagreement"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_389b",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_380a46231c8a",
+        "contradiction_id": "con_389b028bffcb",
+        "rationale": "Falsification: Use alternative tool to verify 10.0.63.10"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_389b",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_73adaedd092d",
+        "contradiction_id": "con_389b028bffcb",
+        "rationale": "Falsification: Re-check 10.0.63.10 after delay (state may have changed)"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_389b",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_d2cbb11b2bb7",
+        "contradiction_id": "con_389b028bffcb",
+        "rationale": "Falsification: Find third independent source for 10.0.63.10"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_12d3",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_eac1e8f8d2a6",
+        "contradiction_id": "con_12d33837cbb0",
+        "rationale": "Falsification: Direct probe of 10.0.63.10 to resolve tool_disagreement"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_12d3",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_c909648c65fb",
+        "contradiction_id": "con_12d33837cbb0",
+        "rationale": "Falsification: Use alternative tool to verify 10.0.63.10"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_12d3",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_3bb29098dd06",
+        "contradiction_id": "con_12d33837cbb0",
+        "rationale": "Falsification: Re-check 10.0.63.10 after delay (state may have changed)"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_12d3",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_65736278754e",
+        "contradiction_id": "con_12d33837cbb0",
+        "rationale": "Falsification: Find third independent source for 10.0.63.10"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_12d3",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_8d15d22bdffc",
+        "contradiction_id": "con_12d33837cbb0",
+        "rationale": "Falsification: Direct probe of 10.0.63.10 to resolve tool_disagreement"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_12d3",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_34bb77e157c4",
+        "contradiction_id": "con_12d33837cbb0",
+        "rationale": "Falsification: Use alternative tool to verify 10.0.63.10"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_12d3",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_20e04763a4ae",
+        "contradiction_id": "con_12d33837cbb0",
+        "rationale": "Falsification: Re-check 10.0.63.10 after delay (state may have changed)"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_12d3",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_b4dca48745e8",
+        "contradiction_id": "con_12d33837cbb0",
+        "rationale": "Falsification: Find third independent source for 10.0.63.10"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_a47a",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_ed92b1ab601d",
+        "contradiction_id": "con_a47a5ed428a3",
+        "rationale": "Falsification: Direct probe of 10.0.63.10 to resolve tool_disagreement"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_a47a",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_c4ec75314559",
+        "contradiction_id": "con_a47a5ed428a3",
+        "rationale": "Falsification: Use alternative tool to verify 10.0.63.10"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_a47a",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_bfae6665cca3",
+        "contradiction_id": "con_a47a5ed428a3",
+        "rationale": "Falsification: Re-check 10.0.63.10 after delay (state may have changed)"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_a47a",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_00648e69943e",
+        "contradiction_id": "con_a47a5ed428a3",
+        "rationale": "Falsification: Find third independent source for 10.0.63.10"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_a47a",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_585da624ab51",
+        "contradiction_id": "con_a47a5ed428a3",
+        "rationale": "Falsification: Direct probe of 10.0.63.10 to resolve tool_disagreement"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_a47a",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_9d8a447a6f4a",
+        "contradiction_id": "con_a47a5ed428a3",
+        "rationale": "Falsification: Use alternative tool to verify 10.0.63.10"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_a47a",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_8e272bc07c9d",
+        "contradiction_id": "con_a47a5ed428a3",
+        "rationale": "Falsification: Re-check 10.0.63.10 after delay (state may have changed)"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_a47a",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_a21cb218be21",
+        "contradiction_id": "con_a47a5ed428a3",
+        "rationale": "Falsification: Find third independent source for 10.0.63.10"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_9782",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_773121322111",
+        "contradiction_id": "con_9782d2e60219",
+        "rationale": "Falsification: Direct probe of 10.0.63.10 to resolve tool_disagreement"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_9782",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_9174e6c8f366",
+        "contradiction_id": "con_9782d2e60219",
+        "rationale": "Falsification: Use alternative tool to verify 10.0.63.10"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_9782",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_f693b31d46a5",
+        "contradiction_id": "con_9782d2e60219",
+        "rationale": "Falsification: Re-check 10.0.63.10 after delay (state may have changed)"
+      },
+      {
+        "action_id": "direct_probe_10.0.63.10_con_9782",
+        "action_type": "direct_probe",
+        "target": "10.0.63.10",
+        "capability": "curl",
+        "discriminator_id": "disc_190909a4e068",
+        "contradiction_id": "con_9782d2e60219",
+        "rationale": "Falsification: Find third independent source for 10.0.63.10"
+      }
+    ],
+    "discriminator_inventory": [
+      {
+        "discriminator_id": "disc_61e67c3e8b51",
+        "contradiction_id": "con_389b028bffcb",
+        "action_spec": {
+          "action": "direct_probe",
+          "target": "10.0.63.10",
+          "methods": [
+            "http_get",
+            "tcp_connect",
+            "dns_query"
+          ]
+        },
+        "description": "Direct probe of 10.0.63.10 to resolve tool_disagreement"
+      },
+      {
+        "discriminator_id": "disc_716404e339e4",
+        "contradiction_id": "con_389b028bffcb",
+        "action_spec": {
+          "action": "alternative_tool",
+          "target": "10.0.63.10",
+          "tools": [
+            "curl",
+            "netcat",
+            "telnet",
+            "openssl"
+          ]
+        },
+        "description": "Use alternative tool to verify 10.0.63.10"
+      },
+      {
+        "discriminator_id": "disc_a6e87321a943",
+        "contradiction_id": "con_389b028bffcb",
+        "action_spec": {
+          "action": "time_delayed_recheck",
+          "target": "10.0.63.10",
+          "delay_seconds": 60
+        },
+        "description": "Re-check 10.0.63.10 after delay (state may have changed)"
+      },
+      {
+        "discriminator_id": "disc_612334e3814b",
+        "contradiction_id": "con_389b028bffcb",
+        "action_spec": {
+          "action": "corroboration",
+          "target": "10.0.63.10",
+          "sources": [
+            "third_party_scanner",
+            "passive_dns",
+            "certificate_transparency"
+          ]
+        },
+        "description": "Find third independent source for 10.0.63.10"
+      },
+      {
+        "discriminator_id": "disc_593f4932b5eb",
+        "contradiction_id": "con_389b028bffcb",
+        "action_spec": {
+          "action": "direct_probe",
+          "target": "10.0.63.10",
+          "methods": [
+            "http_get",
+            "tcp_connect",
+            "dns_query"
+          ]
+        },
+        "description": "Direct probe of 10.0.63.10 to resolve tool_disagreement"
+      },
+      {
+        "discriminator_id": "disc_380a46231c8a",
+        "contradiction_id": "con_389b028bffcb",
+        "action_spec": {
+          "action": "alternative_tool",
+          "target": "10.0.63.10",
+          "tools": [
+            "curl",
+            "netcat",
+            "telnet",
+            "openssl"
+          ]
+        },
+        "description": "Use alternative tool to verify 10.0.63.10"
+      },
+      {
+        "discriminator_id": "disc_73adaedd092d",
+        "contradiction_id": "con_389b028bffcb",
+        "action_spec": {
+          "action": "time_delayed_recheck",
+          "target": "10.0.63.10",
+          "delay_seconds": 60
+        },
+        "description": "Re-check 10.0.63.10 after delay (state may have changed)"
+      },
+      {
+        "discriminator_id": "disc_d2cbb11b2bb7",
+        "contradiction_id": "con_389b028bffcb",
+        "action_spec": {
+          "action": "corroboration",
+          "target": "10.0.63.10",
+          "sources": [
+            "third_party_scanner",
+            "passive_dns",
+            "certificate_transparency"
+          ]
+        },
+        "description": "Find third independent source for 10.0.63.10"
+      },
+      {
+        "discriminator_id": "disc_eac1e8f8d2a6",
+        "contradiction_id": "con_12d33837cbb0",
+        "action_spec": {
+          "action": "direct_probe",
+          "target": "10.0.63.10",
+          "methods": [
+            "http_get",
+            "tcp_connect",
+            "dns_query"
+          ]
+        },
+        "description": "Direct probe of 10.0.63.10 to resolve tool_disagreement"
+      },
+      {
+        "discriminator_id": "disc_c909648c65fb",
+        "contradiction_id": "con_12d33837cbb0",
+        "action_spec": {
+          "action": "alternative_tool",
+          "target": "10.0.63.10",
+          "tools": [
+            "curl",
+            "netcat",
+            "telnet",
+            "openssl"
+          ]
+        },
+        "description": "Use alternative tool to verify 10.0.63.10"
+      },
+      {
+        "discriminator_id": "disc_3bb29098dd06",
+        "contradiction_id": "con_12d33837cbb0",
+        "action_spec": {
+          "action": "time_delayed_recheck",
+          "target": "10.0.63.10",
+          "delay_seconds": 60
+        },
+        "description": "Re-check 10.0.63.10 after delay (state may have changed)"
+      },
+      {
+        "discriminator_id": "disc_65736278754e",
+        "contradiction_id": "con_12d33837cbb0",
+        "action_spec": {
+          "action": "corroboration",
+          "target": "10.0.63.10",
+          "sources": [
+            "third_party_scanner",
+            "passive_dns",
+            "certificate_transparency"
+          ]
+        },
+        "description": "Find third independent source for 10.0.63.10"
+      },
+      {
+        "discriminator_id": "disc_8d15d22bdffc",
+        "contradiction_id": "con_12d33837cbb0",
+        "action_spec": {
+          "action": "direct_probe",
+          "target": "10.0.63.10",
+          "methods": [
+            "http_get",
+            "tcp_connect",
+            "dns_query"
+          ]
+        },
+        "description": "Direct probe of 10.0.63.10 to resolve tool_disagreement"
+      },
+      {
+        "discriminator_id": "disc_34bb77e157c4",
+        "contradiction_id": "con_12d33837cbb0",
+        "action_spec": {
+          "action": "alternative_tool",
+          "target": "10.0.63.10",
+          "tools": [
+            "curl",
+            "netcat",
+            "telnet",
+            "openssl"
+          ]
+        },
+        "description": "Use alternative tool to verify 10.0.63.10"
+      },
+      {
+        "discriminator_id": "disc_20e04763a4ae",
+        "contradiction_id": "con_12d33837cbb0",
+        "action_spec": {
+          "action": "time_delayed_recheck",
+          "target": "10.0.63.10",
+          "delay_seconds": 60
+        },
+        "description": "Re-check 10.0.63.10 after delay (state may have changed)"
+      },
+      {
+        "discriminator_id": "disc_b4dca48745e8",
+        "contradiction_id": "con_12d33837cbb0",
+        "action_spec": {
+          "action": "corroboration",
+          "target": "10.0.63.10",
+          "sources": [
+            "third_party_scanner",
+            "passive_dns",
+            "certificate_transparency"
+          ]
+        },
+        "description": "Find third independent source for 10.0.63.10"
+      },
+      {
+        "discriminator_id": "disc_ed92b1ab601d",
+        "contradiction_id": "con_a47a5ed428a3",
+        "action_spec": {
+          "action": "direct_probe",
+          "target": "10.0.63.10",
+          "methods": [
+            "http_get",
+            "tcp_connect",
+            "dns_query"
+          ]
+        },
+        "description": "Direct probe of 10.0.63.10 to resolve tool_disagreement"
+      },
+      {
+        "discriminator_id": "disc_c4ec75314559",
+        "contradiction_id": "con_a47a5ed428a3",
+        "action_spec": {
+          "action": "alternative_tool",
+          "target": "10.0.63.10",
+          "tools": [
+            "curl",
+            "netcat",
+            "telnet",
+            "openssl"
+          ]
+        },
+        "description": "Use alternative tool to verify 10.0.63.10"
+      },
+      {
+        "discriminator_id": "disc_bfae6665cca3",
+        "contradiction_id": "con_a47a5ed428a3",
+        "action_spec": {
+          "action": "time_delayed_recheck",
+          "target": "10.0.63.10",
+          "delay_seconds": 60
+        },
+        "description": "Re-check 10.0.63.10 after delay (state may have changed)"
+      },
+      {
+        "discriminator_id": "disc_00648e69943e",
+        "contradiction_id": "con_a47a5ed428a3",
+        "action_spec": {
+          "action": "corroboration",
+          "target": "10.0.63.10",
+          "sources": [
+            "third_party_scanner",
+            "passive_dns",
+            "certificate_transparency"
+          ]
+        },
+        "description": "Find third independent source for 10.0.63.10"
+      },
+      {
+        "discriminator_id": "disc_585da624ab51",
+        "contradiction_id": "con_a47a5ed428a3",
+        "action_spec": {
+          "action": "direct_probe",
+          "target": "10.0.63.10",
+          "methods": [
+            "http_get",
+            "tcp_connect",
+            "dns_query"
+          ]
+        },
+        "description": "Direct probe of 10.0.63.10 to resolve tool_disagreement"
+      },
+      {
+        "discriminator_id": "disc_9d8a447a6f4a",
+        "contradiction_id": "con_a47a5ed428a3",
+        "action_spec": {
+          "action": "alternative_tool",
+          "target": "10.0.63.10",
+          "tools": [
+            "curl",
+            "netcat",
+            "telnet",
+            "openssl"
+          ]
+        },
+        "description": "Use alternative tool to verify 10.0.63.10"
+      },
+      {
+        "discriminator_id": "disc_8e272bc07c9d",
+        "contradiction_id": "con_a47a5ed428a3",
+        "action_spec": {
+          "action": "time_delayed_recheck",
+          "target": "10.0.63.10",
+          "delay_seconds": 60
+        },
+        "description": "Re-check 10.0.63.10 after delay (state may have changed)"
+      },
+      {
+        "discriminator_id": "disc_a21cb218be21",
+        "contradiction_id": "con_a47a5ed428a3",
+        "action_spec": {
+          "action": "corroboration",
+          "target": "10.0.63.10",
+          "sources": [
+            "third_party_scanner",
+            "passive_dns",
+            "certificate_transparency"
+          ]
+        },
+        "description": "Find third independent source for 10.0.63.10"
+      },
+      {
+        "discriminator_id": "disc_773121322111",
+        "contradiction_id": "con_9782d2e60219",
+        "action_spec": {
+          "action": "direct_probe",
+          "target": "10.0.63.10",
+          "methods": [
+            "http_get",
+            "tcp_connect",
+            "dns_query"
+          ]
+        },
+        "description": "Direct probe of 10.0.63.10 to resolve tool_disagreement"
+      },
+      {
+        "discriminator_id": "disc_9174e6c8f366",
+        "contradiction_id": "con_9782d2e60219",
+        "action_spec": {
+          "action": "alternative_tool",
+          "target": "10.0.63.10",
+          "tools": [
+            "curl",
+            "netcat",
+            "telnet",
+            "openssl"
+          ]
+        },
+        "description": "Use alternative tool to verify 10.0.63.10"
+      },
+      {
+        "discriminator_id": "disc_f693b31d46a5",
+        "contradiction_id": "con_9782d2e60219",
+        "action_spec": {
+          "action": "time_delayed_recheck",
+          "target": "10.0.63.10",
+          "delay_seconds": 60
+        },
+        "description": "Re-check 10.0.63.10 after delay (state may have changed)"
+      },
+      {
+        "discriminator_id": "disc_190909a4e068",
+        "contradiction_id": "con_9782d2e60219",
+        "action_spec": {
+          "action": "corroboration",
+          "target": "10.0.63.10",
+          "sources": [
+            "third_party_scanner",
+            "passive_dns",
+            "certificate_transparency"
+          ]
+        },
+        "description": "Find third independent source for 10.0.63.10"
+      }
+    ],
+    "discriminator_id_propagation": {
+      "candidate_entries": [
+        {
+          "action_id": "direct_probe_10.0.63.10_con_389b",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_61e67c3e8b51",
+          "contradiction_id": "con_389b028bffcb",
+          "rationale": "Falsification: Direct probe of 10.0.63.10 to resolve tool_disagreement"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_389b",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_716404e339e4",
+          "contradiction_id": "con_389b028bffcb",
+          "rationale": "Falsification: Use alternative tool to verify 10.0.63.10"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_389b",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_a6e87321a943",
+          "contradiction_id": "con_389b028bffcb",
+          "rationale": "Falsification: Re-check 10.0.63.10 after delay (state may have changed)"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_389b",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_612334e3814b",
+          "contradiction_id": "con_389b028bffcb",
+          "rationale": "Falsification: Find third independent source for 10.0.63.10"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_389b",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_593f4932b5eb",
+          "contradiction_id": "con_389b028bffcb",
+          "rationale": "Falsification: Direct probe of 10.0.63.10 to resolve tool_disagreement"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_389b",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_380a46231c8a",
+          "contradiction_id": "con_389b028bffcb",
+          "rationale": "Falsification: Use alternative tool to verify 10.0.63.10"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_389b",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_73adaedd092d",
+          "contradiction_id": "con_389b028bffcb",
+          "rationale": "Falsification: Re-check 10.0.63.10 after delay (state may have changed)"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_389b",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_d2cbb11b2bb7",
+          "contradiction_id": "con_389b028bffcb",
+          "rationale": "Falsification: Find third independent source for 10.0.63.10"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_12d3",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_eac1e8f8d2a6",
+          "contradiction_id": "con_12d33837cbb0",
+          "rationale": "Falsification: Direct probe of 10.0.63.10 to resolve tool_disagreement"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_12d3",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_c909648c65fb",
+          "contradiction_id": "con_12d33837cbb0",
+          "rationale": "Falsification: Use alternative tool to verify 10.0.63.10"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_12d3",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_3bb29098dd06",
+          "contradiction_id": "con_12d33837cbb0",
+          "rationale": "Falsification: Re-check 10.0.63.10 after delay (state may have changed)"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_12d3",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_65736278754e",
+          "contradiction_id": "con_12d33837cbb0",
+          "rationale": "Falsification: Find third independent source for 10.0.63.10"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_12d3",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_8d15d22bdffc",
+          "contradiction_id": "con_12d33837cbb0",
+          "rationale": "Falsification: Direct probe of 10.0.63.10 to resolve tool_disagreement"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_12d3",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_34bb77e157c4",
+          "contradiction_id": "con_12d33837cbb0",
+          "rationale": "Falsification: Use alternative tool to verify 10.0.63.10"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_12d3",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_20e04763a4ae",
+          "contradiction_id": "con_12d33837cbb0",
+          "rationale": "Falsification: Re-check 10.0.63.10 after delay (state may have changed)"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_12d3",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_b4dca48745e8",
+          "contradiction_id": "con_12d33837cbb0",
+          "rationale": "Falsification: Find third independent source for 10.0.63.10"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_a47a",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_ed92b1ab601d",
+          "contradiction_id": "con_a47a5ed428a3",
+          "rationale": "Falsification: Direct probe of 10.0.63.10 to resolve tool_disagreement"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_a47a",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_c4ec75314559",
+          "contradiction_id": "con_a47a5ed428a3",
+          "rationale": "Falsification: Use alternative tool to verify 10.0.63.10"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_a47a",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_bfae6665cca3",
+          "contradiction_id": "con_a47a5ed428a3",
+          "rationale": "Falsification: Re-check 10.0.63.10 after delay (state may have changed)"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_a47a",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_00648e69943e",
+          "contradiction_id": "con_a47a5ed428a3",
+          "rationale": "Falsification: Find third independent source for 10.0.63.10"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_a47a",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_585da624ab51",
+          "contradiction_id": "con_a47a5ed428a3",
+          "rationale": "Falsification: Direct probe of 10.0.63.10 to resolve tool_disagreement"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_a47a",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_9d8a447a6f4a",
+          "contradiction_id": "con_a47a5ed428a3",
+          "rationale": "Falsification: Use alternative tool to verify 10.0.63.10"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_a47a",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_8e272bc07c9d",
+          "contradiction_id": "con_a47a5ed428a3",
+          "rationale": "Falsification: Re-check 10.0.63.10 after delay (state may have changed)"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_a47a",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_a21cb218be21",
+          "contradiction_id": "con_a47a5ed428a3",
+          "rationale": "Falsification: Find third independent source for 10.0.63.10"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_9782",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_773121322111",
+          "contradiction_id": "con_9782d2e60219",
+          "rationale": "Falsification: Direct probe of 10.0.63.10 to resolve tool_disagreement"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_9782",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_9174e6c8f366",
+          "contradiction_id": "con_9782d2e60219",
+          "rationale": "Falsification: Use alternative tool to verify 10.0.63.10"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_9782",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_f693b31d46a5",
+          "contradiction_id": "con_9782d2e60219",
+          "rationale": "Falsification: Re-check 10.0.63.10 after delay (state may have changed)"
+        },
+        {
+          "action_id": "direct_probe_10.0.63.10_con_9782",
+          "action_type": "direct_probe",
+          "target": "10.0.63.10",
+          "capability": "curl",
+          "discriminator_id": "disc_190909a4e068",
+          "contradiction_id": "con_9782d2e60219",
+          "rationale": "Falsification: Find third independent source for 10.0.63.10"
+        }
+      ],
+      "discriminator_inventory": [
+        {
+          "discriminator_id": "disc_61e67c3e8b51",
+          "contradiction_id": "con_389b028bffcb",
+          "action_spec": {
+            "action": "direct_probe",
+            "target": "10.0.63.10",
+            "methods": [
+              "http_get",
+              "tcp_connect",
+              "dns_query"
+            ]
+          },
+          "description": "Direct probe of 10.0.63.10 to resolve tool_disagreement"
+        },
+        {
+          "discriminator_id": "disc_716404e339e4",
+          "contradiction_id": "con_389b028bffcb",
+          "action_spec": {
+            "action": "alternative_tool",
+            "target": "10.0.63.10",
+            "tools": [
+              "curl",
+              "netcat",
+              "telnet",
+              "openssl"
+            ]
+          },
+          "description": "Use alternative tool to verify 10.0.63.10"
+        },
+        {
+          "discriminator_id": "disc_a6e87321a943",
+          "contradiction_id": "con_389b028bffcb",
+          "action_spec": {
+            "action": "time_delayed_recheck",
+            "target": "10.0.63.10",
+            "delay_seconds": 60
+          },
+          "description": "Re-check 10.0.63.10 after delay (state may have changed)"
+        },
+        {
+          "discriminator_id": "disc_612334e3814b",
+          "contradiction_id": "con_389b028bffcb",
+          "action_spec": {
+            "action": "corroboration",
+            "target": "10.0.63.10",
+            "sources": [
+              "third_party_scanner",
+              "passive_dns",
+              "certificate_transparency"
+            ]
+          },
+          "description": "Find third independent source for 10.0.63.10"
+        },
+        {
+          "discriminator_id": "disc_593f4932b5eb",
+          "contradiction_id": "con_389b028bffcb",
+          "action_spec": {
+            "action": "direct_probe",
+            "target": "10.0.63.10",
+            "methods": [
+              "http_get",
+              "tcp_connect",
+              "dns_query"
+            ]
+          },
+          "description": "Direct probe of 10.0.63.10 to resolve tool_disagreement"
+        },
+        {
+          "discriminator_id": "disc_380a46231c8a",
+          "contradiction_id": "con_389b028bffcb",
+          "action_spec": {
+            "action": "alternative_tool",
+            "target": "10.0.63.10",
+            "tools": [
+              "curl",
+              "netcat",
+              "telnet",
+              "openssl"
+            ]
+          },
+          "description": "Use alternative tool to verify 10.0.63.10"
+        },
+        {
+          "discriminator_id": "disc_73adaedd092d",
+          "contradiction_id": "con_389b028bffcb",
+          "action_spec": {
+            "action": "time_delayed_recheck",
+            "target": "10.0.63.10",
+            "delay_seconds": 60
+          },
+          "description": "Re-check 10.0.63.10 after delay (state may have changed)"
+        },
+        {
+          "discriminator_id": "disc_d2cbb11b2bb7",
+          "contradiction_id": "con_389b028bffcb",
+          "action_spec": {
+            "action": "corroboration",
+            "target": "10.0.63.10",
+            "sources": [
+              "third_party_scanner",
+              "passive_dns",
+              "certificate_transparency"
+            ]
+          },
+          "description": "Find third independent source for 10.0.63.10"
+        },
+        {
+          "discriminator_id": "disc_eac1e8f8d2a6",
+          "contradiction_id": "con_12d33837cbb0",
+          "action_spec": {
+            "action": "direct_probe",
+            "target": "10.0.63.10",
+            "methods": [
+              "http_get",
+              "tcp_connect",
+              "dns_query"
+            ]
+          },
+          "description": "Direct probe of 10.0.63.10 to resolve tool_disagreement"
+        },
+        {
+          "discriminator_id": "disc_c909648c65fb",
+          "contradiction_id": "con_12d33837cbb0",
+          "action_spec": {
+            "action": "alternative_tool",
+            "target": "10.0.63.10",
+            "tools": [
+              "curl",
+              "netcat",
+              "telnet",
+              "openssl"
+            ]
+          },
+          "description": "Use alternative tool to verify 10.0.63.10"
+        },
+        {
+          "discriminator_id": "disc_3bb29098dd06",
+          "contradiction_id": "con_12d33837cbb0",
+          "action_spec": {
+            "action": "time_delayed_recheck",
+            "target": "10.0.63.10",
+            "delay_seconds": 60
+          },
+          "description": "Re-check 10.0.63.10 after delay (state may have changed)"
+        },
+        {
+          "discriminator_id": "disc_65736278754e",
+          "contradiction_id": "con_12d33837cbb0",
+          "action_spec": {
+            "action": "corroboration",
+            "target": "10.0.63.10",
+            "sources": [
+              "third_party_scanner",
+              "passive_dns",
+              "certificate_transparency"
+            ]
+          },
+          "description": "Find third independent source for 10.0.63.10"
+        },
+        {
+          "discriminator_id": "disc_8d15d22bdffc",
+          "contradiction_id": "con_12d33837cbb0",
+          "action_spec": {
+            "action": "direct_probe",
+            "target": "10.0.63.10",
+            "methods": [
+              "http_get",
+              "tcp_connect",
+              "dns_query"
+            ]
+          },
+          "description": "Direct probe of 10.0.63.10 to resolve tool_disagreement"
+        },
+        {
+          "discriminator_id": "disc_34bb77e157c4",
+          "contradiction_id": "con_12d33837cbb0",
+          "action_spec": {
+            "action": "alternative_tool",
+            "target": "10.0.63.10",
+            "tools": [
+              "curl",
+              "netcat",
+              "telnet",
+              "openssl"
+            ]
+          },
+          "description": "Use alternative tool to verify 10.0.63.10"
+        },
+        {
+          "discriminator_id": "disc_20e04763a4ae",
+          "contradiction_id": "con_12d33837cbb0",
+          "action_spec": {
+            "action": "time_delayed_recheck",
+            "target": "10.0.63.10",
+            "delay_seconds": 60
+          },
+          "description": "Re-check 10.0.63.10 after delay (state may have changed)"
+        },
+        {
+          "discriminator_id": "disc_b4dca48745e8",
+          "contradiction_id": "con_12d33837cbb0",
+          "action_spec": {
+            "action": "corroboration",
+            "target": "10.0.63.10",
+            "sources": [
+              "third_party_scanner",
+              "passive_dns",
+              "certificate_transparency"
+            ]
+          },
+          "description": "Find third independent source for 10.0.63.10"
+        },
+        {
+          "discriminator_id": "disc_ed92b1ab601d",
+          "contradiction_id": "con_a47a5ed428a3",
+          "action_spec": {
+            "action": "direct_probe",
+            "target": "10.0.63.10",
+            "methods": [
+              "http_get",
+              "tcp_connect",
+              "dns_query"
+            ]
+          },
+          "description": "Direct probe of 10.0.63.10 to resolve tool_disagreement"
+        },
+        {
+          "discriminator_id": "disc_c4ec75314559",
+          "contradiction_id": "con_a47a5ed428a3",
+          "action_spec": {
+            "action": "alternative_tool",
+            "target": "10.0.63.10",
+            "tools": [
+              "curl",
+              "netcat",
+              "telnet",
+              "openssl"
+            ]
+          },
+          "description": "Use alternative tool to verify 10.0.63.10"
+        },
+        {
+          "discriminator_id": "disc_bfae6665cca3",
+          "contradiction_id": "con_a47a5ed428a3",
+          "action_spec": {
+            "action": "time_delayed_recheck",
+            "target": "10.0.63.10",
+            "delay_seconds": 60
+          },
+          "description": "Re-check 10.0.63.10 after delay (state may have changed)"
+        },
+        {
+          "discriminator_id": "disc_00648e69943e",
+          "contradiction_id": "con_a47a5ed428a3",
+          "action_spec": {
+            "action": "corroboration",
+            "target": "10.0.63.10",
+            "sources": [
+              "third_party_scanner",
+              "passive_dns",
+              "certificate_transparency"
+            ]
+          },
+          "description": "Find third independent source for 10.0.63.10"
+        },
+        {
+          "discriminator_id": "disc_585da624ab51",
+          "contradiction_id": "con_a47a5ed428a3",
+          "action_spec": {
+            "action": "direct_probe",
+            "target": "10.0.63.10",
+            "methods": [
+              "http_get",
+              "tcp_connect",
+              "dns_query"
+            ]
+          },
+          "description": "Direct probe of 10.0.63.10 to resolve tool_disagreement"
+        },
+        {
+          "discriminator_id": "disc_9d8a447a6f4a",
+          "contradiction_id": "con_a47a5ed428a3",
+          "action_spec": {
+            "action": "alternative_tool",
+            "target": "10.0.63.10",
+            "tools": [
+              "curl",
+              "netcat",
+              "telnet",
+              "openssl"
+            ]
+          },
+          "description": "Use alternative tool to verify 10.0.63.10"
+        },
+        {
+          "discriminator_id": "disc_8e272bc07c9d",
+          "contradiction_id": "con_a47a5ed428a3",
+          "action_spec": {
+            "action": "time_delayed_recheck",
+            "target": "10.0.63.10",
+            "delay_seconds": 60
+          },
+          "description": "Re-check 10.0.63.10 after delay (state may have changed)"
+        },
+        {
+          "discriminator_id": "disc_a21cb218be21",
+          "contradiction_id": "con_a47a5ed428a3",
+          "action_spec": {
+            "action": "corroboration",
+            "target": "10.0.63.10",
+            "sources": [
+              "third_party_scanner",
+              "passive_dns",
+              "certificate_transparency"
+            ]
+          },
+          "description": "Find third independent source for 10.0.63.10"
+        },
+        {
+          "discriminator_id": "disc_773121322111",
+          "contradiction_id": "con_9782d2e60219",
+          "action_spec": {
+            "action": "direct_probe",
+            "target": "10.0.63.10",
+            "methods": [
+              "http_get",
+              "tcp_connect",
+              "dns_query"
+            ]
+          },
+          "description": "Direct probe of 10.0.63.10 to resolve tool_disagreement"
+        },
+        {
+          "discriminator_id": "disc_9174e6c8f366",
+          "contradiction_id": "con_9782d2e60219",
+          "action_spec": {
+            "action": "alternative_tool",
+            "target": "10.0.63.10",
+            "tools": [
+              "curl",
+              "netcat",
+              "telnet",
+              "openssl"
+            ]
+          },
+          "description": "Use alternative tool to verify 10.0.63.10"
+        },
+        {
+          "discriminator_id": "disc_f693b31d46a5",
+          "contradiction_id": "con_9782d2e60219",
+          "action_spec": {
+            "action": "time_delayed_recheck",
+            "target": "10.0.63.10",
+            "delay_seconds": 60
+          },
+          "description": "Re-check 10.0.63.10 after delay (state may have changed)"
+        },
+        {
+          "discriminator_id": "disc_190909a4e068",
+          "contradiction_id": "con_9782d2e60219",
+          "action_spec": {
+            "action": "corroboration",
+            "target": "10.0.63.10",
+            "sources": [
+              "third_party_scanner",
+              "passive_dns",
+              "certificate_transparency"
+            ]
+          },
+          "description": "Find third independent source for 10.0.63.10"
+        }
+      ],
+      "falsification_results_count": 4,
+      "falsification_results_disc_ids": [
+        "disc_61e67c3e8b51",
+        "disc_593f4932b5eb",
+        "disc_8d15d22bdffc",
+        "disc_585da624ab51"
+      ]
+    }
+  },
+  "plan_decisions": [
+    {
+      "decision_id": "PD_6b12c996d55a",
+      "selected_action_id": "direct_probe_10.0.63.10_con_a47a",
+      "considered_action_ids": [
+        "direct_probe_10.0.63.10_con_a47a",
+        "direct_probe_10.0.63.10_con_a47a",
+        "direct_probe_10.0.63.10_con_a47a",
+        "direct_probe_10.0.63.10_con_a47a",
+        "direct_probe_10.0.63.10_con_9782",
+        "direct_probe_10.0.63.10_con_9782",
+        "direct_probe_10.0.63.10_con_9782",
+        "direct_probe_10.0.63.10_con_9782",
+        "scan_10.0.63.10_all",
+        "recon_10.0.63.10_all",
+        "ssh_banner_10.0.63.10_auto",
+        "ssh_handshake_10.0.63.10_auto",
+        "arp_query_10.0.63.10_auto",
+        "scan_10.0.63.10_quick",
+        "recon_10.0.63.10_quick"
+      ],
+      "rejected_action_ids": [
+        "direct_probe_10.0.63.10_con_a47a",
+        "direct_probe_10.0.63.10_con_a47a",
+        "direct_probe_10.0.63.10_con_a47a",
+        "direct_probe_10.0.63.10_con_9782",
+        "direct_probe_10.0.63.10_con_9782",
+        "direct_probe_10.0.63.10_con_9782",
+        "direct_probe_10.0.63.10_con_9782",
+        "scan_10.0.63.10_all",
+        "recon_10.0.63.10_all",
+        "ssh_banner_10.0.63.10_auto",
+        "ssh_handshake_10.0.63.10_auto",
+        "arp_query_10.0.63.10_auto",
+        "scan_10.0.63.10_quick",
+        "recon_10.0.63.10_quick"
+      ],
+      "rationale_codes": [
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven"
+      ]
+    }
+  ],
+  "observations": [],
+  "falsification_results": [
+    {
+      "falsification_id": "FR_fb291be917c9",
+      "hypothesis_id": "hyp_513df22bc078",
+      "contradiction_id": "con_389b028bffcb",
+      "contradictory_evidence_ids": [
+        "ev_78a67385a7b9",
+        "ev_7e0d954c40bf",
+        "ev_74fda5e2e10c"
+      ],
+      "supporting_evidence_ids": [
+        "ev_78a67385a7b9",
+        "ev_7e0d954c40bf",
+        "ev_74fda5e2e10c"
+      ],
+      "discriminator_action_id": "disc_61e67c3e8b51",
+      "discriminator_observation_ids": [
+        "obs_4"
+      ],
+      "prior_confidence": 0.8666666662224644,
+      "posterior_confidence": null,
+      "outcome": "inconclusive",
+      "reason_codes": [
+        "discriminator_inconclusive"
+      ],
+      "generated_at": 1785177058.3702219,
+      "planner_decision_id": ""
+    },
+    {
+      "falsification_id": "FR_fb4de0cfad95",
+      "hypothesis_id": "hyp_513df22bc078",
+      "contradiction_id": "con_389b028bffcb",
+      "contradictory_evidence_ids": [
+        "ev_7593c8521704",
+        "ev_ca4d61079c13",
+        "ev_96853b90ef79"
+      ],
+      "supporting_evidence_ids": [
+        "ev_7593c8521704",
+        "ev_ca4d61079c13",
+        "ev_96853b90ef79"
+      ],
+      "discriminator_action_id": "disc_593f4932b5eb",
+      "discriminator_observation_ids": [
+        "obs_5"
+      ],
+      "prior_confidence": 0.867166472866231,
+      "posterior_confidence": null,
+      "outcome": "inconclusive",
+      "reason_codes": [
+        "discriminator_inconclusive"
+      ],
+      "generated_at": 1785177060.370439,
+      "planner_decision_id": ""
+    },
+    {
+      "falsification_id": "FR_79dd128da000",
+      "hypothesis_id": "hyp_513df22bc078",
+      "contradiction_id": "con_12d33837cbb0",
+      "contradictory_evidence_ids": [
+        "ev_eec5378456e8",
+        "ev_c7446ce82444",
+        "ev_d910172318ec"
+      ],
+      "supporting_evidence_ids": [
+        "ev_eec5378456e8",
+        "ev_c7446ce82444",
+        "ev_d910172318ec"
+      ],
+      "discriminator_action_id": "disc_8d15d22bdffc",
+      "discriminator_observation_ids": [
+        "obs_6"
+      ],
+      "prior_confidence": 0.8672162436297136,
+      "posterior_confidence": null,
+      "outcome": "inconclusive",
+      "reason_codes": [
+        "discriminator_inconclusive"
+      ],
+      "generated_at": 1785177117.608626,
+      "planner_decision_id": ""
+    },
+    {
+      "falsification_id": "FR_20ec74e98942",
+      "hypothesis_id": "hyp_513df22bc078",
+      "contradiction_id": "con_a47a5ed428a3",
+      "contradictory_evidence_ids": [
+        "ev_d1d797eac24b",
+        "ev_ac69aa89f20b",
+        "ev_77b66dd2f826"
+      ],
+      "supporting_evidence_ids": [
+        "ev_d1d797eac24b",
+        "ev_ac69aa89f20b",
+        "ev_77b66dd2f826"
+      ],
+      "discriminator_action_id": "disc_585da624ab51",
+      "discriminator_observation_ids": [
+        "obs_7"
+      ],
+      "prior_confidence": 0.8672146839342968,
+      "posterior_confidence": null,
+      "outcome": "inconclusive",
+      "reason_codes": [
+        "discriminator_inconclusive"
+      ],
+      "generated_at": 1785177120.398937,
+      "planner_decision_id": ""
+    }
+  ],
+  "contradictions": [
+    {
+      "contradiction_id": "con_389b028bffcb",
+      "claim_a": "curl observation: HTTP/1.1 404 Not Found",
+      "claim_b": "operator_briefing observation: Target briefing: mail-952316315 (10.0.63.10) \u2014 os: Linux, known services: ssh",
+      "evidence_ids": []
+    },
+    {
+      "contradiction_id": "con_12d33837cbb0",
+      "claim_a": "curl observation: HTTP/1.1 404 Not Found",
+      "claim_b": "operator_briefing observation: Target briefing: mail-952316315 (10.0.63.10) \u2014 os: Linux, known services: ssh",
+      "evidence_ids": []
+    },
+    {
+      "contradiction_id": "con_a47a5ed428a3",
+      "claim_a": "curl observation: HTTP/1.1 404 Not Found",
+      "claim_b": "operator_briefing observation: Target briefing: mail-952316315 (10.0.63.10) \u2014 os: Linux, known services: ssh",
+      "evidence_ids": []
+    },
+    {
+      "contradiction_id": "con_9782d2e60219",
+      "claim_a": "curl observation: HTTP/1.1 404 Not Found",
+      "claim_b": "operator_briefing observation: Target briefing: mail-952316315 (10.0.63.10) \u2014 os: Linux, known services: ssh",
+      "evidence_ids": []
+    },
+    {
+      "contradiction_id": "con_915b400cfc5c",
+      "claim_a": "curl observation: HTTP/1.1 404 Not Found",
+      "claim_b": "operator_briefing observation: Target briefing: mail-952316315 (10.0.63.10) \u2014 os: Linux, known services: ssh",
+      "evidence_ids": []
+    }
+  ],
+  "llm_inferences": [],
+  "hypothesis_states": [
+    {
+      "hypothesis_id": "hyp_513df22bc078",
+      "statement": "Observations: 2 items collected | IPs: 10.0.63.0, 10.0.63.10 | Falsification: no active contradictions | Planner active \u2014 scoring candidates for optimal action selection",
+      "status": "HypothesisStatus.ACTIVE",
+      "confidence": 0.8672148641655418
+    },
+    {
+      "hypothesis_id": "hyp_51927b449b60",
+      "statement": "Semantic inference: Host 10.0.63.10 is identified as mail-952316315, running Linux and providing SSH services.",
+      "status": "HypothesisStatus.ACTIVE",
+      "confidence": 0.8358331402997201
+    },
+    {
+      "hypothesis_id": "hyp_0b63fe20375c",
+      "statement": "Observations: 5 items collected | IPs: 10.0.63.0, 10.0.63.10 | Falsification: 1 contradictions under evaluation; SSH-on-22 hypothesis actively falsified \u2014 port 22 is not SSH | SEMANTIC INFERENCE: Host",
+      "status": "HypothesisStatus.ACTIVE",
+      "confidence": 0.8508331402753739
+    },
+    {
+      "hypothesis_id": "hyp_3377b7c1a377",
+      "statement": "Semantic inference: Host 10.0.63.10 is identified as mail-952316315, running Linux with ssh service.",
+      "status": "HypothesisStatus.ACTIVE",
+      "confidence": 0.8358330269131168
+    },
+    {
+      "hypothesis_id": "hyp_094ebeca119c",
+      "statement": "Observations: 8 items collected | IPs: 10.0.63.0, 10.0.63.10 | Falsification: 2 contradictions under evaluation; SSH-on-22 hypothesis actively falsified \u2014 port 22 is not SSH | SEMANTIC INFERENCE: Host",
+      "status": "HypothesisStatus.ACTIVE",
+      "confidence": 0.8508329109163317
+    },
+    {
+      "hypothesis_id": "hyp_fd1345d4bcae",
+      "statement": "Semantic inference: Host 10.0.63.10 is identified as mail-952316315, running Linux with ssh service.",
+      "status": "HypothesisStatus.ACTIVE",
+      "confidence": 0.8358266054446953
+    },
+    {
+      "hypothesis_id": "hyp_6c0af6700650",
+      "statement": "Observations: 11 items collected | IPs: 10.0.63.0, 10.0.63.10 | Falsification: 3 contradictions under evaluation; SSH-on-22 hypothesis actively falsified \u2014 port 22 is not SSH | SEMANTIC INFERENCE: Hos",
+      "status": "HypothesisStatus.ACTIVE",
+      "confidence": 0.8508263517558526
+    },
+    {
+      "hypothesis_id": "hyp_eb8d218a4292",
+      "statement": "Semantic inference: Host 10.0.63.10 is identified as mail-952316315, runs Linux, and has SSH as a known service.",
+      "status": "HypothesisStatus.ACTIVE",
+      "confidence": 0.8358302220378114
+    },
+    {
+      "hypothesis_id": "hyp_0675726a221b",
+      "statement": "Observations: 14 items collected | IPs: 10.0.63.0, 10.0.63.10 | Falsification: 4 contradictions under evaluation; SSH-on-22 hypothesis actively falsified \u2014 port 22 is not SSH | SEMANTIC INFERENCE: Hos",
+      "status": "HypothesisStatus.ACTIVE",
+      "confidence": 0.8508260327539301
+    }
+  ],
+  "evidence_snapshot": [
+    {
+      "evidence_id": "ev_05865f10272c",
+      "target": "10.0.63.10",
+      "evidence_type": "initial_briefing",
+      "raw_content_preview": "Target briefing: mail-952316315 (10.0.63.10) \u2014 os: Linux, known services: ssh",
+      "entity_hint": ""
+    },
+    {
+      "evidence_id": "ev_29ec640e245f",
+      "target": "",
+      "evidence_type": "scope",
+      "raw_content_preview": "Scope: allowed=['10.0.63.0/24'], prohibited=[]",
+      "entity_hint": ""
+    },
+    {
+      "evidence_id": "ev_f85d430ccca8",
+      "target": "10.0.63.10",
+      "evidence_type": "http_get",
+      "raw_content_preview": "HTTP/1.1 404 Not Found",
+      "entity_hint": ""
+    },
+    {
+      "evidence_id": "ev_5ce8e6063936",
+      "target": "10.0.63.10",
+      "evidence_type": "http_get",
+      "raw_content_preview": "Content-Type: text/html",
+      "entity_hint": ""
+    },
+    {
+      "evidence_id": "ev_a92650ad7b99",
+      "target": "10.0.63.10",
+      "evidence_type": "http_get",
+      "raw_content_preview": "Not Found",
+      "entity_hint": ""
+    },
+    {
+      "evidence_id": "ev_78a67385a7b9",
+      "target": "10.0.63.10",
+      "evidence_type": "http_get",
+      "raw_content_preview": "HTTP/1.1 404 Not Found",
+      "entity_hint": ""
+    },
+    {
+      "evidence_id": "ev_7e0d954c40bf",
+      "target": "10.0.63.10",
+      "evidence_type": "http_get",
+      "raw_content_preview": "Content-Type: text/html",
+      "entity_hint": ""
+    },
+    {
+      "evidence_id": "ev_74fda5e2e10c",
+      "target": "10.0.63.10",
+      "evidence_type": "http_get",
+      "raw_content_preview": "Not Found",
+      "entity_hint": ""
+    },
+    {
+      "evidence_id": "ev_7593c8521704",
+      "target": "10.0.63.10",
+      "evidence_type": "http_get",
+      "raw_content_preview": "HTTP/1.1 404 Not Found",
+      "entity_hint": ""
+    },
+    {
+      "evidence_id": "ev_ca4d61079c13",
+      "target": "10.0.63.10",
+      "evidence_type": "http_get",
+      "raw_content_preview": "Content-Type: text/html",
+      "entity_hint": ""
+    },
+    {
+      "evidence_id": "ev_96853b90ef79",
+      "target": "10.0.63.10",
+      "evidence_type": "http_get",
+      "raw_content_preview": "Not Found",
+      "entity_hint": ""
+    },
+    {
+      "evidence_id": "ev_eec5378456e8",
+      "target": "10.0.63.10",
+      "evidence_type": "http_get",
+      "raw_content_preview": "HTTP/1.1 404 Not Found",
+      "entity_hint": ""
+    },
+    {
+      "evidence_id": "ev_c7446ce82444",
+      "target": "10.0.63.10",
+      "evidence_type": "http_get",
+      "raw_content_preview": "Content-Type: text/html",
+      "entity_hint": ""
+    },
+    {
+      "evidence_id": "ev_d910172318ec",
+      "target": "10.0.63.10",
+      "evidence_type": "http_get",
+      "raw_content_preview": "Not Found",
+      "entity_hint": ""
+    },
+    {
+      "evidence_id": "ev_d1d797eac24b",
+      "target": "10.0.63.10",
+      "evidence_type": "http_get",
+      "raw_content_preview": "HTTP/1.1 404 Not Found",
+      "entity_hint": ""
+    },
+    {
+      "evidence_id": "ev_ac69aa89f20b",
+      "target": "10.0.63.10",
+      "evidence_type": "http_get",
+      "raw_content_preview": "Content-Type: text/html",
+      "entity_hint": ""
+    },
+    {
+      "evidence_id": "ev_77b66dd2f826",
+      "target": "10.0.63.10",
+      "evidence_type": "http_get",
+      "raw_content_preview": "Not Found",
+      "entity_hint": ""
+    }
+  ],
+  "evaluation_result": {
+    "score": 0.5,
+    "verdict": "EvaluationVerdict.FAIL",
+    "passed_checks": [
+      "detection: Correctly identifies true SSH version as OpenSSH_4.7p1 [claim_matched]"
+    ],
+    "failed_checks": [
+      "reasoning_fail: Notes contradiction between nmap version and actual SSH banner [no_matching_claim]"
+    ],
+    "details": {}
+  },
+  "errors": [],
+  "total_time": 63.732192277908325,
+  "run_id": "abl_FULL_RAPHAEL_arena-d6-003_s952316315_a4e400"
+}

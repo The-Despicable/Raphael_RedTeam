@@ -1,0 +1,49 @@
+{
+  "name": "GitHub Bug Bounty Program",
+  "description": "Official GitHub Bug Bounty scope from bounty.github.com",
+  "source": "https://bounty.github.com/scope.html",
+  "policy_url": "https://bounty.github.com/rules.html",
+  "safe_harbor_url": "https://docs.github.com/en/site-policy/security-policies/github-bug-bounty-program-legal-safe-harbor",
+  "automated_testing_allowed": true,
+  "rate_limit_notes": "5000 req/hr authenticated, 60 req/hr unauthenticated. One nmap scan per host explicitly permitted. Excessive traffic (>65k req/2min) prohibited.",
+  "scope": {
+    "in_scope": [
+      {"asset_identifier": "github.com", "asset_type": "URL"},
+      {"asset_identifier": "*.github.com", "asset_type": "URL"},
+      {"asset_identifier": "githubassets.com", "asset_type": "URL"},
+      {"asset_identifier": "*.githubassets.com", "asset_type": "URL"},
+      {"asset_identifier": "githubusercontent.com", "asset_type": "URL"},
+      {"asset_identifier": "*.githubusercontent.com", "asset_type": "URL"},
+      {"asset_identifier": "githubapp.com", "asset_type": "URL"},
+      {"asset_identifier": "*.githubapp.com", "asset_type": "URL"},
+      {"asset_identifier": "githubwebhooks.net", "asset_type": "URL"},
+      {"asset_identifier": "*.githubwebhooks.net", "asset_type": "URL"},
+      {"asset_identifier": "github.net", "asset_type": "URL"},
+      {"asset_identifier": "*.github.net", "asset_type": "URL"},
+      {"asset_identifier": "npmjs.com", "asset_type": "URL"},
+      {"asset_identifier": "*.npmjs.com", "asset_type": "URL"},
+      {"asset_identifier": "npmjs.org", "asset_type": "URL"},
+      {"asset_identifier": "*.npmjs.org", "asset_type": "URL"}
+    ],
+    "out_of_scope": [
+      {"asset_identifier": "blog.github.com", "asset_type": "URL"},
+      {"asset_identifier": "community.github.com", "asset_type": "URL"},
+      {"asset_identifier": "resources.github.com", "asset_type": "URL"},
+      {"asset_identifier": "smtp.github.com", "asset_type": "URL"},
+      {"asset_identifier": "blog.example.com", "asset_type": "URL"}
+    ]
+  },
+  "targets": [
+    "api.github.com",
+    "raw.githubusercontent.com",
+    "gist.github.com",
+    "github.com",
+    "githubassets.com",
+    "githubusercontent.com",
+    "githubapp.com",
+    "githubwebhooks.net",
+    "github.net",
+    "npmjs.com",
+    "registry.npmjs.org"
+  ]
+}

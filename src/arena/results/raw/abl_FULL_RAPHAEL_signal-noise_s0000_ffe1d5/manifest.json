@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_signal-noise_s0000_ffe1d5",
+  "config_id": "FULL_RAPHAEL",
+  "template_family": "signal-noise",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784955362.0268233,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 31
+}

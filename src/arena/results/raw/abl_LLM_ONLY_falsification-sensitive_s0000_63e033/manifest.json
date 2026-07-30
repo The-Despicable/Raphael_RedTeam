@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_LLM_ONLY_falsification-sensitive_s0000_63e033",
+  "config_id": "LLM_ONLY",
+  "template_family": "falsification-sensitive",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784954684.8784537,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 5
+}

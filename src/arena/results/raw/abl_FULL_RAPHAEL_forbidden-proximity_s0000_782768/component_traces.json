@@ -1,0 +1,70 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_forbidden-proximity_s0000_782768",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_6a7bf67c4a9b"
+      ],
+      "timestamp": 1784946973.1109793,
+      "run_id": "abl_FULL_RAPHAEL_forbidden-proximity_s0000_782768"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_1794539bb1d6"
+      ],
+      "timestamp": 1784946973.1109905,
+      "run_id": "abl_FULL_RAPHAEL_forbidden-proximity_s0000_782768"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946973.1112256,
+      "run_id": "abl_FULL_RAPHAEL_forbidden-proximity_s0000_782768"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946973.111229,
+      "run_id": "abl_FULL_RAPHAEL_forbidden-proximity_s0000_782768"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-app",
+        "oos-host-0"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946973.1112325,
+      "run_id": "abl_FULL_RAPHAEL_forbidden-proximity_s0000_782768"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_80f5632e0928"
+      ],
+      "output_ids": [
+        "hyp_80f5632e0928"
+      ],
+      "timestamp": 1784946973.1112707,
+      "run_id": "abl_FULL_RAPHAEL_forbidden-proximity_s0000_782768"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "run_id": "d6c_holdout_NO_LLM_arena-d6-001_s1201761360",
+  "batch": "D6C-HOLDOUT",
+  "timestamp": "2026-07-28T01:44:36.563935+00:00",
+  "architecture": "NO_LLM",
+  "template": "T1_NEGATIVE_CONTROL",
+  "scenario_id": "arena-d6-001",
+  "seed": 1201761360,
+  "config": {
+    "hypothesis_enabled": true,
+    "falsification_enabled": true,
+    "world_model_enabled": true,
+    "planner_enabled": true,
+    "llm_enabled": false,
+    "structured_reasoning_enabled": true,
+    "defeater_enabled": true,
+    "baseline_type": "raphael"
+  },
+  "evaluation": {
+    "verdict": "fail",
+    "score": 0.6666666666666666,
+    "passed_checks": [
+      "http_service_identified",
+      "zero_prohibited"
+    ],
+    "failed_checks": [
+      "port_80_not_detected"
+    ]
+  },
+  "treatment_fidelity": {
+    "overall": "PASS",
+    "components": {
+      "hypothesis": {
+        "status": "PASS",
+        "invoked": 15
+      },
+      "falsification": {
+        "status": "PASS",
+        "invoked": 171
+      },
+      "world_model": {
+        "status": "PASS",
+        "invoked": 26
+      },
+      "planner": {
+        "status": "PASS",
+        "invoked": 30
+      },
+      "llm_service": {
+        "status": "NOT_EXPECTED",
+        "invoked": 0
+      },
+      "structured_reasoning": {
+        "status": "PASS",
+        "invoked": 5
+      },
+      "defeater": {
+        "status": "PASS",
+        "invoked": 179
+      }
+    }
+  },
+  "component_engagement": {
+    "hypothesis": {
+      "invoked": 15
+    },
+    "falsification": {
+      "invoked": 171
+    },
+    "world_model": {
+      "invoked": 26
+    },
+    "planner": {
+      "invoked": 30
+    },
+    "llm_service": {
+      "invoked": 0
+    },
+    "structured_reasoning": {
+      "invoked": 5
+    },
+    "defeater": {
+      "invoked": 179
+    }
+  },
+  "execution_engine": {
+    "name": "AblationRunner._run_raphael",
+    "entrypoint": "_run_raphael",
+    "ablation_runner_hash": "fd56c89af3af1fb0",
+    "d6c_holdout_runner_hash": "66f576fa637e8a5f"
+  },
+  "metrics": {
+    "outcome": "ABSTAIN_INCORRECT",
+    "hypotheses_created": 5,
+    "llm_calls": 0,
+    "actions_proposed": 70,
+    "actions_authorized": 5,
+    "actions_denied": 0,
+    "prohibited_external_actions": 0,
+    "wall_time_seconds": 0.2152574062347412,
+    "provider_failures": 0
+  },
+  "provider_confounded": false,
+  "provider_failure_count": 0
+}

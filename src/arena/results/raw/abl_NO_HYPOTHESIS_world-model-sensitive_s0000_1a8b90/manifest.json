@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_NO_HYPOTHESIS_world-model-sensitive_s0000_1a8b90",
+  "config_id": "NO_HYPOTHESIS",
+  "template_family": "world-model-sensitive",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784955362.4540474,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 7
+}

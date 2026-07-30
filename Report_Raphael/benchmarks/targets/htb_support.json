@@ -1,0 +1,12 @@
+{
+    "name": "HTB-Support",
+    "url": "10.129.245.100",
+    "flags": {
+        "user": "",
+        "root": ""
+    },
+    "difficulty": "hard",
+    "phase_requirements": ["recon", "scan", "exploit", "postex", "exfil"],
+    "known_vulnerabilities": ["LDAP injection", "CVE-2024-XXXX"],
+    "skip_reason": ""
+}

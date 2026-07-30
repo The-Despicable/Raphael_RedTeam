@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_LLM_ONLY_contradiction_s0000_a4be8b",
+  "config_id": "LLM_ONLY",
+  "template_family": "contradiction",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784954806.6640391,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 5
+}

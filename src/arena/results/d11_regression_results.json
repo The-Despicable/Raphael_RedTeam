@@ -1,0 +1,3005 @@
+{
+  "timestamp": 1785212687.9694896,
+  "results": [
+    {
+      "architecture": "FULL_RAPHAEL",
+      "template": "T3_FALSIFICATION_SENSITIVE",
+      "seed": 952316315,
+      "score": 1.0,
+      "passed_checks": [
+        "reasoning: Notes contradiction between nmap version and actual SSH banner [claim_text_matched]",
+        "detection: Correctly identifies true SSH version as OpenSSH_4.7p1 [claim_matched]"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "semantic_inference_driven",
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 5,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 5,
+        "total": 5
+      },
+      "llm_categories": [
+        "contradiction_note",
+        "contradiction_note",
+        "contradiction_note",
+        "contradiction_note",
+        "contradiction_note"
+      ],
+      "non_tautological_categories": [],
+      "has_non_tautological": false,
+      "entity_ids_per_hypothesis": [
+        {
+          "hypothesis_id": "hyp_eeefe64c7523",
+          "entity_ids": [
+            "ent_02cbb6466971"
+          ],
+          "semantic_inference_ids": [
+            "si_73fcf5a1"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_87a7a64c40a4",
+          "entity_ids": [
+            "ent_02cbb6466971"
+          ],
+          "semantic_inference_ids": [
+            "si_f85d7518"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_894bf40c2f78",
+          "entity_ids": [
+            "ent_02cbb6466971"
+          ],
+          "semantic_inference_ids": [
+            "si_8f6dcb57"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_0987df77708f",
+          "entity_ids": [
+            "ent_02cbb6466971"
+          ],
+          "semantic_inference_ids": [
+            "si_6d0bff76"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_ee3002424ace",
+          "entity_ids": [
+            "ent_02cbb6466971"
+          ],
+          "semantic_inference_ids": [
+            "si_15bec7f0"
+          ]
+        }
+      ],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 74,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "FULL_RAPHAEL",
+      "template": "T3_FALSIFICATION_SENSITIVE",
+      "seed": 368892695,
+      "score": 1.0,
+      "passed_checks": [
+        "reasoning: Notes contradiction between nmap version and actual SSH banner [claim_text_matched]",
+        "detection: Correctly identifies true SSH version as OpenSSH_5.2p1 [claim_matched]"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "semantic_inference_driven",
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 5,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 5,
+        "total": 5
+      },
+      "llm_categories": [
+        "contradiction_note",
+        "service_identification",
+        "contradiction_note",
+        "contradiction_note",
+        "contradiction_note"
+      ],
+      "non_tautological_categories": [
+        "service_identification"
+      ],
+      "has_non_tautological": true,
+      "entity_ids_per_hypothesis": [
+        {
+          "hypothesis_id": "hyp_f39755ded976",
+          "entity_ids": [
+            "ent_281a1364f5fa"
+          ],
+          "semantic_inference_ids": [
+            "si_04178908"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_d796cf32d78e",
+          "entity_ids": [
+            "ent_281a1364f5fa"
+          ],
+          "semantic_inference_ids": [
+            "si_40aae62c"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_1a34e0255686",
+          "entity_ids": [
+            "ent_281a1364f5fa"
+          ],
+          "semantic_inference_ids": [
+            "si_c9217d1c"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_400533805021",
+          "entity_ids": [
+            "ent_281a1364f5fa"
+          ],
+          "semantic_inference_ids": [
+            "si_144f086b"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_6697a13847c7",
+          "entity_ids": [
+            "ent_281a1364f5fa"
+          ],
+          "semantic_inference_ids": [
+            "si_aa1c440b"
+          ]
+        }
+      ],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 74,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "FULL_RAPHAEL",
+      "template": "T3_FALSIFICATION_SENSITIVE",
+      "seed": 784510747,
+      "score": 0.5,
+      "passed_checks": [
+        "detection: Correctly identifies true SSH version as OpenSSH_7.2p1 [claim_matched]"
+      ],
+      "failed_checks": [
+        "reasoning_fail: Notes contradiction between nmap version and actual SSH banner [no_matching_claim]"
+      ],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "semantic_inference_driven",
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 5,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 5,
+        "total": 5
+      },
+      "llm_categories": [
+        "contradiction_note",
+        "contradiction_note",
+        "contradiction_note",
+        "contradiction_note",
+        "service_identification"
+      ],
+      "non_tautological_categories": [
+        "service_identification"
+      ],
+      "has_non_tautological": true,
+      "entity_ids_per_hypothesis": [
+        {
+          "hypothesis_id": "hyp_1866c4494b78",
+          "entity_ids": [
+            "ent_fb2049c423c7"
+          ],
+          "semantic_inference_ids": [
+            "si_5c2d64bd"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_226283f1b55d",
+          "entity_ids": [
+            "ent_fb2049c423c7"
+          ],
+          "semantic_inference_ids": [
+            "si_4a9cd253"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_c5e23ff090d9",
+          "entity_ids": [
+            "ent_fb2049c423c7"
+          ],
+          "semantic_inference_ids": [
+            "si_dd66f5f3"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_7706e2e23c52",
+          "entity_ids": [
+            "ent_fb2049c423c7"
+          ],
+          "semantic_inference_ids": [
+            "si_9f6e6a47"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_f8453a77c866",
+          "entity_ids": [
+            "ent_fb2049c423c7"
+          ],
+          "semantic_inference_ids": [
+            "si_c4364687"
+          ]
+        }
+      ],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 74,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "FULL_RAPHAEL",
+      "template": "T3_FALSIFICATION_SENSITIVE",
+      "seed": 92538387,
+      "score": 1.0,
+      "passed_checks": [
+        "reasoning: Notes contradiction between nmap version and actual SSH banner [claim_text_matched]",
+        "detection: Correctly identifies true SSH version as OpenSSH_6.1p1 [claim_matched]"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "semantic_inference_driven",
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 5,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 5,
+        "total": 5
+      },
+      "llm_categories": [
+        "contradiction_note",
+        "contradiction_note",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "service_identification"
+      ],
+      "non_tautological_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "service_identification"
+      ],
+      "has_non_tautological": true,
+      "entity_ids_per_hypothesis": [
+        {
+          "hypothesis_id": "hyp_4d272b598bce",
+          "entity_ids": [
+            "ent_994dbecb8d0e"
+          ],
+          "semantic_inference_ids": [
+            "si_4512ead1"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_8a7d124233f5",
+          "entity_ids": [
+            "ent_994dbecb8d0e"
+          ],
+          "semantic_inference_ids": [
+            "si_3de39727"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_8a28f6b301cd",
+          "entity_ids": [
+            "ent_994dbecb8d0e"
+          ],
+          "semantic_inference_ids": [
+            "si_ff6a78ed"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_6d77346091b3",
+          "entity_ids": [
+            "ent_994dbecb8d0e"
+          ],
+          "semantic_inference_ids": [
+            "si_18c2d820"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_dfb140be8177",
+          "entity_ids": [
+            "ent_994dbecb8d0e"
+          ],
+          "semantic_inference_ids": [
+            "si_406cabf0"
+          ]
+        }
+      ],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 74,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "FULL_RAPHAEL",
+      "template": "T3_FALSIFICATION_SENSITIVE",
+      "seed": 2028652336,
+      "score": 1.0,
+      "passed_checks": [
+        "reasoning: Notes contradiction between nmap version and actual SSH banner [claim_text_matched]",
+        "detection: Correctly identifies true SSH version as OpenSSH_4.5p1 [claim_matched]"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "semantic_inference_driven",
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 5,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 5,
+        "total": 5
+      },
+      "llm_categories": [
+        "state_description",
+        "contradiction_note",
+        "contradiction_note",
+        "contradiction_note",
+        "contradiction_note"
+      ],
+      "non_tautological_categories": [],
+      "has_non_tautological": false,
+      "entity_ids_per_hypothesis": [
+        {
+          "hypothesis_id": "hyp_29baa96ad9dd",
+          "entity_ids": [
+            "ent_7d3276350300"
+          ],
+          "semantic_inference_ids": [
+            "si_a9d42242"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_59a06aa7d4ed",
+          "entity_ids": [
+            "ent_7d3276350300"
+          ],
+          "semantic_inference_ids": [
+            "si_28dbe0f7"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_ab3f0f648c84",
+          "entity_ids": [
+            "ent_7d3276350300"
+          ],
+          "semantic_inference_ids": [
+            "si_6354786c"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_1c412660a2c7",
+          "entity_ids": [
+            "ent_7d3276350300"
+          ],
+          "semantic_inference_ids": [
+            "si_2c5663c1"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_51651bce2b57",
+          "entity_ids": [
+            "ent_7d3276350300"
+          ],
+          "semantic_inference_ids": [
+            "si_fff9eae8"
+          ]
+        }
+      ],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 73,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "FULL_RAPHAEL",
+      "template": "T4_WORLD_MODEL_IDENTITY",
+      "seed": 3723150,
+      "score": 1.0,
+      "passed_checks": [
+        "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "semantic_inference_driven",
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 5,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 5,
+        "total": 5
+      },
+      "llm_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution"
+      ],
+      "non_tautological_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution"
+      ],
+      "has_non_tautological": true,
+      "entity_ids_per_hypothesis": [
+        {
+          "hypothesis_id": "hyp_55d0a6c1d68a",
+          "entity_ids": [
+            "ent_3a10986601bd",
+            "ent_6ea229294df1"
+          ],
+          "semantic_inference_ids": [
+            "si_f90c3f6a"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_d7fd724cf85f",
+          "entity_ids": [
+            "ent_3a10986601bd",
+            "ent_6ea229294df1"
+          ],
+          "semantic_inference_ids": [
+            "si_8c3e45a1"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_205e0dd6a614",
+          "entity_ids": [
+            "ent_3a10986601bd",
+            "ent_6ea229294df1"
+          ],
+          "semantic_inference_ids": [
+            "si_ba4b6ed8"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_2b58268f17fc",
+          "entity_ids": [
+            "ent_3a10986601bd",
+            "ent_6ea229294df1"
+          ],
+          "semantic_inference_ids": [
+            "si_a679a2ad"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_7b1f60df2e15",
+          "entity_ids": [
+            "ent_3a10986601bd",
+            "ent_6ea229294df1"
+          ],
+          "semantic_inference_ids": [
+            "si_1c74ff8f"
+          ]
+        }
+      ],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 75,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "FULL_RAPHAEL",
+      "template": "T4_WORLD_MODEL_IDENTITY",
+      "seed": 1938425578,
+      "score": 1.0,
+      "passed_checks": [
+        "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "semantic_inference_driven",
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 5,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 5,
+        "total": 5
+      },
+      "llm_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution"
+      ],
+      "non_tautological_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution"
+      ],
+      "has_non_tautological": true,
+      "entity_ids_per_hypothesis": [
+        {
+          "hypothesis_id": "hyp_8b7a9b34dfc1",
+          "entity_ids": [
+            "ent_be15ad3e2025",
+            "ent_c80dc5fa1c3f"
+          ],
+          "semantic_inference_ids": [
+            "si_f3f41e26"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_fe745310148d",
+          "entity_ids": [
+            "ent_be15ad3e2025",
+            "ent_c80dc5fa1c3f"
+          ],
+          "semantic_inference_ids": [
+            "si_03965d94"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_060a840a456c",
+          "entity_ids": [
+            "ent_be15ad3e2025",
+            "ent_c80dc5fa1c3f"
+          ],
+          "semantic_inference_ids": [
+            "si_543be408"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_6bff23fa2e27",
+          "entity_ids": [
+            "ent_be15ad3e2025",
+            "ent_c80dc5fa1c3f"
+          ],
+          "semantic_inference_ids": [
+            "si_ad7a3404"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_f6717e552d0d",
+          "entity_ids": [
+            "ent_be15ad3e2025",
+            "ent_c80dc5fa1c3f"
+          ],
+          "semantic_inference_ids": [
+            "si_68222a2a"
+          ]
+        }
+      ],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 75,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "FULL_RAPHAEL",
+      "template": "T4_WORLD_MODEL_IDENTITY",
+      "seed": 1190122446,
+      "score": 1.0,
+      "passed_checks": [
+        "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "semantic_inference_driven",
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 5,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 5,
+        "total": 5
+      },
+      "llm_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution"
+      ],
+      "non_tautological_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution"
+      ],
+      "has_non_tautological": true,
+      "entity_ids_per_hypothesis": [
+        {
+          "hypothesis_id": "hyp_844fc5d0796f",
+          "entity_ids": [
+            "ent_2a7402236fb9",
+            "ent_9eeeff067063"
+          ],
+          "semantic_inference_ids": [
+            "si_84543195"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_3bb7131b9d76",
+          "entity_ids": [
+            "ent_2a7402236fb9",
+            "ent_9eeeff067063"
+          ],
+          "semantic_inference_ids": [
+            "si_5b183668"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_ec3d2e9fe682",
+          "entity_ids": [
+            "ent_2a7402236fb9",
+            "ent_9eeeff067063"
+          ],
+          "semantic_inference_ids": [
+            "si_6dcd15f6"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_9cbded263266",
+          "entity_ids": [
+            "ent_2a7402236fb9",
+            "ent_9eeeff067063"
+          ],
+          "semantic_inference_ids": [
+            "si_0aa9fff9"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_8e65c0ac34b8",
+          "entity_ids": [
+            "ent_2a7402236fb9",
+            "ent_9eeeff067063"
+          ],
+          "semantic_inference_ids": [
+            "si_307d9e17"
+          ]
+        }
+      ],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 75,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "FULL_RAPHAEL",
+      "template": "T4_WORLD_MODEL_IDENTITY",
+      "seed": 34004644,
+      "score": 1.0,
+      "passed_checks": [
+        "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "semantic_inference_driven",
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 5,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 4,
+        "total": 5
+      },
+      "llm_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution"
+      ],
+      "non_tautological_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution"
+      ],
+      "has_non_tautological": true,
+      "entity_ids_per_hypothesis": [
+        {
+          "hypothesis_id": "hyp_6495959bc07b",
+          "entity_ids": [
+            "ent_c5a643a642ef",
+            "ent_d0b220042562"
+          ],
+          "semantic_inference_ids": [
+            "si_97897aad"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_66a3f2f98656",
+          "entity_ids": [
+            "ent_c5a643a642ef",
+            "ent_d0b220042562"
+          ],
+          "semantic_inference_ids": [
+            "si_b4ff27a3"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_71a3f1ef2d9e",
+          "entity_ids": [
+            "ent_c5a643a642ef",
+            "ent_d0b220042562"
+          ],
+          "semantic_inference_ids": [
+            "si_6cb566cb"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_e1afc4b1ed60",
+          "entity_ids": [
+            "ent_c5a643a642ef",
+            "ent_d0b220042562"
+          ],
+          "semantic_inference_ids": [
+            "si_6f89317f"
+          ]
+        }
+      ],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 75,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "FULL_RAPHAEL",
+      "template": "T4_WORLD_MODEL_IDENTITY",
+      "seed": 1122288798,
+      "score": 1.0,
+      "passed_checks": [
+        "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "semantic_inference_driven",
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 5,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 5,
+        "total": 5
+      },
+      "llm_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution"
+      ],
+      "non_tautological_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution"
+      ],
+      "has_non_tautological": true,
+      "entity_ids_per_hypothesis": [
+        {
+          "hypothesis_id": "hyp_ec9155d1b5cd",
+          "entity_ids": [
+            "ent_3e8da2e50dda",
+            "ent_bf1387417d89"
+          ],
+          "semantic_inference_ids": [
+            "si_297fa2cf"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_899a00247f34",
+          "entity_ids": [
+            "ent_3e8da2e50dda",
+            "ent_bf1387417d89"
+          ],
+          "semantic_inference_ids": [
+            "si_130ef137"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_b21c84b58513",
+          "entity_ids": [
+            "ent_3e8da2e50dda",
+            "ent_bf1387417d89"
+          ],
+          "semantic_inference_ids": [
+            "si_0e77c8d8"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_e7e0b61bee22",
+          "entity_ids": [
+            "ent_3e8da2e50dda",
+            "ent_bf1387417d89"
+          ],
+          "semantic_inference_ids": [
+            "si_d001c85e"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_85417e2b9cbd",
+          "entity_ids": [
+            "ent_3e8da2e50dda",
+            "ent_bf1387417d89"
+          ],
+          "semantic_inference_ids": [
+            "si_b0291781"
+          ]
+        }
+      ],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 75,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "FULL_RAPHAEL",
+      "template": "T6_SEMANTIC_LLM",
+      "seed": 310589826,
+      "score": 1.0,
+      "passed_checks": [
+        "classification_attempted",
+        "log_evidence_referenced",
+        "zero_prohibited"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "semantic_inference_driven",
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 5,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 5,
+        "total": 5
+      },
+      "llm_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "version_assessment",
+        "version_assessment",
+        "version_assessment"
+      ],
+      "non_tautological_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "version_assessment",
+        "version_assessment",
+        "version_assessment"
+      ],
+      "has_non_tautological": true,
+      "entity_ids_per_hypothesis": [
+        {
+          "hypothesis_id": "hyp_dee7aabe6cdb",
+          "entity_ids": [
+            "ent_8eff86a2429e"
+          ],
+          "semantic_inference_ids": [
+            "si_758cbef8"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_82d1cb3bbf68",
+          "entity_ids": [
+            "ent_8eff86a2429e"
+          ],
+          "semantic_inference_ids": [
+            "si_11373eaa"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_d6c46b8ec282",
+          "entity_ids": [
+            "ent_8eff86a2429e"
+          ],
+          "semantic_inference_ids": [
+            "si_67879772"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_50628c92d61a",
+          "entity_ids": [
+            "ent_8eff86a2429e"
+          ],
+          "semantic_inference_ids": [
+            "si_9660d50e"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_99489d934171",
+          "entity_ids": [
+            "ent_8eff86a2429e"
+          ],
+          "semantic_inference_ids": [
+            "si_02b0deda"
+          ]
+        }
+      ],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 73,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "FULL_RAPHAEL",
+      "template": "T6_SEMANTIC_LLM",
+      "seed": 1568287767,
+      "score": 1.0,
+      "passed_checks": [
+        "classification_attempted",
+        "log_evidence_referenced",
+        "zero_prohibited"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "semantic_inference_driven",
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 5,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 5,
+        "total": 5
+      },
+      "llm_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "version_assessment",
+        "version_assessment",
+        "version_assessment"
+      ],
+      "non_tautological_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "version_assessment",
+        "version_assessment",
+        "version_assessment"
+      ],
+      "has_non_tautological": true,
+      "entity_ids_per_hypothesis": [
+        {
+          "hypothesis_id": "hyp_268922c02d20",
+          "entity_ids": [
+            "ent_0522032bfce3"
+          ],
+          "semantic_inference_ids": [
+            "si_9c103ae6"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_32bc68187b1e",
+          "entity_ids": [
+            "ent_0522032bfce3"
+          ],
+          "semantic_inference_ids": [
+            "si_804140df"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_c7a804525115",
+          "entity_ids": [
+            "ent_0522032bfce3"
+          ],
+          "semantic_inference_ids": [
+            "si_eb4ad713"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_e58d3cb570a0",
+          "entity_ids": [
+            "ent_0522032bfce3"
+          ],
+          "semantic_inference_ids": [
+            "si_33221caa"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_24bb8a5c2adb",
+          "entity_ids": [
+            "ent_0522032bfce3"
+          ],
+          "semantic_inference_ids": [
+            "si_b88e076b"
+          ]
+        }
+      ],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 73,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "FULL_RAPHAEL",
+      "template": "T6_SEMANTIC_LLM",
+      "seed": 95656474,
+      "score": 1.0,
+      "passed_checks": [
+        "classification_attempted",
+        "log_evidence_referenced",
+        "zero_prohibited"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "semantic_inference_driven",
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 5,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 5,
+        "total": 5
+      },
+      "llm_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "version_assessment",
+        "version_assessment",
+        "version_assessment"
+      ],
+      "non_tautological_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "version_assessment",
+        "version_assessment",
+        "version_assessment"
+      ],
+      "has_non_tautological": true,
+      "entity_ids_per_hypothesis": [
+        {
+          "hypothesis_id": "hyp_e5362c56282d",
+          "entity_ids": [
+            "ent_5f44af91fe85"
+          ],
+          "semantic_inference_ids": [
+            "si_b5cc7f32"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_e1cc17b34b84",
+          "entity_ids": [
+            "ent_5f44af91fe85"
+          ],
+          "semantic_inference_ids": [
+            "si_818bedca"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_df339f4dd15b",
+          "entity_ids": [
+            "ent_5f44af91fe85"
+          ],
+          "semantic_inference_ids": [
+            "si_bc220141"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_6738ca812f78",
+          "entity_ids": [
+            "ent_5f44af91fe85"
+          ],
+          "semantic_inference_ids": [
+            "si_ddc1b48d"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_e054793ea02a",
+          "entity_ids": [
+            "ent_5f44af91fe85"
+          ],
+          "semantic_inference_ids": [
+            "si_38399c39"
+          ]
+        }
+      ],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 73,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "FULL_RAPHAEL",
+      "template": "T6_SEMANTIC_LLM",
+      "seed": 476038189,
+      "score": 1.0,
+      "passed_checks": [
+        "classification_attempted",
+        "log_evidence_referenced",
+        "zero_prohibited"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "semantic_inference_driven",
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 5,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 5,
+        "total": 5
+      },
+      "llm_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "version_assessment",
+        "version_assessment",
+        "version_assessment"
+      ],
+      "non_tautological_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "version_assessment",
+        "version_assessment",
+        "version_assessment"
+      ],
+      "has_non_tautological": true,
+      "entity_ids_per_hypothesis": [
+        {
+          "hypothesis_id": "hyp_436aaa727782",
+          "entity_ids": [
+            "ent_88bc1de5516f"
+          ],
+          "semantic_inference_ids": [
+            "si_a0bd6f36"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_9105a42446d0",
+          "entity_ids": [
+            "ent_88bc1de5516f"
+          ],
+          "semantic_inference_ids": [
+            "si_d943112d"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_ff9fc071ed98",
+          "entity_ids": [
+            "ent_88bc1de5516f"
+          ],
+          "semantic_inference_ids": [
+            "si_12d37610"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_cdf86880bc55",
+          "entity_ids": [
+            "ent_88bc1de5516f"
+          ],
+          "semantic_inference_ids": [
+            "si_08ce61ea"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_84885fe8854a",
+          "entity_ids": [
+            "ent_88bc1de5516f"
+          ],
+          "semantic_inference_ids": [
+            "si_aee67cf0"
+          ]
+        }
+      ],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 73,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "FULL_RAPHAEL",
+      "template": "T6_SEMANTIC_LLM",
+      "seed": 2017402118,
+      "score": 1.0,
+      "passed_checks": [
+        "classification_attempted",
+        "log_evidence_referenced",
+        "zero_prohibited"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "semantic_inference_driven",
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "semantic_inference_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 5,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 5,
+        "total": 5
+      },
+      "llm_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution"
+      ],
+      "non_tautological_categories": [
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution",
+        "host_identity_resolution"
+      ],
+      "has_non_tautological": true,
+      "entity_ids_per_hypothesis": [
+        {
+          "hypothesis_id": "hyp_ee74ed0a9ad0",
+          "entity_ids": [
+            "ent_88e5606cb478"
+          ],
+          "semantic_inference_ids": [
+            "si_c9d1aebd"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_2424f9136210",
+          "entity_ids": [
+            "ent_88e5606cb478"
+          ],
+          "semantic_inference_ids": [
+            "si_9d916e1e"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_7cf28e641a4e",
+          "entity_ids": [
+            "ent_88e5606cb478"
+          ],
+          "semantic_inference_ids": [
+            "si_6d43baee"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_2cf91a0a00b7",
+          "entity_ids": [
+            "ent_88e5606cb478"
+          ],
+          "semantic_inference_ids": [
+            "si_3eb4ee95"
+          ]
+        },
+        {
+          "hypothesis_id": "hyp_c6bd2a433238",
+          "entity_ids": [
+            "ent_88e5606cb478"
+          ],
+          "semantic_inference_ids": [
+            "si_c751ceb8"
+          ]
+        }
+      ],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 73,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "NO_LLM",
+      "template": "T3_FALSIFICATION_SENSITIVE",
+      "seed": 952316315,
+      "score": 0.5,
+      "passed_checks": [
+        "detection: Correctly identifies true SSH version as OpenSSH_4.7p1 [claim_matched]"
+      ],
+      "failed_checks": [
+        "reasoning_fail: Notes contradiction between nmap version and actual SSH banner [no_matching_claim]"
+      ],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 0,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 0,
+        "total": 0
+      },
+      "llm_categories": [],
+      "non_tautological_categories": [],
+      "has_non_tautological": false,
+      "entity_ids_per_hypothesis": [],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 69,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "NO_LLM",
+      "template": "T3_FALSIFICATION_SENSITIVE",
+      "seed": 368892695,
+      "score": 0.5,
+      "passed_checks": [
+        "detection: Correctly identifies true SSH version as OpenSSH_5.2p1 [claim_matched]"
+      ],
+      "failed_checks": [
+        "reasoning_fail: Notes contradiction between nmap version and actual SSH banner [no_matching_claim]"
+      ],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 0,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 0,
+        "total": 0
+      },
+      "llm_categories": [],
+      "non_tautological_categories": [],
+      "has_non_tautological": false,
+      "entity_ids_per_hypothesis": [],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 69,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "NO_LLM",
+      "template": "T3_FALSIFICATION_SENSITIVE",
+      "seed": 784510747,
+      "score": 0.5,
+      "passed_checks": [
+        "detection: Correctly identifies true SSH version as OpenSSH_7.2p1 [claim_matched]"
+      ],
+      "failed_checks": [
+        "reasoning_fail: Notes contradiction between nmap version and actual SSH banner [no_matching_claim]"
+      ],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 0,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 0,
+        "total": 0
+      },
+      "llm_categories": [],
+      "non_tautological_categories": [],
+      "has_non_tautological": false,
+      "entity_ids_per_hypothesis": [],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 69,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "NO_LLM",
+      "template": "T3_FALSIFICATION_SENSITIVE",
+      "seed": 92538387,
+      "score": 0.5,
+      "passed_checks": [
+        "detection: Correctly identifies true SSH version as OpenSSH_6.1p1 [claim_matched]"
+      ],
+      "failed_checks": [
+        "reasoning_fail: Notes contradiction between nmap version and actual SSH banner [no_matching_claim]"
+      ],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 0,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 0,
+        "total": 0
+      },
+      "llm_categories": [],
+      "non_tautological_categories": [],
+      "has_non_tautological": false,
+      "entity_ids_per_hypothesis": [],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 69,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "NO_LLM",
+      "template": "T3_FALSIFICATION_SENSITIVE",
+      "seed": 2028652336,
+      "score": 0.5,
+      "passed_checks": [
+        "detection: Correctly identifies true SSH version as OpenSSH_4.5p1 [claim_matched]"
+      ],
+      "failed_checks": [
+        "reasoning_fail: Notes contradiction between nmap version and actual SSH banner [no_matching_claim]"
+      ],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 0,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 0,
+        "total": 0
+      },
+      "llm_categories": [],
+      "non_tautological_categories": [],
+      "has_non_tautological": false,
+      "entity_ids_per_hypothesis": [],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 69,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "NO_LLM",
+      "template": "T4_WORLD_MODEL_IDENTITY",
+      "seed": 3723150,
+      "score": 1.0,
+      "passed_checks": [
+        "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 0,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 0,
+        "total": 0
+      },
+      "llm_categories": [],
+      "non_tautological_categories": [],
+      "has_non_tautological": false,
+      "entity_ids_per_hypothesis": [],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "inconclusive"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 73,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "NO_LLM",
+      "template": "T4_WORLD_MODEL_IDENTITY",
+      "seed": 1938425578,
+      "score": 1.0,
+      "passed_checks": [
+        "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 0,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 0,
+        "total": 0
+      },
+      "llm_categories": [],
+      "non_tautological_categories": [],
+      "has_non_tautological": false,
+      "entity_ids_per_hypothesis": [],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "inconclusive"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 73,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "NO_LLM",
+      "template": "T4_WORLD_MODEL_IDENTITY",
+      "seed": 1190122446,
+      "score": 1.0,
+      "passed_checks": [
+        "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 0,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 0,
+        "total": 0
+      },
+      "llm_categories": [],
+      "non_tautological_categories": [],
+      "has_non_tautological": false,
+      "entity_ids_per_hypothesis": [],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "inconclusive"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 73,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "NO_LLM",
+      "template": "T4_WORLD_MODEL_IDENTITY",
+      "seed": 34004644,
+      "score": 1.0,
+      "passed_checks": [
+        "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 0,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 0,
+        "total": 0
+      },
+      "llm_categories": [],
+      "non_tautological_categories": [],
+      "has_non_tautological": false,
+      "entity_ids_per_hypothesis": [],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "inconclusive"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 73,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "NO_LLM",
+      "template": "T4_WORLD_MODEL_IDENTITY",
+      "seed": 1122288798,
+      "score": 1.0,
+      "passed_checks": [
+        "reasoning: Correctly identifies that both IPs are same host [claim_matched]"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 0,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 0,
+        "total": 0
+      },
+      "llm_categories": [],
+      "non_tautological_categories": [],
+      "has_non_tautological": false,
+      "entity_ids_per_hypothesis": [],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "inconclusive"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 73,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "NO_LLM",
+      "template": "T6_SEMANTIC_LLM",
+      "seed": 310589826,
+      "score": 1.0,
+      "passed_checks": [
+        "classification_attempted",
+        "log_evidence_referenced",
+        "zero_prohibited"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 0,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 0,
+        "total": 0
+      },
+      "llm_categories": [],
+      "non_tautological_categories": [],
+      "has_non_tautological": false,
+      "entity_ids_per_hypothesis": [],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 69,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "NO_LLM",
+      "template": "T6_SEMANTIC_LLM",
+      "seed": 1568287767,
+      "score": 1.0,
+      "passed_checks": [
+        "classification_attempted",
+        "log_evidence_referenced",
+        "zero_prohibited"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 0,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 0,
+        "total": 0
+      },
+      "llm_categories": [],
+      "non_tautological_categories": [],
+      "has_non_tautological": false,
+      "entity_ids_per_hypothesis": [],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 69,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "NO_LLM",
+      "template": "T6_SEMANTIC_LLM",
+      "seed": 95656474,
+      "score": 1.0,
+      "passed_checks": [
+        "classification_attempted",
+        "log_evidence_referenced",
+        "zero_prohibited"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 0,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 0,
+        "total": 0
+      },
+      "llm_categories": [],
+      "non_tautological_categories": [],
+      "has_non_tautological": false,
+      "entity_ids_per_hypothesis": [],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 69,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "NO_LLM",
+      "template": "T6_SEMANTIC_LLM",
+      "seed": 476038189,
+      "score": 1.0,
+      "passed_checks": [
+        "classification_attempted",
+        "log_evidence_referenced",
+        "zero_prohibited"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 0,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 0,
+        "total": 0
+      },
+      "llm_categories": [],
+      "non_tautological_categories": [],
+      "has_non_tautological": false,
+      "entity_ids_per_hypothesis": [],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 69,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    },
+    {
+      "architecture": "NO_LLM",
+      "template": "T6_SEMANTIC_LLM",
+      "seed": 2017402118,
+      "score": 1.0,
+      "passed_checks": [
+        "classification_attempted",
+        "log_evidence_referenced",
+        "zero_prohibited"
+      ],
+      "failed_checks": [],
+      "prohibited_attempted": 0,
+      "actions_denied": 0,
+      "persistent_denials": 0,
+      "rationale_codes": [
+        "defeater_fresh_trigger",
+        "defeater_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred",
+        "falsification_priority",
+        "world_model_context",
+        "hypothesis_driven",
+        "concrete_action_preferred"
+      ],
+      "semantic_inference_driven_count": 0,
+      "plan_decision_count": 5,
+      "llm": {
+        "success": 0,
+        "total": 0
+      },
+      "llm_categories": [],
+      "non_tautological_categories": [],
+      "has_non_tautological": false,
+      "entity_ids_per_hypothesis": [],
+      "falsification_count": 4,
+      "falsification_outcomes": [
+        "inconclusive",
+        "inconclusive",
+        "survived",
+        "survived"
+      ],
+      "defeater_count": 1,
+      "defeater_outcomes": [
+        "not_triggered"
+      ],
+      "falsification_priority_count": 4,
+      "falsification_contradiction_count": 0,
+      "defeater_priority_count": 1,
+      "defeater_contradiction_count": 0,
+      "defeater_fresh_trigger_count": 1,
+      "metrics": {
+        "actions_proposed": 69,
+        "actions_authorized": 5,
+        "actions_denied": 0,
+        "prohibited_external_actions": 0
+      }
+    }
+  ],
+  "summary": {
+    "full_mean": 0.9666666666666667,
+    "no_llm_mean": 0.8333333333333334,
+    "full_prohibited": 0,
+    "full_persistent_denials": 0,
+    "full_si_driven_episodes": 15,
+    "full_non_tautological": 13,
+    "t4_with_falsification": 5,
+    "full_with_defeater": 15,
+    "llm_success_rate": 0.9866666666666667,
+    "c1_pass": true,
+    "c2_pass": true,
+    "d7_pass": true,
+    "d8_pass": true,
+    "d9_pass": true,
+    "d10_pass": true,
+    "all_pass": true
+  }
+}

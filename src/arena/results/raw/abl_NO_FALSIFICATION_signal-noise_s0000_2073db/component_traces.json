@@ -1,0 +1,169 @@
+{
+  "run_id": "abl_NO_FALSIFICATION_signal-noise_s0000_2073db",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_9379fd467c2f"
+      ],
+      "timestamp": 1784946973.024816,
+      "run_id": "abl_NO_FALSIFICATION_signal-noise_s0000_2073db"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_5346c88e512f"
+      ],
+      "timestamp": 1784946973.0248275,
+      "run_id": "abl_NO_FALSIFICATION_signal-noise_s0000_2073db"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_23f8f2574b10"
+      ],
+      "timestamp": 1784946973.0248334,
+      "run_id": "abl_NO_FALSIFICATION_signal-noise_s0000_2073db"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_bf7531cecd90"
+      ],
+      "timestamp": 1784946973.024839,
+      "run_id": "abl_NO_FALSIFICATION_signal-noise_s0000_2073db"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_6e7f0e904c1d"
+      ],
+      "timestamp": 1784946973.024844,
+      "run_id": "abl_NO_FALSIFICATION_signal-noise_s0000_2073db"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_aaeadfff6760"
+      ],
+      "timestamp": 1784946973.0248494,
+      "run_id": "abl_NO_FALSIFICATION_signal-noise_s0000_2073db"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_9685bb260840"
+      ],
+      "timestamp": 1784946973.0248554,
+      "run_id": "abl_NO_FALSIFICATION_signal-noise_s0000_2073db"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_f6c73c427a27"
+      ],
+      "timestamp": 1784946973.0248604,
+      "run_id": "abl_NO_FALSIFICATION_signal-noise_s0000_2073db"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_ef1be2fe6768"
+      ],
+      "timestamp": 1784946973.0248656,
+      "run_id": "abl_NO_FALSIFICATION_signal-noise_s0000_2073db"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_87e35fc8367c"
+      ],
+      "timestamp": 1784946973.024871,
+      "run_id": "abl_NO_FALSIFICATION_signal-noise_s0000_2073db"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_c1f5beb7a204"
+      ],
+      "timestamp": 1784946973.0248764,
+      "run_id": "abl_NO_FALSIFICATION_signal-noise_s0000_2073db"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946973.025056,
+      "run_id": "abl_NO_FALSIFICATION_signal-noise_s0000_2073db"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946973.0250587,
+      "run_id": "abl_NO_FALSIFICATION_signal-noise_s0000_2073db"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "vuln-host",
+        "host-0",
+        "host-1",
+        "host-2",
+        "host-3",
+        "host-4",
+        "host-5",
+        "host-6",
+        "host-7",
+        "host-8",
+        "host-9"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946973.0250626,
+      "run_id": "abl_NO_FALSIFICATION_signal-noise_s0000_2073db"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_69e03bead0d9"
+      ],
+      "output_ids": [
+        "hyp_69e03bead0d9"
+      ],
+      "timestamp": 1784946973.025104,
+      "run_id": "abl_NO_FALSIFICATION_signal-noise_s0000_2073db"
+    }
+  ]
+}

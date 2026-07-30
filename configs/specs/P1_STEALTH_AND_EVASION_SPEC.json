@@ -1,0 +1,52 @@
+{
+  "spec_id": "P1_STEALTH_AND_EVASION_SPEC",
+  "version": "1.0.0",
+  "status": "SEALED",
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-29",
+    "authority": "SENTINEL Charter §24, §30, §49, §58"
+  },
+  "title": "P1 Stealth & Evasion Specification",
+  "description": "Four stealth modules integrated into CapabilityBroker authorization flow without modifying D-Series core.",
+  "modules": {
+    "SS-01_ScopeParser": {
+      "file": "orchestrator/brain/scope_parser.py",
+      "description": "HackerOne JSON/Markdown scope parsing, wildcard domains, CIDR, exclusions, URL-path prefixes, fail-closed",
+      "self_test": "7/7"
+    },
+    "SS-02_RateLimiter": {
+      "file": "orchestrator/brain/rate_limiter.py",
+      "description": "Per-target + global rate tracking, configurable jitter (5-15s), emergency brake, shell keepalive, async-safe",
+      "self_test": "7/7"
+    },
+    "SS-03_WAFDetector": {
+      "file": "orchestrator/brain/waf_detector.py",
+      "description": "7 WAF signatures (Cloudflare, ModSecurity, AWS WAF, F5 ASM, Akamai, Sucuri, Wordfence), benign probe fingerprinting, 5-min TTL cache",
+      "self_test": "6/6"
+    },
+    "SS-04_PayloadMutator": {
+      "file": "orchestrator/student/payload_mutator.py",
+      "description": "7 deterministic mutations (case, comment, encoding, whitespace, unicode, param pollution, boundary) + LLM fuzzing, WAF-specific strategy maps, max 3 rounds",
+      "self_test": "all pass"
+    }
+  },
+  "integration": {
+    "capability_broker": "Accepts optional rate_limiter, scope_parser, payload_mutator, student instances",
+    "authorization_flow": "RateLimiter delay in ALLOW path; ScopeParser delegation in _run_all_checks; PayloadMutator + Student in resolve_falsification",
+    "student_integration": "StudentCandidateGenerator.generate_candidates(waf_info) tags candidates with waf_type, waf_confidence, adjusted confidence"
+  },
+  "safety_invariants": [
+    "Fail-closed scope: ambiguous target → DENY",
+    "RateLimiter emergency brake: anomaly threshold → halt all actions",
+    "ShellKeepAlive: heartbeat bypasses RateLimiter, sends raw \\n to PTY",
+    "PayloadMutator max 3 rounds; LLM mutation method 8/8, experimental"
+  ],
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-29",
+    "authority": "SENTINEL Charter §24, §30, §49, §58"
+  }
+}

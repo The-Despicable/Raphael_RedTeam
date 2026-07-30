@@ -1,0 +1,53 @@
+import { Command as $Command } from "@smithy/core/client";
+import { MetadataBearer as __MetadataBearer } from "@smithy/types";
+import {
+  BedrockClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../BedrockClient";
+import {
+  CreateAutomatedReasoningPolicyRequest,
+  CreateAutomatedReasoningPolicyResponse,
+} from "../models/models_0";
+export { __MetadataBearer };
+export { $Command };
+export interface CreateAutomatedReasoningPolicyCommandInput
+  extends CreateAutomatedReasoningPolicyRequest {}
+export interface CreateAutomatedReasoningPolicyCommandOutput
+  extends CreateAutomatedReasoningPolicyResponse,
+    __MetadataBearer {}
+declare const CreateAutomatedReasoningPolicyCommand_base: {
+  new (
+    input: CreateAutomatedReasoningPolicyCommandInput
+  ): import("@smithy/core/client").CommandImpl<
+    CreateAutomatedReasoningPolicyCommandInput,
+    CreateAutomatedReasoningPolicyCommandOutput,
+    BedrockClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  new (
+    input: CreateAutomatedReasoningPolicyCommandInput
+  ): import("@smithy/core/client").CommandImpl<
+    CreateAutomatedReasoningPolicyCommandInput,
+    CreateAutomatedReasoningPolicyCommandOutput,
+    BedrockClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  getEndpointParameterInstructions(): {
+    [x: string]: unknown;
+  };
+};
+export declare class CreateAutomatedReasoningPolicyCommand extends CreateAutomatedReasoningPolicyCommand_base {
+  protected static __types: {
+    api: {
+      input: CreateAutomatedReasoningPolicyRequest;
+      output: CreateAutomatedReasoningPolicyResponse;
+    };
+    sdk: {
+      input: CreateAutomatedReasoningPolicyCommandInput;
+      output: CreateAutomatedReasoningPolicyCommandOutput;
+    };
+  };
+}

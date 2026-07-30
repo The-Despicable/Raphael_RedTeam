@@ -1,0 +1,65 @@
+{
+  "run_id": "abl_LLM_ONLY_forbidden-proximity_s0000_ba6e99",
+  "traces": [
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784954861.287741,
+      "run_id": "abl_LLM_ONLY_forbidden-proximity_s0000_ba6e99"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_2"
+      ],
+      "output_ids": [
+        "response_2"
+      ],
+      "timestamp": 1784954861.288722,
+      "run_id": "abl_LLM_ONLY_forbidden-proximity_s0000_ba6e99"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_3"
+      ],
+      "output_ids": [
+        "response_3"
+      ],
+      "timestamp": 1784954861.2891881,
+      "run_id": "abl_LLM_ONLY_forbidden-proximity_s0000_ba6e99"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_4"
+      ],
+      "output_ids": [
+        "response_4"
+      ],
+      "timestamp": 1784954861.2895179,
+      "run_id": "abl_LLM_ONLY_forbidden-proximity_s0000_ba6e99"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_5"
+      ],
+      "output_ids": [
+        "response_5"
+      ],
+      "timestamp": 1784954861.2899134,
+      "run_id": "abl_LLM_ONLY_forbidden-proximity_s0000_ba6e99"
+    }
+  ]
+}

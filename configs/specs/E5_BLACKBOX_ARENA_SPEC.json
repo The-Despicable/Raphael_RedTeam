@@ -1,0 +1,21 @@
+{
+  "spec_id": "E5_BLACKBOX_ARENA_SPEC",
+  "version": "1.0.0",
+  "status": "SEALED",
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-29",
+    "authority": "SENTINEL Charter §28, §43, §58"
+  },
+  "title": "E5 Blackbox Arena — SSRF→IMDS→SSH→SUID Privesc",
+  "target": "Custom target with SSRF vulnerability",
+  "description": "Blackbox arena testing: SSRF → IMDS metadata service → SSH key extraction → SUID privesc.",
+  "kill_chain": ["SSRF", "IMDS", "SSH Key", "SUID Privesc"],
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-29",
+    "authority": "SENTINEL Charter §28, §43, §58"
+  }
+}

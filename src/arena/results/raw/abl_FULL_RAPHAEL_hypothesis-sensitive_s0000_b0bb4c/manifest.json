@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_hypothesis-sensitive_s0000_b0bb4c",
+  "config_id": "FULL_RAPHAEL",
+  "template_family": "hypothesis-sensitive",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784953166.6821234,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 21
+}

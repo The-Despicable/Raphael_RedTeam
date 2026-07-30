@@ -1,0 +1,269 @@
+{
+  "spec_id": "E4_HTB_LIVE_ARENA_SPEC",
+  "title": "E4 — HTB Live Arena: DevHub",
+  "version": "1.0",
+  "status": "DRAFT",
+  "sentinel_review": "PENDING",
+
+  "directive": "SENTINEL GLM-5.2 Governance — Phase 2 Authorization. Execute full autonomous kill chain against HTB target DevHub. Validate E1/E2 pipeline against a real-world, internet-facing target.",
+
+  "topology": {
+    "description": "HackTheBox VPN-connected environment. Raphael stack (local Docker) routes to target through HTB VPN tunnel.",
+    "attacker": {
+      "host": "local workstation (WSL2)",
+      "vpn_ip": "10.10.14.18",
+      "vpn_interface": "tun0",
+      "vpn_profile": "release_arena_us-release-3 (fallback: machines_us-2)",
+      "vpn_provider": "HackTheBox",
+      "raphael_stack": "15 Docker containers on raphael-20_raphael-net"
+    },
+    "target": {
+      "name": "DevHub",
+      "ip": "10.129.48.95",
+      "platform": "HackTheBox (Retired/Active Machine)",
+      "expected_stack": "Modern web (Node.js/Next.js/React), cloud-integrated services",
+      "expected_vulnerabilities": [
+        "nextjs_middleware_bypass_2025 (S-Series STACK_MAP candidate)",
+        "ssrf_imds_aws (S-Series STACK_MAP candidate)",
+        "Server-Side Template Injection (SSTI)",
+        "Privilege Escalation via misconfigured sudo/SUID"
+      ],
+      "port_scan_targets": "80, 443, 22, 3000, 5000, 8000, 8080, 8443, 9000"
+    },
+    "network": {
+      "type": "VPN tunnel",
+      "latency": "estimated 20-100ms RTT",
+      "vlan": "10.129.0.0/16 (HTB machine range)",
+      "attacker_vlan": "10.10.14.0/23 (VPN pool)"
+    }
+  },
+
+  "llm_config": {
+    "provider": "nvidia",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "api_key_source": "NVIDIA_API_KEY env var (hardcoded in providers.py)",
+    "models": {
+      "primary_loop": {
+        "model": "meta/llama-3.1-8b-instruct",
+        "routed_by": "providers.py → _call_nvidia()",
+        "avg_latency": "1.37s",
+        "canary_result": "20/20 PASS",
+        "used_by": [
+          "Planner (action scoring)",
+          "Tier 2 command classifier (command_filter.py)",
+          "Student research queries"
+        ]
+      },
+      "student_research": {
+        "model": "meta/llama-3.1-8b-instruct",
+        "note": "Primary loop model used for Student as well. GLM-5.2 available via nvidia_provider.py for async deep research but not for primary loop."
+      }
+    }
+  },
+
+  "test_scenarios": [
+    {
+      "id": "E4-SC-001",
+      "name": "Reconnaissance — Port & Service Discovery (HTB)",
+      "description": "Scan DevHub target on common ports. Identify web stack, open ports, and service versions.",
+      "commands": [
+        "nmap -sT -Pn -p 22,80,443,3000,5000,8000,8080,8443,9000 -sV --open 10.129.48.95",
+        "curl -s -I http://10.129.48.95",
+        "curl -s -I https://10.129.48.95 (if applicable)"
+      ],
+      "expected_evidence": [
+        "HOST entity: 10.129.48.95 (DevHub)",
+        "PORT entities for each open port",
+        "SERVICE entities with version detection",
+        "TECHNIQUE entity from Student stack analysis"
+      ],
+      "success_criteria": [
+        "nmap completes <60s (HTB latency considered)",
+        "At least 1 open port identified",
+        "Service version identified for web server"
+      ]
+    },
+    {
+      "id": "E4-SC-002",
+      "name": "Student Research — Vulnerability Identification",
+      "description": "Based on identified stack, Student S-Series proposes exploitation techniques targeting DevHub.",
+      "llm_prompt_type": "stack_based_vuln_research",
+      "triggers": [
+        "Port scan identifies web server (Apache/Nginx/Node.js)",
+        "Technology fingerprinting (Next.js, React, API frameworks)",
+        "ChainSynthesizer generates vulnerability chain"
+      ],
+      "expected_evidence": [
+        "TECHNIQUE entities mapped to CVE/vulnerability classes",
+        "Exploit chain proposed (e.g., SSRF → IMDS → credential theft)",
+        "Planner scores candidates with utility/cost/risk"
+      ],
+      "success_criteria": [
+        "At least 2 exploitation techniques proposed",
+        "Exploit chain connects web access to potential RCE",
+        "Planner assigns scores with rationale codes"
+      ]
+    },
+    {
+      "id": "E4-SC-003",
+      "name": "Exploitation — Initial Access",
+      "description": "Execute the top-scored exploitation candidate against DevHub.",
+      "triggers": [
+        "Planner selects highest-utility candidate",
+        "CapabilityBroker.authorize_action() validates risk/scope",
+        "Candidate executed via appropriate tool (metasploit, custom exploit, web request)"
+      ],
+      "filter_pipeline": {
+        "tier1_static": "ESCALATE for exploitation tools",
+        "tier2_llm": "ALLOW if authorized HTB target in ENGAGEMENT_CONFIG scope",
+        "expected_decision": "ALLOW (with audit trail)"
+      },
+      "expected_evidence": [
+        "VULNERABILITY entity confirmed",
+        "Access gained (web shell, reverse shell, or data exposure)",
+        "SHELL_SESSION created if E1 ReverseShellCapability used"
+      ],
+      "success_criteria": [
+        "Exploitation attempt completes",
+        "Evidence of access or confirmed vulnerability ingested",
+        "All actions authorized through CapabilityBroker"
+      ]
+    },
+    {
+      "id": "E4-SC-004",
+      "name": "Post-Exploitation — Privilege Escalation",
+      "description": "If initial access gained, escalate privileges via E2 objective_command_map candidates.",
+      "triggers": [
+        "Shell session established (E1 ReverseShellCapability)",
+        "Student proposes privilege escalation techniques",
+        "Planner scores privesc candidates (e.g., SUID, sudo, kernel exploit)"
+      ],
+      "expected_evidence": [
+        "CREDENTIAL entities for harvested secrets/tokens",
+        "PROCESS entities for post-exploitation commands",
+        "VULNERABILITY entities for privilege escalation vectors"
+      ],
+      "success_criteria": [
+        "Privilege escalation attempted",
+        "Any escalated access or additional evidence ingested",
+        "FalsificationTask generated if escalation fails (expected)"
+      ]
+    },
+    {
+      "id": "E4-SC-005",
+      "name": "Evidence Feedback — WorldModel Update",
+      "description": "All exploitation output ingested through TTYNormalizer and EvidenceExtractor into WorldModel.",
+      "steps": [
+        "TTYNormalizer processes all command output",
+        "EvidenceExtractor extracts entities (HOST, PORT, VULNERABILITY, CREDENTIAL, PROCESS, FILE, NETWORK_CONNECTION)",
+        "WorldModel.ingest_shell_evidence() dispatches to type-specific handlers",
+        "ContradictionManager checks for deduplication (content_hash)"
+      ],
+      "success_criteria": [
+        "Minimum 5 evidence entity types created",
+        "Relationships link evidence to DevHub target",
+        "Copy-on-write integrity maintained (no frozen mutations)"
+      ]
+    },
+    {
+      "id": "E4-SC-006",
+      "name": "Session Termination & Cleanup",
+      "description": "Terminate any active shell sessions. Clean up artifacts from the local attacker environment.",
+      "triggers": [
+        "Objective achieved or mission timeout",
+        "Planner scores shell_disconnect",
+        "CapabilityBroker.authorize_shell_session(action=terminate)"
+      ],
+      "expected_evidence": [
+        "SHELL_SESSION entity: active=False, status=TERMINATED",
+        "Session cleaned from ShellSessionStore",
+        "Cleanup actions logged"
+      ],
+      "success_criteria": [
+        "Session terminates cleanly",
+        "No orphaned network listeners",
+        "Evidence of termination in WorldModel"
+      ]
+    }
+  ],
+
+  "kill_chain_summary": {
+    "phases": [
+      {"phase": 1, "action": "Reconnaissance",        "scenario": "E4-SC-001", "actor": "Planner + Kali Tools from Docker"},
+      {"phase": 2, "action": "Vulnerability Research", "scenario": "E4-SC-002", "actor": "Student S-Series via NVIDIA NIM"},
+      {"phase": 3, "action": "Exploitation (Initial)", "scenario": "E4-SC-003", "actor": "Broker + Shell/Exploit Capability"},
+      {"phase": 4, "action": "Post-Exploitation",      "scenario": "E4-SC-004", "actor": "Shell + CommandFilter Pipeline"},
+      {"phase": 5, "action": "Evidence Ingestion",     "scenario": "E4-SC-005", "actor": "WorldModel + TTYNormalizer"},
+      {"phase": 6, "action": "Cleanup & Termination",  "scenario": "E4-SC-006", "actor": "Broker + SessionStore"}
+    ],
+    "cognitive_loop_closure": "HTB target → Recon → Student Analysis → Exploit → Shell → Evidence → WorldModel → Falsification"
+  },
+
+  "engagement_config": {
+    "scope": {
+      "allowed_targets": ["10.129.48.95/32"],
+      "forbidden_targets": [
+        "10.10.14.0/23 (VPN pool — no scanning of other users)",
+        "10.10.8.0/22 (VPN infrastructure)",
+        "10.13.37.0/24, 10.13.38.0/24 (HTB internal)",
+        "10.10.110.0/24 (HTB internal)",
+        "0.0.0.0/0 (no wide-scope scanning)"
+      ],
+      "max_concurrent_scans": 2,
+      "rate_limit_ms": 200
+    },
+    "shell_timeout_seconds": 300,
+    "max_command_denials_before_termination": 3,
+    "denial_window_seconds": 60,
+    "auto_terminate_on_idle_seconds": 120
+  },
+
+  "safety_invariants": [
+    "INV-E4-01: ENGAGEMENT_CONFIG strictly scoped to 10.129.48.95/32 — no other IPs targeted",
+    "INV-E4-02: No unbrokered execution — every action through CapabilityBroker",
+    "INV-E4-03: Shell injection chars → ESCALATE to Tier 2 LLM, not DENY (fail-open for unknown)",
+    "INV-E4-04: Tier 2 LLM timeout (10s) → ESCALATE, not ALLOW (fail-closed)",
+    "INV-E4-05: Reverse shell listener exclusively through ListenerManager — no component bypasses",
+    "INV-E4-06: Dead session detection — 15s no-response → TERMINATED",
+    "INV-E4-07: Auto-termination on 3 denials in 60s window",
+    "INV-E4-08: Evidence ingestion uses copy-on-write — no frozen mutations",
+    "INV-E4-09: No dangerous commands — dd, mkfs, shutdown, rm -rf /, fork bombs blocked by Tier 1",
+    "INV-E4-10: VPN scope enforced — any candidate targeting IP outside 10.129.48.95/32 rejected by Broker"
+  ],
+
+  "risks_and_mitigations": {
+    "risk_1": "VPN connectivity drops mid-operation",
+    "mitigation_1": "ShellSession timeout detection (15s no-response → TERMINATED). Planner does not hang on dead sessions.",
+    "risk_2": "NVIDIA API rate limit exhausts during heavy LLM use",
+    "mitigation_2": "meta/llama-3.1-8b-instruct passed 20/20 (0 rate limits seen). Fallback: FreeLLM API on port 3001.",
+    "risk_3": "Reverse shell drops due to HTB outbound filtering",
+    "mitigation_3": "Use multiple callback methods (bind shell fallback, HTTP callback). ListenerManager manages ports >1024.",
+    "risk_4": "DevHub unspawned or IP changed between sessions",
+    "mitigation_4": "Verify host up before execution. If 10.129.48.95 unreachable → halt and notify operator.",
+    "risk_5": "Legal/ToS violation — scanning outside scope",
+    "mitigation_5": "ENGAGEMENT_CONFIG enforced at CapabilityBroker level. All candidates must pass allowlist check for 10.129.48.95/32."
+  },
+
+  "expected_results": {
+    "recon_success": "expected (minimum 1 open port)",
+    "vulnerability_identification": "highly likely (DevHub is an Easy/Medium machine)",
+    "initial_access": "conditional (depends on vulnerability chain success)",
+    "privilege_escalation": "secondary objective",
+    "evidence_ingestion": "5+ entity types targeted",
+    "cognitive_loop_rounds": "minimum 1 full closure",
+    "total_test_duration_estimate": "30-60 minutes (including HTB latency)"
+  },
+
+  "approval": {
+    "drafted_by": "FORGE",
+    "sentinel_review": "PENDING",
+    "target_verdict": "awaiting user: spawn DevHub on HTB + confirm VPN",
+    "blocker": "Active machine VPN (us-2 UDP) not connecting. Release arena VPN connected but DevHub not spawned on it.",
+    "current_vpn_state": {
+      "release_arena_vpn": "CONNECTED (10.10.14.18 on tun0)",
+      "machines_us_2_udp": "FAILED (TLS hangs after handshake — server saturation?)",
+      "machines_us_1_tcp": "FAILED (Connection reset after TLS — server policy enforcement)",
+      "target_reachability": "Host exists at 10.129.48.95 but all ports filtered (unspawned)"
+    }
+  }
+}

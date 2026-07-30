@@ -1,0 +1,76 @@
+{
+  "manifest_version": "2.0.0",
+  "generated": "2026-07-30T00:00:00Z",
+  "git": {
+    "commit_sha": "4ad1981c2a7448c014124ac78c133c410fded32e",
+    "branch": "main",
+    "tag": "v2.0.0",
+    "dirty": false
+  },
+  "environment": {
+    "python_version": "3.14.4",
+    "docker_version": "27.3.1",
+    "os": "Linux 6.8.0-1016-azure x86_64",
+    "architecture": "x86_64"
+  },
+  "dependencies": {
+    "torch": "2.7.0",
+    "transformers": "4.51.3",
+    "numpy": "2.5.1",
+    "pydantic": "2.12.5",
+    "sqlalchemy": "2.0.51",
+    "aiohttp": "3.13.5",
+    "docker": "7.1.0",
+    "requests": "2.32.5",
+    "pwntools": "4.15.0",
+    "paramiko": "5.0.0",
+    "litellm": "1.83.7",
+    "openai": "2.30.0",
+    "rich": "15.0.0",
+    "pydantic": "2.12.5",
+    "pytest": "9.1.1"
+  },
+  "providers": {
+    "llm": {
+      "primary": "nvidia_nim",
+      "model": "meta/llama-3.1-8b-instruct",
+      "endpoint": "https://integrate.api.nvidia.com/v1",
+      "version": "3.1"
+    },
+    "embedding": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "version": "2.2.2"
+    }
+  },
+  "prompt_templates": {
+    "planner": "v2.0.0",
+    "student": "v2.0.0",
+    "falsification": "v2.0.0",
+    "reflection": "v2.0.0",
+    "hypothesis": "v2.0.0",
+    "evidence_extraction": "v2.0.0"
+  },
+  "random_seed_policy": {
+    "global_seed": 42,
+    "per_run_offset": true,
+    "llm_temperature": 0.0,
+    "deterministic_sampling": true
+  },
+  "benchmark_version": "RBS-v1",
+  "spec_versions": {
+    "E1_INTERACTIVE_SHELL_SPEC": "1.0.0",
+    "E2_SHELL_CANDIDATE_GENERATION_SPEC": "1.0.0",
+    "E3_LIVE_ARENA_TEST_SPEC": "1.0.0",
+    "E4_LOCAL_ADV_ARENA_SPEC": "1.0.0",
+    "E5_BLACKBOX_ARENA_SPEC": "1.0.0",
+    "E6_LOCAL_H1_ARENA_SPEC": "1.0.0",
+    "P1_STEALTH_AND_EVASION_SPEC": "1.0.0",
+    "P1_LIVE_WAF_ARENA_SPEC": "1.0.0",
+    "H1_LIVE_ENGAGEMENT_SPEC": "1.0.0",
+    "H1_GITHUB_LIVE_SPEC": "1.0.0",
+    "GITHUB_SCOPE_CONFIG": "1.0.0"
+  },
+  "immutable": true,
+  "sealed_by": "SENTINEL (GLM-5.2)",
+  "seal_date": "2026-07-30"
+}

@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_llm-sensitive_s0000_0c2c0f",
+  "config_id": "FULL_RAPHAEL",
+  "template_family": "llm-sensitive",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784957203.8648236,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 21
+}

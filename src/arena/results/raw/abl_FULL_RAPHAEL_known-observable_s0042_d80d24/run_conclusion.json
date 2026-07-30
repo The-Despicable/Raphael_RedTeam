@@ -1,0 +1,260 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_known-observable_s0042_d80d24",
+  "scenario_id": "known-observable-s0042",
+  "decision": "STOP_BUDGET_EXHAUSTED",
+  "claims": [
+    {
+      "claim_id": "cl_beb4a6ac0a17",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_4752d5bc95f7",
+        "ev_4daa57d3e2db",
+        "ev_902b8e27fe77",
+        "ev_73be3b655bfe"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_b705f3626115",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "accessible",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_4752d5bc95f7",
+        "ev_4daa57d3e2db",
+        "ev_902b8e27fe77",
+        "ev_73be3b655bfe",
+        "ev_f5ea0e72db44"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_e5cc7314e1e5",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_4752d5bc95f7",
+        "ev_4daa57d3e2db",
+        "ev_902b8e27fe77",
+        "ev_73be3b655bfe",
+        "ev_f5ea0e72db44"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_f43a6ea1e02d",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "accessible",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_4752d5bc95f7",
+        "ev_4daa57d3e2db",
+        "ev_902b8e27fe77",
+        "ev_73be3b655bfe",
+        "ev_f5ea0e72db44"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_93f0900a2abd",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_4752d5bc95f7",
+        "ev_4daa57d3e2db",
+        "ev_902b8e27fe77",
+        "ev_73be3b655bfe",
+        "ev_f5ea0e72db44"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_71a678926295",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "accessible",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_4752d5bc95f7",
+        "ev_4daa57d3e2db",
+        "ev_902b8e27fe77",
+        "ev_73be3b655bfe",
+        "ev_f5ea0e72db44"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_e0d9ffb21108",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_4752d5bc95f7",
+        "ev_4daa57d3e2db",
+        "ev_902b8e27fe77",
+        "ev_73be3b655bfe",
+        "ev_f5ea0e72db44"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_042d1f2cdc59",
+      "subject_id": "host",
+      "predicate": "host_identity",
+      "object_value": "HOST-40-A7",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_4752d5bc95f7",
+        "ev_4daa57d3e2db",
+        "ev_902b8e27fe77",
+        "ev_73be3b655bfe",
+        "ev_f5ea0e72db44"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_938e46f11968",
+      "subject_id": "ent_9038a1cf90c3",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_c0c7092f3ddf"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_6dc952a28939"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_eec2a12b0c46",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_4752d5bc95f7",
+        "ev_4daa57d3e2db",
+        "ev_902b8e27fe77",
+        "ev_73be3b655bfe",
+        "ev_f5ea0e72db44",
+        "ev_ac5708747465",
+        "ev_32d0c8d67b6d",
+        "ev_4779fac0d856",
+        "ev_3a70a3420979",
+        "ev_4903838e15cb",
+        "ev_063d10b32f0c",
+        "ev_6dc952a28939"
+      ],
+      "provenance": {
+        "producer": "direct_observation",
+        "derivation_type": "direct_observation"
+      }
+    },
+    {
+      "claim_id": "cl_0b1df437a06a",
+      "subject_id": "host",
+      "predicate": "host_identity",
+      "object_value": "HOST-40-A7",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_4752d5bc95f7",
+        "ev_4daa57d3e2db",
+        "ev_902b8e27fe77",
+        "ev_73be3b655bfe",
+        "ev_f5ea0e72db44",
+        "ev_ac5708747465",
+        "ev_32d0c8d67b6d",
+        "ev_4779fac0d856",
+        "ev_3a70a3420979",
+        "ev_4903838e15cb",
+        "ev_063d10b32f0c",
+        "ev_6dc952a28939"
+      ],
+      "provenance": {
+        "producer": "direct_observation",
+        "derivation_type": "direct_observation"
+      }
+    },
+    {
+      "claim_id": "cl_070603dca1e4",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "Category A",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_32d0c8d67b6d"
+      ],
+      "provenance": {
+        "producer": "llm_interpretation",
+        "derivation_type": "llm_interpretation"
+      }
+    },
+    {
+      "claim_id": "cl_c43e7995ac5b",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "Category A",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_3a70a3420979"
+      ],
+      "provenance": {
+        "producer": "llm_interpretation",
+        "derivation_type": "llm_interpretation"
+      }
+    },
+    {
+      "claim_id": "cl_a82d9a0a2a89",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "Category A",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_063d10b32f0c"
+      ],
+      "provenance": {
+        "producer": "llm_interpretation",
+        "derivation_type": "llm_interpretation"
+      }
+    }
+  ],
+  "architecture_id": "FULL_RAPHAEL",
+  "abstention_reason": null
+}

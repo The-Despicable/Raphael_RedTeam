@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_planner-sensitive_s0000_b7f189",
+  "config_id": "FULL_RAPHAEL",
+  "template_family": "planner-sensitive",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784954684.9618611,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 21
+}

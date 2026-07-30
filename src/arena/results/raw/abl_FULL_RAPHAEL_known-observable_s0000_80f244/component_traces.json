@@ -1,0 +1,81 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_80f244",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_2874e6e2086d"
+      ],
+      "timestamp": 1784946972.9765518,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_80f244"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_38e87f742130"
+      ],
+      "timestamp": 1784946972.9765682,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_80f244"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_c49f93eab256"
+      ],
+      "timestamp": 1784946972.9765804,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_80f244"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946972.9768605,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_80f244"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946972.9768639,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_80f244"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "extra-1",
+        "extra-2"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946972.9768696,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_80f244"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_9a3ad313ac66"
+      ],
+      "output_ids": [
+        "hyp_9a3ad313ac66"
+      ],
+      "timestamp": 1784946972.9769256,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_80f244"
+    }
+  ]
+}

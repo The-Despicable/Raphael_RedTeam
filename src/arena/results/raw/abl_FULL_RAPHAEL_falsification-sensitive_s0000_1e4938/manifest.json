@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_falsification-sensitive_s0000_1e4938",
+  "config_id": "FULL_RAPHAEL",
+  "template_family": "falsification-sensitive",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784955362.3804593,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 21
+}

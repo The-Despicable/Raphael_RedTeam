@@ -1,0 +1,566 @@
+Total runs to execute: 280
+Already completed: 0
+Remaining: 280
+To execute: 280
+  FAILED: FULL_RAPHAEL arena-d6-001 seed=542084448 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-001 seed=542084448 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-001 seed=542084448 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-001 seed=542084448 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-001 seed=542084448 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-001 seed=542084448 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-001 seed=542084448 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-001 seed=542084448 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-001 seed=1328360881 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-001 seed=1328360881 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-001 seed=1328360881 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-001 seed=1328360881 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-001 seed=1328360881 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-001 seed=1328360881 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-001 seed=1328360881 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-001 seed=1328360881 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-001 seed=1454621848 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-001 seed=1454621848 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-001 seed=1454621848 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-001 seed=1454621848 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-001 seed=1454621848 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-001 seed=1454621848 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-001 seed=1454621848 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-001 seed=1454621848 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-001 seed=1503358799 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-001 seed=1503358799 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-001 seed=1503358799 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-001 seed=1503358799 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-001 seed=1503358799 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-001 seed=1503358799 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-001 seed=1503358799 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-001 seed=1503358799 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-001 seed=380863322 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-001 seed=380863322 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-001 seed=380863322 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-001 seed=380863322 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-001 seed=380863322 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-001 seed=380863322 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-001 seed=380863322 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-001 seed=380863322 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-002 seed=992020810 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-002 seed=992020810 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-002 seed=992020810 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-002 seed=992020810 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-002 seed=992020810 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-002 seed=992020810 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-002 seed=992020810 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-002 seed=992020810 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-002 seed=1688407926 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-002 seed=1688407926 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-002 seed=1688407926 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-002 seed=1688407926 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-002 seed=1688407926 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-002 seed=1688407926 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-002 seed=1688407926 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-002 seed=1688407926 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-002 seed=723234452 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-002 seed=723234452 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-002 seed=723234452 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-002 seed=723234452 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-002 seed=723234452 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-002 seed=723234452 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-002 seed=723234452 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-002 seed=723234452 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-002 seed=1652502719 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-002 seed=1652502719 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-002 seed=1652502719 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-002 seed=1652502719 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-002 seed=1652502719 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-002 seed=1652502719 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-002 seed=1652502719 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-002 seed=1652502719 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-002 seed=1992195642 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-002 seed=1992195642 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-002 seed=1992195642 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-002 seed=1992195642 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-002 seed=1992195642 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-002 seed=1992195642 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-002 seed=1992195642 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-002 seed=1992195642 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-003 seed=1766672591 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-003 seed=1766672591 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-003 seed=1766672591 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-003 seed=1766672591 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-003 seed=1766672591 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-003 seed=1766672591 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-003 seed=1766672591 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-003 seed=1766672591 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-003 seed=59454771 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-003 seed=59454771 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-003 seed=59454771 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-003 seed=59454771 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-003 seed=59454771 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-003 seed=59454771 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-003 seed=59454771 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-003 seed=59454771 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-003 seed=1494567783 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-003 seed=1494567783 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-003 seed=1494567783 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-003 seed=1494567783 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-003 seed=1494567783 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-003 seed=1494567783 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-003 seed=1494567783 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-003 seed=1494567783 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-003 seed=1545552493 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-003 seed=1545552493 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-003 seed=1545552493 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-003 seed=1545552493 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-003 seed=1545552493 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-003 seed=1545552493 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-003 seed=1545552493 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-003 seed=1545552493 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-003 seed=1309892715 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-003 seed=1309892715 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-003 seed=1309892715 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-003 seed=1309892715 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-003 seed=1309892715 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-003 seed=1309892715 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-003 seed=1309892715 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-003 seed=1309892715 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-004 seed=862352654 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-004 seed=862352654 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-004 seed=862352654 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-004 seed=862352654 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-004 seed=862352654 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-004 seed=862352654 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-004 seed=862352654 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-004 seed=862352654 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-004 seed=341631535 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-004 seed=341631535 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-004 seed=341631535 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-004 seed=341631535 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-004 seed=341631535 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-004 seed=341631535 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-004 seed=341631535 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-004 seed=341631535 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-004 seed=1534237374 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-004 seed=1534237374 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-004 seed=1534237374 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-004 seed=1534237374 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-004 seed=1534237374 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-004 seed=1534237374 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-004 seed=1534237374 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-004 seed=1534237374 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-004 seed=1739571338 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-004 seed=1739571338 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-004 seed=1739571338 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-004 seed=1739571338 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-004 seed=1739571338 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-004 seed=1739571338 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-004 seed=1739571338 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-004 seed=1739571338 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-004 seed=1455279714 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-004 seed=1455279714 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-004 seed=1455279714 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-004 seed=1455279714 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-004 seed=1455279714 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-004 seed=1455279714 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-004 seed=1455279714 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-004 seed=1455279714 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-005 seed=213349305 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-005 seed=213349305 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-005 seed=213349305 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-005 seed=213349305 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-005 seed=213349305 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-005 seed=213349305 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-005 seed=213349305 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-005 seed=213349305 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-005 seed=1402602831 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-005 seed=1402602831 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-005 seed=1402602831 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-005 seed=1402602831 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-005 seed=1402602831 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-005 seed=1402602831 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-005 seed=1402602831 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-005 seed=1402602831 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-005 seed=1751240556 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-005 seed=1751240556 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-005 seed=1751240556 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-005 seed=1751240556 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-005 seed=1751240556 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-005 seed=1751240556 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-005 seed=1751240556 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-005 seed=1751240556 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-005 seed=848616704 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-005 seed=848616704 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-005 seed=848616704 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-005 seed=848616704 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-005 seed=848616704 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-005 seed=848616704 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-005 seed=848616704 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-005 seed=848616704 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-005 seed=2024409702 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-005 seed=2024409702 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-005 seed=2024409702 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-005 seed=2024409702 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-005 seed=2024409702 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-005 seed=2024409702 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-005 seed=2024409702 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-005 seed=2024409702 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-006 seed=1144874965 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-006 seed=1144874965 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-006 seed=1144874965 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-006 seed=1144874965 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-006 seed=1144874965 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-006 seed=1144874965 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-006 seed=1144874965 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-006 seed=1144874965 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-006 seed=1766616372 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-006 seed=1766616372 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-006 seed=1766616372 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-006 seed=1766616372 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-006 seed=1766616372 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-006 seed=1766616372 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-006 seed=1766616372 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-006 seed=1766616372 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-006 seed=1519049909 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-006 seed=1519049909 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-006 seed=1519049909 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-006 seed=1519049909 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-006 seed=1519049909 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-006 seed=1519049909 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-006 seed=1519049909 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-006 seed=1519049909 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-006 seed=814870450 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-006 seed=814870450 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-006 seed=814870450 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-006 seed=814870450 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-006 seed=814870450 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-006 seed=814870450 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-006 seed=814870450 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-006 seed=814870450 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-006 seed=579180796 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-006 seed=579180796 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-006 seed=579180796 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-006 seed=579180796 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-006 seed=579180796 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-006 seed=579180796 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-006 seed=579180796 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-006 seed=579180796 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-007 seed=829251624 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-007 seed=829251624 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-007 seed=829251624 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-007 seed=829251624 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-007 seed=829251624 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-007 seed=829251624 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-007 seed=829251624 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-007 seed=829251624 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-007 seed=1503558562 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-007 seed=1503558562 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-007 seed=1503558562 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-007 seed=1503558562 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-007 seed=1503558562 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-007 seed=1503558562 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-007 seed=1503558562 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-007 seed=1503558562 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-007 seed=1855805883 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-007 seed=1855805883 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-007 seed=1855805883 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-007 seed=1855805883 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-007 seed=1855805883 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-007 seed=1855805883 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-007 seed=1855805883 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-007 seed=1855805883 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-007 seed=1335677062 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-007 seed=1335677062 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-007 seed=1335677062 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-007 seed=1335677062 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-007 seed=1335677062 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-007 seed=1335677062 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-007 seed=1335677062 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-007 seed=1335677062 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: FULL_RAPHAEL arena-d6-007 seed=1271814007 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_HYPOTHESIS arena-d6-007 seed=1271814007 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_FALSIFICATION arena-d6-007 seed=1271814007 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_WORLD_MODEL arena-d6-007 seed=1271814007 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_PLANNER arena-d6-007 seed=1271814007 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_LLM arena-d6-007 seed=1271814007 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: NO_DEFEATER arena-d6-007 seed=1271814007 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+  FAILED: SCRIPTED_BASELINE arena-d6-007 seed=1271814007 - name 'hm_e' is not defined
+  Progress: 0/280 completed
+
+Experiment complete! 0/280 runs completed.

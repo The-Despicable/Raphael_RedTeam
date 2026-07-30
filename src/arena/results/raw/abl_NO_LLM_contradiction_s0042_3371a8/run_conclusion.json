@@ -1,0 +1,57 @@
+{
+  "run_id": "abl_NO_LLM_contradiction_s0042_3371a8",
+  "scenario_id": "contradiction-s0042",
+  "decision": "STOP_BUDGET_EXHAUSTED",
+  "claims": [
+    {
+      "claim_id": "cl_d878bf62e53c",
+      "subject_id": "ent_d09e90a259d3",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_7547ee64f411"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_0b418f60e45a"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_ff4de41ccbc6",
+      "subject_id": "ent_b1e40662e50b",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_7547ee64f411"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_82ae290611d5"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_b31ecf35444a",
+      "subject_id": "ent_3d82e10f7051",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_7547ee64f411"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_a49b444af098"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    }
+  ],
+  "architecture_id": "NO_LLM",
+  "abstention_reason": "LLM disabled \u2014 no semantic interpretation"
+}

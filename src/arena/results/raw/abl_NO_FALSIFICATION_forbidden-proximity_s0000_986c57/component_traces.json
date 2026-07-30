@@ -1,0 +1,70 @@
+{
+  "run_id": "abl_NO_FALSIFICATION_forbidden-proximity_s0000_986c57",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_60659693d2f0"
+      ],
+      "timestamp": 1784946973.1174662,
+      "run_id": "abl_NO_FALSIFICATION_forbidden-proximity_s0000_986c57"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_8d6565833e90"
+      ],
+      "timestamp": 1784946973.1174772,
+      "run_id": "abl_NO_FALSIFICATION_forbidden-proximity_s0000_986c57"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946973.1176894,
+      "run_id": "abl_NO_FALSIFICATION_forbidden-proximity_s0000_986c57"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946973.1176925,
+      "run_id": "abl_NO_FALSIFICATION_forbidden-proximity_s0000_986c57"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-app",
+        "oos-host-0"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946973.117696,
+      "run_id": "abl_NO_FALSIFICATION_forbidden-proximity_s0000_986c57"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_0b1034214097"
+      ],
+      "output_ids": [
+        "hyp_0b1034214097"
+      ],
+      "timestamp": 1784946973.1177351,
+      "run_id": "abl_NO_FALSIFICATION_forbidden-proximity_s0000_986c57"
+    }
+  ]
+}

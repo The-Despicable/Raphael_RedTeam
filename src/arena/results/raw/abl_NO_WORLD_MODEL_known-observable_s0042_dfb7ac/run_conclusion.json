@@ -1,0 +1,244 @@
+{
+  "run_id": "abl_NO_WORLD_MODEL_known-observable_s0042_dfb7ac",
+  "scenario_id": "known-observable-s0042",
+  "decision": "STOP_BUDGET_EXHAUSTED",
+  "claims": [
+    {
+      "claim_id": "cl_5344ab4924aa",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_eedf3a86182a",
+        "ev_a4e64c8a880a",
+        "ev_d4296fba4830",
+        "ev_9f3ed3cb7b45"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_2b9a85abe0d9",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "accessible",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_eedf3a86182a",
+        "ev_a4e64c8a880a",
+        "ev_d4296fba4830",
+        "ev_9f3ed3cb7b45",
+        "ev_dabbb5a526e2"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_fd1dab94bacf",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_eedf3a86182a",
+        "ev_a4e64c8a880a",
+        "ev_d4296fba4830",
+        "ev_9f3ed3cb7b45",
+        "ev_dabbb5a526e2"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_c026dc2d347e",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "accessible",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_eedf3a86182a",
+        "ev_a4e64c8a880a",
+        "ev_d4296fba4830",
+        "ev_9f3ed3cb7b45",
+        "ev_dabbb5a526e2"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_56761e8344c9",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_eedf3a86182a",
+        "ev_a4e64c8a880a",
+        "ev_d4296fba4830",
+        "ev_9f3ed3cb7b45",
+        "ev_dabbb5a526e2"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_8e7f37e99c82",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "accessible",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_eedf3a86182a",
+        "ev_a4e64c8a880a",
+        "ev_d4296fba4830",
+        "ev_9f3ed3cb7b45",
+        "ev_dabbb5a526e2"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_43af4547007b",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_eedf3a86182a",
+        "ev_a4e64c8a880a",
+        "ev_d4296fba4830",
+        "ev_9f3ed3cb7b45",
+        "ev_dabbb5a526e2"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_9236ca77ecc4",
+      "subject_id": "host",
+      "predicate": "host_identity",
+      "object_value": "HOST-40-A7",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_eedf3a86182a",
+        "ev_a4e64c8a880a",
+        "ev_d4296fba4830",
+        "ev_9f3ed3cb7b45",
+        "ev_dabbb5a526e2"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_4682ae22daae",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_eedf3a86182a",
+        "ev_a4e64c8a880a",
+        "ev_d4296fba4830",
+        "ev_9f3ed3cb7b45",
+        "ev_dabbb5a526e2",
+        "ev_19944183d70a",
+        "ev_0781ee45c2fb",
+        "ev_8a4468f2af82",
+        "ev_5acf513faa9c",
+        "ev_33faea390908",
+        "ev_fdfea2add50b",
+        "ev_812988ea72ff"
+      ],
+      "provenance": {
+        "producer": "direct_observation",
+        "derivation_type": "direct_observation"
+      }
+    },
+    {
+      "claim_id": "cl_6a7aa4712528",
+      "subject_id": "host",
+      "predicate": "host_identity",
+      "object_value": "HOST-40-A7",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_eedf3a86182a",
+        "ev_a4e64c8a880a",
+        "ev_d4296fba4830",
+        "ev_9f3ed3cb7b45",
+        "ev_dabbb5a526e2",
+        "ev_19944183d70a",
+        "ev_0781ee45c2fb",
+        "ev_8a4468f2af82",
+        "ev_5acf513faa9c",
+        "ev_33faea390908",
+        "ev_fdfea2add50b",
+        "ev_812988ea72ff"
+      ],
+      "provenance": {
+        "producer": "direct_observation",
+        "derivation_type": "direct_observation"
+      }
+    },
+    {
+      "claim_id": "cl_6e193150f0f6",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "Category A",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_0781ee45c2fb"
+      ],
+      "provenance": {
+        "producer": "llm_interpretation",
+        "derivation_type": "llm_interpretation"
+      }
+    },
+    {
+      "claim_id": "cl_7df8edd13f88",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "Category A",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_5acf513faa9c"
+      ],
+      "provenance": {
+        "producer": "llm_interpretation",
+        "derivation_type": "llm_interpretation"
+      }
+    },
+    {
+      "claim_id": "cl_4a4b7b98693d",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "Category A",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_fdfea2add50b"
+      ],
+      "provenance": {
+        "producer": "llm_interpretation",
+        "derivation_type": "llm_interpretation"
+      }
+    }
+  ],
+  "architecture_id": "NO_WORLD_MODEL",
+  "abstention_reason": "World Model disabled \u2014 no identity resolution"
+}

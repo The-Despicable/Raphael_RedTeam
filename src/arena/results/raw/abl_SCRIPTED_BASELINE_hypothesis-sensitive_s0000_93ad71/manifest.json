@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_SCRIPTED_BASELINE_hypothesis-sensitive_s0000_93ad71",
+  "config_id": "SCRIPTED_BASELINE",
+  "template_family": "hypothesis-sensitive",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784954437.7607822,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 0
+}

@@ -1,0 +1,36 @@
+{
+  "spec_id": "E3_LIVE_ARENA_TEST_SPEC",
+  "version": "1.0.0",
+  "status": "SEALED",
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-29",
+    "authority": "SENTINEL Charter §28, §43, §58"
+  },
+  "title": "E3 Live Arena Test Spec — Local Docker Target (DVWA)",
+  "target": "DVWA (Damn Vulnerable Web App)",
+  "description": "First live arena execution against DVWA in local Docker. Validates end-to-end cognitive loop: recon → propose → execute → ingest → reflect.",
+  "target": {
+    "image": "vulnerables/web-dvwa",
+    "port": 8080,
+    "vulnerabilities": ["SQLi", "XSS", "Command Injection", "File Inclusion"]
+  },
+  "engagement_config": {
+    "max_actions": 20,
+    "timeout_minutes": 30,
+    "rate_limit_jitter_ms": 10000,
+    "scope": "localhost:8080"
+  },
+  "success_criteria": {
+    "min_findings": 3,
+    "validation_rate": 1.0,
+    "max_unbrokered_executions": 0
+  },
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-29",
+    "authority": "SENTINEL Charter §28, §43, §58"
+  }
+}

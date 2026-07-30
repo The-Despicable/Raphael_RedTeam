@@ -1,0 +1,75 @@
+{
+  "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_eb8b0e",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_1b4739c2607d"
+      ],
+      "timestamp": 1784954806.410546,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_eb8b0e"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_a79523cd318e"
+      ],
+      "timestamp": 1784954806.4105587,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_eb8b0e"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_0debc6a2d2d4"
+      ],
+      "timestamp": 1784954806.410566,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_eb8b0e"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954806.412435,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_eb8b0e"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954806.4133244,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_eb8b0e"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954806.413942,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_eb8b0e"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954806.4144504,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_eb8b0e"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954806.4149694,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_eb8b0e"
+    }
+  ]
+}

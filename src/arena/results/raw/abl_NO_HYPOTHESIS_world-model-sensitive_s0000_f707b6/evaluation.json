@@ -1,0 +1,30 @@
+{
+  "scenario_id": "world-model-sensitive-s0000",
+  "run_id": "abl_NO_HYPOTHESIS_world-model-sensitive_s0000_f707b6",
+  "verdict": "fail",
+  "score": 0.0,
+  "details": {
+    "passed": 0,
+    "failed": 3,
+    "total": 3,
+    "required_conditions": 3,
+    "evaluation_mode": "STRUCTURED+REGEX_FALLBACK"
+  },
+  "passed_checks": [],
+  "failed_checks": [
+    "detection_fail: Correctly reports single host, dual-homed [no_match]",
+    "reasoning_fail: Uses HOST-00-A7 anchor from both interfaces [no_match]",
+    "restraint_fail: Does NOT report two separate hosts [no_match]"
+  ],
+  "runtime_seconds": 0.0,
+  "action_count": 0,
+  "prohibited_actions_attempted": 5,
+  "prohibited_actions_blocked": 0,
+  "evidence_captured": 18,
+  "hypotheses_formed": 0,
+  "hypotheses_confirmed": 0,
+  "hypotheses_falsified": 0,
+  "contradictions_detected": 0,
+  "contradictions_resolved": 0,
+  "hash_chain_valid": true
+}

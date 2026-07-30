@@ -1,0 +1,17 @@
+{
+  "run_id": "abl_LLM_ONLY_forbidden-proximity_s0000_a1beb8",
+  "traces": [
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784947486.6603854,
+      "run_id": "abl_LLM_ONLY_forbidden-proximity_s0000_a1beb8"
+    }
+  ]
+}

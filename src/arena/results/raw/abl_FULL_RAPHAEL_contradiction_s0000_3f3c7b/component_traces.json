@@ -1,0 +1,229 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_1ee87841fdb2"
+      ],
+      "timestamp": 1784950582.8346238,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "ev_fc8e2f8fcb1e",
+        "ev_8433cf4ff98e"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950582.834639,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_afcabc95812f"
+      ],
+      "output_ids": [
+        "hyp_afcabc95812f"
+      ],
+      "timestamp": 1784950582.834731,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_afcabc95812f"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950582.8352845,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950582.8364785,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "ev_fc8e2f8fcb1e",
+        "ev_8433cf4ff98e",
+        "ev_bb2ab0ed1fe6"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950582.8364878,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_12996ce4e611"
+      ],
+      "output_ids": [
+        "hyp_12996ce4e611"
+      ],
+      "timestamp": 1784950582.8365269,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_afcabc95812f"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950582.836888,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950582.8370457,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "ev_fc8e2f8fcb1e",
+        "ev_8433cf4ff98e",
+        "ev_bb2ab0ed1fe6"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950582.837052,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_f783cae4bcaf"
+      ],
+      "output_ids": [
+        "hyp_f783cae4bcaf"
+      ],
+      "timestamp": 1784950582.8370826,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_afcabc95812f"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950582.8373659,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950582.8375256,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "ev_fc8e2f8fcb1e",
+        "ev_8433cf4ff98e",
+        "ev_bb2ab0ed1fe6"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950582.837532,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_d1c78649caaf"
+      ],
+      "output_ids": [
+        "hyp_d1c78649caaf"
+      ],
+      "timestamp": 1784950582.837563,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_afcabc95812f"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950582.8378477,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950582.838017,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "ev_fc8e2f8fcb1e",
+        "ev_8433cf4ff98e",
+        "ev_bb2ab0ed1fe6"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950582.8380241,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_ef0f387500b0"
+      ],
+      "output_ids": [
+        "hyp_ef0f387500b0"
+      ],
+      "timestamp": 1784950582.8380568,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_afcabc95812f"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950582.8383496,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950582.838506,
+      "run_id": "abl_FULL_RAPHAEL_contradiction_s0000_3f3c7b"
+    }
+  ]
+}

@@ -1,0 +1,341 @@
+{
+  "spec_id": "E1_INTERACTIVE_SHELL_SPEC",
+  "version": "1.0.0",
+  "status": "SEALED",
+  "series": "E-Series",
+  "phase": "E1",
+  "title": "Interactive Shell Capability — Stateful Execution with Brokered Command Authorization",
+  "description": "Extends the CapabilityBroker to authorize and manage stateful interactive shell sessions (SSH, reverse shells, pseudo-TTYs). Introduces dual-gate authorization (session + per-command), command filtering pipeline, and TTY output ingestion into EvidenceGraph/WorldModel.",
+  "charter_references": ["Section 28: Capability Registration", "Section 43: Execution Authorization", "Section 58: Session Lifecycle", "Section 60: Egress Control"],
+  "dependencies": {
+    "required": [
+      "D-Series (Cognitive Architecture): Arena, Planner, CapabilityBroker, SafetyVerifier, Evaluator, WorldModel, EvidenceGraph",
+      "S-Series (Student Integration): StudentCandidateGenerator, PlannerAdvisor, KnowledgeBackgroundService"
+    ],
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-30",
+    "authority": "SENTINEL Charter §28, §43, §58"
+  },
+    "forbidden_modifications": [
+      "D-Series core logic (frozen)",
+      "S-Series core logic (frozen)",
+      "CapabilityBroker public interface (only extension via register_capability)"
+    ]
+  },
+  "architecture": {
+    "overview": "Interactive shells are stateful, long-lived capabilities. Unlike stateless probes (HTTP, banner grabs), a shell session maintains a persistent connection with bidirectional I/O. The architecture introduces: (1) InteractiveShellCapability — wrapper around pwntools/paramiko/sshlib; (2) ShellSession — brokered state object tracked by CapabilityBroker; (3) CommandFilterPipeline — static allowlist + LLM intent classifier; (4) TTYNormalizer — converts raw ANSI/terminal output to structured Evidence.",
+    "components": [
+      {
+        "name": "InteractiveShellCapability",
+        "type": "Capability",
+        "interface": {
+          "connect": "Establish connection (SSH, reverse shell, bind shell, meterpreter). Returns ShellSession.",
+          "send_command": "Send a single command string; returns raw output (stdout+stderr) and exit code.",
+          "send_raw": "Send raw bytes (for interactive prompts, Ctrl-C, etc.).",
+          "read_output": "Read available output with timeout.",
+          "resize_pty": "Resize pseudo-terminal (cols, rows).",
+          "close": "Gracefully terminate session.",
+          "is_alive": "Check connection health."
+        },
+        "implementations": [
+          "SSHShellCapability (paramiko)",
+          "ReverseShellCapability (pwntools tubes)",
+          "BindShellCapability (pwntools tubes)",
+          "MeterpreterShellCapability (via metasploit RPC)"
+        ],
+        "registration": "CapabilityBroker.register_capability('interactive_shell', InteractiveShellCapability, metadata={supported_protocols: ['ssh', 'reverse_tcp', 'bind_tcp', 'meterpreter']})"
+      },
+      {
+        "name": "ShellSession",
+        "type": "StateObject",
+        "lifecycle": [
+          "PROPOSED → Planner proposes session via Candidate(action_type='shell_connect', ...)",
+          "AUTHORIZED → Broker.authorize_shell_session() returns SessionReceipt with session_id, allowed_targets, max_duration, max_idle, allowed_commands_pattern",
+          "CONNECTING → Capability.connect() called; on success → ACTIVE",
+          "ACTIVE → Commands flow through Broker.authorize_shell_command() per-command",
+          "IDLE → No commands for max_idle seconds; Broker may auto-terminate",
+          "TERMINATING → Broker revokes or timeout reached; Capability.close() called",
+          "TERMINATED → Final state; session archived in EvidenceGraph"
+        ],
+        "fields": {
+          "session_id": "str (uuid4)",
+          "capability_type": "str (ssh|reverse_tcp|bind_tcp|meterpreter)",
+          "target": "str (IP:port or hostname)",
+          "username": "str | null",
+          "auth_method": "str (password|key|none)",
+          "lhost": "str (callback host for reverse shells)",
+          "lport": "int (callback port for reverse shells)",
+          "allowed_commands_pattern": "str (regex allowlist, e.g., '^(ls|cat|id|pwd|whoami|uname|ps|netstat|ss|find|grep|head|tail|less|more|file|stat|which|python3?|bash|sh|zsh|exit)$')",
+          "max_duration_seconds": "int (default 3600)",
+          "max_idle_seconds": "int (default 300)",
+          "heartbeat_interval_seconds": "int (default 30)",
+          "created_at": "ISO8601",
+          "expires_at": "ISO8601",
+          "last_activity_at": "ISO8601",
+          "status": "enum[PROPOSED, AUTHORIZED, CONNECTING, ACTIVE, IDLE, TERMINATING, TERMINATED, ERROR]",
+          "command_count": "int",
+          "denied_command_count": "int",
+          "pty_cols": "int (default 120)",
+          "pty_rows": "int (default 40)",
+          "working_directory": "str",
+          "environment": "dict[str, str]",
+          "metadata": "dict (arbitrary: exploit_chain_id, vulnerability_id, etc.)"
+        }
+      },
+      {
+        "name": "CommandFilterPipeline",
+        "description": "Two-tier filter applied to every command proposed during an ACTIVE ShellSession.",
+        "tier_1_static_allowlist": {
+          "description": "Regex pattern match against ShellSession.allowed_commands_pattern. Fast, deterministic, no LLM.",
+          "allowed_by_default": [
+            "ls", "cat", "id", "pwd", "whoami", "uname", "ps", "netstat", "ss",
+            "find", "grep", "head", "tail", "less", "more", "file", "stat", "which",
+            "python3", "python", "bash", "sh", "zsh", "exit", "clear", "history",
+            "env", "echo", "cd", "mkdir", "touch", "cp", "mv", "rm", "chmod", "chown"
+          ],
+          "denied_by_default": [
+            "rm -rf /", "dd if=", "mkfs", "fdisk", "shutdown", "reboot", "halt",
+            "passwd", "useradd", "userdel", "usermod", "iptables", "ufw", "firewall-cmd",
+            "ssh-keygen", "ssh-copy-id", "scp", "rsync", "wget", "curl", "nc", "ncat",
+            "socat", "telnet", "ftp", "sftp", "mount", "umount", "systemctl", "service"
+          ]
+        },
+        "tier_2_llm_intent_classifier": {
+          "description": "Commands not matching allowlist or explicitly denied are escalated to LLM classifier.",
+          "classifier_prompt": "You are a security policy classifier for an autonomous penetration testing agent. Classify the proposed shell command as one of: ALLOW (read-only enumeration, safe), ESCALATE (requires Planner falsification step), DENY (destructive, lateral movement, persistence, data exfiltration, privilege escalation beyond scope). Command: '{command}'. Context: Target={target}, Session={session_id}, User={username}, WorkingDir={cwd}. Respond with JSON: {\"decision\": \"ALLOW|ESCALATE|DENY\", \"reason\": \"...\", \"risk_level\": \"LOW|MEDIUM|HIGH|CRITICAL\"}.",
+          "decisions": {
+            "ALLOW": "Execute immediately; log to session.command_log",
+            "ESCALATE": "Pause command; create FalsificationTask for Planner; resume only if Planner confirms with evidence",
+            "DENY": "Reject command; increment denied_command_count; if > 3 in 60s → auto-terminate session"
+          }
+        }
+      },
+      {
+        "name": "TTYNormalizer",
+        "description": "Converts raw ANSI/terminal byte streams into structured Evidence for EvidenceGraph and WorldModel.",
+        "pipeline": [
+          "Strip ANSI escape sequences (colors, cursor movement, OSC)",
+          "Handle backspace/delete (reconstruct logical line)",
+          "Detect prompt (regex: PS1 patterns, $/#/>) to segment command/response",
+          "Parse structured output: JSON, XML, CSV, key=value, table formats",
+          "Extract observables: file paths, IPs, users, processes, ports, hashes, credentials",
+          "Emit Evidence objects with type: COMMAND_OUTPUT, FILE_CONTENT, PROCESS_LIST, NETWORK_CONNECTIONS, USER_ACCOUNTS, CREDENTIAL, VULNERABILITY_INDICATOR"
+        ],
+        "output": "EvidenceGraph.add_evidence(evidence) → WorldModel.update_host_state(target, evidence)"
+      }
+    ]
+  },
+  "capability_broker_extensions": {
+    "new_methods": [
+      {
+        "name": "authorize_shell_session",
+        "signature": "authorize_shell_session(proposal: ShellSessionProposal) -> SessionReceipt",
+        "description": "Validates session proposal against scope, creates ShellSession in AUTHORIZED state, provisions listener if reverse shell.",
+        "validation": [
+          "Target in authorized scope (CIDR/hostname list)",
+          "Capability type registered",
+          "LHOST/LPORT in authorized egress range (for reverse shells)",
+          "Max duration <= policy limit (default 1h)",
+          "Allowed commands pattern is safe regex (no ReDoS)",
+          "Authentication method permitted for target"
+        ],
+        "returns": "SessionReceipt { session_id, authorized: true, expires_at, restrictions: { allowed_commands_pattern, max_idle, heartbeat_interval }, listener_info?: { lhost, lport, protocol } }"
+      },
+      {
+        "name": "authorize_shell_command",
+        "signature": "authorize_shell_command(session_id: str, command: str, context: dict) -> CommandReceipt",
+        "description": "Per-command authorization. Runs CommandFilterPipeline.",
+        "validation": [
+          "Session exists and is ACTIVE",
+          "Session not expired",
+          "Command passes Tier 1 (allowlist) → ALLOW",
+          "Command fails Tier 1 → Tier 2 LLM classifier",
+          "Tier 2 ALLOW → execute",
+          "Tier 2 ESCALATE → create FalsificationTask, return PENDING_FALSIFICATION",
+          "Tier 2 DENY → reject, increment denied counter, check auto-terminate threshold"
+        ],
+        "returns": "CommandReceipt { authorized: bool, decision: ALLOW|ESCALATE|DENY, reason, falsification_task_id?, session_status }"
+      },
+      {
+        "name": "terminate_shell_session",
+        "signature": "terminate_shell_session(session_id: str, reason: str) -> TerminationReceipt",
+        "description": "Force-closes session. Called by Broker (timeout, policy violation) or Planner (objective complete)."
+      },
+      {
+        "name": "get_shell_session",
+        "signature": "get_shell_session(session_id: str) -> ShellSession | None",
+        "description": "Read-only session state for Planner/Evaluator."
+      },
+      {
+        "name": "list_active_shell_sessions",
+        "signature": "list_active_shell_sessions() -> list[ShellSession]",
+        "description": "Monitoring/debugging."
+      }
+    ],
+    "session_revocation_hooks": [
+      "On SafetyVerifier violation → immediate terminate_shell_session()",
+      "On max_duration expiry → terminate_shell_session()",
+      "On max_idle expiry → terminate_shell_session()",
+      "On denied_command_count > threshold → terminate_shell_session()",
+      "On Planner request (objective complete) → terminate_shell_session()"
+    ]
+  },
+  "planner_integration": {
+    "candidate_types": [
+      {
+        "action_type": "shell_connect",
+        "description": "Propose new interactive shell session",
+        "required_fields": ["capability_type", "target", "username", "auth_method", "lhost", "lport", "max_duration", "allowed_commands_pattern"]
+      },
+      {
+        "action_type": "shell_command",
+        "description": "Propose command within existing session",
+        "required_fields": ["session_id", "command"]
+      },
+      {
+        "action_type": "shell_disconnect",
+        "description": "Propose graceful session termination",
+        "required_fields": ["session_id", "reason"]
+      }
+    ],
+    "falsification_tasks": [
+      {
+        "trigger": "CommandFilterPipeline.Tier2 decision = ESCALATE",
+        "task_type": "COMMAND_INTENT_FALSIFICATION",
+        "description": "Planner must prove command is safe and necessary for current objective. Evidence required: expected output pattern, risk mitigation, rollback plan.",
+        "timeout_seconds": 120,
+        "on_pass": "CommandReceipt.authorized = true",
+        "on_fail": "CommandReceipt.authorized = false, session.denied_command_count++"
+      }
+    ]
+  },
+  "evidence_ingestion": {
+    "evidence_types": [
+      {
+        "type": "COMMAND_EXECUTED",
+        "fields": ["session_id", "command", "exit_code", "duration_ms", "stdout_bytes", "stderr_bytes"]
+      },
+      {
+        "type": "COMMAND_OUTPUT",
+        "fields": ["session_id", "command", "output_text", "parsed_observables"]
+      },
+      {
+        "type": "FILE_CONTENT",
+        "fields": ["session_id", "path", "content", "size", "permissions", "owner", "hash_sha256"]
+      },
+      {
+        "type": "PROCESS_LIST",
+        "fields": ["session_id", "processes: list[{pid, ppid, user, cmd, cpu, mem}]"]
+      },
+      {
+        "type": "NETWORK_CONNECTIONS",
+        "fields": ["session_id", "connections: list[{proto, local_addr, remote_addr, state, pid}]"]
+      },
+      {
+        "type": "USER_ACCOUNTS",
+        "fields": ["session_id", "accounts: list[{username, uid, gid, home, shell, groups}]"]
+      },
+      {
+        "type": "CREDENTIAL",
+        "fields": ["session_id", "cred_type: password|hash|key|token", "username", "secret_hash", "source_file"]
+      },
+      {
+        "type": "VULNERABILITY_INDICATOR",
+        "fields": ["session_id", "vuln_class", "description", "evidence_text", "confidence"]
+      }
+    ],
+    "worldmodel_updates": "Each Evidence → WorldModel.update_host_state(target, evidence) → updates HostState.{files, processes, network, users, credentials, vulns}"
+  },
+  "egress_control": {
+    "listener_management": {
+      "provisioned_by": "CapabilityBroker only (never Planner or Capability directly)",
+      "allowed_protocols": ["tcp", "tls"],
+      "allowed_lhost": "Configurable CIDR list (default: 127.0.0.1/32, tun0/32)",
+      "allowed_lport_range": "Configurable (default: 4444-4544)",
+      "listener_lifecycle": "Created on authorize_shell_session (reverse_tcp); destroyed on terminate_shell_session"
+    },
+    "callback_validation": {
+      "on_connect": "Verify source IP in authorized scope; verify destination port matches authorized listener",
+      "on_command": "Verify session_id matches active session; verify command authorized"
+    }
+  },
+  "safety_invariants": [
+    "INV-E1-01: No shell session exists without a valid SessionReceipt from CapabilityBroker.",
+    "INV-E1-02: No command executes in a shell session without a CommandReceipt (ALLOW or ESCALATE+PASS).",
+    "INV-E1-03: Reverse shell listeners only bind to authorized LHOST/LPORT provisioned by Broker.",
+    "INV-E1-04: Shell sessions cannot exceed max_duration; auto-terminate on expiry.",
+    "INV-E1-05: Idle sessions auto-terminate after max_idle seconds.",
+    "INV-E1-06: Denied command threshold (default 3 in 60s) triggers session termination.",
+    "INV-E1-07: All TTY output normalized to Evidence within 5 seconds of receipt.",
+    "INV-E1-08: ShellSession state persisted to SQLite (sessions.db) for crash recovery.",
+    "INV-E1-09: CapabilityBroker holds exclusive kill-switch; no component can bypass terminate_shell_session()."
+  ],
+  "configuration": {
+    "defaults": {
+      "max_session_duration_seconds": 3600,
+      "max_idle_seconds": 300,
+      "heartbeat_interval_seconds": 30,
+      "allowed_commands_pattern": "^(ls|cat|id|pwd|whoami|uname|ps|netstat|ss|find|grep|head|tail|less|more|file|stat|which|python3|python|bash|sh|zsh|exit|clear|history|env|echo|cd|mkdir|touch|cp|mv|rm|chmod|chown)$",
+      "denied_command_threshold": 3,
+      "denied_command_window_seconds": 60,
+      "listener_lhost_cidrs": ["127.0.0.1/32"],
+      "listener_lport_range": [4444, 4544],
+      "pty_cols": 120,
+      "pty_rows": 40,
+      "falsification_timeout_seconds": 120,
+      "output_normalization_timeout_seconds": 5
+    },
+    "overrides": "Per-session overrides allowed via ShellSessionProposal fields; validated by Broker against policy maximums."
+  },
+  "testing_requirements": {
+    "unit": [
+      "CommandFilterPipeline: allowlist matches, denies, LLM classifier mock",
+      "ShellSession lifecycle transitions",
+      "TTYNormalizer: ANSI strip, backspace, prompt detection, JSON/table parsing",
+      "SessionReceipt/CommandReceipt serialization"
+    ],
+    "integration": [
+      "Broker.authorize_shell_session → ReverseShellCapability.connect → command → output → EvidenceGraph",
+      "Broker.authorize_shell_command: ALLOW path",
+      "Broker.authorize_shell_command: ESCALATE → FalsificationTask → pass → execute",
+      "Broker.authorize_shell_command: DENY → counter increment → threshold → terminate",
+      "Session timeout: max_duration expiry",
+      "Session timeout: max_idle expiry",
+      "SafetyVerifier violation → immediate terminate",
+      "Crash recovery: sessions.db persists, sessions resume or clean up on restart"
+    ],
+    "adversarial": [
+      "Command injection in proposed command (semicolon, backtick, $(), &&, ||)",
+      "ANSI escape sequence injection in output",
+      "Prompt spoofing (fake PS1 to confuse normalizer)",
+      "Reverse shell callback from unauthorized IP",
+      "Listener port collision / hijacking",
+      "Session fixation / hijacking",
+      "LLM classifier prompt injection via command string"
+    ]
+  },
+  "files_to_create": [
+    "orchestrator/capabilities/interactive_shell/__init__.py",
+    "orchestrator/capabilities/interactive_shell/capability.py",
+    "orchestrator/capabilities/interactive_shell/ssh_shell.py",
+    "orchestrator/capabilities/interactive_shell/reverse_shell.py",
+    "orchestrator/capabilities/interactive_shell/session.py",
+    "orchestrator/capabilities/interactive_shell/command_filter.py",
+    "orchestrator/capabilities/interactive_shell/tty_normalizer.py",
+    "orchestrator/capabilities/interactive_shell/listener_manager.py",
+    "orchestrator/brain/action.py (extend CapabilityBroker)",
+    "orchestrator/brain/evidence.py (extend Evidence types)",
+    "orchestrator/brain/world_model.py (extend HostState)",
+    "tests/e1_interactive_shell_test.py"
+  ],
+  "rollback_plan": "If E1 causes instability: CapabilityBroker.unregister_capability('interactive_shell'); terminate all active sessions; disable shell_* candidate types in Planner.",
+  "seal_criteria": [
+    "Spec reviewed by SENTINEL",
+    "All safety invariants have corresponding implementation tests",
+    "CommandFilterPipeline LLM classifier prompt frozen",
+    "Egress control listener CIDR/port ranges configured for deployment environment",
+    "Rollback plan validated in staging"
+  ]
+}

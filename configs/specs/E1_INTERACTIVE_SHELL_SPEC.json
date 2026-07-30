@@ -1,0 +1,45 @@
+{
+  "spec_id": "E1_INTERACTIVE_SHELL_SPEC",
+  "version": "1.0.0",
+  "status": "SEALED",
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-30",
+    "authority": "SENTINEL Charter §28, §43, §58"
+  },
+  "series": "E-Series",
+  "phase": "E1",
+  "title": "Interactive Shell Capability — Stateful Execution with Brokered Command Authorization",
+  "description": "Extends the CapabilityBroker to authorize and manage stateful interactive shell sessions (SSH, reverse shells, pseudo-TTYs). Introduces dual-gate authorization (session + per-command), command filtering pipeline, and TTY output ingestion into EvidenceGraph/WorldModel.",
+  "charter_references": ["Section 28: Capability Registration", "Section 43: Execution Authorization", "Section 58: Session Lifecycle", "Section 60: Egress Control"],
+  "dependencies": {
+    "required": [
+      "D-Series (Cognitive Architecture): Arena, Planner, CapabilityBroker, SafetyVerifier, Evaluator, WorldModel, EvidenceGraph",
+      "S-Series (Student Integration): StudentCandidateGenerator, PlannerAdvisor, KnowledgeBackgroundService"
+    ],
+    "forbidden_modifications": [
+      "D-Series core logic (frozen)",
+      "S-Series core logic (frozen)",
+      "CapabilityBroker public interface (only extension via register_capability)"
+    ]
+  },
+  "architecture": {
+    "overview": "Interactive shells are stateful, long-lived capabilities. Unlike stateless probes (HTTP, banner grabs), a shell session maintains a persistent connection with bidirectional I/O. The architecture introduces: (1) InteractiveShellCapability — wrapper around pwntools/paramiko/sshlib; (2) ShellSession — brokered state object tracked by CapabilityBroker; (3) CommandFilterPipeline — static allowlist + LLM intent classifier; (4) TTYNormalizer — converts raw ANSI/terminal output to structured Evidence.",
+    "components": [
+      {
+        "name": "InteractiveShellCapability",
+        "type": "Capability",
+        "interface": {
+          "connect": "Establish connection (SSH, reverse shell, bind shell, meterpreter). Returns ShellSession.",
+          "send_command": "Send a single command string; returns raw output (stdout+stderr) and exit code.",
+          "send_raw": "Send raw bytes (for interactive prompts, Ctrl-C, etc.).",
+          "read_output": "Read available output with timeout.",
+          "resize_pty": "Resize pseudo-terminal (cols, rows).",
+          "close": "Gracefully terminate session.",
+          "is_alive": "Check connection health."
+        }
+      }
+    ]
+  }
+}

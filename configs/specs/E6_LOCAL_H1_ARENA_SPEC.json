@@ -1,0 +1,21 @@
+{
+  "spec_id": "E6_LOCAL_H1_ARENA_SPEC",
+  "version": "1.0.0",
+  "status": "SEALED",
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-29",
+    "authority": "SENTINEL Charter §28, §43, §58"
+  },
+  "title": "E6 Local H1 Arena — LFI→SSH Key→SUID Privesc",
+  "target": "Custom target with LFI vulnerability",
+  "description": "H1-style local arena: LFI → SSH private key extraction → SUID privilege escalation.",
+  "kill_chain": ["LFI", "SSH Key", "SUID Privesc"],
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-29",
+    "authority": "SENTINEL Charter §28, §43, §58"
+  }
+}

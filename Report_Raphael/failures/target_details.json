@@ -1,0 +1,194 @@
+{
+  "www": {
+    "target": "vulnu-lab-www (CentOS 6 / Apache 2.2 / PHP 5.6)",
+    "technologies": [
+      "apache 2.2.15",
+      "php 5.6.31",
+      "centos 6",
+      "mysql 5.7"
+    ],
+    "versions": {
+      "apache": 2.2
+    },
+    "cves": [
+      {
+        "cve": "CVE-2017-9798",
+        "description": "Optionsbleed",
+        "version": "2.2"
+      },
+      {
+        "cve": "CVE-2015-0228",
+        "description": "mod_lua DoS",
+        "version": "2.2"
+      }
+    ],
+    "risk_score": 9,
+    "vulnerabilities": [
+      {
+        "type": "sqli",
+        "endpoint": "/login.php",
+        "param": "username",
+        "method": "POST",
+        "severity": "critical",
+        "flag": "FLAG{user_db_sqli}"
+      },
+      {
+        "type": "sqli",
+        "endpoint": "/search.php",
+        "param": "q",
+        "method": "GET",
+        "severity": "high"
+      },
+      {
+        "type": "lfi",
+        "endpoint": "/page.php",
+        "param": "file",
+        "method": "GET",
+        "severity": "high",
+        "path": "/etc/passwd"
+      },
+      {
+        "type": "file_upload",
+        "endpoint": "/profile/avatar.php",
+        "param": "avatar",
+        "method": "POST",
+        "severity": "critical",
+        "extension": ".php"
+      },
+      {
+        "type": "info_disclosure",
+        "endpoint": "/db_backup.sql",
+        "method": "GET",
+        "severity": "medium"
+      },
+      {
+        "type": "directory_listing",
+        "endpoint": "/admin/",
+        "method": "GET",
+        "severity": "low"
+      },
+      {
+        "type": "directory_listing",
+        "endpoint": "/backup/",
+        "method": "GET",
+        "severity": "low"
+      }
+    ]
+  },
+  "www-flask": {
+    "target": "vulnu-lab-www-flask (Python Flask CMS)",
+    "technologies": [
+      "python 3.9",
+      "flask",
+      "sqlite"
+    ],
+    "versions": {},
+    "cves": [],
+    "risk_score": 7,
+    "vulnerabilities": [
+      {
+        "type": "sqli",
+        "endpoint": "/login",
+        "param": "username",
+        "method": "POST",
+        "severity": "critical",
+        "flag": "FLAG{user_db_sqli}"
+      },
+      {
+        "type": "sqli",
+        "endpoint": "/search",
+        "param": "q",
+        "method": "GET",
+        "severity": "high"
+      },
+      {
+        "type": "lfi",
+        "endpoint": "/page",
+        "param": "file",
+        "method": "GET",
+        "severity": "high"
+      },
+      {
+        "type": "file_upload",
+        "endpoint": "/upload",
+        "param": "file",
+        "method": "POST",
+        "severity": "critical"
+      }
+    ]
+  },
+  "ums": {
+    "target": "vulnu-lab-ums-flask (Python Flask UMS)",
+    "technologies": [
+      "python 3.9",
+      "flask"
+    ],
+    "versions": {},
+    "cves": [],
+    "risk_score": 7,
+    "vulnerabilities": [
+      {
+        "type": "idor",
+        "endpoint": "/students/view",
+        "param": "id",
+        "method": "GET",
+        "severity": "high",
+        "note": "No auth check, iterable IDs"
+      },
+      {
+        "type": "mass_assignment",
+        "endpoint": "/api/profile/update",
+        "method": "POST",
+        "severity": "medium",
+        "note": "No field whitelist"
+      },
+      {
+        "type": "info_disclosure",
+        "endpoint": "/api/health",
+        "method": "GET",
+        "severity": "low",
+        "note": "Debug endpoint leaks config"
+      }
+    ]
+  },
+  "nertu": {
+    "target": "vulnu-lab-nertu (Tomcat 9 / Oracle JSP)",
+    "technologies": [
+      "tomcat 9.0",
+      "oracle 21",
+      "java 11"
+    ],
+    "versions": {
+      "tomcat": 9.0
+    },
+    "cves": [
+      {
+        "cve": "CVE-2020-1938",
+        "description": "AJP Ghostcat",
+        "version": "9.0"
+      },
+      {
+        "cve": "CVE-2024-21733",
+        "description": "Session fixation",
+        "version": "9.0"
+      }
+    ],
+    "risk_score": 9,
+    "vulnerabilities": [
+      {
+        "type": "sqli",
+        "endpoint": "/res07/2025.jsp",
+        "param": "id",
+        "method": "GET",
+        "severity": "critical",
+        "db": "Oracle XE"
+      },
+      {
+        "type": "ghostcat",
+        "endpoint": "ajp://host:8009/",
+        "cve": "CVE-2020-1938",
+        "severity": "critical"
+      }
+    ]
+  }
+}

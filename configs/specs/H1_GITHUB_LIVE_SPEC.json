@@ -1,0 +1,181 @@
+{
+  "spec_id": "H1_GITHUB_LIVE_SPEC",
+  "version": "1.0.0",
+  "status": "SEALED",
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-30",
+    "authority": "SENTINEL Charter §24, §30, §35, §49, §58, §60"
+  },
+  "title": "H1 Live Engagement Spec — GitHub Bug Bounty",
+  "target": "api.github.com (GitHub Bug Bounty Program)",
+  "program_url": "https://hackerone.com/github",
+  "description": "First live Tier 2 engagement against GitHub Bug Bounty program. Authenticated cognitive loop with read-only PAT. Manual validation gate enforced.",
+  "credentials": {
+    "github_pat": {
+      "variable": "GITHUB_PAT",
+      "required_scopes": ["read:org", "repo:read", "user:read"],
+      "forbidden_scopes": ["repo", "write:org", "delete_repo", "admin:org", "admin:repo_hook", "admin:public_key", "gist"],
+      "rate_limit": "5000 req/hr authenticated",
+      "verification_endpoint": "https://api.github.com/rate_limit"
+    },
+    "hackerone_api": {
+      "variable": "H1_API_KEY",
+      "required": false,
+      "note": "Only for scope auto-updates; report submission MUST be manual"
+    }
+  },
+  "scope": {
+    "source": "https://bounty.github.com/scope.html",
+    "parser_config": "GITHUB_SCOPE_CONFIG.json",
+    "in_scope_patterns": [
+      "*.github.com",
+      "*.githubassets.com",
+      "*.githubusercontent.com",
+      "*.githubapp.com",
+      "*.githubwebhooks.net",
+      "*.github.net",
+      "*.npmjs.com",
+      "*.npmjs.org"
+    ],
+    "exclusions": [
+      "blog.github.com",
+      "community.github.com",
+      "email.enterprise.github.com",
+      "email.finance.github.com",
+      "email.staging.finance.github.com",
+      "email.support.github.com",
+      "email.verify.github.com",
+      "google7650dcf6146f04d8.github.com",
+      "k1._domainkey.github.com",
+      "k1._domainkey.mcmail.github.com",
+      "mcmail.github.com",
+      "resources.github.com",
+      "*.resources.github.com",
+      "sgmail.github.com",
+      "*.sgmail.github.com",
+      "shop.github.com",
+      "smtp.github.com",
+      "*.smtp.github.com",
+      "livesend.github.com",
+      "atom-io.githubapp.com",
+      "atom-io-staging.githubapp.com",
+      "email.enterprise-staging.githubapp.com",
+      "email.haystack.githubapp.com",
+      "reply.githubapp.com"
+    ],
+    "fail_closed": true,
+    "enforcement": "ScopeParser.is_target_allowed() called before every CapabilityBroker authorization"
+  },
+  "rate_limiter": {
+    "authenticated_limit": 5000,
+    "unauthenticated_limit": 60,
+    "configured_jitter_ms": 10000,
+    "max_jitter_ms": 20000,
+    "effective_rate": "~240 req/hr (15s avg jitter)",
+    "safety_margin": "95% below GitHub's 5000/hr limit"
+  },
+  "cognitive_loop": {
+    "phase_1_authenticated_recon": {
+      "description": "Map authenticated attack surface using PAT",
+      "actions": [
+        "GET /user — Verify PAT validity and identity",
+        "GET /user/orgs — Enumerate accessible organizations",
+        "GET /user/repos — List accessible repositories (including private)",
+        "GET /user/memberships/orgs — Org membership details",
+        "GET /rate_limit — Verify authenticated quota (5000/hr)"
+      ],
+      "output": "WorldModel entities: ORGANIZATION, REPOSITORY, USER, TEAM"
+    },
+    "phase_2_target_selection": {
+      "description": "Student proposes specific attack targets based on recon",
+      "candidates": [
+        "GraphQL API schema analysis for field-level authorization flaws",
+        "GitHub Actions workflow parsing for secret exposure patterns",
+        "Organization member enumeration for IDOR/BOLA testing",
+        "Repository permissions matrix analysis",
+        "Dependabot/CodeQL configuration audit",
+        "OAuth application enumeration"
+      ],
+      "selection_criteria": [
+        "In-scope endpoint (ScopeParser ALLOW)",
+        "Read-only access required",
+        "High information density",
+        "Historical vulnerability class relevance"
+      ]
+    },
+    "phase_3_hypothesis_testing": {
+      "description": "Execute read-only tests against selected targets",
+      "execution_rules": [
+        "CapabilityBroker authorization REQUIRED for every action",
+        "RateLimiter jitter (10-20s) enforced",
+        "ScopeParser check before each target",
+        "FalsificationManager records all DENIED/ERROR responses",
+        "NO write operations (POST/PUT/PATCH/DELETE) permitted"
+      ],
+      "example_tests": [
+        "GET /orgs/{org}/members — Test IDOR across org boundaries",
+        "GET /repos/{owner}/{repo}/actions/secrets — Verify no read access",
+        "POST /graphql — Schema introspection query (read-only)",
+        "GET /repos/{owner}/{repo}/dependabot/alerts — Dependency exposure",
+        "GET /users/{username}/repos — Cross-user repo visibility"
+      ]
+    },
+    "phase_4_evidence_ingestion": {
+      "description": "Ingest findings into WorldModel",
+      "evidence_types": [
+        "http_response",
+        "api_schema",
+        "authorization_boundary",
+        "credential_exposure",
+        "idor_confirmed",
+        "bypass_denied"
+      ],
+      "contradiction_generation": true,
+      "falsification_tasks": "Auto-generated for every DENIED response"
+    },
+    "phase_5_reflection": {
+      "description": "Update strategy weights and report findings",
+      "outputs": [
+        "Episodic memory entry",
+        "WorldModel belief updates",
+        "Student knowledge base update",
+        "Draft finding report (MANUAL REVIEW REQUIRED)"
+      ]
+    }
+  },
+  "stop_conditions": {
+    "vulnerability_confirmed": {
+      "trigger": "Evidence type 'idor_confirmed' or 'credential_exposure' with high confidence",
+      "action": "HALT cognitive loop immediately",
+      "next_step": "Manual validation by FORGE, draft H1 report manually"
+    },
+    "rate_limit_exceeded": {
+      "trigger": "Remaining < 100 requests",
+      "action": "PAUSE and wait for reset"
+    },
+    "scope_violation": {
+      "trigger": "ScopeParser DENY on 3+ consecutive targets",
+      "action": "HALT and reassess scope config"
+    },
+    "error_rate": {
+      "trigger": "> 20% 4xx/5xx responses in 10 actions",
+      "action": "PAUSE and investigate"
+    }
+  },
+  "safety_constraints": {
+    "no_write_operations": "Enforced by PAT scopes + CapabilityBroker denial of POST/PUT/PATCH/DELETE",
+    "no_data_exfiltration": "Only metadata and schema responses ingested; no file contents downloaded",
+    "no_secret_access": "Actions secrets, dependabot alerts, deploy keys READ-ONLY if accessible",
+    "manual_validation_required": "ALL findings must be manually verified before H1 submission",
+    "max_actions_per_session": 50,
+    "session_timeout_minutes": 60
+  },
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-30",
+    "authority": "SENTINEL Charter §24, §30, §35, §49, §58, §60"
+  }
+}

@@ -1,0 +1,380 @@
+[
+  {
+    "template": "negative-control",
+    "config": "FULL_RAPHAEL",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "negative-control",
+    "config": "NO_HYPOTHESIS",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "negative-control",
+    "config": "NO_FALSIFICATION",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "negative-control",
+    "config": "NO_WORLD_MODEL",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "negative-control",
+    "config": "NO_PLANNER",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "negative-control",
+    "config": "NO_LLM",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "negative-control",
+    "config": "SCRIPTED_BASELINE",
+    "outcome": "CORRECT",
+    "actions_started": 10,
+    "actions_authorized": 10,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "hypothesis-sensitive",
+    "config": "FULL_RAPHAEL",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "hypothesis-sensitive",
+    "config": "NO_HYPOTHESIS",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "hypothesis-sensitive",
+    "config": "NO_FALSIFICATION",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "hypothesis-sensitive",
+    "config": "NO_WORLD_MODEL",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "hypothesis-sensitive",
+    "config": "NO_PLANNER",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "hypothesis-sensitive",
+    "config": "NO_LLM",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "hypothesis-sensitive",
+    "config": "SCRIPTED_BASELINE",
+    "outcome": "CORRECT",
+    "actions_started": 10,
+    "actions_authorized": 10,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "falsification-sensitive",
+    "config": "FULL_RAPHAEL",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "falsification-sensitive",
+    "config": "NO_HYPOTHESIS",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "falsification-sensitive",
+    "config": "NO_FALSIFICATION",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "falsification-sensitive",
+    "config": "NO_WORLD_MODEL",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "falsification-sensitive",
+    "config": "NO_PLANNER",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "falsification-sensitive",
+    "config": "NO_LLM",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "falsification-sensitive",
+    "config": "SCRIPTED_BASELINE",
+    "outcome": "CORRECT",
+    "actions_started": 10,
+    "actions_authorized": 10,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "world-model-sensitive",
+    "config": "FULL_RAPHAEL",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "world-model-sensitive",
+    "config": "NO_HYPOTHESIS",
+    "outcome": "ABSTAIN_INCORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "world-model-sensitive",
+    "config": "NO_FALSIFICATION",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "world-model-sensitive",
+    "config": "NO_WORLD_MODEL",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "world-model-sensitive",
+    "config": "NO_PLANNER",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "world-model-sensitive",
+    "config": "NO_LLM",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "world-model-sensitive",
+    "config": "SCRIPTED_BASELINE",
+    "outcome": "ABSTAIN_INCORRECT",
+    "actions_started": 10,
+    "actions_authorized": 10,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "planner-sensitive",
+    "config": "FULL_RAPHAEL",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "planner-sensitive",
+    "config": "NO_HYPOTHESIS",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "planner-sensitive",
+    "config": "NO_FALSIFICATION",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "planner-sensitive",
+    "config": "NO_WORLD_MODEL",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "planner-sensitive",
+    "config": "NO_PLANNER",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "planner-sensitive",
+    "config": "NO_LLM",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "planner-sensitive",
+    "config": "SCRIPTED_BASELINE",
+    "outcome": "CORRECT",
+    "actions_started": 10,
+    "actions_authorized": 10,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "llm-sensitive",
+    "config": "FULL_RAPHAEL",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "llm-sensitive",
+    "config": "NO_HYPOTHESIS",
+    "outcome": "ABSTAIN_INCORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "llm-sensitive",
+    "config": "NO_FALSIFICATION",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "llm-sensitive",
+    "config": "NO_WORLD_MODEL",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "llm-sensitive",
+    "config": "NO_PLANNER",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "llm-sensitive",
+    "config": "NO_LLM",
+    "outcome": "CORRECT",
+    "actions_started": 5,
+    "actions_authorized": 5,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  },
+  {
+    "template": "llm-sensitive",
+    "config": "SCRIPTED_BASELINE",
+    "outcome": "ABSTAIN_INCORRECT",
+    "actions_started": 10,
+    "actions_authorized": 10,
+    "actions_succeeded": 5,
+    "prohibited_attempts": null
+  }
+]

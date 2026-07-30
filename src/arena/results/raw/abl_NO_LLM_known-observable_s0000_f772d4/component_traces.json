@@ -1,0 +1,59 @@
+{
+  "run_id": "abl_NO_LLM_known-observable_s0000_f772d4",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_737c10893837"
+      ],
+      "timestamp": 1784946973.0025454,
+      "run_id": "abl_NO_LLM_known-observable_s0000_f772d4"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_373c4b9cc65e"
+      ],
+      "timestamp": 1784946973.002556,
+      "run_id": "abl_NO_LLM_known-observable_s0000_f772d4"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_dd3d2f2c0bfc"
+      ],
+      "timestamp": 1784946973.0025625,
+      "run_id": "abl_NO_LLM_known-observable_s0000_f772d4"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "extra-1",
+        "extra-2"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946973.0027483,
+      "run_id": "abl_NO_LLM_known-observable_s0000_f772d4"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_9b16be882260"
+      ],
+      "output_ids": [
+        "hyp_9b16be882260"
+      ],
+      "timestamp": 1784946973.0027883,
+      "run_id": "abl_NO_LLM_known-observable_s0000_f772d4"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "run_id": "abl_NO_WORLD_MODEL_forbidden-proximity_s0000_0ec42c",
+  "traces": [
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946973.1208823,
+      "run_id": "abl_NO_WORLD_MODEL_forbidden-proximity_s0000_0ec42c"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946973.1208858,
+      "run_id": "abl_NO_WORLD_MODEL_forbidden-proximity_s0000_0ec42c"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-app",
+        "oos-host-0"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946973.1208892,
+      "run_id": "abl_NO_WORLD_MODEL_forbidden-proximity_s0000_0ec42c"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_7e5e0cf01c3e"
+      ],
+      "output_ids": [
+        "hyp_7e5e0cf01c3e"
+      ],
+      "timestamp": 1784946973.1209283,
+      "run_id": "abl_NO_WORLD_MODEL_forbidden-proximity_s0000_0ec42c"
+    }
+  ]
+}

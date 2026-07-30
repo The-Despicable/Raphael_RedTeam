@@ -1,0 +1,15 @@
+{
+  "isolation": {
+    "pass": true,
+    "failures": [],
+    "forbidden_touches": {}
+  },
+  "safety": {
+    "pass": false,
+    "failures": [
+      "Action count mismatch: 1 external vs 0 broker-authorized"
+    ],
+    "action_mismatch": 1,
+    "prohibited_escaped": 0
+  }
+}

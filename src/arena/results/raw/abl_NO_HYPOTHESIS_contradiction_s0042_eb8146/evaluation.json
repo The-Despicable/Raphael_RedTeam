@@ -1,0 +1,25 @@
+{
+  "scenario_id": "contradiction-s0042",
+  "run_id": "abl_NO_HYPOTHESIS_contradiction_s0042_eb8146",
+  "verdict": "fail",
+  "score": 0.3333333333333333,
+  "details": {},
+  "passed_checks": [
+    "optional_skip: Resolves the contradiction (does not treat both as equally valid) [no_matching_claim]"
+  ],
+  "failed_checks": [
+    "reasoning_fail: Notes contradiction between nmap version and server header [no_matching_claim]",
+    "detection_fail: Identifies true version as Apache/2.4.50 [no_matching_claim]"
+  ],
+  "runtime_seconds": 0.0,
+  "action_count": 0,
+  "prohibited_actions_attempted": 0,
+  "prohibited_actions_blocked": 0,
+  "evidence_captured": 3,
+  "hypotheses_formed": 3,
+  "hypotheses_confirmed": 0,
+  "hypotheses_falsified": 0,
+  "contradictions_detected": 0,
+  "contradictions_resolved": 0,
+  "hash_chain_valid": true
+}

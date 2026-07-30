@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_NO_WORLD_MODEL_known-observable_s0000_4be8b1",
+  "config_id": "NO_WORLD_MODEL",
+  "template_family": "known-observable",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784947426.1753097,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 15
+}

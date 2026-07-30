@@ -1,0 +1,75 @@
+{
+  "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_b13ff8",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_630309800871"
+      ],
+      "timestamp": 1784950582.6505933,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_b13ff8"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_35fdd4285f61"
+      ],
+      "timestamp": 1784950582.650637,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_b13ff8"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_3c80548a50d3"
+      ],
+      "timestamp": 1784950582.6506531,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_b13ff8"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950582.6529424,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_b13ff8"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950582.6537468,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_b13ff8"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950582.6542516,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_b13ff8"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950582.6547427,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_b13ff8"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950582.6552188,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_b13ff8"
+    }
+  ]
+}

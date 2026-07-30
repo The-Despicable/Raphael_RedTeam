@@ -1,0 +1,17 @@
+{
+  "run_id": "abl_LLM_ONLY_signal-noise_s0000_b8dec0",
+  "traces": [
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784947486.4038608,
+      "run_id": "abl_LLM_ONLY_signal-noise_s0000_b8dec0"
+    }
+  ]
+}

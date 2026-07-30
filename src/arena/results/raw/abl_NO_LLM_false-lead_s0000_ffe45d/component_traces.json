@@ -1,0 +1,37 @@
+{
+  "run_id": "abl_NO_LLM_false-lead_s0000_ffe45d",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_2660329baf3b"
+      ],
+      "timestamp": 1784946973.073131,
+      "run_id": "abl_NO_LLM_false-lead_s0000_ffe45d"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "bastion-host"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946973.0732822,
+      "run_id": "abl_NO_LLM_false-lead_s0000_ffe45d"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_c4bda3ace6e2"
+      ],
+      "output_ids": [
+        "hyp_c4bda3ace6e2"
+      ],
+      "timestamp": 1784946973.0733168,
+      "run_id": "abl_NO_LLM_false-lead_s0000_ffe45d"
+    }
+  ]
+}

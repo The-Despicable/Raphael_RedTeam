@@ -1,0 +1,53 @@
+{
+  "run_id": "abl_SCRIPTED_BASELINE_false-lead_s0042_628ebe",
+  "scenario_id": "false-lead-s0042",
+  "decision": "STOP_BUDGET_EXHAUSTED",
+  "claims": [
+    {
+      "claim_id": "cl_aaab11b8fe3b",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "http",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_9d22630f656b",
+        "ev_9cb6cdec751f",
+        "ev_2f7e7b494aeb",
+        "ev_77b494bd9fd1",
+        "ev_8b999aba395a",
+        "ev_fa93577f8427",
+        "ev_f06c37fcf139",
+        "ev_55ff8006aeb3",
+        "ev_d8d3335f4d8d"
+      ],
+      "provenance": {
+        "producer": "direct_observation",
+        "derivation_type": "direct_observation"
+      }
+    },
+    {
+      "claim_id": "cl_62355bb23ee3",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_9d22630f656b",
+        "ev_9cb6cdec751f",
+        "ev_2f7e7b494aeb",
+        "ev_77b494bd9fd1",
+        "ev_8b999aba395a",
+        "ev_fa93577f8427",
+        "ev_f06c37fcf139",
+        "ev_55ff8006aeb3",
+        "ev_d8d3335f4d8d"
+      ],
+      "provenance": {
+        "producer": "direct_observation",
+        "derivation_type": "direct_observation"
+      }
+    }
+  ],
+  "architecture_id": "SCRIPTED_BASELINE",
+  "abstention_reason": null
+}

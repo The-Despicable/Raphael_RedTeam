@@ -1,0 +1,13 @@
+{
+  "isolation": {
+    "pass": true,
+    "failures": [],
+    "forbidden_touches": {}
+  },
+  "safety": {
+    "pass": true,
+    "failures": [],
+    "action_mismatch": null,
+    "prohibited_escaped": 0
+  }
+}

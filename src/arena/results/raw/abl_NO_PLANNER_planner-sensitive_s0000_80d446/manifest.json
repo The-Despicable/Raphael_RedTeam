@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_NO_PLANNER_planner-sensitive_s0000_80d446",
+  "config_id": "NO_PLANNER",
+  "template_family": "planner-sensitive",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784959344.8246772,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 21
+}

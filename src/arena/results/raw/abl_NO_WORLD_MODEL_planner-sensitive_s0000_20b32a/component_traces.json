@@ -1,0 +1,219 @@
+{
+  "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a",
+  "traces": [
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "ev_f7c404ec4788",
+        "ev_afffda3f3dc9"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954806.9733365,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_1469f3397740"
+      ],
+      "output_ids": [
+        "hyp_1469f3397740"
+      ],
+      "timestamp": 1784954806.973399,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_1469f3397740"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954806.9736705,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954806.974703,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "ev_f7c404ec4788",
+        "ev_afffda3f3dc9",
+        "ev_92a8dd728cd1"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954806.9747152,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_8e0505696c22"
+      ],
+      "output_ids": [
+        "hyp_8e0505696c22"
+      ],
+      "timestamp": 1784954806.974771,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_1469f3397740"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954806.9750543,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954806.9753718,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "ev_f7c404ec4788",
+        "ev_afffda3f3dc9",
+        "ev_92a8dd728cd1"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954806.9753838,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_7e4e12bd1d9e"
+      ],
+      "output_ids": [
+        "hyp_7e4e12bd1d9e"
+      ],
+      "timestamp": 1784954806.9754343,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_1469f3397740"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954806.9757023,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954806.9761128,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "ev_f7c404ec4788",
+        "ev_afffda3f3dc9",
+        "ev_92a8dd728cd1"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954806.976155,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_8ab6bdb978a9"
+      ],
+      "output_ids": [
+        "hyp_8ab6bdb978a9"
+      ],
+      "timestamp": 1784954806.9763165,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_1469f3397740"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954806.9765835,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954806.9768064,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "ev_f7c404ec4788",
+        "ev_afffda3f3dc9",
+        "ev_92a8dd728cd1"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954806.9768162,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_d6e0576f35e5"
+      ],
+      "output_ids": [
+        "hyp_d6e0576f35e5"
+      ],
+      "timestamp": 1784954806.9768639,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_1469f3397740"
+      ],
+      "output_ids": [],
+      "timestamp": 1784954806.977102,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954806.977344,
+      "run_id": "abl_NO_WORLD_MODEL_planner-sensitive_s0000_20b32a"
+    }
+  ]
+}

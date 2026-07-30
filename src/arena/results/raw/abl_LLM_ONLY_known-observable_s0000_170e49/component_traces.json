@@ -1,0 +1,65 @@
+{
+  "run_id": "abl_LLM_ONLY_known-observable_s0000_170e49",
+  "traces": [
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784954861.072676,
+      "run_id": "abl_LLM_ONLY_known-observable_s0000_170e49"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_2"
+      ],
+      "output_ids": [
+        "response_2"
+      ],
+      "timestamp": 1784954861.0740697,
+      "run_id": "abl_LLM_ONLY_known-observable_s0000_170e49"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_3"
+      ],
+      "output_ids": [
+        "response_3"
+      ],
+      "timestamp": 1784954861.074571,
+      "run_id": "abl_LLM_ONLY_known-observable_s0000_170e49"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_4"
+      ],
+      "output_ids": [
+        "response_4"
+      ],
+      "timestamp": 1784954861.0752847,
+      "run_id": "abl_LLM_ONLY_known-observable_s0000_170e49"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_5"
+      ],
+      "output_ids": [
+        "response_5"
+      ],
+      "timestamp": 1784954861.075809,
+      "run_id": "abl_LLM_ONLY_known-observable_s0000_170e49"
+    }
+  ]
+}

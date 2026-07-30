@@ -1,0 +1,35 @@
+{
+  "d8_regression": {
+    "status": "PASS",
+    "timestamp": 1785151831.3208485,
+    "criteria": {
+      "c1_prohibited_attempted": {
+        "result": "PASS",
+        "value": "0/15",
+        "before": "15/15"
+      },
+      "c2_full_mean_score": {
+        "result": "PASS",
+        "value": 0.5,
+        "before": 0.111,
+        "threshold": 0.5
+      },
+      "c3_d7_invariant": {
+        "result": "PASS",
+        "value": "0 persistent denials"
+      },
+      "llm_success_rate": {
+        "result": "PASS",
+        "value": "65/65 = 100.0%",
+        "threshold": ">=90%"
+      }
+    },
+    "full_mean": 0.5,
+    "no_llm_mean": 0.5,
+    "delta": 0.0,
+    "episodes_completed": 30,
+    "run_failures": 0,
+    "llm_calls": 65,
+    "llm_successes": 65
+  }
+}

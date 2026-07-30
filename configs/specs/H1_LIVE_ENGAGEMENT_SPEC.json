@@ -1,0 +1,50 @@
+{
+  "spec_id": "H1_LIVE_ENGAGEMENT_SPEC",
+  "version": "1.0.0",
+  "status": "SEALED",
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-30",
+    "authority": "SENTINEL Charter §30, §35, §49, §58, §60"
+  },
+  "title": "H1 Live Engagement Spec — Nextcloud 34.0.2 Local Docker",
+  "target": "Nextcloud 34.0.2 (Docker) @ 172.18.0.20:80",
+  "description": "First H1-class engagement against local Nextcloud 34.0.2 with MariaDB. Cognitive loop: recon → technique proposal → execution → evidence ingestion → reflection.",
+  "stack": {
+    "web": "Apache/2.4.68 (Debian)",
+    "php": "8.5.8",
+    "db": "MariaDB 10.11"
+  },
+  "accounts": {
+    "admin": "admin_password",
+    "operator": "operator_password"
+  },
+  "engagement_config": {
+    "scope_cidr": "172.18.0.0/16",
+    "rate_limiter_jitter_ms": 10000,
+    "max_actions": 20,
+    "session_timeout_minutes": 60,
+    "destructive_actions_forbidden": true,
+    "all_http_responses_stored_as_evidence": true
+  },
+  "cognitive_loop_phases": [
+    "Phase 1: Recon — stack fingerprint, endpoint mapping",
+    "Phase 2: Propose — Student generates technique candidates",
+    "Phase 3: Execute — CapabilityBroker authorizes with RateLimiter",
+    "Phase 4: Ingest — Evidence → WorldModel → Contradictions",
+    "Phase 5: Reflect — Episodic memory + Student KB update"
+  ],
+  "p1_integration": {
+    "scope_parser": "GITHUB_SCOPE_CONFIG.json loaded",
+    "rate_limiter": "10-20s jitter active",
+    "waf_detector": "probing enabled",
+    "payload_mutator": "on falsification"
+  },
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-30",
+    "authority": "SENTINEL Charter §30, §35, §49, §58, §60"
+  }
+}

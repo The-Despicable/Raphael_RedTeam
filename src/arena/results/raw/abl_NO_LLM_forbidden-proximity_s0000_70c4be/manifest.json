@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_NO_LLM_forbidden-proximity_s0000_70c4be",
+  "config_id": "NO_LLM",
+  "template_family": "forbidden-proximity",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784950516.4382899,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 22
+}

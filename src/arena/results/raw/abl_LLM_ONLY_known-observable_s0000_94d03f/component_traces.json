@@ -1,0 +1,17 @@
+{
+  "run_id": "abl_LLM_ONLY_known-observable_s0000_94d03f",
+  "traces": [
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946945.9479847,
+      "run_id": "abl_LLM_ONLY_known-observable_s0000_94d03f"
+    }
+  ]
+}

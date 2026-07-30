@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_LLM_ONLY_signal-noise_s0000_99ee3f",
+  "config_id": "LLM_ONLY",
+  "template_family": "signal-noise",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784954806.5408175,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 5
+}

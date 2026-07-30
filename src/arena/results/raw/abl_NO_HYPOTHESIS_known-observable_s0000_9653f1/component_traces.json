@@ -1,0 +1,75 @@
+{
+  "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_9653f1",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_09335d20839d"
+      ],
+      "timestamp": 1784950509.2683284,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_9653f1"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_36f4b10f846f"
+      ],
+      "timestamp": 1784950509.2683399,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_9653f1"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_43f7f82839bb"
+      ],
+      "timestamp": 1784950509.2683465,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_9653f1"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950509.2696598,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_9653f1"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950509.270239,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_9653f1"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950509.270799,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_9653f1"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950509.2713964,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_9653f1"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950509.271944,
+      "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_9653f1"
+    }
+  ]
+}

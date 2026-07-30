@@ -1,0 +1,2937 @@
+{
+  "judge_version": "2.1",
+  "root": "/home/yaser/raphael-2.0",
+  "files_audited": 450,
+  "elapsed_ms": 27451,
+  "counts": {
+    "PASS": 6,
+    "INFO": 2,
+    "DECLARED_GAP": 10,
+    "INTENTIONAL_NOOP": 3,
+    "WEAK": 293,
+    "FAIL": 10,
+    "CRASH": 0,
+    "FABRICATION": 0
+  },
+  "hard_failures": 10,
+  "declared_gaps": 10,
+  "intentional_noops": 3,
+  "reports": [
+    {
+      "verdict": "FAIL",
+      "check": "imports",
+      "file": "agent/agent.py",
+      "lines": "283",
+      "evidence": "import modules.syscall",
+      "failure": "Module 'modules' cannot be resolved in this environment.",
+      "fix": "Install the declared dependency or guard/remove the import."
+    },
+    {
+      "verdict": "FAIL",
+      "check": "imports",
+      "file": "agent/agent.py",
+      "lines": "289",
+      "evidence": "import modules.stealth",
+      "failure": "Module 'modules' cannot be resolved in this environment.",
+      "fix": "Install the declared dependency or guard/remove the import."
+    },
+    {
+      "verdict": "FAIL",
+      "check": "imports",
+      "file": "agent/modules/credtheft.py",
+      "lines": "106",
+      "evidence": "import win32crypt",
+      "failure": "Module 'win32crypt' cannot be resolved in this environment.",
+      "fix": "Install the declared dependency or guard/remove the import."
+    },
+    {
+      "verdict": "FAIL",
+      "check": "imports",
+      "file": "recon-pipeline/case_api.py",
+      "lines": "9",
+      "evidence": "import case_store",
+      "failure": "Module 'case_store' cannot be resolved in this environment.",
+      "fix": "Install the declared dependency or guard/remove the import."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "raphael/techniques/vhost_enum/enumerators.py",
+      "lines": "18",
+      "evidence": "External import 'aiodns' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "agent/modules/exfil.py",
+      "lines": "375",
+      "evidence": "External import 'azure' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "agent/modules/exfil.py",
+      "lines": "363",
+      "evidence": "External import 'boto3' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "orchestrator/runtime/caido_bootstrap.py",
+      "lines": "47",
+      "evidence": "External import 'caido_sdk_client' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "recon-pipeline/case_api.py",
+      "lines": "9",
+      "evidence": "External import 'case_store' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "orchestrator/modes/deep_research.py",
+      "lines": "49",
+      "evidence": "External import 'ddgs' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "orchestrator/runtime/docker_client.py",
+      "lines": "18",
+      "evidence": "External import 'docker' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "agent/modules/exfil.py",
+      "lines": "384",
+      "evidence": "External import 'google' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "telegram mcp/mcp_server.py",
+      "lines": "10",
+      "evidence": "External import 'mcp' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "agent/agent.py",
+      "lines": "283",
+      "evidence": "External import 'modules' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "orchestrator/ml_attack/model_format_analyzer.py",
+      "lines": "34",
+      "evidence": "External import 'numpy' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "agent/dependency_check.py",
+      "lines": "290",
+      "evidence": "External import 'packaging' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "bridge.py",
+      "lines": "302",
+      "evidence": "External import 'playwright' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "exploits/mssql/mssql_rce_xp_cmdshell_clr.py",
+      "lines": "75",
+      "evidence": "External import 'pymssql' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "orchestrator/reversing/binary_analyzer.py",
+      "lines": "15",
+      "evidence": "External import 'r2pipe' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "agent/modules/credtheft.py",
+      "lines": "157",
+      "evidence": "External import 'secretstorage' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "orchestrator/c2/sliver_backend.py",
+      "lines": "29",
+      "evidence": "External import 'sliver' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "agent/modules/stealth.py",
+      "lines": "432",
+      "evidence": "External import 'urllib3' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "requirements",
+      "file": "agent/modules/credtheft.py",
+      "lines": "106",
+      "evidence": "External import 'win32crypt' is used",
+      "failure": "Dependency is not mapped from requirements.txt.",
+      "fix": "Add the package to requirements.txt or extend PKG_TO_IMPORT if package/import names differ."
+    },
+    {
+      "verdict": "FAIL",
+      "check": "ablation_noops",
+      "file": "arena/ablation_runner.py",
+      "lines": "736",
+      "evidence": "_run_raphael references NoOpWorldModel",
+      "failure": "NoOp class 'NoOpWorldModel' is reachable from FULL_RAPHAEL execution path. Ablation stubs must not be used when all components are enabled.",
+      "fix": "Ensure FULL_RAPHAEL path uses real implementations, not NoOp stubs."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "stub_honesty",
+      "file": "agent/dependency_check.py",
+      "lines": "457",
+      "evidence": "all_blockers_passed()",
+      "failure": "Function returns success=True with minimal executable behavior.",
+      "fix": "Verify this is a legitimate predicate/helper rather than a lying success stub."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "stub_honesty",
+      "file": "agent/modules/stealth.py",
+      "lines": "895",
+      "evidence": "_setup_stack_spoof()",
+      "failure": "Function returns success=True with minimal executable behavior.",
+      "fix": "Verify this is a legitimate predicate/helper rather than a lying success stub."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "stub_honesty",
+      "file": "agent/modules/stealth.py",
+      "lines": "930",
+      "evidence": "verify_ntdll_integrity()",
+      "failure": "Function returns success=True with minimal executable behavior.",
+      "fix": "Verify this is a legitimate predicate/helper rather than a lying success stub."
+    },
+    {
+      "verdict": "INTENTIONAL_NOOP",
+      "check": "stub_honesty",
+      "file": "arena/ablation_runner.py",
+      "lines": "441",
+      "evidence": "NoOpHypothesisManager.update_confidence()",
+      "failure": "Verified ablation NoOp \u2014 intentionally inert, ablation-only path.",
+      "fix": ""
+    },
+    {
+      "verdict": "INTENTIONAL_NOOP",
+      "check": "stub_honesty",
+      "file": "arena/ablation_runner.py",
+      "lines": "456",
+      "evidence": "NoOpWorldModel.add_entity()",
+      "failure": "Verified ablation NoOp \u2014 intentionally inert, ablation-only path.",
+      "fix": ""
+    },
+    {
+      "verdict": "INTENTIONAL_NOOP",
+      "check": "stub_honesty",
+      "file": "arena/ablation_runner.py",
+      "lines": "460",
+      "evidence": "NoOpWorldModel.add_relationship()",
+      "failure": "Verified ablation NoOp \u2014 intentionally inert, ablation-only path.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "stub_honesty",
+      "file": "arena/conclusion_evaluator.py",
+      "lines": "29",
+      "evidence": "_check_has_predicate()",
+      "failure": "Function returns success=True with minimal executable behavior.",
+      "fix": "Verify this is a legitimate predicate/helper rather than a lying success stub."
+    },
+    {
+      "verdict": "DECLARED_GAP",
+      "check": "stub_honesty",
+      "file": "arena/tests/test_evaluator_robustness.py",
+      "lines": "204",
+      "evidence": "test_hypothesis_not_mistaken_for_observation()",
+      "failure": "Declared NOT_IMPLEMENTED with explicit 'NOT_IMPLEMENTED:' message \u2014 known gap.",
+      "fix": ""
+    },
+    {
+      "verdict": "FAIL",
+      "check": "stub_honesty",
+      "file": "exploits/ad/nopac_shadow_creds.py",
+      "lines": "65",
+      "evidence": "aes256_cts_hmac_sha1()",
+      "failure": "raise NotImplementedError with no NOT_IMPLEMENTED: message \u2014 undeclared stub.",
+      "fix": "Add a descriptive 'NOT_IMPLEMENTED: ...' message or implement the function."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "stub_honesty",
+      "file": "exploits/mssql/mssql_rce_xp_cmdshell_clr.py",
+      "lines": "102",
+      "evidence": "_connect_impacket()",
+      "failure": "Function returns success=True with minimal executable behavior.",
+      "fix": "Verify this is a legitimate predicate/helper rather than a lying success stub."
+    },
+    {
+      "verdict": "FAIL",
+      "check": "stub_honesty",
+      "file": "mcp-hub/core/registry.py",
+      "lines": "20",
+      "evidence": "execute()",
+      "failure": "raise NotImplementedError with no NOT_IMPLEMENTED: message \u2014 undeclared stub.",
+      "fix": "Add a descriptive 'NOT_IMPLEMENTED: ...' message or implement the function."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "stub_honesty",
+      "file": "mcp-hub/core/security.py",
+      "lines": "28",
+      "evidence": "validate_scope()",
+      "failure": "Function returns success=True with minimal executable behavior.",
+      "fix": "Verify this is a legitimate predicate/helper rather than a lying success stub."
+    },
+    {
+      "verdict": "FAIL",
+      "check": "stub_honesty",
+      "file": "orchestrator/agents/base.py",
+      "lines": "114",
+      "evidence": "think()",
+      "failure": "raise NotImplementedError with no NOT_IMPLEMENTED: message \u2014 undeclared stub.",
+      "fix": "Add a descriptive 'NOT_IMPLEMENTED: ...' message or implement the function."
+    },
+    {
+      "verdict": "FAIL",
+      "check": "stub_honesty",
+      "file": "orchestrator/agents/base.py",
+      "lines": "117",
+      "evidence": "execute()",
+      "failure": "raise NotImplementedError with no NOT_IMPLEMENTED: message \u2014 undeclared stub.",
+      "fix": "Add a descriptive 'NOT_IMPLEMENTED: ...' message or implement the function."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "stub_honesty",
+      "file": "orchestrator/agents/goal_tree.py",
+      "lines": "81",
+      "evidence": "is_complete()",
+      "failure": "Function returns success=True with minimal executable behavior.",
+      "fix": "Verify this is a legitimate predicate/helper rather than a lying success stub."
+    },
+    {
+      "verdict": "FAIL",
+      "check": "stub_honesty",
+      "file": "orchestrator/brain/action.py",
+      "lines": "492",
+      "evidence": "_register_builtins()",
+      "failure": "Function body is only 'pass' \u2014 undetermined stub.",
+      "fix": "Implement it, declare NOT_IMPLEMENTED, or (if ablation NoOp) verify in test_ablation_noops."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "stub_honesty",
+      "file": "orchestrator/brain/action.py",
+      "lines": "622",
+      "evidence": "_is_persistent_proposal_suppressed()",
+      "failure": "Function returns success=True with minimal executable behavior.",
+      "fix": "Verify this is a legitimate predicate/helper rather than a lying success stub."
+    },
+    {
+      "verdict": "DECLARED_GAP",
+      "check": "stub_honesty",
+      "file": "orchestrator/brain/phases/models.py",
+      "lines": "71",
+      "evidence": "_exec_harvest()",
+      "failure": "Declared NOT_IMPLEMENTED with explicit 'NOT_IMPLEMENTED:' message \u2014 known gap.",
+      "fix": ""
+    },
+    {
+      "verdict": "DECLARED_GAP",
+      "check": "stub_honesty",
+      "file": "orchestrator/brain/phases/models.py",
+      "lines": "79",
+      "evidence": "_exec_recon()",
+      "failure": "Declared NOT_IMPLEMENTED with explicit 'NOT_IMPLEMENTED:' message \u2014 known gap.",
+      "fix": ""
+    },
+    {
+      "verdict": "DECLARED_GAP",
+      "check": "stub_honesty",
+      "file": "orchestrator/brain/phases/models.py",
+      "lines": "87",
+      "evidence": "_exec_scan()",
+      "failure": "Declared NOT_IMPLEMENTED with explicit 'NOT_IMPLEMENTED:' message \u2014 known gap.",
+      "fix": ""
+    },
+    {
+      "verdict": "DECLARED_GAP",
+      "check": "stub_honesty",
+      "file": "orchestrator/brain/phases/models.py",
+      "lines": "95",
+      "evidence": "_exec_exploit()",
+      "failure": "Declared NOT_IMPLEMENTED with explicit 'NOT_IMPLEMENTED:' message \u2014 known gap.",
+      "fix": ""
+    },
+    {
+      "verdict": "DECLARED_GAP",
+      "check": "stub_honesty",
+      "file": "orchestrator/brain/phases/models.py",
+      "lines": "103",
+      "evidence": "_exec_postex()",
+      "failure": "Declared NOT_IMPLEMENTED with explicit 'NOT_IMPLEMENTED:' message \u2014 known gap.",
+      "fix": ""
+    },
+    {
+      "verdict": "DECLARED_GAP",
+      "check": "stub_honesty",
+      "file": "orchestrator/brain/phases/models.py",
+      "lines": "111",
+      "evidence": "_exec_lateral()",
+      "failure": "Declared NOT_IMPLEMENTED with explicit 'NOT_IMPLEMENTED:' message \u2014 known gap.",
+      "fix": ""
+    },
+    {
+      "verdict": "DECLARED_GAP",
+      "check": "stub_honesty",
+      "file": "orchestrator/brain/phases/models.py",
+      "lines": "119",
+      "evidence": "_exec_credential()",
+      "failure": "Declared NOT_IMPLEMENTED with explicit 'NOT_IMPLEMENTED:' message \u2014 known gap.",
+      "fix": ""
+    },
+    {
+      "verdict": "DECLARED_GAP",
+      "check": "stub_honesty",
+      "file": "orchestrator/brain/phases/models.py",
+      "lines": "127",
+      "evidence": "_exec_exfil()",
+      "failure": "Declared NOT_IMPLEMENTED with explicit 'NOT_IMPLEMENTED:' message \u2014 known gap.",
+      "fix": ""
+    },
+    {
+      "verdict": "DECLARED_GAP",
+      "check": "stub_honesty",
+      "file": "orchestrator/brain/phases/models.py",
+      "lines": "135",
+      "evidence": "_exec_phish()",
+      "failure": "Declared NOT_IMPLEMENTED with explicit 'NOT_IMPLEMENTED:' message \u2014 known gap.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "stub_honesty",
+      "file": "orchestrator/postex/ladon_scanner.py",
+      "lines": "19",
+      "evidence": "available()",
+      "failure": "Function returns success=True with minimal executable behavior.",
+      "fix": "Verify this is a legitimate predicate/helper rather than a lying success stub."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "stub_honesty",
+      "file": "orchestrator/privesc/privesc_engine.py",
+      "lines": "259",
+      "evidence": "_kernel_vulnerable()",
+      "failure": "Function returns success=True with minimal executable behavior.",
+      "fix": "Verify this is a legitimate predicate/helper rather than a lying success stub."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "stub_honesty",
+      "file": "orchestrator/runtime/caido_bootstrap.py",
+      "lines": "95",
+      "evidence": "capture_enabled()",
+      "failure": "Function returns success=True with minimal executable behavior.",
+      "fix": "Verify this is a legitimate predicate/helper rather than a lying success stub."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "stub_honesty",
+      "file": "orchestrator/scanners/nmap_scanner.py",
+      "lines": "31",
+      "evidence": "available()",
+      "failure": "Function returns success=True with minimal executable behavior.",
+      "fix": "Verify this is a legitimate predicate/helper rather than a lying success stub."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "stub_honesty",
+      "file": "orchestrator/scanners/nuclei_scanner.py",
+      "lines": "16",
+      "evidence": "available()",
+      "failure": "Function returns success=True with minimal executable behavior.",
+      "fix": "Verify this is a legitimate predicate/helper rather than a lying success stub."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "stub_honesty",
+      "file": "orchestrator/scanners/whatweb_scanner.py",
+      "lines": "33",
+      "evidence": "available()",
+      "failure": "Function returns success=True with minimal executable behavior.",
+      "fix": "Verify this is a legitimate predicate/helper rather than a lying success stub."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "stub_honesty",
+      "file": "orchestrator/scope.py",
+      "lines": "13",
+      "evidence": "check()",
+      "failure": "Function returns success=True with minimal executable behavior.",
+      "fix": "Verify this is a legitimate predicate/helper rather than a lying success stub."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "stub_honesty",
+      "file": "raphael/eventbus/core.py",
+      "lines": "199",
+      "evidence": "unsubscribe()",
+      "failure": "Function returns success=True with minimal executable behavior.",
+      "fix": "Verify this is a legitimate predicate/helper rather than a lying success stub."
+    },
+    {
+      "verdict": "PASS",
+      "check": "module_singletons",
+      "file": "project",
+      "lines": "-",
+      "evidence": "No module-level cognitive singleton instantiations detected.",
+      "failure": "",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/agent.py",
+      "lines": "43",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/agent.py",
+      "lines": "101",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/audit.py",
+      "lines": "223",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/audit.py",
+      "lines": "632",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/audit.py",
+      "lines": "682",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/audit.py",
+      "lines": "402",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/audit.py",
+      "lines": "662",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/audit.py",
+      "lines": "731",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/dependency_check.py",
+      "lines": "297",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/audit.py",
+      "lines": "60",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/cleanup.py",
+      "lines": "105",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/credtheft.py",
+      "lines": "168",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/credtheft.py",
+      "lines": "201",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/credtheft.py",
+      "lines": "185",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/credtheft.py",
+      "lines": "398",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/credtheft.py",
+      "lines": "509",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/credtheft.py",
+      "lines": "515",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/credtheft.py",
+      "lines": "544",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/credtheft.py",
+      "lines": "553",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/credtheft.py",
+      "lines": "418",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/credtheft.py",
+      "lines": "430",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/credtheft.py",
+      "lines": "442",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/credtheft.py",
+      "lines": "473",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/credtheft.py",
+      "lines": "488",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/credtheft.py",
+      "lines": "533",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/credtheft.py",
+      "lines": "663",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/lateral.py",
+      "lines": "114",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/lateral.py",
+      "lines": "125",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/lateral.py",
+      "lines": "166",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/lateral.py",
+      "lines": "193",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/lateral.py",
+      "lines": "72",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/lateral.py",
+      "lines": "96",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/lateral.py",
+      "lines": "104",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/lateral.py",
+      "lines": "144",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/lateral.py",
+      "lines": "179",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/lateral.py",
+      "lines": "80",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/persistence.py",
+      "lines": "221",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/persistence.py",
+      "lines": "234",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/stealth.py",
+      "lines": "161",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/stealth.py",
+      "lines": "236",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/stealth.py",
+      "lines": "246",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/stealth.py",
+      "lines": "318",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/stealth.py",
+      "lines": "103",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/stealth.py",
+      "lines": "113",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/stealth.py",
+      "lines": "120",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/stealth.py",
+      "lines": "134",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/stealth.py",
+      "lines": "142",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/stealth.py",
+      "lines": "176",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/stealth.py",
+      "lines": "185",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/stealth.py",
+      "lines": "208",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/stealth.py",
+      "lines": "790",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "agent/modules/stealth.py",
+      "lines": "195",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "arena/conclusion_adapters.py",
+      "lines": "111",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "arena/conclusion_adapters.py",
+      "lines": "157",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "arena/conclusion_adapters.py",
+      "lines": "302",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "arena/conclusion_adapters.py",
+      "lines": "359",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "arena/conclusion_adapters.py",
+      "lines": "423",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "arena/conclusion_adapters.py",
+      "lines": "479",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "arena/conclusion_adapters.py",
+      "lines": "482",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "arena/conclusion_adapters.py",
+      "lines": "549",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "arena/conclusion_adapters.py",
+      "lines": "619",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "arena/conclusion_adapters.py",
+      "lines": "696",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "bridge.py",
+      "lines": "297",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "bridge.py",
+      "lines": "127",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "bridge.py",
+      "lines": "249",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "cloak-service/cloakbrowser.py",
+      "lines": "94",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "enigma/CVE-2025-69212-PoC/exploit.py",
+      "lines": "535",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "exploits/cloud/k8s_cluster_escalation.py",
+      "lines": "442",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/agents/exploit.py",
+      "lines": "841",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/agents/exploit.py",
+      "lines": "859",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/agents/exploit.py",
+      "lines": "877",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/agents/exploit.py",
+      "lines": "899",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/agents/exploit.py",
+      "lines": "927",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/brain/phases/container_escape_executor.py",
+      "lines": "166",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/c2/implant_builder.py",
+      "lines": "518",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/c2/implant_builder.py",
+      "lines": "469",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/c2/implant_builder.py",
+      "lines": "337",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/c2/sliver_backend.py",
+      "lines": "80",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/c2/sliver_backend.py",
+      "lines": "127",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/c2/sliver_backend.py",
+      "lines": "164",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/c2/sliver_backend.py",
+      "lines": "191",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/c2/sliver_backend.py",
+      "lines": "215",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/c2/sliver_backend.py",
+      "lines": "117",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/c2/sliver_backend.py",
+      "lines": "124",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/c2/sliver_backend.py",
+      "lines": "111",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/cicd/runner_fingerprinter.py",
+      "lines": "345",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/cicd/runner_fingerprinter.py",
+      "lines": "394",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/cloud_abuse/iam_pathfinder.py",
+      "lines": "326",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/cloud_abuse/iam_pathfinder.py",
+      "lines": "337",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/cloud_abuse/iam_pathfinder.py",
+      "lines": "385",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/cloud_abuse/iam_pathfinder.py",
+      "lines": "397",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/cloud_abuse/iam_pathfinder.py",
+      "lines": "350",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/container_escape/k8s_escape.py",
+      "lines": "365",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/container_escape/k8s_escape.py",
+      "lines": "528",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/container_escape/k8s_escape.py",
+      "lines": "615",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/container_escape/k8s_escape.py",
+      "lines": "429",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/container_escape/sandbox_detection.py",
+      "lines": "343",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/container_escape/sandbox_detection.py",
+      "lines": "499",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/exploit/nettacker_exploit.py",
+      "lines": "91",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/exploit/nettacker_exploit.py",
+      "lines": "56",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/exploit/ssrf_scanner.py",
+      "lines": "50",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/exploit/xss_scanner.py",
+      "lines": "47",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/exploit/xss_scanner.py",
+      "lines": "91",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/growth_db.py",
+      "lines": "86",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/growth_db.py",
+      "lines": "186",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/ml_attack/pickle_payload_factory.py",
+      "lines": "664",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/ml_attack/pickle_payload_factory.py",
+      "lines": "633",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/modes/student.py",
+      "lines": "204",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/modes/student.py",
+      "lines": "331",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/modes/student.py",
+      "lines": "367",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/modes/student.py",
+      "lines": "202",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/privesc/privesc_engine.py",
+      "lines": "153",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/privesc/privesc_engine.py",
+      "lines": "190",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/scanners/masscan_wrapper.py",
+      "lines": "34",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/social/social_engine.py",
+      "lines": "231",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/social/social_engine.py",
+      "lines": "274",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/student/coverage_gap_filler.py",
+      "lines": "214",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/student/integration_pipeline.py",
+      "lines": "492",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/student/research_scheduler.py",
+      "lines": "657",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/student/scihub.py",
+      "lines": "265",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/student/scihub.py",
+      "lines": "226",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/tactics/anonymous_ttp.py",
+      "lines": "239",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/tactics/anonymous_ttp.py",
+      "lines": "332",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/tactics/anonymous_ttp.py",
+      "lines": "379",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/utils/retry.py",
+      "lines": "45",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/utils/retry.py",
+      "lines": "83",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/utils/retry.py",
+      "lines": "89",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/weaponizer/weaponizer_engine.py",
+      "lines": "223",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/weaponizer/weaponizer_engine.py",
+      "lines": "238",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/weaponizer/weaponizer_engine.py",
+      "lines": "245",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/weaponizer/weaponizer_engine.py",
+      "lines": "261",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "orchestrator/weaponizer/weaponizer_engine.py",
+      "lines": "221",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "raphael/eventbus/core.py",
+      "lines": "698",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "raphael/eventbus/core.py",
+      "lines": "708",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "raphael/executor/kali_bridge.py",
+      "lines": "39",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "raphael/exploit_factory/cve_database.py",
+      "lines": "210",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "raphael/techniques/vhost_enum/enumerators.py",
+      "lines": "181",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "raphael/techniques/vhost_enum/enumerators.py",
+      "lines": "249",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "raphael/techniques/vhost_enum/enumerators.py",
+      "lines": "264",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "raphael/techniques/vhost_enum/enumerators.py",
+      "lines": "323",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "raphael/techniques/vhost_enum/enumerators.py",
+      "lines": "401",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "raphael/verifier/channels.py",
+      "lines": "215",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "raphael/verifier/core.py",
+      "lines": "314",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "sword/phase_0_recon.py",
+      "lines": "65",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "sword/phase_0_recon.py",
+      "lines": "82",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "sword/phase_0_recon.py",
+      "lines": "149",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "sword/phase_0_recon.py",
+      "lines": "113",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "telegram mcp/mcp_server.py",
+      "lines": "33",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "exception_hygiene",
+      "file": "tests/test_cli_smoke.py",
+      "lines": "810",
+      "evidence": "Broad exception is silently swallowed",
+      "failure": "Runtime defects may be hidden from JUDGE and operators.",
+      "fix": "Catch a narrower exception or record/re-raise the failure."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "agent/agent.py",
+      "lines": "77",
+      "evidence": "subprocess with shell=True",
+      "failure": "Shell interpretation expands the side-effect/input surface.",
+      "fix": "Prefer argv execution; if required, document why inputs cannot be attacker-controlled."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "agent/modules/cleanup.py",
+      "lines": "102",
+      "evidence": "subprocess with shell=True",
+      "failure": "Shell interpretation expands the side-effect/input surface.",
+      "fix": "Prefer argv execution; if required, document why inputs cannot be attacker-controlled."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "agent/modules/cleanup.py",
+      "lines": "102",
+      "evidence": "Binary 'history' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "agent/modules/cleanup.py",
+      "lines": "103",
+      "evidence": "subprocess with shell=True",
+      "failure": "Shell interpretation expands the side-effect/input surface.",
+      "fix": "Prefer argv execution; if required, document why inputs cannot be attacker-controlled."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "agent/modules/cleanup.py",
+      "lines": "153",
+      "evidence": "Binary 'reg' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "agent/modules/cleanup.py",
+      "lines": "184",
+      "evidence": "Binary 'log' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "agent/modules/cleanup.py",
+      "lines": "250",
+      "evidence": "Binary 'cmd' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "agent/modules/credtheft.py",
+      "lines": "317",
+      "evidence": "Binary 'powershell' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "agent/modules/credtheft.py",
+      "lines": "177",
+      "evidence": "Binary 'secret-tool' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "agent/modules/stealth.py",
+      "lines": "201",
+      "evidence": "Binary 'wmic' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "agent/modules/stealth.py",
+      "lines": "361",
+      "evidence": "Binary 'wevtutil' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "c2-server/main.py",
+      "lines": "272",
+      "evidence": "Binary 'main:app' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "exploits/mssql/mssql_rce_xp_cmdshell_clr.py",
+      "lines": "144",
+      "evidence": "subprocess with shell=True",
+      "failure": "Shell interpretation expands the side-effect/input surface.",
+      "fix": "Prefer argv execution; if required, document why inputs cannot be attacker-controlled."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "exploits/mssql/mssql_rce_xp_cmdshell_clr.py",
+      "lines": "620",
+      "evidence": "subprocess with shell=True",
+      "failure": "Shell interpretation expands the side-effect/input surface.",
+      "fix": "Prefer argv execution; if required, document why inputs cannot be attacker-controlled."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "mcp-hub/main.py",
+      "lines": "28",
+      "evidence": "Binary 'main:create_app' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/ad/ntlm_relay.py",
+      "lines": "30",
+      "evidence": "Binary 'ntlmrelayx' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/ad/petitpotam.py",
+      "lines": "25",
+      "evidence": "Binary 'impacket-petitpotam' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/ad/pywhisker_wrapper.py",
+      "lines": "18",
+      "evidence": "Binary 'pywhisker' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/ad/pywhisker_wrapper.py",
+      "lines": "56",
+      "evidence": "Binary 'bloodyad' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/ad/pywhisker_wrapper.py",
+      "lines": "69",
+      "evidence": "Binary 'mitm6' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/ad/pywhisker_wrapper.py",
+      "lines": "91",
+      "evidence": "Binary 'coercer' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/ad/rbcd.py",
+      "lines": "86",
+      "evidence": "Binary 'impacket-getST' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/agents/exploit.py",
+      "lines": "603",
+      "evidence": "Binary 'searchsploit' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/agents/scan.py",
+      "lines": "144",
+      "evidence": "Binary 'sslscan' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/chains/ad_kill_chain.py",
+      "lines": "117",
+      "evidence": "Binary 'kerbrute' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/cicd/runner_fingerprinter.py",
+      "lines": "241",
+      "evidence": "subprocess with shell=True",
+      "failure": "Shell interpretation expands the side-effect/input surface.",
+      "fix": "Prefer argv execution; if required, document why inputs cannot be attacker-controlled."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/cicd/runner_fingerprinter.py",
+      "lines": "303",
+      "evidence": "Binary 'sw_vers' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/postex/pupy_c2.py",
+      "lines": "13",
+      "evidence": "Binary 'pupy' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/scanners/cracking_wrappers.py",
+      "lines": "17",
+      "evidence": "Binary 'donpapi' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/scanners/cracking_wrappers.py",
+      "lines": "64",
+      "evidence": "Binary 'pspy64' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/scanners/dns_wrappers.py",
+      "lines": "37",
+      "evidence": "Binary 'whois' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/scanners/enum4linux_wrapper.py",
+      "lines": "10",
+      "evidence": "Binary 'enum4linux' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/scanners/enum4linux_wrapper.py",
+      "lines": "33",
+      "evidence": "Binary 'smbmap' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/scanners/web_wrappers.py",
+      "lines": "18",
+      "evidence": "Binary 'wfuzz' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "orchestrator/scanners/web_wrappers.py",
+      "lines": "54",
+      "evidence": "Binary 'kerberoast' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "recon-pipeline/main.py",
+      "lines": "80",
+      "evidence": "Binary 'subfinder' not found",
+      "failure": "This execution path is unavailable on the current host.",
+      "fix": "Keep the path capability-guarded or install the binary in the intended runtime."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "subprocess",
+      "file": "telegram mcp/mcp_server.py",
+      "lines": "48",
+      "evidence": "subprocess with shell=True",
+      "failure": "Shell interpretation expands the side-effect/input surface.",
+      "fix": "Prefer argv execution; if required, document why inputs cannot be attacker-controlled."
+    },
+    {
+      "verdict": "INFO",
+      "check": "crypto_roundtrip",
+      "file": "orchestrator/weaponizer/weaponizer_engine.py",
+      "lines": "-",
+      "evidence": "aes_cbc_encrypt absent; check not applicable.",
+      "failure": "",
+      "fix": ""
+    },
+    {
+      "verdict": "PASS",
+      "check": "crypto_roundtrip",
+      "file": "agent/crypto.py",
+      "lines": "-",
+      "evidence": "encrypt/decrypt round-trip passed.",
+      "failure": "",
+      "fix": ""
+    },
+    {
+      "verdict": "PASS",
+      "check": "crypto_roundtrip",
+      "file": "agent/crypto.py",
+      "lines": "-",
+      "evidence": "aes_ctr_encrypt/aes_ctr_decrypt round-trip passed.",
+      "failure": "",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "action_receipt_contract",
+      "file": "orchestrator/hardening/action_receipt.py",
+      "lines": "-",
+      "evidence": "ActionReceipt structural fields",
+      "failure": "Could not confirm expected fields: state",
+      "fix": ""
+    },
+    {
+      "verdict": "PASS",
+      "check": "action_receipt_contract",
+      "file": "orchestrator/hardening/action_receipt.py",
+      "lines": "-",
+      "evidence": "Required receipt lifecycle states are represented.",
+      "failure": "",
+      "fix": ""
+    },
+    {
+      "verdict": "INFO",
+      "check": "arena_isolation",
+      "file": "arena/scenario.py",
+      "lines": "-",
+      "evidence": "Arena scenario module absent.",
+      "failure": "",
+      "fix": ""
+    },
+    {
+      "verdict": "PASS",
+      "check": "broker_fail_closed",
+      "file": "orchestrator/brain/capability_broker.py",
+      "lines": "-",
+      "evidence": "Explicit DENY semantics detected.",
+      "failure": "",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "arena/d7_r1_gemma_retest.py",
+      "lines": "22",
+      "evidence": "/home/yaser/raphael-2.0",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "arena/d7_r1_gemma_retest.py",
+      "lines": "40",
+      "evidence": "/home/yaser/raphael-2.0/arena/results/d7_r1_gemma_retest",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "arena/d7_r1_mechanism_test.py",
+      "lines": "22",
+      "evidence": "/home/yaser/raphael-2.0",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "arena/d7_regression_test.py",
+      "lines": "17",
+      "evidence": "/home/yaser/raphael-2.0",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "arena/d8_cognitive_trace.py",
+      "lines": "17",
+      "evidence": "/home/yaser/raphael-2.0",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "arena/d8_regression_test.py",
+      "lines": "17",
+      "evidence": "/home/yaser/raphael-2.0",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "arena/d9_regression_test.py",
+      "lines": "21",
+      "evidence": "/home/yaser/raphael-2.0",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "arena/d9_regression_test.py",
+      "lines": "174",
+      "evidence": "/home/yaser/raphael-2.0/arena/results/d9_regression_results.json",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "bridge/raphael_bridge.py",
+      "lines": "15",
+      "evidence": "/home/yaser/raphael-2.0",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "bridge.py",
+      "lines": "57",
+      "evidence": "/home/yaser/raphael-2.0",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "bridge.py",
+      "lines": "319",
+      "evidence": "/home/yaser/.playwright-chatgpt-profile",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner.py",
+      "lines": "32",
+      "evidence": "/home/yaser/raphael-2.0",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner.py",
+      "lines": "48",
+      "evidence": "/home/yaser/raphael-2.0/arena/d6b_results",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner.py",
+      "lines": "60",
+      "evidence": "/home/yaser/raphael-2.0/arena/ablation_runner.py",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner.py",
+      "lines": "61",
+      "evidence": "/home/yaser/raphael-2.0/arena/ablation_runner.py",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner.py",
+      "lines": "62",
+      "evidence": "/home/yaser/raphael-2.0/d6b_runner.py",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner.py",
+      "lines": "63",
+      "evidence": "/home/yaser/raphael-2.0/d6b_runner.py",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner.py",
+      "lines": "64",
+      "evidence": "/home/yaser/raphael-2.0/arena/ablation.py",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner.py",
+      "lines": "65",
+      "evidence": "/home/yaser/raphael-2.0/arena/d6_manifest.py",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner_fixed.py",
+      "lines": "14",
+      "evidence": "/home/yaser/raphael-2.0",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner_fixed.py",
+      "lines": "39",
+      "evidence": "/home/yaser/raphael-2.0/arena/d6b_results",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner_fixed.py",
+      "lines": "42",
+      "evidence": "/home/yaser/raphael-2.0/arena/d6b_results/d6b_results.jsonl",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner_fixed.py",
+      "lines": "43",
+      "evidence": "/home/yaser/raphael-2.0/arena/d6b_results/d6b_progress.json",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner_fixed.py",
+      "lines": "86",
+      "evidence": "/home/yaser/raphael-2.0/arena/d6b_results",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner_fixed.py",
+      "lines": "89",
+      "evidence": "/home/yaser/raphael-2.0/arena/d6b_results/d6b_results.jsonl",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner_fixed.py",
+      "lines": "90",
+      "evidence": "/home/yaser/raphael-2.0/arena/d6b_results/d6b_progress.json",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner_fixed.py",
+      "lines": "159",
+      "evidence": "/home/yaser/raphael-2.0/arena/d6b_results/d6b_results.jsonl",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner_fixed.py",
+      "lines": "160",
+      "evidence": "/home/yaser/raphael-2.0/arena/d6b_results/d6b_progress.json",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner_fixed.py",
+      "lines": "229",
+      "evidence": "/home/yaser/raphael-2.0/arena/d6b_results",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner_fixed.py",
+      "lines": "232",
+      "evidence": "/home/yaser/raphael-2.0/arena/d6b_results/d6b_results.jsonl",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner_fixed.py",
+      "lines": "233",
+      "evidence": "/home/yaser/raphael-2.0/arena/d6b_results/d6b_progress.json",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6b_runner_fixed.py",
+      "lines": "375",
+      "evidence": "/home/yaser/raphael-2.0/arena/d6b_results/d6b_failed.jsonl",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6c_holdout_runner.py",
+      "lines": "28",
+      "evidence": "/home/yaser/raphael-2.0",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6c_holdout_runner.py",
+      "lines": "43",
+      "evidence": "/home/yaser/raphael-2.0/arena/d6c_results",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6c_holdout_runner.py",
+      "lines": "59",
+      "evidence": "/home/yaser/raphael-2.0/arena/ablation_runner.py",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6c_holdout_runner.py",
+      "lines": "60",
+      "evidence": "/home/yaser/raphael-2.0/arena/ablation_runner.py",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6c_holdout_runner.py",
+      "lines": "61",
+      "evidence": "/home/yaser/raphael-2.0/d6c_holdout_runner.py",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6c_holdout_runner.py",
+      "lines": "62",
+      "evidence": "/home/yaser/raphael-2.0/d6c_holdout_runner.py",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6c_holdout_runner.py",
+      "lines": "63",
+      "evidence": "/home/yaser/raphael-2.0/d6b_runner.py",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6c_holdout_runner.py",
+      "lines": "64",
+      "evidence": "/home/yaser/raphael-2.0/d6b_runner.py",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6c_holdout_runner.py",
+      "lines": "65",
+      "evidence": "/home/yaser/raphael-2.0/arena/ablation.py",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6c_holdout_runner.py",
+      "lines": "66",
+      "evidence": "/home/yaser/raphael-2.0/arena/d6_manifest.py",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6c_reconcile.py",
+      "lines": "25",
+      "evidence": "/home/yaser/raphael-2.0",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6c_reconcile.py",
+      "lines": "33",
+      "evidence": "/home/yaser/raphael-2.0/arena/d6c_results",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6c_reconcile.py",
+      "lines": "36",
+      "evidence": "/home/yaser/raphael-2.0/arena/manifests",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "d6c_reconcile.py",
+      "lines": "37",
+      "evidence": "/home/yaser/raphael-2.0/arena/d6b_results",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "exploits/browser/chrome_v8_webgpu_escape.py",
+      "lines": "269",
+      "evidence": "/home/user/.ssh/id_rsa",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "orchestrator/config/paths.py",
+      "lines": "2",
+      "evidence": "/home/yaser/raphael-2.0",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "orchestrator/config/target.py",
+      "lines": "2",
+      "evidence": "/home/yaser/raphael-2.0",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "raphael/techniques/ad1_xor_sweep.py",
+      "lines": "10",
+      "evidence": "/home/yaser/raphael-2.0/challenge_1245/invisible-theft.ad1",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "recon-pipeline/main.py",
+      "lines": "20",
+      "evidence": "/home/yaser/raphael-2.0/raphael",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "tests/test_d5_preflight.py",
+      "lines": "12",
+      "evidence": "/home/yaser/raphael-2.0",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "portability",
+      "file": "tests/test_d5_seven_gate_proof.py",
+      "lines": "12",
+      "evidence": "/home/yaser/raphael-2.0",
+      "failure": "User-specific absolute path reduces reproducibility.",
+      "fix": "Resolve paths from configuration/project root instead."
+    },
+    {
+      "verdict": "WEAK",
+      "check": "duplicate_definitions",
+      "file": "arena/conclusion_adapters.py",
+      "lines": "490",
+      "evidence": "Duplicate definition '_plan_decision_to_claims'",
+      "failure": "Earlier definition at line 62 is shadowed.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "duplicate_definitions",
+      "file": "arena/environment.py",
+      "lines": "638",
+      "evidence": "Duplicate definition '_handle_http_options'",
+      "failure": "Earlier definition at line 611 is shadowed.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "duplicate_definitions",
+      "file": "arena/environment.py",
+      "lines": "798",
+      "evidence": "Duplicate definition '_handle_ssh_banner'",
+      "failure": "Earlier definition at line 777 is shadowed.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "duplicate_definitions",
+      "file": "d6b_runner_fixed.py",
+      "lines": "162",
+      "evidence": "Duplicate definition 'load_progress'",
+      "failure": "Earlier definition at line 92 is shadowed.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "duplicate_definitions",
+      "file": "d6b_runner_fixed.py",
+      "lines": "168",
+      "evidence": "Duplicate definition 'save_progress'",
+      "failure": "Earlier definition at line 98 is shadowed.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "duplicate_definitions",
+      "file": "d6b_runner_fixed.py",
+      "lines": "172",
+      "evidence": "Duplicate definition 'append_result'",
+      "failure": "Earlier definition at line 102 is shadowed.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "duplicate_definitions",
+      "file": "d6b_runner_fixed.py",
+      "lines": "235",
+      "evidence": "Duplicate definition 'load_progress'",
+      "failure": "Earlier definition at line 162 is shadowed.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "duplicate_definitions",
+      "file": "d6b_runner_fixed.py",
+      "lines": "241",
+      "evidence": "Duplicate definition 'save_progress'",
+      "failure": "Earlier definition at line 168 is shadowed.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "duplicate_definitions",
+      "file": "d6b_runner_fixed.py",
+      "lines": "245",
+      "evidence": "Duplicate definition 'append_result'",
+      "failure": "Earlier definition at line 172 is shadowed.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "duplicate_definitions",
+      "file": "raphael/blackboard/contracts.py",
+      "lines": "157",
+      "evidence": "Duplicate definition 'strict_mode'",
+      "failure": "Earlier definition at line 153 is shadowed.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "duplicate_definitions",
+      "file": "raphael/cognitive/models.py",
+      "lines": "127",
+      "evidence": "Duplicate definition 'get_by_state'",
+      "failure": "Earlier definition at line 110 is shadowed.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "duplicate_definitions",
+      "file": "raphael/exploit_factory/core.py",
+      "lines": "61",
+      "evidence": "Duplicate definition 'current_detection_risk'",
+      "failure": "Earlier definition at line 56 is shadowed.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "duplicate_definitions",
+      "file": "telegram mcp/mcp_server.py",
+      "lines": "184",
+      "evidence": "Duplicate definition 'read_file'",
+      "failure": "Earlier definition at line 95 is shadowed.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "duplicate_definitions",
+      "file": "telegram mcp/mcp_server.py",
+      "lines": "195",
+      "evidence": "Duplicate definition 'write_file'",
+      "failure": "Earlier definition at line 106 is shadowed.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "duplicate_definitions",
+      "file": "telegram mcp/mcp_server.py",
+      "lines": "212",
+      "evidence": "Duplicate definition 'list_directory'",
+      "failure": "Earlier definition at line 123 is shadowed.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "duplicate_definitions",
+      "file": "telegram mcp/mcp_server.py",
+      "lines": "219",
+      "evidence": "Duplicate definition 'git_status'",
+      "failure": "Earlier definition at line 131 is shadowed.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "duplicate_definitions",
+      "file": "telegram mcp/mcp_server.py",
+      "lines": "234",
+      "evidence": "Duplicate definition 'search_in_files'",
+      "failure": "Earlier definition at line 146 is shadowed.",
+      "fix": ""
+    },
+    {
+      "verdict": "WEAK",
+      "check": "duplicate_definitions",
+      "file": "telegram mcp/mcp_server.py",
+      "lines": "247",
+      "evidence": "Duplicate definition 'get_system_status'",
+      "failure": "Earlier definition at line 168 is shadowed.",
+      "fix": ""
+    },
+    {
+      "verdict": "PASS",
+      "check": "pytest",
+      "file": "tests",
+      "lines": "-",
+      "evidence": "Project test suite passed.",
+      "failure": "warnings.warn(\n\ntests/test_cli_smoke.py::test_orchestrator_app\n  /home/yaser/.local/lib/python3.14/site-packages/_pytest/python.py:171: PytestReturnNotNoneWarning: Test functions should return None, but tests/test_cli_smoke.py::test_orchestrator_app returned <class 'list'>.\n  Did you mean to use `assert` instead of `return`?\n  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.\n    warnings.warn(\n\ntests/test_cli_smoke.py::test_orchestrator_pipelines\n  /home/yaser/.local/lib/python3.14/site-packages/_pytest/python.py:171: PytestReturnNotNoneWarning: Test functions should return None, but tests/test_cli_smoke.py::test_orchestrator_pipelines returned <class 'list'>.\n  Did you mean to use `assert` instead of `return`?\n  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.\n    warnings.warn(\n\ntests/test_cli_smoke.py::test_orchestrator_c2\n  /home/yaser/.local/lib/python3.14/site-packages/_pytest/python.py:171: PytestReturnNotNoneWarning: Test functions should return None, but tests/test_cli_smoke.py::test_orchestrator_c2 returned <class 'list'>.\n  Did you mean to use `assert` instead of `return`?\n  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.\n    warnings.warn(\n\ntests/test_cli_smoke.py::test_orchestrator_security\n  /home/yaser/.local/lib/python3.14/site-packages/_pytest/python.py:171: PytestReturnNotNoneWarning: Test functions should return None, but tests/test_cli_smoke.py::test_orchestrator_security returned <class 'list'>.\n  Did you mean to use `assert` instead of `return`?\n  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.\n    warnings.warn(\n\ntests/test_cli_smoke.py::test_orchestrator_brain\n  /home/yaser/.local/lib/python3.14/site-packages/_pytest/python.py:171: PytestReturnNotNoneWarning: Test functions should return None, but tests/test_cli_smoke.py::test_orchestrator_brain returned <class 'list'>.\n  Did you mean to use `assert` instead of `return`?\n  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.\n    warnings.warn(\n\ntests/test_cli_smoke.py::test_orchestrator_agent\n  /home/yaser/.local/lib/python3.14/site-packages/_pytest/python.py:171: PytestReturnNotNoneWarning: Test functions should return None, but tests/test_cli_smoke.py::test_orchestrator_agent returned <class 'list'>.\n  Did you mean to use `assert` instead of `return`?\n  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.\n    warnings.warn(\n\ntests/test_cli_smoke.py::test_env_configuration\n  /home/yaser/.local/lib/python3.14/site-packages/_pytest/python.py:171: PytestReturnNotNoneWarning: Test functions should return None, but tests/test_cli_smoke.py::test_env_configuration returned <class 'list'>.\n  Did you mean to use `assert` instead of `return`?\n  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.\n    warnings.warn(\n\ntests/test_cli_smoke.py::test_requirements\n  /home/yaser/.local/lib/python3.14/site-packages/_pytest/python.py:171: PytestReturnNotNoneWarning: Test functions should return None, but tests/test_cli_smoke.py::test_requirements returned <class 'list'>.\n  Did you mean to use `assert` instead of `return`?\n  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.\n    warnings.warn(\n\ntests/test_cli_smoke.py::test_project_structure\n  /home/yaser/.local/lib/python3.14/site-packages/_pytest/python.py:171: PytestReturnNotNoneWarning: Test functions should return None, but tests/test_cli_smoke.py::test_project_structure returned <class 'list'>.\n  Did you mean to use `assert` instead of `return`?\n  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.\n    warnings.warn(\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n51 passed, 26 warnings in 4.99s",
+      "fix": ""
+    }
+  ]
+}

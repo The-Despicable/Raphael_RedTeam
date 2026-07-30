@@ -1,0 +1,170 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_5f4d51",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_ac2adb655248"
+      ],
+      "timestamp": 1784947347.729363,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_5f4d51"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_e0e674a1bbff"
+      ],
+      "timestamp": 1784947347.7293959,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_5f4d51"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_d46c3c45d6ac"
+      ],
+      "timestamp": 1784947347.7294254,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_5f4d51"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "extra-1",
+        "extra-2",
+        "ev_9099ef6b42ef",
+        "ev_f14cdc489c6f",
+        "ev_2ce7361a0d41"
+      ],
+      "output_ids": [],
+      "timestamp": 1784947347.729446,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_5f4d51"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_2147fedc0371"
+      ],
+      "output_ids": [
+        "hyp_2147fedc0371"
+      ],
+      "timestamp": 1784947347.7297356,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_5f4d51"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "extra-1",
+        "extra-2",
+        "ev_9099ef6b42ef",
+        "ev_f14cdc489c6f",
+        "ev_2ce7361a0d41"
+      ],
+      "output_ids": [],
+      "timestamp": 1784947347.734846,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_5f4d51"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_0f9a41da9db6"
+      ],
+      "output_ids": [
+        "hyp_0f9a41da9db6"
+      ],
+      "timestamp": 1784947347.7349591,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_5f4d51"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "extra-1",
+        "extra-2",
+        "ev_9099ef6b42ef",
+        "ev_f14cdc489c6f",
+        "ev_2ce7361a0d41"
+      ],
+      "output_ids": [],
+      "timestamp": 1784947347.735612,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_5f4d51"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_f617f726fe44"
+      ],
+      "output_ids": [
+        "hyp_f617f726fe44"
+      ],
+      "timestamp": 1784947347.7356713,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_5f4d51"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "extra-1",
+        "extra-2",
+        "ev_9099ef6b42ef",
+        "ev_f14cdc489c6f",
+        "ev_2ce7361a0d41"
+      ],
+      "output_ids": [],
+      "timestamp": 1784947347.7363527,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_5f4d51"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_ae2b45448e59"
+      ],
+      "output_ids": [
+        "hyp_ae2b45448e59"
+      ],
+      "timestamp": 1784947347.7364132,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_5f4d51"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "extra-1",
+        "extra-2",
+        "ev_9099ef6b42ef",
+        "ev_f14cdc489c6f",
+        "ev_2ce7361a0d41"
+      ],
+      "output_ids": [],
+      "timestamp": 1784947347.7368886,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_5f4d51"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_d3781b270f92"
+      ],
+      "output_ids": [
+        "hyp_d3781b270f92"
+      ],
+      "timestamp": 1784947347.7369475,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_5f4d51"
+    }
+  ]
+}

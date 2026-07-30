@@ -1,0 +1,70 @@
+{
+  "run_id": "abl_NO_PLANNER_forbidden-proximity_s0000_e9bc89",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_85d88a2dd6c1"
+      ],
+      "timestamp": 1784946973.1226556,
+      "run_id": "abl_NO_PLANNER_forbidden-proximity_s0000_e9bc89"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_6009be95aa23"
+      ],
+      "timestamp": 1784946973.1226656,
+      "run_id": "abl_NO_PLANNER_forbidden-proximity_s0000_e9bc89"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946973.122874,
+      "run_id": "abl_NO_PLANNER_forbidden-proximity_s0000_e9bc89"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946973.1228776,
+      "run_id": "abl_NO_PLANNER_forbidden-proximity_s0000_e9bc89"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-app",
+        "oos-host-0"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946973.1228807,
+      "run_id": "abl_NO_PLANNER_forbidden-proximity_s0000_e9bc89"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_cfe993da1b32"
+      ],
+      "output_ids": [
+        "hyp_cfe993da1b32"
+      ],
+      "timestamp": 1784946973.1229146,
+      "run_id": "abl_NO_PLANNER_forbidden-proximity_s0000_e9bc89"
+    }
+  ]
+}

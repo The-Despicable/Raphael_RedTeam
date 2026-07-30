@@ -1,0 +1,158 @@
+{
+  "run_id": "abl_NO_LLM_known-observable_s0042_7df371",
+  "scenario_id": "known-observable-s0042",
+  "decision": "STOP_BUDGET_EXHAUSTED",
+  "claims": [
+    {
+      "claim_id": "cl_6f1b45deb326",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_f84a429a1d9a",
+        "ev_f72256d912bd",
+        "ev_da1bc1df4435",
+        "ev_07551c3d0b2c"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_fee021914787",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_f84a429a1d9a",
+        "ev_f72256d912bd",
+        "ev_da1bc1df4435",
+        "ev_07551c3d0b2c",
+        "ev_75f882396699"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_28eb7ed8e5d9",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_f84a429a1d9a",
+        "ev_f72256d912bd",
+        "ev_da1bc1df4435",
+        "ev_07551c3d0b2c",
+        "ev_75f882396699"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_fb3cc0c14f28",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_f84a429a1d9a",
+        "ev_f72256d912bd",
+        "ev_da1bc1df4435",
+        "ev_07551c3d0b2c",
+        "ev_75f882396699"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_a88d6e4b6f13",
+      "subject_id": "host",
+      "predicate": "host_identity",
+      "object_value": "HOST-40-A7",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_f84a429a1d9a",
+        "ev_f72256d912bd",
+        "ev_da1bc1df4435",
+        "ev_07551c3d0b2c",
+        "ev_75f882396699"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_7a659e187711",
+      "subject_id": "ent_91eaca8d8a6d",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_67a3123d286f"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_0e1f77d8b856"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_6202714e8924",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_f84a429a1d9a",
+        "ev_f72256d912bd",
+        "ev_da1bc1df4435",
+        "ev_07551c3d0b2c",
+        "ev_75f882396699",
+        "ev_09fca02146fb",
+        "ev_d0a4060d7c3b",
+        "ev_233f91901feb",
+        "ev_0e1f77d8b856"
+      ],
+      "provenance": {
+        "producer": "direct_observation",
+        "derivation_type": "direct_observation"
+      }
+    },
+    {
+      "claim_id": "cl_222f854b7835",
+      "subject_id": "host",
+      "predicate": "host_identity",
+      "object_value": "HOST-40-A7",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_f84a429a1d9a",
+        "ev_f72256d912bd",
+        "ev_da1bc1df4435",
+        "ev_07551c3d0b2c",
+        "ev_75f882396699",
+        "ev_09fca02146fb",
+        "ev_d0a4060d7c3b",
+        "ev_233f91901feb",
+        "ev_0e1f77d8b856"
+      ],
+      "provenance": {
+        "producer": "direct_observation",
+        "derivation_type": "direct_observation"
+      }
+    }
+  ],
+  "architecture_id": "NO_LLM",
+  "abstention_reason": "LLM disabled \u2014 no semantic interpretation"
+}

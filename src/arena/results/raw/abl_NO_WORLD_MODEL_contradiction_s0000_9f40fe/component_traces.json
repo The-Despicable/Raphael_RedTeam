@@ -1,0 +1,49 @@
+{
+  "run_id": "abl_NO_WORLD_MODEL_contradiction_s0000_9f40fe",
+  "traces": [
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946973.095221,
+      "run_id": "abl_NO_WORLD_MODEL_contradiction_s0000_9f40fe"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946973.0952253,
+      "run_id": "abl_NO_WORLD_MODEL_contradiction_s0000_9f40fe"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946973.0952294,
+      "run_id": "abl_NO_WORLD_MODEL_contradiction_s0000_9f40fe"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_b152560f7d37"
+      ],
+      "output_ids": [
+        "hyp_b152560f7d37"
+      ],
+      "timestamp": 1784946973.0952744,
+      "run_id": "abl_NO_WORLD_MODEL_contradiction_s0000_9f40fe"
+    }
+  ]
+}

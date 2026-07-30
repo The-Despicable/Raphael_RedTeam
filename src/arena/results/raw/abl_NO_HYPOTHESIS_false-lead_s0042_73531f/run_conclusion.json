@@ -1,0 +1,75 @@
+{
+  "run_id": "abl_NO_HYPOTHESIS_false-lead_s0042_73531f",
+  "scenario_id": "false-lead-s0042",
+  "decision": "STOP_BUDGET_EXHAUSTED",
+  "claims": [
+    {
+      "claim_id": "cl_8d9ee62a5796",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "http",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_522e1421ee89",
+        "ev_dba68352656e",
+        "ev_e02402d01979",
+        "ev_0a0bf6a2bf9c",
+        "ev_788d5565da97",
+        "ev_a5c5fdec914a",
+        "ev_9564e802e865",
+        "ev_7134a726853a",
+        "ev_81948f5d7ff8",
+        "ev_d9a505a668c1",
+        "ev_d19fd544f4f7",
+        "ev_bf209873c9c2",
+        "ev_1b1a118c7b30",
+        "ev_2c489d8f727f",
+        "ev_4effefb12614",
+        "ev_467f99a0d56d",
+        "ev_570940f7742b",
+        "ev_09f1dd749dd3",
+        "ev_ceebd3e3474f",
+        "ev_f3ba94a95ea5"
+      ],
+      "provenance": {
+        "producer": "direct_observation",
+        "derivation_type": "direct_observation"
+      }
+    },
+    {
+      "claim_id": "cl_713d5ec4a400",
+      "subject_id": "target",
+      "predicate": "service_type",
+      "object_value": "ssh",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_522e1421ee89",
+        "ev_dba68352656e",
+        "ev_e02402d01979",
+        "ev_0a0bf6a2bf9c",
+        "ev_788d5565da97",
+        "ev_a5c5fdec914a",
+        "ev_9564e802e865",
+        "ev_7134a726853a",
+        "ev_81948f5d7ff8",
+        "ev_d9a505a668c1",
+        "ev_d19fd544f4f7",
+        "ev_bf209873c9c2",
+        "ev_1b1a118c7b30",
+        "ev_2c489d8f727f",
+        "ev_4effefb12614",
+        "ev_467f99a0d56d",
+        "ev_570940f7742b",
+        "ev_09f1dd749dd3",
+        "ev_ceebd3e3474f",
+        "ev_f3ba94a95ea5"
+      ],
+      "provenance": {
+        "producer": "direct_observation",
+        "derivation_type": "direct_observation"
+      }
+    }
+  ],
+  "architecture_id": "NO_HYPOTHESIS",
+  "abstention_reason": "Hypothesis formation disabled"
+}

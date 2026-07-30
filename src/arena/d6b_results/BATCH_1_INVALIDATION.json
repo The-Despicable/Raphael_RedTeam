@@ -1,0 +1,15 @@
+{
+  "batch_id": "D6B_BATCH_1",
+  "status": "INVALID_FOR_COGNITIVE_COMPARISON",
+  "classification": "ARCHITECTURE_BLIND_EXECUTION",
+  "runs_completed": 280,
+  "infrastructure_failures": 0,
+  "safety_violations": 0,
+  "execution_engine": "d6b_runner.py (simplified scan-only loop)",
+  "failure_mode": "The batch runner bypassed all cognitive components (hypothesis, falsification, planner, LLM, defeater, world model). All 8 architectures executed an identical scan-only control path through CapabilityBroker. No architecture-specific treatment was applied.",
+  "valid_for": ["broker/execution smoke testing", "evaluator availability testing", "batch infrastructure testing", "safety reconciliation testing"],
+  "invalid_for": ["component usefulness claims", "FULL-vs-ablation comparison", "architecture differentiation", "cognitive performance claims"],
+  "cognitive_results": "UNINTERPRETABLE — TREATMENT_NOT_APPLIED",
+  "sealed_at": "2026-07-26T16:55:00Z",
+  "sealed_by": "SENTINEL-DIRECTIVE-via-FORGE"
+}

@@ -1,0 +1,37 @@
+{
+  "run_id": "abl_NO_HYPOTHESIS_false-lead_s0000_25186d",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_918634e73142"
+      ],
+      "timestamp": 1784946973.0587194,
+      "run_id": "abl_NO_HYPOTHESIS_false-lead_s0000_25186d"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946973.0589,
+      "run_id": "abl_NO_HYPOTHESIS_false-lead_s0000_25186d"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946973.0589042,
+      "run_id": "abl_NO_HYPOTHESIS_false-lead_s0000_25186d"
+    }
+  ]
+}

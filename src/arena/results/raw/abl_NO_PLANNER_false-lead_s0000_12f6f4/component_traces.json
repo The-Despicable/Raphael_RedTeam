@@ -1,0 +1,229 @@
+{
+  "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_481107ea40c6"
+      ],
+      "timestamp": 1784950516.2835743,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "bastion-host",
+        "ev_65021bf70dc3",
+        "ev_63123a6515d3"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950516.283588,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_68d9b57b57eb"
+      ],
+      "output_ids": [
+        "hyp_68d9b57b57eb"
+      ],
+      "timestamp": 1784950516.283652,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_68d9b57b57eb"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950516.2844138,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950516.2862222,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "bastion-host",
+        "ev_65021bf70dc3",
+        "ev_63123a6515d3",
+        "ev_5197bf6ba902"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950516.2862477,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_8f00fc4477e9"
+      ],
+      "output_ids": [
+        "hyp_8f00fc4477e9"
+      ],
+      "timestamp": 1784950516.2863088,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_68d9b57b57eb"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950516.286829,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950516.2870889,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "bastion-host",
+        "ev_65021bf70dc3",
+        "ev_63123a6515d3",
+        "ev_5197bf6ba902"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950516.2870986,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_ba33507712d1"
+      ],
+      "output_ids": [
+        "hyp_ba33507712d1"
+      ],
+      "timestamp": 1784950516.2871437,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_68d9b57b57eb"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950516.28756,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950516.2878058,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "bastion-host",
+        "ev_65021bf70dc3",
+        "ev_63123a6515d3",
+        "ev_5197bf6ba902"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950516.2878156,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_6300949f1451"
+      ],
+      "output_ids": [
+        "hyp_6300949f1451"
+      ],
+      "timestamp": 1784950516.2878597,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_68d9b57b57eb"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950516.2883005,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950516.2885249,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "bastion-host",
+        "ev_65021bf70dc3",
+        "ev_63123a6515d3",
+        "ev_5197bf6ba902"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950516.2885346,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_70b15e824681"
+      ],
+      "output_ids": [
+        "hyp_70b15e824681"
+      ],
+      "timestamp": 1784950516.288579,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_68d9b57b57eb"
+      ],
+      "output_ids": [],
+      "timestamp": 1784950516.28899,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784950516.2891996,
+      "run_id": "abl_NO_PLANNER_false-lead_s0000_12f6f4"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_world-model-sensitive_s0000_745163",
+  "config_id": "FULL_RAPHAEL",
+  "template_family": "world-model-sensitive",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784959344.7939565,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 22
+}

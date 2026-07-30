@@ -1,0 +1,229 @@
+{
+  "run_id": "abl_NO_LLM_negative-control_s0000_312071",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_13130c5f85ce"
+      ],
+      "timestamp": 1784955362.697574,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "ev_8b473ee5eec3",
+        "ev_4eb3eec707cb"
+      ],
+      "output_ids": [],
+      "timestamp": 1784955362.6975887,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_7dda4dc53ff1"
+      ],
+      "output_ids": [
+        "hyp_7dda4dc53ff1"
+      ],
+      "timestamp": 1784955362.6976593,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_7dda4dc53ff1"
+      ],
+      "output_ids": [],
+      "timestamp": 1784955362.6980374,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784955362.6992264,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "ev_8b473ee5eec3",
+        "ev_4eb3eec707cb",
+        "ev_3108b759567b"
+      ],
+      "output_ids": [],
+      "timestamp": 1784955362.6992412,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_b623212a574f"
+      ],
+      "output_ids": [
+        "hyp_b623212a574f"
+      ],
+      "timestamp": 1784955362.699302,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_7dda4dc53ff1"
+      ],
+      "output_ids": [],
+      "timestamp": 1784955362.6997347,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784955362.70001,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "ev_8b473ee5eec3",
+        "ev_4eb3eec707cb",
+        "ev_3108b759567b"
+      ],
+      "output_ids": [],
+      "timestamp": 1784955362.700021,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_57b8a8f1a902"
+      ],
+      "output_ids": [
+        "hyp_57b8a8f1a902"
+      ],
+      "timestamp": 1784955362.7001746,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_7dda4dc53ff1"
+      ],
+      "output_ids": [],
+      "timestamp": 1784955362.7006557,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784955362.7009392,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "ev_8b473ee5eec3",
+        "ev_4eb3eec707cb",
+        "ev_3108b759567b"
+      ],
+      "output_ids": [],
+      "timestamp": 1784955362.700951,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_af87d34a08a7"
+      ],
+      "output_ids": [
+        "hyp_af87d34a08a7"
+      ],
+      "timestamp": 1784955362.7010043,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_7dda4dc53ff1"
+      ],
+      "output_ids": [],
+      "timestamp": 1784955362.70137,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784955362.7016385,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "ev_8b473ee5eec3",
+        "ev_4eb3eec707cb",
+        "ev_3108b759567b"
+      ],
+      "output_ids": [],
+      "timestamp": 1784955362.7016494,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_3d7a7717e472"
+      ],
+      "output_ids": [
+        "hyp_3d7a7717e472"
+      ],
+      "timestamp": 1784955362.701697,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "update_confidence",
+      "input_ids": [
+        "hyp_7dda4dc53ff1"
+      ],
+      "output_ids": [],
+      "timestamp": 1784955362.701993,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784955362.7022023,
+      "run_id": "abl_NO_LLM_negative-control_s0000_312071"
+    }
+  ]
+}

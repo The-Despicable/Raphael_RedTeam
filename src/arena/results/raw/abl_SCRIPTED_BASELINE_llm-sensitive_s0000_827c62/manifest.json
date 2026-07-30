@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_SCRIPTED_BASELINE_llm-sensitive_s0000_827c62",
+  "config_id": "SCRIPTED_BASELINE",
+  "template_family": "llm-sensitive",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784957203.8840747,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 0
+}

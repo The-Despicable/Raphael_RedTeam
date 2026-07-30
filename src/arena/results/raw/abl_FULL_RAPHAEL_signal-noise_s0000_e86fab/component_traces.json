@@ -1,0 +1,169 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_signal-noise_s0000_e86fab",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_7bd913a84289"
+      ],
+      "timestamp": 1784946973.0126216,
+      "run_id": "abl_FULL_RAPHAEL_signal-noise_s0000_e86fab"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_11c0455a1fc4"
+      ],
+      "timestamp": 1784946973.0126328,
+      "run_id": "abl_FULL_RAPHAEL_signal-noise_s0000_e86fab"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_250fba7c22ac"
+      ],
+      "timestamp": 1784946973.0126395,
+      "run_id": "abl_FULL_RAPHAEL_signal-noise_s0000_e86fab"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_e9c058556c06"
+      ],
+      "timestamp": 1784946973.0126448,
+      "run_id": "abl_FULL_RAPHAEL_signal-noise_s0000_e86fab"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_26895fce5d94"
+      ],
+      "timestamp": 1784946973.0126503,
+      "run_id": "abl_FULL_RAPHAEL_signal-noise_s0000_e86fab"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_fa335730d72d"
+      ],
+      "timestamp": 1784946973.0126567,
+      "run_id": "abl_FULL_RAPHAEL_signal-noise_s0000_e86fab"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_24a9574ca156"
+      ],
+      "timestamp": 1784946973.0126657,
+      "run_id": "abl_FULL_RAPHAEL_signal-noise_s0000_e86fab"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_cd738280ba1b"
+      ],
+      "timestamp": 1784946973.0126715,
+      "run_id": "abl_FULL_RAPHAEL_signal-noise_s0000_e86fab"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_8dc15df85787"
+      ],
+      "timestamp": 1784946973.012678,
+      "run_id": "abl_FULL_RAPHAEL_signal-noise_s0000_e86fab"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_a6792c56d923"
+      ],
+      "timestamp": 1784946973.0126832,
+      "run_id": "abl_FULL_RAPHAEL_signal-noise_s0000_e86fab"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_be52a0fe4600"
+      ],
+      "timestamp": 1784946973.0126882,
+      "run_id": "abl_FULL_RAPHAEL_signal-noise_s0000_e86fab"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946973.0169523,
+      "run_id": "abl_FULL_RAPHAEL_signal-noise_s0000_e86fab"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946973.016957,
+      "run_id": "abl_FULL_RAPHAEL_signal-noise_s0000_e86fab"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "vuln-host",
+        "host-0",
+        "host-1",
+        "host-2",
+        "host-3",
+        "host-4",
+        "host-5",
+        "host-6",
+        "host-7",
+        "host-8",
+        "host-9"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946973.016962,
+      "run_id": "abl_FULL_RAPHAEL_signal-noise_s0000_e86fab"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_14eae4b2c77f"
+      ],
+      "output_ids": [
+        "hyp_14eae4b2c77f"
+      ],
+      "timestamp": 1784946973.0170763,
+      "run_id": "abl_FULL_RAPHAEL_signal-noise_s0000_e86fab"
+    }
+  ]
+}

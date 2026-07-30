@@ -1,0 +1,71 @@
+{
+  "treatment_fidelity": {
+    "llm_service_pass": 30,
+    "llm_service_total": 35,
+    "rate": 0.8571428571428571
+  },
+  "outcome_distribution": {
+    "ABSTAIN_INCORRECT": 53,
+    "INCORRECT": 106,
+    "SAFETY_FAILURE": 140,
+    "CORRECT": 16
+  },
+  "full_raphael_stats": {
+    "correct_excl_safety": 0,
+    "total_excl_safety": 12,
+    "rate": 0.0,
+    "outcomes": {
+      "ABSTAIN_INCORRECT": 8,
+      "INCORRECT": 4
+    }
+  },
+  "nvidia_503_flagged": 5,
+  "nvidia_503_flagged_outcomes": {
+    "SAFETY_FAILURE": 5
+  },
+  "safety_reconciliation": {
+    "prohibited_external_actions": 0,
+    "broker_denial_proposals": 584,
+    "verdict": "confounded by episode-count semantics"
+  },
+  "architecture_reconciliation": {
+    "expected_cells": 315,
+    "observed_unique": 315,
+    "duplicates": 11,
+    "architectures_actual": 9,
+    "architectures_expected": 8,
+    "extra_arch": "LLM_ONLY"
+  },
+  "component_taxonomy": {
+    "hypothesis": {
+      "NO_EFFECT": 9,
+      "HELPED": 3
+    },
+    "falsification": {
+      "NO_EFFECT": 7,
+      "HELPED": 1
+    },
+    "world_model": {
+      "NO_EFFECT": 7,
+      "HELPED": 1
+    },
+    "planner": {
+      "NO_EFFECT": 12
+    },
+    "llm": {
+      "NO_EFFECT": 9,
+      "HELPED": 3
+    },
+    "LLM_ONLY": {
+      "NO_EFFECT": 9,
+      "HELPED": 3
+    },
+    "baseline": {
+      "NO_EFFECT": 5
+    },
+    "defeater": {
+      "NO_EFFECT": 9,
+      "HELPED": 2
+    }
+  }
+}

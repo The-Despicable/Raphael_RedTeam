@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_NO_WORLD_MODEL_falsification-sensitive_s0000_9c4be8",
+  "config_id": "NO_WORLD_MODEL",
+  "template_family": "falsification-sensitive",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784954861.379487,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 20
+}

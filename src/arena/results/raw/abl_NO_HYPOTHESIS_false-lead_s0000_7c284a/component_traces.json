@@ -1,0 +1,55 @@
+{
+  "run_id": "abl_NO_HYPOTHESIS_false-lead_s0000_7c284a",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_7433f6b9cc6c"
+      ],
+      "timestamp": 1784954861.1571584,
+      "run_id": "abl_NO_HYPOTHESIS_false-lead_s0000_7c284a"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954861.1580496,
+      "run_id": "abl_NO_HYPOTHESIS_false-lead_s0000_7c284a"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954861.1583934,
+      "run_id": "abl_NO_HYPOTHESIS_false-lead_s0000_7c284a"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954861.1587293,
+      "run_id": "abl_NO_HYPOTHESIS_false-lead_s0000_7c284a"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954861.1590288,
+      "run_id": "abl_NO_HYPOTHESIS_false-lead_s0000_7c284a"
+    },
+    {
+      "component": "structured_reasoning",
+      "operation": "detect_contradictions",
+      "input_ids": [],
+      "output_ids": [],
+      "timestamp": 1784954861.1593268,
+      "run_id": "abl_NO_HYPOTHESIS_false-lead_s0000_7c284a"
+    }
+  ]
+}

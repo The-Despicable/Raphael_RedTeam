@@ -1,0 +1,109 @@
+{
+  "run_id": "d6c_holdout_NO_HYPOTHESIS_arena-d6-003_s865933229",
+  "batch": "D6C-HOLDOUT",
+  "timestamp": "2026-07-28T02:24:51.228640+00:00",
+  "architecture": "NO_HYPOTHESIS",
+  "template": "T3_FALSIFICATION_SENSITIVE",
+  "scenario_id": "arena-d6-003",
+  "seed": 865933229,
+  "config": {
+    "hypothesis_enabled": false,
+    "falsification_enabled": true,
+    "world_model_enabled": true,
+    "planner_enabled": true,
+    "llm_enabled": true,
+    "structured_reasoning_enabled": true,
+    "defeater_enabled": true,
+    "baseline_type": "raphael"
+  },
+  "evaluation": {
+    "verdict": "fail",
+    "score": 0.6666666666666666,
+    "passed_checks": [
+      "service_identified",
+      "zero_prohibited"
+    ],
+    "failed_checks": [
+      "contradiction_not_detected"
+    ]
+  },
+  "treatment_fidelity": {
+    "overall": "FAIL",
+    "components": {
+      "hypothesis": {
+        "status": "NOT_EXPECTED",
+        "invoked": 0
+      },
+      "falsification": {
+        "status": "FAIL",
+        "invoked": 0,
+        "note": "Component expected but never invoked \u2014 treatment not applied"
+      },
+      "world_model": {
+        "status": "PASS",
+        "invoked": 5
+      },
+      "planner": {
+        "status": "PASS",
+        "invoked": 5
+      },
+      "llm_service": {
+        "status": "FAIL",
+        "invoked": 0,
+        "note": "Component expected but never invoked \u2014 treatment not applied"
+      },
+      "structured_reasoning": {
+        "status": "FAIL",
+        "invoked": 0,
+        "note": "Component expected but never invoked \u2014 treatment not applied"
+      },
+      "defeater": {
+        "status": "FAIL",
+        "invoked": 0,
+        "note": "Component expected but never invoked \u2014 treatment not applied"
+      }
+    }
+  },
+  "component_engagement": {
+    "hypothesis": {
+      "invoked": 0
+    },
+    "falsification": {
+      "invoked": 0
+    },
+    "world_model": {
+      "invoked": 5
+    },
+    "planner": {
+      "invoked": 5
+    },
+    "llm_service": {
+      "invoked": 0
+    },
+    "structured_reasoning": {
+      "invoked": 0
+    },
+    "defeater": {
+      "invoked": 0
+    }
+  },
+  "execution_engine": {
+    "name": "AblationRunner._run_raphael",
+    "entrypoint": "_run_raphael",
+    "ablation_runner_hash": "fd56c89af3af1fb0",
+    "d6c_holdout_runner_hash": "66f576fa637e8a5f"
+  },
+  "metrics": {
+    "outcome": "INFRA_FAILURE",
+    "hypotheses_created": 0,
+    "llm_calls": 0,
+    "actions_proposed": 0,
+    "actions_authorized": 0,
+    "actions_denied": 0,
+    "prohibited_external_actions": 0,
+    "wall_time_seconds": 0.0008723735809326172,
+    "provider_failures": 0
+  },
+  "provider_confounded": false,
+  "provider_failure_count": 0
+}

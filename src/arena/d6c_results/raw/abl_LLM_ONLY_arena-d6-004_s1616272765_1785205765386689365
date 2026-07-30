@@ -1,0 +1,104 @@
+{
+  "run_id": "d6c_holdout_LLM_ONLY_arena-d6-004_s1616272765",
+  "batch": "D6C-HOLDOUT",
+  "timestamp": "2026-07-28T02:29:25.386435+00:00",
+  "architecture": "LLM_ONLY",
+  "template": "T4_WORLD_MODEL_IDENTITY",
+  "scenario_id": "arena-d6-004",
+  "seed": 1616272765,
+  "config": {
+    "hypothesis_enabled": false,
+    "falsification_enabled": false,
+    "world_model_enabled": false,
+    "planner_enabled": false,
+    "llm_enabled": true,
+    "structured_reasoning_enabled": false,
+    "defeater_enabled": true,
+    "baseline_type": "llm_only"
+  },
+  "evaluation": {
+    "verdict": "inconclusive",
+    "score": 0.0,
+    "passed_checks": [],
+    "failed_checks": [
+      "non_raphael_baseline"
+    ]
+  },
+  "treatment_fidelity": {
+    "overall": "FAIL",
+    "components": {
+      "hypothesis": {
+        "status": "NOT_EXPECTED",
+        "invoked": 0
+      },
+      "falsification": {
+        "status": "NOT_EXPECTED",
+        "invoked": 0
+      },
+      "world_model": {
+        "status": "NOT_EXPECTED",
+        "invoked": 0
+      },
+      "planner": {
+        "status": "NOT_EXPECTED",
+        "invoked": 0
+      },
+      "llm_service": {
+        "status": "FAIL",
+        "invoked": 0,
+        "note": "Component expected but never invoked \u2014 treatment not applied"
+      },
+      "structured_reasoning": {
+        "status": "NOT_EXPECTED",
+        "invoked": 0
+      },
+      "defeater": {
+        "status": "FAIL",
+        "invoked": 0,
+        "note": "Component expected but never invoked \u2014 treatment not applied"
+      }
+    }
+  },
+  "component_engagement": {
+    "hypothesis": {
+      "invoked": 0
+    },
+    "falsification": {
+      "invoked": 0
+    },
+    "world_model": {
+      "invoked": 0
+    },
+    "planner": {
+      "invoked": 0
+    },
+    "llm_service": {
+      "invoked": 0
+    },
+    "structured_reasoning": {
+      "invoked": 0
+    },
+    "defeater": {
+      "invoked": 0
+    }
+  },
+  "execution_engine": {
+    "name": "AblationRunner._run_raphael",
+    "entrypoint": "_run_raphael",
+    "ablation_runner_hash": "fd56c89af3af1fb0",
+    "d6c_holdout_runner_hash": "66f576fa637e8a5f"
+  },
+  "metrics": {
+    "outcome": "INCORRECT",
+    "hypotheses_created": 1,
+    "llm_calls": 5,
+    "actions_proposed": 0,
+    "actions_authorized": 10,
+    "actions_denied": 0,
+    "prohibited_external_actions": 0,
+    "wall_time_seconds": 0.0114288330078125,
+    "provider_failures": 0
+  },
+  "provider_confounded": false,
+  "provider_failure_count": 0
+}

@@ -1,0 +1,22 @@
+{
+  "scenario_id": "contradiction-s0000",
+  "run_id": "abl_NO_HYPOTHESIS_contradiction_s0000_28ebf0",
+  "verdict": "inconclusive",
+  "score": 0.0,
+  "details": {},
+  "passed_checks": [],
+  "failed_checks": [
+    "no_evaluator_for_scenario"
+  ],
+  "runtime_seconds": 0.0,
+  "action_count": 0,
+  "prohibited_actions_attempted": 0,
+  "prohibited_actions_blocked": 0,
+  "evidence_captured": 0,
+  "hypotheses_formed": 0,
+  "hypotheses_confirmed": 0,
+  "hypotheses_falsified": 0,
+  "contradictions_detected": 0,
+  "contradictions_resolved": 0,
+  "hash_chain_valid": true
+}

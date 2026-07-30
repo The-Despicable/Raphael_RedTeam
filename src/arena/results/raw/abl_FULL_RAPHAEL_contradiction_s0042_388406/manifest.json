@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_contradiction_s0042_388406",
+  "config_id": "FULL_RAPHAEL",
+  "template_family": "contradiction",
+  "seed": 42,
+  "split": "dev",
+  "timestamp": 1784995274.3067448,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 45
+}

@@ -1,0 +1,21 @@
+{
+  "spec_id": "E4_LOCAL_ADV_ARENA_SPEC",
+  "version": "1.0.0",
+  "status": "SEALED",
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-29",
+    "authority": "SENTINEL Charter §28, §43, §58"
+  },
+  "title": "E4 Local Advanced Arena — RCE→Reverse Shell→SUID Privesc",
+  "target": "Custom target with RCE vulnerability, SSH access, SUID binary",
+  "description": "Advanced local arena testing full kill chain: RCE → reverse shell → SSH access → SUID privilege escalation.",
+  "kill_chain": ["RCE", "Reverse Shell", "SSH Key", "SUID Privesc"],
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-29",
+    "authority": "SENTINEL Charter §28, §43, §58"
+  }
+}

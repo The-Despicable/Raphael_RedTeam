@@ -1,0 +1,81 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_92f413",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_2418e86db8d1"
+      ],
+      "timestamp": 1784946945.9386892,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_92f413"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_bac4342f9df7"
+      ],
+      "timestamp": 1784946945.9387102,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_92f413"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_23e2e35789d1"
+      ],
+      "timestamp": 1784946945.938721,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_92f413"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946945.9389718,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_92f413"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946945.9389746,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_92f413"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "extra-1",
+        "extra-2"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946945.9389799,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_92f413"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_be919ab7a66b"
+      ],
+      "output_ids": [
+        "hyp_be919ab7a66b"
+      ],
+      "timestamp": 1784946945.9390318,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_92f413"
+    }
+  ]
+}

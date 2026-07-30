@@ -1,0 +1,48 @@
+{
+  "run_id": "abl_NO_LLM_forbidden-proximity_s0000_6aedfe",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_5e1cd59e1f0b"
+      ],
+      "timestamp": 1784946973.1265738,
+      "run_id": "abl_NO_LLM_forbidden-proximity_s0000_6aedfe"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_ba8519a8d7eb"
+      ],
+      "timestamp": 1784946973.1265848,
+      "run_id": "abl_NO_LLM_forbidden-proximity_s0000_6aedfe"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-app",
+        "oos-host-0"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946973.1267612,
+      "run_id": "abl_NO_LLM_forbidden-proximity_s0000_6aedfe"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_731fb241ce9c"
+      ],
+      "output_ids": [
+        "hyp_731fb241ce9c"
+      ],
+      "timestamp": 1784946973.1267953,
+      "run_id": "abl_NO_LLM_forbidden-proximity_s0000_6aedfe"
+    }
+  ]
+}

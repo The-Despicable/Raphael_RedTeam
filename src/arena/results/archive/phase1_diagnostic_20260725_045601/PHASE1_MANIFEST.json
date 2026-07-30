@@ -1,0 +1,26 @@
+{
+  "preregistered_experiment": "Stage 2.5C Phase 1 Diagnostic Preflight",
+  "total_runs": 18,
+  "scenarios": 6,
+  "configs_per_scenario": 3,
+  "seeds": [
+    0
+  ],
+  "split": "dev",
+  "preregistered_configs_per_scenario": [
+    "FULL_RAPHAEL",
+    "targeted_ablation",
+    "SCRIPTED_BASELINE"
+  ],
+  "targeted_ablations": {
+    "hypothesis-sensitive": "NO_HYPOTHESIS",
+    "falsification-sensitive": "NO_FALSIFICATION",
+    "world-model-sensitive": "NO_WORLD_MODEL",
+    "planner-sensitive": "NO_PLANNER",
+    "llm-sensitive": "NO_LLM",
+    "negative-control": "NO_HYPOTHESIS"
+  },
+  "extra_runs_excluded": 30,
+  "extra_runs_reason": "Debug runs: all 8 configs \u00d7 6 scenarios, not preregistered",
+  "archived_at": "2026-07-25T04:56:02.737785"
+}

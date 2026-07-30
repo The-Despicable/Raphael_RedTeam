@@ -1,0 +1,65 @@
+{
+  "run_id": "abl_LLM_ONLY_negative-control_s0000_10aeed",
+  "traces": [
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784954861.5570586,
+      "run_id": "abl_LLM_ONLY_negative-control_s0000_10aeed"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_2"
+      ],
+      "output_ids": [
+        "response_2"
+      ],
+      "timestamp": 1784954861.558131,
+      "run_id": "abl_LLM_ONLY_negative-control_s0000_10aeed"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_3"
+      ],
+      "output_ids": [
+        "response_3"
+      ],
+      "timestamp": 1784954861.5589075,
+      "run_id": "abl_LLM_ONLY_negative-control_s0000_10aeed"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_4"
+      ],
+      "output_ids": [
+        "response_4"
+      ],
+      "timestamp": 1784954861.5593145,
+      "run_id": "abl_LLM_ONLY_negative-control_s0000_10aeed"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_5"
+      ],
+      "output_ids": [
+        "response_5"
+      ],
+      "timestamp": 1784954861.55975,
+      "run_id": "abl_LLM_ONLY_negative-control_s0000_10aeed"
+    }
+  ]
+}

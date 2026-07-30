@@ -1,0 +1,15 @@
+export { createCredentialChain, propertyProviderChain } from "./createCredentialChain";
+export { fromCognitoIdentity } from "./fromCognitoIdentity";
+export { fromCognitoIdentityPool } from "./fromCognitoIdentityPool";
+export { fromContainerMetadata } from "./fromContainerMetadata";
+export { fromEnv } from "./fromEnv";
+export { fromHttp } from "./fromHttp";
+export { fromIni } from "./fromIni";
+export { fromInstanceMetadata } from "./fromInstanceMetadata";
+export { fromLoginCredentials } from "./fromLoginCredentials";
+export { fromNodeProviderChain } from "./fromNodeProviderChain";
+export { fromProcess } from "./fromProcess";
+export { fromSSO } from "./fromSSO";
+export { fromTemporaryCredentials } from "./fromTemporaryCredentials";
+export { fromTokenFile } from "./fromTokenFile";
+export { fromWebToken } from "./fromWebToken";

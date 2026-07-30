@@ -1,0 +1,153 @@
+{
+  "run_id": "abl_NO_PLANNER_contradiction_s0042_622282",
+  "scenario_id": "contradiction-s0042",
+  "decision": "STOP_BUDGET_EXHAUSTED",
+  "claims": [
+    {
+      "claim_id": "cl_77d138adcc86",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "accessible",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_603e0b81e6ce",
+        "ev_99f6180ffe0f",
+        "ev_87f2bf8188ef",
+        "ev_8aedbd1b2e1a",
+        "ev_7ebdab6b15fb"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_105a32817a30",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "accessible",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_603e0b81e6ce",
+        "ev_99f6180ffe0f",
+        "ev_87f2bf8188ef",
+        "ev_8aedbd1b2e1a",
+        "ev_7ebdab6b15fb"
+      ],
+      "provenance": {
+        "producer": "hypothesis_inference",
+        "derivation_type": "hypothesis_inference"
+      }
+    },
+    {
+      "claim_id": "cl_be6d548c4e27",
+      "subject_id": "ent_cabbc29c3c68",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_2bd90d0922a6"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_87f2bf8188ef"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_ac97c2073e32",
+      "subject_id": "ent_eeae465bc7f9",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_2bd90d0922a6"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_8aedbd1b2e1a"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_27e95a8e1cf0",
+      "subject_id": "ent_17adf79289f5",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_2bd90d0922a6"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_7ebdab6b15fb"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_79135997d735",
+      "subject_id": "ent_164c80832204",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_2bd90d0922a6"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_503c3004beed"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_c1d368985880",
+      "subject_id": "ent_fee598870a10",
+      "predicate": "has_service",
+      "object_value": {
+        "entity": "ent_2bd90d0922a6"
+      },
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_cc64dd1c632c"
+      ],
+      "provenance": {
+        "producer": "world_model_relationship",
+        "derivation_type": "world_model_relationship"
+      }
+    },
+    {
+      "claim_id": "cl_dfe2e5f2e591",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "Category A",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_70ac5987cfea"
+      ],
+      "provenance": {
+        "producer": "llm_interpretation",
+        "derivation_type": "llm_interpretation"
+      }
+    },
+    {
+      "claim_id": "cl_8b503e997a5e",
+      "subject_id": "admin_endpoint",
+      "predicate": "resource_accessible",
+      "object_value": "Category A",
+      "confidence": null,
+      "supporting_evidence_ids": [
+        "ev_262cd65c7410"
+      ],
+      "provenance": {
+        "producer": "llm_interpretation",
+        "derivation_type": "llm_interpretation"
+      }
+    }
+  ],
+  "architecture_id": "NO_PLANNER",
+  "abstention_reason": null
+}

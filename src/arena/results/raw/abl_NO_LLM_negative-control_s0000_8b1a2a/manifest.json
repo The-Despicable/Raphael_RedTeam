@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_NO_LLM_negative-control_s0000_8b1a2a",
+  "config_id": "NO_LLM",
+  "template_family": "negative-control",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784954685.1335342,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 21
+}

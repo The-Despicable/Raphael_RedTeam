@@ -1,0 +1,52 @@
+{
+  "spec_id": "E2_SHELL_CANDIDATE_GENERATION_SPEC",
+  "version": "1.0.0",
+  "status": "SEALED",
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-28",
+    "authority": "SENTINEL Charter §28, §43, §58"
+  },
+  "series": "E-Series",
+  "phase": "E2",
+  "title": "Shell Candidate Generation — Trigger-Based Proposals",
+  "description": "Defines the candidate generation pipeline for shell actions. Three trigger tiers (T1 credential discovery, T2 exploit confirmation, T3 student advisory) each produce `shell_connect` candidates scored by the Planner.",
+  "charter_references": ["Section 28: Capability Registration", "Section 43: Execution Authorization", "Section 58: Session Lifecycle"],
+  "trigger_tiers": {
+    "T1": {
+      "name": "Credential Discovery",
+      "condition": "Valid credentials found (SSH keys, passwords, tokens)",
+      "candidate_type": "shell_connect",
+      "priority": 0.9
+    },
+    "T2": {
+      "name": "Exploit Confirmation",
+      "condition": "Vulnerability confirmed exploitable via probe",
+      "candidate_type": "shell_connect",
+      "priority": 0.8
+    },
+    "T3": {
+      "name": "Student Advisory",
+      "condition": "Student proposes technique requiring shell",
+      "candidate_type": "shell_connect",
+      "priority": 0.6
+    }
+  },
+  "candidate_proposal": {
+    "max_per_trigger": 5,
+    "scoring": "Planner scores by utility/cost/risk",
+    "rationale_codes": "Mandatory for transparency"
+  },
+  "invariants": [
+    "Every shell action originates from a trigger",
+    "No candidate bypasses Planner scoring",
+    "Student proposals enter same pool as T1/T2"
+  ],
+  "seal": {
+    "status": "SEALED",
+    "sealed_by": "SENTINEL (GLM-5.2)",
+    "seal_date": "2026-07-28",
+    "authority": "SENTINEL Charter §28, §43, §58"
+  }
+}

@@ -1,0 +1,29 @@
+FROM python:3.9-slim
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    openssh-server \
+    sudo \
+    && rm -rf /var/lib/apt/lists/*
+
+# Setup SSH
+RUN mkdir -p /var/run/sshd
+RUN useradd -m -s /bin/bash operatoruser && echo 'operatoruser:MetadataSecret123!' | chpasswd
+
+# Setup Privilege Escalation Vector (SUID on 'find')
+RUN chmod u+s /usr/bin/find
+
+# Setup sample data for post-exploitation
+RUN mkdir -p /root/.ssh
+RUN echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ... root_dummy_key" > /root/.ssh/authorized_keys
+RUN echo "FLAG_CLOUD_IMPERSONATION=SUCCESS" > /root/.env
+
+# Setup Vulnerable Web Application
+RUN mkdir -p /app
+COPY app.py /app/app.py
+WORKDIR /app
+RUN pip install flask
+
+EXPOSE 22 8080
+
+CMD ["/bin/bash", "-c", "/usr/sbin/sshd && python app.py"]

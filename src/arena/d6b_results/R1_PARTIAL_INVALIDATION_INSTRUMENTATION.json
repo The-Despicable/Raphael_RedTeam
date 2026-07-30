@@ -1,0 +1,24 @@
+{
+  "batch": "D6B-R1-PARTIAL",
+  "status": "INVALIDATED_INSTRUMENTATION",
+  "completed_runs": 190,
+  "total_runs": 280,
+  "timestamp": "2026-07-26T19:16:00Z",
+  "reason": "LLM treatment-fidelity classifier monitored the wrong trace component ('llm' instead of 'llm_service'). The TracedLLM wrapper (component='llm') is never invoked in the _run_raphael() cognitive loop; real LLM calls go through LLMService.run_inference() which traces under component='llm_service'. Every run reported treatment_fidelity.llm = FAIL even though the LLM service was actually invoked. Raw traces remain valid diagnostic evidence but results are not admissible for the final D-6B validation matrix.",
+  "patch": {
+    "file": "d6b_runner.py",
+    "changes": [
+      "extract_component_engagement(): 'llm' → 'llm_service' in component list (line 117)",
+      "classify_treatment_fidelity(): 'llm_enabled' → 'llm_service' in config_to_comp mapping (line 149)"
+    ],
+    "type": "instrumentation_only",
+    "authorized_by": "SENTINEL 2026-07-26T19:16:13Z"
+  },
+  "provider_substitution": {
+    "original": {"provider": "opencode", "model_id": "deepseek-v4-flash-free", "api_base": ""},
+    "current": {"provider": "nvidia", "model_id": "deepseek-ai/deepseek-v4-flash", "api_base": "https://integrate.api.nvidia.com/v1"},
+    "status": "must_be_explicitly_resealed"
+  },
+  "preserved_as": "audit_evidence",
+  "preserved_file": "d6b_r1_results.jsonl"
+}

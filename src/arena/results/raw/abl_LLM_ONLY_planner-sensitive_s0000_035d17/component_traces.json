@@ -1,0 +1,65 @@
+{
+  "run_id": "abl_LLM_ONLY_planner-sensitive_s0000_035d17",
+  "traces": [
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784955362.578915,
+      "run_id": "abl_LLM_ONLY_planner-sensitive_s0000_035d17"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_2"
+      ],
+      "output_ids": [
+        "response_2"
+      ],
+      "timestamp": 1784955362.5806892,
+      "run_id": "abl_LLM_ONLY_planner-sensitive_s0000_035d17"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_3"
+      ],
+      "output_ids": [
+        "response_3"
+      ],
+      "timestamp": 1784955362.5811527,
+      "run_id": "abl_LLM_ONLY_planner-sensitive_s0000_035d17"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_4"
+      ],
+      "output_ids": [
+        "response_4"
+      ],
+      "timestamp": 1784955362.5815659,
+      "run_id": "abl_LLM_ONLY_planner-sensitive_s0000_035d17"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_5"
+      ],
+      "output_ids": [
+        "response_5"
+      ],
+      "timestamp": 1784955362.5819921,
+      "run_id": "abl_LLM_ONLY_planner-sensitive_s0000_035d17"
+    }
+  ]
+}

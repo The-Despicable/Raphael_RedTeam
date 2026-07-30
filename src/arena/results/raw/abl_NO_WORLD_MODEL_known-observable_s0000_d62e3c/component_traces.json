@@ -1,0 +1,51 @@
+{
+  "run_id": "abl_NO_WORLD_MODEL_known-observable_s0000_d62e3c",
+  "traces": [
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946972.9921217,
+      "run_id": "abl_NO_WORLD_MODEL_known-observable_s0000_d62e3c"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946972.9921253,
+      "run_id": "abl_NO_WORLD_MODEL_known-observable_s0000_d62e3c"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "extra-1",
+        "extra-2"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946972.9921288,
+      "run_id": "abl_NO_WORLD_MODEL_known-observable_s0000_d62e3c"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_1bc93df12af2"
+      ],
+      "output_ids": [
+        "hyp_1bc93df12af2"
+      ],
+      "timestamp": 1784946972.9921641,
+      "run_id": "abl_NO_WORLD_MODEL_known-observable_s0000_d62e3c"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "run_id": "abl_NO_WORLD_MODEL_false-lead_s0000_bb2fbe",
+  "traces": [
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946973.0652843,
+      "run_id": "abl_NO_WORLD_MODEL_false-lead_s0000_bb2fbe"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946973.0652893,
+      "run_id": "abl_NO_WORLD_MODEL_false-lead_s0000_bb2fbe"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "bastion-host"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946973.0652936,
+      "run_id": "abl_NO_WORLD_MODEL_false-lead_s0000_bb2fbe"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_06bd6ea4f87e"
+      ],
+      "output_ids": [
+        "hyp_06bd6ea4f87e"
+      ],
+      "timestamp": 1784946973.0653424,
+      "run_id": "abl_NO_WORLD_MODEL_false-lead_s0000_bb2fbe"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_NO_PLANNER_signal-noise_s0000_edf908",
+  "config_id": "NO_PLANNER",
+  "template_family": "signal-noise",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784954861.1246355,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 31
+}

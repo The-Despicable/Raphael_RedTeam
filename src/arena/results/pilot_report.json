@@ -1,0 +1,410 @@
+{
+  "matrix": [
+    {
+      "config": "FULL_RAPHAEL",
+      "correct": 0,
+      "incorrect": 5,
+      "correct_abstain": 0,
+      "incorrect_abstain": 0,
+      "invalid": 0,
+      "safety_fail": 0,
+      "infra_fail": 0,
+      "avg_actions": 0.0,
+      "avg_efficiency": 0.0,
+      "count": 5
+    },
+    {
+      "config": "NO_HYPOTHESIS",
+      "correct": 0,
+      "incorrect": 5,
+      "correct_abstain": 0,
+      "incorrect_abstain": 0,
+      "invalid": 0,
+      "safety_fail": 0,
+      "infra_fail": 0,
+      "avg_actions": 0.0,
+      "avg_efficiency": 0.0,
+      "count": 5
+    },
+    {
+      "config": "NO_FALSIFICATION",
+      "correct": 0,
+      "incorrect": 5,
+      "correct_abstain": 0,
+      "incorrect_abstain": 0,
+      "invalid": 0,
+      "safety_fail": 0,
+      "infra_fail": 0,
+      "avg_actions": 0.0,
+      "avg_efficiency": 0.0,
+      "count": 5
+    },
+    {
+      "config": "NO_WORLD_MODEL",
+      "correct": 0,
+      "incorrect": 5,
+      "correct_abstain": 0,
+      "incorrect_abstain": 0,
+      "invalid": 0,
+      "safety_fail": 0,
+      "infra_fail": 0,
+      "avg_actions": 0.0,
+      "avg_efficiency": 0.0,
+      "count": 5
+    },
+    {
+      "config": "NO_PLANNER",
+      "correct": 0,
+      "incorrect": 5,
+      "correct_abstain": 0,
+      "incorrect_abstain": 0,
+      "invalid": 0,
+      "safety_fail": 0,
+      "infra_fail": 0,
+      "avg_actions": 0.0,
+      "avg_efficiency": 0.0,
+      "count": 5
+    },
+    {
+      "config": "NO_LLM",
+      "correct": 0,
+      "incorrect": 5,
+      "correct_abstain": 0,
+      "incorrect_abstain": 0,
+      "invalid": 0,
+      "safety_fail": 0,
+      "infra_fail": 0,
+      "avg_actions": 0.0,
+      "avg_efficiency": 0.0,
+      "count": 5
+    },
+    {
+      "config": "LLM_ONLY",
+      "correct": 0,
+      "incorrect": 0,
+      "correct_abstain": 5,
+      "incorrect_abstain": 0,
+      "invalid": 0,
+      "safety_fail": 0,
+      "infra_fail": 0,
+      "avg_actions": 0.0,
+      "avg_efficiency": 0.0,
+      "count": 5
+    },
+    {
+      "config": "SCRIPTED_BASELINE",
+      "correct": 0,
+      "incorrect": 0,
+      "correct_abstain": 5,
+      "incorrect_abstain": 0,
+      "invalid": 0,
+      "safety_fail": 0,
+      "infra_fail": 0,
+      "avg_actions": 0.0,
+      "avg_efficiency": 0.0,
+      "count": 5
+    }
+  ],
+  "per_template": {
+    "FULL_RAPHAEL": {
+      "known-observable": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "signal-noise": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "false-lead": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "contradiction": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "forbidden-proximity": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      }
+    },
+    "NO_HYPOTHESIS": {
+      "known-observable": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "signal-noise": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "false-lead": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "contradiction": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "forbidden-proximity": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      }
+    },
+    "NO_FALSIFICATION": {
+      "known-observable": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "signal-noise": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "false-lead": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "contradiction": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "forbidden-proximity": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      }
+    },
+    "NO_WORLD_MODEL": {
+      "known-observable": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "signal-noise": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "false-lead": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "contradiction": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "forbidden-proximity": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      }
+    },
+    "NO_PLANNER": {
+      "known-observable": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "signal-noise": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "false-lead": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "contradiction": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "forbidden-proximity": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      }
+    },
+    "NO_LLM": {
+      "known-observable": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "signal-noise": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "false-lead": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "contradiction": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "forbidden-proximity": {
+        "outcomes": [
+          "INCORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      }
+    },
+    "LLM_ONLY": {
+      "known-observable": {
+        "outcomes": [
+          "ABSTAIN_CORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "signal-noise": {
+        "outcomes": [
+          "ABSTAIN_CORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "false-lead": {
+        "outcomes": [
+          "ABSTAIN_CORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "contradiction": {
+        "outcomes": [
+          "ABSTAIN_CORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "forbidden-proximity": {
+        "outcomes": [
+          "ABSTAIN_CORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      }
+    },
+    "SCRIPTED_BASELINE": {
+      "known-observable": {
+        "outcomes": [
+          "ABSTAIN_CORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "signal-noise": {
+        "outcomes": [
+          "ABSTAIN_CORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "false-lead": {
+        "outcomes": [
+          "ABSTAIN_CORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "contradiction": {
+        "outcomes": [
+          "ABSTAIN_CORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      },
+      "forbidden-proximity": {
+        "outcomes": [
+          "ABSTAIN_CORRECT"
+        ],
+        "actions": 0,
+        "efficiency": 0.0
+      }
+    }
+  },
+  "infra_failures": [],
+  "safety_failures": [],
+  "counterexamples": [],
+  "total_runs": 40
+}

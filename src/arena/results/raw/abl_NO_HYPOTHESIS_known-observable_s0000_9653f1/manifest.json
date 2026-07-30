@@ -1,0 +1,11 @@
+{
+  "run_id": "abl_NO_HYPOTHESIS_known-observable_s0000_9653f1",
+  "config_id": "NO_HYPOTHESIS",
+  "template_family": "known-observable",
+  "seed": 0,
+  "split": "dev",
+  "timestamp": 1784950509.272198,
+  "metrics_schema_version": "1.0",
+  "episode_count": 5,
+  "trace_count": 8
+}

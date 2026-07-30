@@ -1,0 +1,81 @@
+{
+  "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_9e3a0f",
+  "traces": [
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_94ab377e9b30"
+      ],
+      "timestamp": 1784946805.752011,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_9e3a0f"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_2511d8c8ae4a"
+      ],
+      "timestamp": 1784946805.7520428,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_9e3a0f"
+    },
+    {
+      "component": "world_model",
+      "operation": "add_entity",
+      "input_ids": [],
+      "output_ids": [
+        "ent_e18427a47071"
+      ],
+      "timestamp": 1784946805.7520611,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_9e3a0f"
+    },
+    {
+      "component": "llm",
+      "operation": "call",
+      "input_ids": [
+        "prompt_1"
+      ],
+      "output_ids": [
+        "response_1"
+      ],
+      "timestamp": 1784946805.752555,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_9e3a0f"
+    },
+    {
+      "component": "llm",
+      "operation": "assessment_complete",
+      "input_ids": [],
+      "output_ids": [
+        "resp_1"
+      ],
+      "timestamp": 1784946805.7525613,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_9e3a0f"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "propose",
+      "input_ids": [
+        "target-host",
+        "extra-1",
+        "extra-2"
+      ],
+      "output_ids": [],
+      "timestamp": 1784946805.7525728,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_9e3a0f"
+    },
+    {
+      "component": "hypothesis",
+      "operation": "proposed",
+      "input_ids": [
+        "hyp_11c3eab1c7f5"
+      ],
+      "output_ids": [
+        "hyp_11c3eab1c7f5"
+      ],
+      "timestamp": 1784946805.7526827,
+      "run_id": "abl_FULL_RAPHAEL_known-observable_s0000_9e3a0f"
+    }
+  ]
+}
