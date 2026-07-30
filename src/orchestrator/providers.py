@@ -9,6 +9,10 @@ import aiohttp
 logger = logging.getLogger("providers")
 
 OLLAMA_BASE = os.getenv("OLLAMA_HOST", "http://localhost:11434")
+OLLAMA_DEFAULT_MODEL = os.getenv("OLLAMA_MODEL", "nemotron-3-ultra:cloud")
+# Models hosted via Ollama cloud proxy (routed to Ollama, not NVIDIA)
+OLLAMA_CLOUD_PREFIXES = (":cloud", "wormgpt", "nemotron-3-ultra")
+
 OPENAI_BASE = os.getenv("OPENAI_BASE_URL", "")
 OPENAI_KEY = os.getenv("OPENAI_API_KEY", "")
 
@@ -21,13 +25,15 @@ NVIDIA_DEFAULT_MODEL = os.getenv("NVIDIA_MODEL", "deepseek-ai/deepseek-v4-flash"
 NVIDIA_MODEL_PREFIXES = ("deepseek-", "nvidia/", "z-ai/", "meta/llama", "mistralai/")
 
 
-async def _call_ollama(messages: list[dict], max_tokens: int, temperature: float) -> str:
+async def _call_ollama(messages: list[dict], max_tokens: int, temperature: float,
+                       model: str | None = None) -> str:
     system = None
     if messages and messages[0].get("role") == "system":
         system = messages[0]["content"]
         messages = messages[1:]
+    model_name = model or OLLAMA_DEFAULT_MODEL
     payload = {
-        "model": os.getenv("OLLAMA_MODEL", "llama3.2"),
+        "model": model_name,
         "messages": messages,
         "options": {"num_predict": max_tokens, "temperature": temperature},
     }
@@ -39,6 +45,9 @@ async def _call_ollama(messages: list[dict], max_tokens: int, temperature: float
             if resp.status == 200:
                 data = await resp.json()
                 return data["choices"][0]["message"]["content"]
+            else:
+                text = await resp.text()
+                logger.warning(f"[OLLAMA] HTTP {resp.status}: {text[:200]}")
     return ""
 
 
@@ -94,6 +103,17 @@ async def _call_nvidia(
     return ""
 
 
+def _is_ollama_model(model: str) -> bool:
+    """Check if a model identifier should be routed to local/cloud Ollama."""
+    if not model:
+        return False
+    model_lower = model.lower()
+    for prefix in OLLAMA_CLOUD_PREFIXES:
+        if prefix in model_lower:
+            return True
+    return False
+
+
 def _is_nvidia_model(model: str) -> bool:
     """Check if a model identifier should be routed to NVIDIA NIM."""
     if not model:
@@ -119,28 +139,35 @@ async def call_model(
     else:
         msgs = messages
 
-    # 1. Route NVIDIA-known models through NVIDIA NIM
+    # 1. Ollama-hosted models (local or cloud proxy) — try Ollama first
+    if _is_ollama_model(model):
+        result = await _call_ollama(msgs, max_tokens, temperature, model)
+        if result:
+            return result
+        logger.warning(f"Ollama call failed for {model}, trying fallbacks")
+
+    # 2. Route NVIDIA-known models through NVIDIA NIM
     if _is_nvidia_model(model):
         result = await _call_nvidia(msgs, max_tokens, temperature, model)
         if result:
             return result
         logger.warning(f"NVIDIA call failed for {model}, trying fallbacks")
 
-    # 2. OpenAI-compatible endpoint (explicitly configured)
+    # 3. OpenAI-compatible endpoint (explicitly configured)
     if OPENAI_KEY and OPENAI_BASE:
         result = await _call_openai(msgs, max_tokens, temperature, model)
         if result:
             return result
 
-    # 3. NVIDIA as default provider when model is unknown / no other provider configured
+    # 4. NVIDIA as default provider when model is unknown / no other provider configured
     if NVIDIA_KEY and not (OPENAI_KEY and OPENAI_BASE):
         result = await _call_nvidia(msgs, max_tokens, temperature, NVIDIA_DEFAULT_MODEL)
         if result:
             return result
 
-    # 4. Ollama fallback
+    # 5. Ollama fallback (for models not explicitly matched above)
     try:
-        return await _call_ollama(msgs, max_tokens, temperature)
+        return await _call_ollama(msgs, max_tokens, temperature, model)
     except Exception as e:
         logger.warning(f"Ollama call failed: {e}")
         content = messages[-1].get("content", "") if messages else ""
