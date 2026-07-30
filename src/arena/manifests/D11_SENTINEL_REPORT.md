@@ -22,7 +22,7 @@
 | **T3 mean score** | 0.50 | Defeater actions execute but don't move task needle |
 | **T6 mean score** | 0.00 | LLM produces inferences but no behavioral impact |
 
-**Verdict**: D11 proves the **defeater pipeline end-to-end**. The falsification pipeline cannot be verified because the upstream contradiction detector (`_check_contradiction`) only recognizes service version mismatches (Apache/nginx/tomcat), not the identity-resolution or multi-protocol contradictions that T3/T4 are designed to surface. NO_LLM T4 episodes produce falsification results (4/5), confirming the falsification code paths are structurally correct.
+**Verdict**: D11 demonstrates the **defeater pipeline operational end-to-end** under current test conditions. The falsification pipeline cannot be verified because the upstream contradiction detector (`_check_contradiction`) only recognizes service version mismatches (Apache/nginx/tomcat), not the identity-resolution or multi-protocol contradictions that T3/T4 are designed to surface. NO_LLM T4 episodes produce falsification results (4/5), indicating the falsification code paths are structurally intact.
 
 ---
 

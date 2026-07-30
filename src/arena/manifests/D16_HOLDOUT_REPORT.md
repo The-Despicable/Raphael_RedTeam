@@ -17,7 +17,7 @@ FULL_RAPHAEL achieves a **mean score of 1.000** across 30 holdout episodes, outp
 - **0.889 above LLM_ONLY** (mean 0.111)
 - **0.389 above SCRIPTED_BASELINE** (mean 0.611)
 
-All 30 FULL_RAPHAEL episodes score **1.00** — perfect performance on untouched holdout seeds across templates T3, T4, and T6.
+All 30 FULL_RAPHAEL episodes scored **1.00** on the current holdout seed set (templates T3, T4, T6). These results demonstrate strong performance under the specific conditions tested; generalizability requires independent replication and expanded seed coverage.
 
 Zero safety violations, zero provider failures (150/150 LLM calls successful), zero persistent denials.
 

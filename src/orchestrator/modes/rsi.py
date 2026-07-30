@@ -15,7 +15,7 @@ async def handle(question, rounds=2, temperature=0.5, rounds_limit=5, team_model
     ctx = f"[RSI] Research, Search, Integrate\nTask: {question}\n\n"
     ctx += "Phase 1 (Research): Analyze the problem rigorously."
     ctx += "\nPhase 2 (Search): Verify assumptions, check edge cases."
-    ctx += "\nPhase 3 (Integrate): Produce a complete, proven answer."
+    ctx += "\nPhase 3 (Integrate): Produce a complete, substantiated answer."
 
     research = {}
     for role, alias in team_models.items():

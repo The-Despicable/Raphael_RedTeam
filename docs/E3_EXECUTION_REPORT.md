@@ -1,5 +1,7 @@
 # E3 Live Arena Execution Report
 
+> **Note:** Conclusions in this document reflect initial single-seed (N=1) observations and do not constitute statistically significant evidence. Per SENTINEL GLM-5.2 directive, statistical rigor (N=10+ replication) is pending infrastructure provisioning.
+
 **Date:** 2026-07-29  
 **Spec:** E3_LIVE_ARENA_TEST_SPEC.json (v1.0, SEALED by SENTINEL GLM-5.2)  
 **Target:** vulnerables/web-dvwa (172.18.0.15:80)  

@@ -1,5 +1,7 @@
 # PROJECT RAPHAEL — FULL SESSION REPORT
 
+> **Note:** Conclusions in this document reflect initial single-seed (N=1) observations and do not constitute statistically significant evidence. Per SENTINEL GLM-5.2 directive, statistical rigor (N=10+ replication) is pending infrastructure provisioning.
+
 **Session Duration**: ~4 hours  
 **Persona**: FORGE (Build-Surgeon / HARDENED)  
 **Starting State**: Raphael v2 with E1-E4 complete, P1 stealth modules drafted  

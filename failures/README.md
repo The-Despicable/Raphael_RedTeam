@@ -12,7 +12,7 @@
 **Resolution**: 
 - Fixed `ablation_runner.py` cache isolation (PR #d6c-fix)
 - Added cache invalidation on mask change
-- Re-ran D6B with clean state: FULL_RAPHAEL 1.000 > NO_LLM 0.833 confirmed
+- Re-ran D6B with clean state: observed FULL_RAPHAEL 1.000 > NO_LLM 0.833 (on current benchmark/seeds, N=1)
 **Status**: RESOLVED — `D6B_R1_CANONICAL_INDEX.json` regenerated and sealed.  
 **Regression Test**: `tests/test_state_isolation.py::test_canonical_index_determinism`
 
@@ -26,7 +26,7 @@
 **Resolution**: 
 - Isolated LLM client per ablation run
 - Added `llm_context_reset()` hook
-- Re-ran D6B with clean state: FULL_RAPHAEL 1.000 > NO_LLM 0.833 confirmed
+- Re-ran D6B with clean state: observed FULL_RAPHAEL 1.000 > NO_LLM 0.833 (on current benchmark/seeds, N=1)
 **Status**: RESOLVED — `D6B_R1_FULL_VS_ABLATION.json` re-run and sealed.  
 **Regression Test**: `tests/test_state_isolation.py::test_llm_context_isolation`
 

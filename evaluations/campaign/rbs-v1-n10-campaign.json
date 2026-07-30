@@ -1,0 +1,704 @@
+{
+  "campaign": "RBS-v1 N=10 Statistical Campaign",
+  "timestamp": "2026-07-30T16:28:12.732176+00:00",
+  "provider": "ollama:nemotron-3-ultra:cloud",
+  "seeds": [
+    42,
+    1042,
+    1043,
+    1044,
+    1045,
+    1046,
+    1047,
+    1048,
+    1049,
+    1050
+  ],
+  "templates": [
+    "T1_NEGATIVE_CONTROL",
+    "T2_HYPOTHESIS_SENSITIVE",
+    "T3_FALSIFICATION_SENSITIVE",
+    "T4_WORLD_MODEL_IDENTITY",
+    "T5_PLANNING_COST",
+    "T6_SEMANTIC_LLM",
+    "T7_DEFEATER_SENSITIVE"
+  ],
+  "configs": [
+    "FULL_RAPHAEL",
+    "NO_LLM"
+  ],
+  "results": {
+    "T1_NEGATIVE_CONTROL_FULL_RAPHAEL": {
+      "template": "T1_NEGATIVE_CONTROL",
+      "config": "FULL_RAPHAEL",
+      "scores": [
+        1.0,
+        1.0,
+        1.0,
+        0.5,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actions": [
+        74,
+        74,
+        74,
+        70,
+        70,
+        70,
+        74,
+        70,
+        74,
+        70
+      ],
+      "stats": {
+        "score": {
+          "n": 10,
+          "mean": 0.95,
+          "median": 1.0,
+          "std": 0.15,
+          "variance": 0.0225,
+          "min": 0.5,
+          "max": 1.0
+        },
+        "actions": {
+          "n": 10,
+          "mean": 72.0,
+          "median": 72.0,
+          "std": 2.0,
+          "variance": 4.0,
+          "min": 70,
+          "max": 74
+        }
+      }
+    },
+    "T1_NEGATIVE_CONTROL_NO_LLM": {
+      "template": "T1_NEGATIVE_CONTROL",
+      "config": "NO_LLM",
+      "scores": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "actions": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "stats": {
+        "score": {
+          "n": 10,
+          "mean": 0.5,
+          "median": 0.5,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 0.5,
+          "max": 0.5
+        },
+        "actions": {
+          "n": 10,
+          "mean": 70.0,
+          "median": 70.0,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 70,
+          "max": 70
+        }
+      }
+    },
+    "T2_HYPOTHESIS_SENSITIVE_FULL_RAPHAEL": {
+      "template": "T2_HYPOTHESIS_SENSITIVE",
+      "config": "FULL_RAPHAEL",
+      "scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "actions": [
+        74,
+        74,
+        75,
+        74,
+        74,
+        75,
+        74,
+        74,
+        74,
+        75
+      ],
+      "stats": {
+        "score": {
+          "n": 10,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "actions": {
+          "n": 10,
+          "mean": 74.3,
+          "median": 74.0,
+          "std": 0.4583,
+          "variance": 0.21,
+          "min": 74,
+          "max": 75
+        }
+      }
+    },
+    "T2_HYPOTHESIS_SENSITIVE_NO_LLM": {
+      "template": "T2_HYPOTHESIS_SENSITIVE",
+      "config": "NO_LLM",
+      "scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "actions": [
+        74,
+        74,
+        74,
+        74,
+        74,
+        74,
+        74,
+        74,
+        74,
+        74
+      ],
+      "stats": {
+        "score": {
+          "n": 10,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "actions": {
+          "n": 10,
+          "mean": 74.0,
+          "median": 74.0,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 74,
+          "max": 74
+        }
+      }
+    },
+    "T3_FALSIFICATION_SENSITIVE_FULL_RAPHAEL": {
+      "template": "T3_FALSIFICATION_SENSITIVE",
+      "config": "FULL_RAPHAEL",
+      "scores": [
+        1.0,
+        1.0,
+        1.0,
+        0.5,
+        0.5,
+        1.0,
+        0.5,
+        1.0,
+        1.0,
+        0.5
+      ],
+      "actions": [
+        74,
+        74,
+        69,
+        69,
+        69,
+        69,
+        69,
+        69,
+        69,
+        69
+      ],
+      "stats": {
+        "score": {
+          "n": 10,
+          "mean": 0.8,
+          "median": 1.0,
+          "std": 0.2449,
+          "variance": 0.06,
+          "min": 0.5,
+          "max": 1.0
+        },
+        "actions": {
+          "n": 10,
+          "mean": 70.0,
+          "median": 69.0,
+          "std": 2.0,
+          "variance": 4.0,
+          "min": 69,
+          "max": 74
+        }
+      }
+    },
+    "T3_FALSIFICATION_SENSITIVE_NO_LLM": {
+      "template": "T3_FALSIFICATION_SENSITIVE",
+      "config": "NO_LLM",
+      "scores": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "actions": [
+        69,
+        69,
+        69,
+        69,
+        69,
+        69,
+        69,
+        69,
+        69,
+        69
+      ],
+      "stats": {
+        "score": {
+          "n": 10,
+          "mean": 0.5,
+          "median": 0.5,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 0.5,
+          "max": 0.5
+        },
+        "actions": {
+          "n": 10,
+          "mean": 69.0,
+          "median": 69.0,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 69,
+          "max": 69
+        }
+      }
+    },
+    "T4_WORLD_MODEL_IDENTITY_FULL_RAPHAEL": {
+      "template": "T4_WORLD_MODEL_IDENTITY",
+      "config": "FULL_RAPHAEL",
+      "scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actions": [
+        73,
+        73,
+        75,
+        73,
+        73,
+        73,
+        73,
+        73,
+        73,
+        73
+      ],
+      "stats": {
+        "score": {
+          "n": 10,
+          "mean": 1.0,
+          "median": 1.0,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "actions": {
+          "n": 10,
+          "mean": 73.2,
+          "median": 73.0,
+          "std": 0.6,
+          "variance": 0.36,
+          "min": 73,
+          "max": 75
+        }
+      }
+    },
+    "T4_WORLD_MODEL_IDENTITY_NO_LLM": {
+      "template": "T4_WORLD_MODEL_IDENTITY",
+      "config": "NO_LLM",
+      "scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actions": [
+        73,
+        73,
+        73,
+        73,
+        73,
+        73,
+        73,
+        73,
+        73,
+        73
+      ],
+      "stats": {
+        "score": {
+          "n": 10,
+          "mean": 1.0,
+          "median": 1.0,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "actions": {
+          "n": 10,
+          "mean": 73.0,
+          "median": 73.0,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 73,
+          "max": 73
+        }
+      }
+    },
+    "T5_PLANNING_COST_FULL_RAPHAEL": {
+      "template": "T5_PLANNING_COST",
+      "config": "FULL_RAPHAEL",
+      "scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "actions": [
+        72,
+        72,
+        72,
+        72,
+        72,
+        72,
+        72,
+        72,
+        72,
+        72
+      ],
+      "stats": {
+        "score": {
+          "n": 10,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "actions": {
+          "n": 10,
+          "mean": 72.0,
+          "median": 72.0,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 72,
+          "max": 72
+        }
+      }
+    },
+    "T5_PLANNING_COST_NO_LLM": {
+      "template": "T5_PLANNING_COST",
+      "config": "NO_LLM",
+      "scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "actions": [
+        72,
+        72,
+        72,
+        72,
+        72,
+        72,
+        72,
+        72,
+        72,
+        72
+      ],
+      "stats": {
+        "score": {
+          "n": 10,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "actions": {
+          "n": 10,
+          "mean": 72.0,
+          "median": 72.0,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 72,
+          "max": 72
+        }
+      }
+    },
+    "T6_SEMANTIC_LLM_FULL_RAPHAEL": {
+      "template": "T6_SEMANTIC_LLM",
+      "config": "FULL_RAPHAEL",
+      "scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actions": [
+        69,
+        69,
+        69,
+        69,
+        69,
+        69,
+        69,
+        69,
+        69,
+        69
+      ],
+      "stats": {
+        "score": {
+          "n": 10,
+          "mean": 1.0,
+          "median": 1.0,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "actions": {
+          "n": 10,
+          "mean": 69.0,
+          "median": 69.0,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 69,
+          "max": 69
+        }
+      }
+    },
+    "T6_SEMANTIC_LLM_NO_LLM": {
+      "template": "T6_SEMANTIC_LLM",
+      "config": "NO_LLM",
+      "scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actions": [
+        69,
+        69,
+        69,
+        69,
+        69,
+        69,
+        69,
+        69,
+        69,
+        69
+      ],
+      "stats": {
+        "score": {
+          "n": 10,
+          "mean": 1.0,
+          "median": 1.0,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "actions": {
+          "n": 10,
+          "mean": 69.0,
+          "median": 69.0,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 69,
+          "max": 69
+        }
+      }
+    },
+    "T7_DEFEATER_SENSITIVE_FULL_RAPHAEL": {
+      "template": "T7_DEFEATER_SENSITIVE",
+      "config": "FULL_RAPHAEL",
+      "scores": [
+        0.5,
+        0.5,
+        1.0,
+        1.0,
+        0.5,
+        1.0,
+        0.5,
+        1.0,
+        0.5,
+        0.5
+      ],
+      "actions": [
+        65,
+        69,
+        74,
+        69,
+        63,
+        69,
+        74,
+        69,
+        63,
+        74
+      ],
+      "stats": {
+        "score": {
+          "n": 10,
+          "mean": 0.7,
+          "median": 0.5,
+          "std": 0.2449,
+          "variance": 0.06,
+          "min": 0.5,
+          "max": 1.0
+        },
+        "actions": {
+          "n": 10,
+          "mean": 68.9,
+          "median": 69.0,
+          "std": 4.0361,
+          "variance": 16.29,
+          "min": 63,
+          "max": 74
+        }
+      }
+    },
+    "T7_DEFEATER_SENSITIVE_NO_LLM": {
+      "template": "T7_DEFEATER_SENSITIVE",
+      "config": "NO_LLM",
+      "scores": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "actions": [
+        63,
+        63,
+        63,
+        63,
+        63,
+        63,
+        63,
+        63,
+        63,
+        63
+      ],
+      "stats": {
+        "score": {
+          "n": 10,
+          "mean": 0.5,
+          "median": 0.5,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 0.5,
+          "max": 0.5
+        },
+        "actions": {
+          "n": 10,
+          "mean": 63.0,
+          "median": 63.0,
+          "std": 0.0,
+          "variance": 0.0,
+          "min": 63,
+          "max": 63
+        }
+      }
+    }
+  }
+}

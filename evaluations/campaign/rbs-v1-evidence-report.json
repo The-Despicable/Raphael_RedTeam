@@ -22,7 +22,7 @@
           "actions": 69
         }
       },
-      "verdict": "FULL_RAPHAEL (1.0) > NO_LLM (0.5) \u2705 Architecture value confirmed"
+      "verdict": "FULL_RAPHAEL (1.0) > NO_LLM (0.5) on current benchmark seed (N=1). Requires N=10 replication for statistical significance."
     },
     "exp2_ablation": {
       "status": "COMPLETE",
@@ -61,7 +61,7 @@
           "actions": 70
         }
       },
-      "verdict": "Hypothesis & Falsification are CRITICAL (0.0 when removed). LLM-only fails (0.0). Architecture matters."
+      "verdict": "Hypothesis and Falsification ablation caused score drop (0.0) on this template/seed combination. LLM-only configuration also scored 0.0. Causal attribution requires N=10 replication."
     },
     "exp3_difficulty_scaling": {
       "status": "COMPLETE",
@@ -74,14 +74,14 @@
         "T6_SEMANTIC_LLM": 1.0,
         "T7_DEFEATER_SENSITIVE": 0.5
       },
-      "verdict": "Mean score: 0.5. T4 (1.0) and T6 (1.0) mastered; T2 (0.0) and T5 (0.0) unsolved. Seed-dependent sensitivity observed."
+      "verdict": "Mean score: 0.5 (N=1 per template). T4 and T6 scored 1.0 on this seed; T2 and T5 scored 0.0. Seed-dependent sensitivity observed — N=10 replication required."
     },
     "full_campaign": {
       "status": "COMPLETE",
       "templates_tested": 7,
       "mean_score": "0.5",
       "no_llm_mean_score": "0.5",
-      "note": "Seed 42 shows identical FULL_RAPHAEL and NO_LLM scores \u2014 deterministic template base dominates."
+      "note": "Seed 42 shows identical FULL_RAPHAEL and NO_LLM scores — requires trace of cognitive loop to determine if LLM was queried or if default/recon actions dominated."
     }
   },
   "governance": {

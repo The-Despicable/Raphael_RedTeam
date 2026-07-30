@@ -1,0 +1,239 @@
+{
+  "experiment": "Experiment_0_Repeatability",
+  "timestamp": "2026-07-30T16:08:30.136838+00:00",
+  "template": "T1_NEGATIVE_CONTROL",
+  "config": "FULL_RAPHAEL",
+  "docker_dvwa_available": true,
+  "deterministic_same_seed": false,
+  "same_seed_runs": [
+    {
+      "run_id": "same_seed_0",
+      "seed": 42,
+      "score": 1.0,
+      "actions": 70,
+      "elapsed_seconds": 12.62,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    },
+    {
+      "run_id": "same_seed_1",
+      "seed": 42,
+      "score": 1.0,
+      "actions": 74,
+      "elapsed_seconds": 8.37,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    },
+    {
+      "run_id": "same_seed_2",
+      "seed": 42,
+      "score": 1.0,
+      "actions": 70,
+      "elapsed_seconds": 9.42,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    },
+    {
+      "run_id": "same_seed_3",
+      "seed": 42,
+      "score": 1.0,
+      "actions": 74,
+      "elapsed_seconds": 8.98,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    },
+    {
+      "run_id": "same_seed_4",
+      "seed": 42,
+      "score": 1.0,
+      "actions": 70,
+      "elapsed_seconds": 4.39,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    },
+    {
+      "run_id": "same_seed_5",
+      "seed": 42,
+      "score": 1.0,
+      "actions": 70,
+      "elapsed_seconds": 9.52,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    },
+    {
+      "run_id": "same_seed_6",
+      "seed": 42,
+      "score": 1.0,
+      "actions": 74,
+      "elapsed_seconds": 5.74,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    },
+    {
+      "run_id": "same_seed_7",
+      "seed": 42,
+      "score": 1.0,
+      "actions": 74,
+      "elapsed_seconds": 9.92,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    },
+    {
+      "run_id": "same_seed_8",
+      "seed": 42,
+      "score": 1.0,
+      "actions": 70,
+      "elapsed_seconds": 10.15,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    },
+    {
+      "run_id": "same_seed_9",
+      "seed": 42,
+      "score": 1.0,
+      "actions": 74,
+      "elapsed_seconds": 3.93,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    }
+  ],
+  "different_seed_runs": [
+    {
+      "run_id": "diff_seed_0",
+      "seed": 1042,
+      "score": 1.0,
+      "actions": 70,
+      "elapsed_seconds": 7.72,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    },
+    {
+      "run_id": "diff_seed_1",
+      "seed": 1043,
+      "score": 1.0,
+      "actions": 70,
+      "elapsed_seconds": 7.92,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    },
+    {
+      "run_id": "diff_seed_2",
+      "seed": 1044,
+      "score": 1.0,
+      "actions": 74,
+      "elapsed_seconds": 4.97,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    },
+    {
+      "run_id": "diff_seed_3",
+      "seed": 1045,
+      "score": 1.0,
+      "actions": 70,
+      "elapsed_seconds": 4.52,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    },
+    {
+      "run_id": "diff_seed_4",
+      "seed": 1046,
+      "score": 1.0,
+      "actions": 70,
+      "elapsed_seconds": 5.65,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    },
+    {
+      "run_id": "diff_seed_5",
+      "seed": 1047,
+      "score": 1.0,
+      "actions": 70,
+      "elapsed_seconds": 5.69,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    },
+    {
+      "run_id": "diff_seed_6",
+      "seed": 1048,
+      "score": 1.0,
+      "actions": 70,
+      "elapsed_seconds": 9.76,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    },
+    {
+      "run_id": "diff_seed_7",
+      "seed": 1049,
+      "score": 1.0,
+      "actions": 70,
+      "elapsed_seconds": 3.25,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    },
+    {
+      "run_id": "diff_seed_8",
+      "seed": 1050,
+      "score": 1.0,
+      "actions": 70,
+      "elapsed_seconds": 8.73,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    },
+    {
+      "run_id": "diff_seed_9",
+      "seed": 1051,
+      "score": 1.0,
+      "actions": 74,
+      "elapsed_seconds": 17.28,
+      "config": "FULL_RAPHAEL",
+      "template": "T1_NEGATIVE_CONTROL"
+    }
+  ],
+  "statistics": {
+    "same_seed_score": {
+      "n": 10,
+      "mean": 1.0,
+      "median": 1.0,
+      "std": 0.0,
+      "variance": 0.0,
+      "min": 1.0,
+      "max": 1.0,
+      "range": 0.0
+    },
+    "same_seed_actions": {
+      "n": 10,
+      "mean": 72.0,
+      "median": 72.0,
+      "std": 2.0,
+      "variance": 4.0,
+      "min": 70,
+      "max": 74,
+      "range": 4
+    },
+    "different_seeds_score": {
+      "n": 10,
+      "mean": 1.0,
+      "median": 1.0,
+      "std": 0.0,
+      "variance": 0.0,
+      "min": 1.0,
+      "max": 1.0,
+      "range": 0.0
+    },
+    "different_seeds_actions": {
+      "n": 10,
+      "mean": 70.8,
+      "median": 70.0,
+      "std": 1.6,
+      "variance": 2.56,
+      "min": 70,
+      "max": 74,
+      "range": 4
+    }
+  },
+  "analysis": {
+    "same_seed_variance": "non-zero",
+    "different_seed_variance": "0.0 (score), 2.56 (actions)",
+    "same_seed_determinism": "NON-DETERMINISTIC: variance=0.0"
+  }
+}
