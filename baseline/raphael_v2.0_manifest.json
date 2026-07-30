@@ -2,9 +2,9 @@
   "manifest_version": "2.0.0",
   "generated": "2026-07-30T00:00:00Z",
   "git": {
-    "commit_sha": "4ad1981c2a7448c014124ac78c133c410fded32e",
+    "commit_sha": "9b50019e",
     "branch": "main",
-    "tag": "v2.0.0",
+    "tag": "v2.0-reviewed",
     "dirty": false
   },
   "environment": {
@@ -32,10 +32,10 @@
   },
   "providers": {
     "llm": {
-      "primary": "nvidia_nim",
-      "model": "meta/llama-3.1-8b-instruct",
-      "endpoint": "https://integrate.api.nvidia.com/v1",
-      "version": "3.1"
+      "primary": "ollama",
+      "model": "nemotron-3-ultra:cloud",
+      "endpoint": "http://localhost:11434",
+      "version": "1.0"
     },
     "embedding": {
       "model": "sentence-transformers/all-MiniLM-L6-v2",
@@ -72,5 +72,22 @@
   },
   "immutable": true,
   "sealed_by": "SENTINEL (GLM-5.2)",
-  "seal_date": "2026-07-30"
+  "seal_date": "2026-07-30",
+  "status": "REVIEWED",
+  "rbs_v1_campaign": {
+    "completed": true,
+    "total_runs": 140,
+    "templates": 7,
+    "configs": 2,
+    "seeds_per_config": 10,
+    "provider": "ollama:nemotron-3-ultra:cloud",
+    "key_results": {
+      "architecture_delta_mean": 0.32,
+      "templates_where_full_gt_no_llm": ["T1", "T3", "T7"],
+      "ceiling_templates": ["T4", "T6"],
+      "floor_templates": ["T2", "T5"],
+      "no_llm_variance": 0.0,
+      "full_raphael_variance_nonzero_on": ["T1", "T3", "T7"]
+    }
+  }
 }
