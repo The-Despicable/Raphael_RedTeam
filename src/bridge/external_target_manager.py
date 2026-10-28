@@ -1665,6 +1665,35 @@ class ExternalTargetManager:
         })
         return out
 
+    # ------------------------------------------------------------------
+    # broad IP scanning (engagement-scoped)
+    # ------------------------------------------------------------------
+
+    async def cloak_fetch(
+        self,
+        url: str,
+        timeout: float = 30.0,
+        **opts: Any,
+    ) -> Dict[str, Any]:
+        """Run a stealth-browser fetch inside the engagement scope."""
+        from .cloak import CloakBrowserRunner
+
+        return await CloakBrowserRunner(self).fetch(url, timeout, **opts)
+
+        """Run ``tools/broadscan`` bounded by the engagement scope.
+
+        Every target must validate against the loaded profile (fail closed),
+        ports are restricted to ``allowed_ports`` when the profile declares
+        them, and the probe rate is capped at ``max_packet_rate``. The binary
+        additionally receives an allow/deny gate file derived from the
+        profile, so a widened target still cannot probe outside scope.
+        """
+        from .broadscan import BroadscanRunner
+
+        return await BroadscanRunner(self).run(
+            targets, ports=ports, rate=rate, timeout=timeout, **opts
+        )
+
     async def _run_via_kali(
         self, base_url: str, tool: str, argv: List[str], target: str, timeout: float
     ) -> Dict[str, Any]:

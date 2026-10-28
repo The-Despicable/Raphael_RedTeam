@@ -1,22 +1,59 @@
+# ── Python ────────────────────────────────────────────────────────────────
 __pycache__/
-*.pyc
-*.pyo
-.env
-.venv/
-.pytest_cache/
+*.py[cod]
 *.egg-info/
-.ssh/
+.venv/
+venv/
+.pytest_cache/
+
+# ── Secrets — never committed ─────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+!.env.tier2.template
+sliver/operator.cfg
+*.pem
+*.key
+*.p12
 *.ovpn
-*.ovpn:Zone.Identifier
-:Zone.Identifier
-.openclaude/
-challenge.zip
-data/
-challenge_1245/
-# Generated evaluation outputs — not source
+*.ovpn.bak
+
+# ── Backups / provenance (host-only) ──────────────────────────────────────
+*.bak
+brain.backup/
+brain.pre_glm2/
+.glm_native_backup/
+glm/
+glm-response/
+raphael-autonomous-brain/
+Raphael_Pre_Chimera_Archive/
+Raphael_Pre_Chimera_Archive*.zip
+raphael-build/
+*.zip
+
+# ── Generated evaluation outputs — not source ─────────────────────────────
 evaluations/
 # JUDGE report output
 scripts/judge_report.json
 # Ablation runner temp artifacts
 arena/
 evaluations.zip
+
+# ── Build artifacts ───────────────────────────────────────────────────────
+tools/broadscan/bin/
+src/cli/node_modules/
+
+# ── Host-local compatibility shim (absolute symlink) ──────────────────────
+/orchestrator
+
+# ── Data / runtime state ──────────────────────────────────────────────────
+data/
+challenge.zip
+challenge_1245/
+challenge_*.zip
+runtime/pid/
+runtime/logs/
+:Zone.Identifier
+*:Zone.Identifier
+*.ovpn:Zone.Identifier
+.openclaude/

@@ -31,7 +31,7 @@ class EvidenceService:
             from orchestrator.brain import world as _world  # type: ignore
 
             self._orch_graph = _ev.get_evidence_graph()
-            self._world = _world.WorldModel()
+            self._world = _world.WorldModel(self._orch_graph)
             log.info("Loaded orchestrator evidence/world modules")
         except Exception as e:  # noqa: BLE001
             log.info("orchestrator evidence/world not available: %s", str(e)[:120])

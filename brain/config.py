@@ -49,6 +49,29 @@ class Settings(BaseSettings):
         default="http://kali-tools:3800", alias="KALI_TOOLS_URL"
     )
 
+    # --- Broadscan (self-hosted IP scanner, scope-gated) --------------------
+    broadscan_bin: str = Field(default="", alias="BROADSCAN_BIN")
+    broadscan_scope_file: Optional[str] = Field(
+        default=None, alias="BROADSCAN_SCOPE"
+    )
+    broadscan_allow_open: bool = Field(default=False, alias="BROADSCAN_ALLOW_OPEN")
+    broadscan_default_ports: str = Field(
+        default=(
+            "21,22,23,25,53,80,110,143,443,445,587,993,995,1433,1521,"
+            "3306,3389,5432,5900,6379,8080,8443,27017"
+        ),
+        alias="BROADSCAN_PORTS",
+    )
+    broadscan_max_rate: int = Field(
+        default=100_000, alias="BROADSCAN_MAX_RATE", ge=1
+    )
+
+    # --- Cloakbrowser (self-hosted stealth browser, scope-gated) ------------
+    cloak_scope_file: Optional[str] = Field(default=None, alias="CLOAK_SCOPE")
+    cloak_allow_open: bool = Field(default=False, alias="CLOAK_ALLOW_OPEN")
+    cloak_proxy: Optional[str] = Field(default=None, alias="CLOAKBROWSER_PROXY")
+    cloak_max_html: int = Field(default=250_000, alias="CLOAK_MAX_HTML", ge=1)
+
     # --- Neo4j (optional) ---------------------------------------------------
     neo4j_uri: Optional[str] = Field(default=None, alias="NEO4J_URI")
     neo4j_user: Optional[str] = Field(default=None, alias="NEO4J_USER")
@@ -123,6 +146,12 @@ class Settings(BaseSettings):
             "tor_socks": self.tor_socks,
             "sliver_configured": bool(self.sliver_operator_config),
             "kali_tools_url": self.kali_tools_url,
+            "broadscan_configured": bool(
+                self.broadscan_scope_file or self.broadscan_allow_open
+            ),
+            "cloak_configured": bool(
+                self.cloak_scope_file or self.cloak_allow_open
+            ),
             "neo4j_configured": bool(self.neo4j_uri and self.neo4j_user),
             "llm_configured": bool(self.llm_api_key),
             "llm_base_url": self.openai_base_url,

@@ -265,11 +265,26 @@ class SystemHealthService:
                     return {"error": str(x)[:160]}
                 return x  # type: ignore[return-value]
 
+            # Self-hosted tool config (no probes; just scope-doc presence).
+            try:
+                cfg = get_settings()
+                self_hosted = {
+                    "broadscan_configured": bool(
+                        cfg.broadscan_scope_file or cfg.broadscan_allow_open
+                    ),
+                    "cloak_configured": bool(
+                        cfg.cloak_scope_file or cfg.cloak_allow_open
+                    ),
+                }
+            except Exception as e:  # noqa: BLE001
+                self_hosted = {"error": str(e)[:160]}
+
             self._cache = {
                 "tor": _safe(tor_h),
                 "sliver": _safe(sliver_h),
                 "neo4j": _safe(neo4j_h),
                 "kali_tools": _safe(kali_h),
+                "self_hosted": self_hosted,
                 "cached_for_seconds": self.ttl,
             }
             self._cache_ts = now

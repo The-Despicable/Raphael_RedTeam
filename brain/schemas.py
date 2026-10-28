@@ -179,6 +179,18 @@ class ToolExecuteResponse(BaseModel):
     timed_out: bool = False
     fallback_used: bool = False
     broker_decision: Optional[Dict[str, Any]] = None
+    # self-hosted engine extras (broadscan / cloakfetch)
+    engine: Optional[str] = None
+    routed: Optional[str] = None
+    open: Optional[int] = None
+    hits: Optional[List[Dict[str, Any]]] = None
+    scope: Optional[Dict[str, Any]] = None
+    rate: Optional[int] = None
+    status_code: Optional[int] = None
+    title: Optional[str] = None
+    final_url: Optional[str] = None
+    screenshot_b64: Optional[str] = None
+    html: Optional[str] = None
 
 
 class CapabilityCheckRequest(BaseModel):

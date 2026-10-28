@@ -15,6 +15,8 @@ from typing import Any, Dict, List, Optional
 import httpx
 
 from .config import Settings, get_settings
+from .broadscan_tool import BroadscanError, BroadscanScopeError, BroadscanTool
+from .cloak_tool import CloakError, CloakScopeError, CloakFetchTool
 
 log = logging.getLogger("brain.tools")
 
@@ -198,11 +200,20 @@ class CapabilityBrokerService:
 
         try:
             from orchestrator.brain.capability_broker import (  # type: ignore
+                BrokerPolicy,
                 CapabilityBroker,
                 create_brokered_engine,
+                load_scenario_5_policy,
             )
 
-            self._broker = CapabilityBroker()
+            policy = None
+            try:
+                policy = load_scenario_5_policy()
+            except Exception:
+                policy = None
+            if policy is None:
+                policy = BrokerPolicy()
+            self._broker = CapabilityBroker(policy)
             log.info("Loaded orchestrator.brain.capability_broker.CapabilityBroker")
         except Exception:
             self._broker = None
@@ -263,6 +274,7 @@ class CapabilityBrokerService:
             "nmap", "masscan", "nikto", "nuclei", "httpx", "ffuf",
             "gobuster", "dirb", "sqlmap", "hydra", "whatweb", "wpscan",
             "smbclient", "enum4linux", "gobuster", "subfinder",
+            "broadscan",
         ]
 
     def known_engines(self) -> List[str]:
@@ -291,6 +303,11 @@ class ToolsService:
         self.settings = settings or get_settings()
         self.client = client or KaliToolsClient(self.settings)
         self.broker = broker or CapabilityBrokerService(self.settings)
+        self.broadscan = BroadscanTool(self.settings)
+        self.cloak = CloakFetchTool(self.settings)
+
+    # Tools the brain executes itself rather than routing to kali-tools.
+    SELF_HOSTED = frozenset({"broadscan", "cloakfetch", "cloak_fetch"})
 
     async def execute(
         self,
@@ -313,12 +330,92 @@ class ToolsService:
                 "fallback_used": False,
                 "broker_decision": decision,
             }
+        if tool in self.SELF_HOSTED:
+            result = await self._execute_self_hosted(tool, args, target, timeout)
+            result["broker_decision"] = decision
+            return result
         result = await self.client.run(tool, args, target, timeout)
         result["broker_decision"] = decision
         return result
 
+    async def _execute_self_hosted(
+        self,
+        tool: str,
+        args: List[str],
+        target: Optional[str],
+        timeout: Optional[float],
+    ) -> Dict[str, Any]:
+        """Run a locally-executed tool with its own scope gate."""
+        t0 = time.perf_counter()
+        capped = self._capped(timeout, self.settings.max_tool_timeout)
+        try:
+            if tool == "broadscan":
+                result = await self.broadscan.from_args(args, target, capped)
+            elif tool in ("cloakfetch", "cloak_fetch"):
+                result = await self.cloak.from_args(args, target, capped)
+            else:
+                result = None
+            if result is not None:
+                result.setdefault("tool", tool)
+                result.setdefault("exit_code", 0 if result.get("ok", True) else 1)
+                result.setdefault("stdout", "")
+                result["duration_ms"] = (time.perf_counter() - t0) * 1000
+                result.setdefault("timed_out", False)
+                result.setdefault("fallback_used", False)
+                return result
+        except (BroadscanScopeError, BroadscanError,
+                CloakScopeError, CloakError) as e:
+            return {
+                "tool": tool,
+                "exit_code": 126,
+                "stdout": "",
+                "stderr": f"{type(e).__name__}: {e}",
+                "duration_ms": (time.perf_counter() - t0) * 1000,
+                "timed_out": False,
+                "fallback_used": False,
+                "engine": "broadscan",
+            }
+        except Exception as e:  # noqa: BLE001
+            log.warning("%s local execution failed: %s", tool, str(e)[:160])
+            return {
+                "tool": tool,
+                "exit_code": 1,
+                "stdout": "",
+                "stderr": f"{type(e).__name__}: {e}",
+                "duration_ms": (time.perf_counter() - t0) * 1000,
+                "timed_out": False,
+                "fallback_used": False,
+                "engine": "broadscan",
+            }
+
+    def _capped(self, timeout: Optional[float], default: float) -> float:
+        effective = timeout if timeout and timeout > 0 else default
+        return float(min(effective, self.settings.max_tool_timeout))
+
     async def list_tools(self) -> List[Dict[str, Any]]:
-        return await self.client.tools_list()
+        tools = await self.client.tools_list()
+        names = {
+            str(t.get("name") or t.get("tool") or "")
+            for t in tools
+            if isinstance(t, dict)
+        }
+        if "broadscan" not in names:
+            tools.append(
+                {
+                    "name": "broadscan",
+                    "engine": "local",
+                    "description": "Scope-gated broad TCP scanner (connect/syn)",
+                }
+            )
+        if "cloakfetch" not in names:
+            tools.append(
+                {
+                    "name": "cloakfetch",
+                    "engine": "local",
+                    "description": "Scope-gated stealth-browser page fetch (cloakbrowser)",
+                }
+            )
+        return tools
 
     async def close(self) -> None:
         """Release the shared HTTP client (called during shutdown)."""

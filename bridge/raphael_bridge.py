@@ -165,6 +165,7 @@ class RaphaelBridge:
             "proxy.test": (self._m_proxy_test, False),
             "dns.resolve": (self._m_dns_resolve, False),
             "bridge.logs": (self._m_bridge_logs, False),
+            "web.cloak": (self._m_web_cloak, True),
             # --- scoped mutations / outward actions (fail closed) ---------
             "vpn.connect": (self._m_vpn_connect, True),
             "vpn.disconnect": (self._m_vpn_disconnect, True),
@@ -175,6 +176,7 @@ class RaphaelBridge:
             "tls.query": (self._m_tls_query, True),
             "vpn/profile/load": (self._m_vpn_profile_load, False),
             "kali.run": (self._m_kali_run, True),
+            "scan.broad": (self._m_scan_broad, True),
             # --- MCP shim (stdio MCP server mount for OpenCode) ----------
             "initialize": (self._m_mcp_initialize, False),
             "tools/list": (self._m_mcp_tools_list, False),
@@ -560,6 +562,66 @@ class RaphaelBridge:
             tool, args, str(target), timeout=p.get("timeout")
         )
 
+    async def _m_scan_broad(self, p: Dict[str, Any]) -> Dict[str, Any]:
+        """Engagement-scoped broad IP scan via tools/broadscan."""
+        raw = p.get("targets")
+        targets: List[str] = []
+        if isinstance(raw, list):
+            targets = [str(t) for t in raw]
+        elif isinstance(raw, str) and raw.strip():
+            targets = [raw]
+        if not targets and p.get("target"):
+            targets = [str(p["target"])]
+        if not targets:
+            raise RpcError(
+                INVALID_PARAMS,
+                "scan.broad requires targets[] (or target) — fail closed",
+            )
+        ports = p.get("ports")
+        if ports is not None and not isinstance(ports, (str, int, list)):
+            raise RpcError(INVALID_PARAMS, "ports must be a string, int or list")
+        try:
+            return await self.manager.broadscan(
+                targets,
+                ports=ports,
+                rate=p.get("rate"),
+                timeout=min(max(float(p.get("timeout") or 120.0), 1.0), 3600.0),
+                syn=bool(p.get("syn", False)),
+                banners=bool(p.get("banners", True)),
+                shuffle=bool(p.get("shuffle", True)),
+                workers=p.get("workers"),
+                probe_timeout_ms=int(p.get("probe_timeout_ms") or 900),
+                opsec=bool(p.get("opsec", False)),
+                decoys=p.get("decoys"),
+                jitter_ms=p.get("jitter_ms"),
+                frag=int(p.get("frag") or 0),
+                ttl=p.get("ttl"),
+                tcp_ts=bool(p.get("tcp_ts", False)),
+                sport=p.get("sport"),
+            )
+        except PolicyViolationError as e:
+            raise RpcError(-32001, str(e), data=e.data) from e
+        except NotConfiguredError as e:
+            raise RpcError(-32002, str(e), data=e.data) from e
+
+    async def _m_web_cloak(self, p: Dict[str, Any]) -> Dict[str, Any]:
+        url = str(p.get("url") or "").strip()
+        if not url:
+            raise RpcError(INVALID_PARAMS, "web.cloak requires url (fail closed)")
+        screenshot = bool(p.get("screenshot", False))
+        timeout = min(max(float(p.get("timeout") or 30.0), 1.0), 240.0)
+        try:
+            return await self.manager.cloak_fetch(
+                url, timeout=timeout, screenshot=screenshot,
+                full_html=bool(p.get("full_html", True)),
+                wait_ms=int(p.get("wait_ms", 2000)),
+                humanize=bool(p.get("humanize", False)),
+            )
+        except PolicyViolationError as e:
+            raise RpcError(-32001, str(e), data=e.data) from e
+        except Exception as e:  # noqa: BLE001
+            raise RpcError(-32003, f"web.cloak failed: {e}")
+
     # ------------------------------------------------------------------
     # proxy / egress verification
     # ------------------------------------------------------------------
@@ -647,6 +709,7 @@ class RaphaelBridge:
             "targets.set": "Declare engagement scope (cidrs/urls/egress/creds)",
             "targets.get_policy": "Read engagement egress policy (no secrets)",
             "network.check_reachability": "Scoped async TCP port probes",
+            "web.cloak": "Scoped stealth-browser page fetch (cloakbrowser) via engagement scope",
             "egress_policy.set": "Set mode proxy|tor|vpn|direct for engagement",
             "proxy.status": "Tor SOCKS reachability + exit IP check",
             "proxy.test": "Canary request through Tor; leak detection",
@@ -655,6 +718,8 @@ class RaphaelBridge:
             "vpn/profile/load": "Validate + attach an OpenVPN profile",
             "bridge.logs": "Tail the audit trail",
             "kali.run": "Scoped tool run routed to kali-tools (single catalog)",
+            "web.cloak": "Scoped stealth-browser page fetch (cloakbrowser)",
+            "scan.broad": "Engagement-scoped broad TCP scan (tools/broadscan)",
         }
         schemas = {
             "targets.set": {
@@ -682,6 +747,40 @@ class RaphaelBridge:
             "dns.resolve": {
                 "type": "object", "required": ["host"],
                 "properties": {"host": {"type": "string"}},
+            },
+            "web.cloak": {
+                "type": "object",
+                "required": ["url"],
+                "properties": {
+                    "url": {"type": "string"},
+                    "timeout": {"type": "number"},
+                    "screenshot": {"type": "boolean"},
+                    "full_html": {"type": "boolean"},
+                    "wait_ms": {"type": "integer"},
+                    "humanize": {"type": "boolean"},
+                },
+            },
+            "scan.broad": {
+                "type": "object",
+                "required": ["targets"],
+                "properties": {
+                    "targets": {"type": "array", "items": {"type": "string"}},
+                    "ports": {"type": ["string", "array"]},
+                    "rate": {"type": "integer"},
+                    "timeout": {"type": "number"},
+                    "syn": {"type": "boolean"},
+                    "banners": {"type": "boolean"},
+                    "shuffle": {"type": "boolean"},
+                    "workers": {"type": "integer"},
+                    "probe_timeout_ms": {"type": "integer"},
+                    "opsec": {"type": "boolean"},
+                    "decoys": {"type": "array", "items": {"type": "string"}},
+                    "jitter_ms": {"type": "integer"},
+                    "frag": {"type": "integer"},
+                    "ttl": {"type": "string"},
+                    "tcp_ts": {"type": "boolean"},
+                    "sport": {"type": "string", "enum": ["random", "fixed"]},
+                },
             },
         }
         tools = []
