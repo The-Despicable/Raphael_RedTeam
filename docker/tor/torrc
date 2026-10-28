@@ -1,5 +1,5 @@
 AutomapHostsOnResolve 1
-ControlPort 0.0.0.0:9051
+ControlPort 127.0.0.1:9051
 ControlSocket /etc/tor/run/control
 ControlSocketsGroupWritable 1
 CookieAuthentication 1
@@ -10,7 +10,7 @@ DataDirectory /var/lib/tor
 ExitPolicy accept *:*
 Log notice stderr
 RunAsDaemon 0
-SocksPort 0.0.0.0:9050 IsolateDestAddr
+SocksPort 127.0.0.1:9050 IsolateDestAddr
 TransPort 0.0.0.0:9040
 User tor
 VirtualAddrNetworkIPv4 10.192.0.0/10

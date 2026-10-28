@@ -1,3 +1,4 @@
+# ROLLBACK ONLY — validated snapshot of the last working compose stack.
 x-logging: &default-logging
   driver: json-file
   options:
@@ -11,7 +12,7 @@ x-host-config: &host-config
 services:
   cai-service:
     build:
-      context: ./cai-service
+      context: ./src/cai-service
       dockerfile: Dockerfile
     ports:
       - "3201:3200"
@@ -71,6 +72,9 @@ services:
       - NET_ADMIN
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=1
+    volumes:
+      - ./src/cloak-service:/app
+    command: ["uvicorn","main:app","--app-dir","/app","--host","0.0.0.0","--port","3400"]
     depends_on:
       - tor-proxy
     networks:
@@ -89,10 +93,13 @@ services:
     environment:
       - SERVICE_NAME=c2-server
       - RAPHAEL_PATH=/raphael
+      - PYTHONPATH=/raphael:/app
       - SLIVER_OPERATOR_CONFIG=/sliver-config/operator.cfg
     volumes:
+      - ./src/c2-server:/app
       - ./orchestrator:/raphael/orchestrator
       - sliver-config:/sliver-config:rw
+    command: ["uvicorn","main:app","--app-dir","/app","--host","0.0.0.0","--port","3501"]
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=1
     depends_on:
@@ -114,6 +121,7 @@ services:
     environment:
       - SERVICE_NAME=phishing
       - RAPHAEL_PATH=/raphael
+      # GoPhish admin API key (from .env:GOPHISH_API_KEY/PHISHING_API_KEY)
       - GOPHISH_API_KEY=${GOPHISH_API_KEY}
       - PHISHING_API_KEY=${PHISHING_API_KEY}
     volumes:
@@ -137,8 +145,10 @@ services:
       - SERVICE_NAME=recon-pipeline
       - RAPHAEL_PATH=/raphael
     volumes:
+      - ./src/recon-pipeline:/app
       - ./orchestrator:/raphael/orchestrator
       - case-data:/data
+    command: ["uvicorn","main:app","--app-dir","/app","--host","0.0.0.0","--port","3503"]
     cap_add:
       - NET_RAW
     sysctls:
@@ -160,9 +170,10 @@ services:
     env_file: .env
     environment:
       - SERVICE_NAME=sword
+      - PYTHONPATH=/app
     volumes:
-      - ./orchestrator:/app/orchestrator
-      - ./sword:/app/sword
+      - ./src:/app
+    command: ["uvicorn","sword.api:app","--app-dir","/app","--host","0.0.0.0","--port","3600"]
     cap_add:
       - NET_RAW
       - NET_ADMIN
@@ -181,34 +192,6 @@ services:
     logging: *default-logging
     restart: unless-stopped
 
-  autonomous-brain:
-    <<: *host-config
-    build:
-      context: .
-      dockerfile: ./brain/Dockerfile
-    ports:
-      - "3700:3700"
-    env_file: .env
-    environment:
-      - SERVICE_NAME=autonomous-brain
-      - OPENAI_BASE_URL=http://host.docker.internal:11434/v1
-      - BRAIN_DB=/data/brain.db
-      - TOR_SOCKS=tor-proxy:9050
-      - TOR_CONTROL=tor-proxy:9051
-      - SLIVER_OPERATOR_CONFIG=/sliver-config/operator.cfg
-    volumes:
-      - brain-data:/data
-      - sliver-config:/sliver-config:rw
-    cap_add:
-      - NET_ADMIN
-    depends_on:
-      - tor-proxy
-      - sliver-server
-    networks:
-      - raphael-net
-    logging: *default-logging
-    restart: unless-stopped
-
   tor-proxy:
     # Pin to specific version for stability; update after testing
     image: dperson/torproxy:latest
@@ -217,6 +200,8 @@ services:
       - "9052:9051"
     environment:
       - PASSWORD=${TOR_CONTROL_PASS:-changeme}
+    volumes:
+      - ./docker/tor/torrc:/etc/tor/torrc:ro
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=1
     networks:
@@ -306,6 +291,8 @@ services:
       - DB_DATABASE=dvwa
       - DB_USERNAME=dvwa
       - DB_PASSWORD=p@ssw0rd
+    volumes:
+      - ./docker/tor/torrc:/etc/tor/torrc:ro
     depends_on:
       - dvwa-db
     logging: *default-logging
@@ -338,12 +325,16 @@ services:
     environment:
       - SERVICE_NAME=raphael-api
       - RAPHAEL_PATH=/raphael
+      - PYTHONPATH=/raphael
+      - PATH=/opt/tools:/opt/ptools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       - CI_API_PORT=3900
       - ORCHESTRATOR_API_PORT=3900
     volumes:
       - ./orchestrator:/raphael/orchestrator
       - ./cli:/raphael/cli
       - ./data:/data
+      - /home/yaser/bin:/opt/tools:ro
+      - /home/yaser/.local/bin:/opt/ptools:ro
     depends_on:
       - tor-proxy
     networks:
@@ -368,6 +359,38 @@ services:
       resources:
         limits:
           memory: 256M
+
+
+  autonomous-brain:
+    <<: *host-config
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "3700:3700"
+    env_file: .env
+    environment:
+      - SERVICE_NAME=autonomous-brain
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL:-http://host.docker.internal:11434/v1}
+      - BRAIN_DB=/data/brain.db
+      - TOR_SOCKS=tor-proxy:9050
+      - TOR_CONTROL=tor-proxy:9051
+      - PYTHONPATH=/app
+    volumes:
+      - brain-data:/data
+      - sliver-config:/sliver-config:rw
+      - ./orchestrator:/app/orchestrator
+      - ./brain:/app/brain
+    cap_add:
+      - NET_ADMIN
+    depends_on:
+      - tor-proxy
+      - sliver-server
+    networks:
+      - raphael-net
+    logging: *default-logging
+    restart: unless-stopped
+
 
 networks:
   raphael-net:
