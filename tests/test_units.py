@@ -60,9 +60,9 @@ def test_port_schema_exact():
     assert ports["brain"] == 3700
     assert ports["c2-server"] == 3501
     assert ports["recon-pipeline"] == 3503
-    assert ports["cloak-service"] == 3400
-    assert ports["cai-service"] == 3200
-    assert ports["mhddos-service"] == 3300
+    assert ports["cloak-service"] == 3401
+    assert ports["cai-service"] == 3201
+    assert ports["mhddos-service"] == 3301
     assert ports["phishing"] == 3502
     assert ports["sword"] == 3600
     assert ports["kali-tools"] == 3800

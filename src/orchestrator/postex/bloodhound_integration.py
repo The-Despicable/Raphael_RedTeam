@@ -32,7 +32,7 @@ BLOODHOUND_QUERIES = {
 
 
 class BloodHoundIntegration:
-    def __init__(self, uri: str = "bolt://neo4j:7687",
+    def __init__(self, uri: str = "bolt://127.0.0.1:7687",
                  user: str = "neo4j", password: str = "raphael-dev"):
         self._uri = uri
         self._user = user

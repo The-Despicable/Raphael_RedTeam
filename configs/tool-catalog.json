@@ -1,0 +1,31 @@
+{
+  "$comment": "SINGLE SOURCE OF TRUTH for host tooling. scripts/check_tools.py verifies it; scripts/setup-kali.sh installs it; scripts/check_consistency.py fails if a required tool is not installed by the setup script.",
+  "tools": [
+    {"name": "nmap", "binaries": ["nmap"], "category": "network", "required": true, "install": "apt:nmap", "caps": "cap_net_raw+ep", "probe": ["nmap", "--version"]},
+    {"name": "masscan", "binaries": ["masscan"], "category": "network", "required": true, "install": "apt:masscan", "caps": "cap_net_raw+ep", "probe": ["masscan", "--version"]},
+    {"name": "nuclei", "binaries": ["nuclei"], "category": "web", "required": true, "install": "apt:nuclei", "probe": ["nuclei", "-version"]},
+    {"name": "feroxbuster", "binaries": ["feroxbuster"], "category": "web", "required": true, "install": "apt:feroxbuster", "probe": ["feroxbuster", "--version"]},
+    {"name": "ffuf", "binaries": ["ffuf"], "category": "web", "required": true, "install": "apt:ffuf", "probe": ["ffuf", "-V"]},
+    {"name": "whatweb", "binaries": ["whatweb"], "category": "web", "required": true, "install": "apt:whatweb", "probe": ["whatweb", "--version"]},
+    {"name": "curl", "binaries": ["curl"], "category": "web", "required": true, "install": "apt:curl", "probe": ["curl", "--version"]},
+    {"name": "fping", "binaries": ["fping"], "category": "network", "required": true, "install": "apt:fping", "caps": "cap_net_raw+ep", "probe": ["fping", "-v"]},
+    {"name": "smbclient", "binaries": ["smbclient"], "category": "ad", "required": true, "install": "apt:smbclient", "probe": ["smbclient", "--version"]},
+    {"name": "rpcclient", "binaries": ["rpcclient"], "category": "ad", "required": true, "install": "apt:smbclient", "probe": ["rpcclient", "--version"]},
+    {"name": "impacket", "binaries": ["impacket-psexec", "impacket-smbserver"], "category": "ad", "required": true, "install": "apt:impacket-scripts", "probe": ["impacket-psexec", "-h"]},
+    {"name": "crackmapexec", "binaries": ["crackmapexec", "nxc"], "category": "ad", "required": true, "install": "apt:nxc", "probe": ["nxc", "--version"]},
+    {"name": "bloodhound", "binaries": ["bloodhound-python"], "category": "ad", "required": true, "install": "apt:bloodhound.py", "probe": ["bloodhound-python", "--help"]},
+    {"name": "secdelete", "binaries": ["srm"], "category": "antiforensics", "required": true, "install": "apt:secure-delete", "probe": ["srm", "--help"]},
+    {"name": "bleachbit", "binaries": ["bleachbit"], "category": "antiforensics", "required": true, "install": "apt:bleachbit", "probe": ["bleachbit", "--version"]},
+    {"name": "wipe", "binaries": ["wipe"], "category": "antiforensics", "required": true, "install": "apt:wipe", "probe": ["wipe", "-h"]},
+    {"name": "sleuthkit", "binaries": ["fls", "tsk_recover"], "category": "antiforensics", "required": true, "install": "apt:sleuthkit", "probe": ["fls", "-V"]},
+    {"name": "auditd", "binaries": ["auditctl"], "category": "antiforensics", "required": true, "install": "apt:auditd", "probe": ["auditctl", "--version"]},
+    {"name": "shred", "binaries": ["shred"], "category": "antiforensics", "required": true, "install": "apt:coreutils", "probe": ["shred", "--version"]},
+    {"name": "tor", "binaries": ["tor"], "category": "stealth", "required": true, "install": "apt:tor", "probe": ["tor", "--version"]},
+    {"name": "proxychains4", "binaries": ["proxychains4"], "category": "stealth", "required": true, "install": "apt:proxychains4", "probe": ["proxychains4", "-h"]},
+    {"name": "go", "binaries": ["go"], "category": "build", "required": true, "install": "apt:golang-go", "probe": ["go", "version"], "note": "needed to build tools/broadscan/bin/broadscan"},
+    {"name": "pupy", "binaries": ["pupy"], "category": "c2", "required": false, "warn": true, "install": "pip:pupy", "probe": ["pupy", "--help"], "deferred_reason": "GAP-006: 30+ transitive deps fail on python3.11; tracked, not gating"},
+    {"name": "sliver-server", "binaries": ["sliver-server", "sliver/sliver-server"], "category": "c2", "required": false, "install": "manual:https://github.com/BishopFox/sliver/releases", "probe": ["sliver/sliver-server", "version"]},
+    {"name": "neo4j", "binaries": ["neo4j", "data/neo4j/bin/neo4j"], "category": "graph", "required": false, "install": "manual:neo4j tarball", "probe": ["data/neo4j/bin/neo4j", "version"]},
+    {"name": "caido", "binaries": ["caido"], "category": "proxy", "required": false, "install": "manual:caido-cli", "probe": ["caido", "--version"]}
+  ]
+}

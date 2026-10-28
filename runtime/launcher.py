@@ -62,12 +62,34 @@ class NativeLauncher:
         health_attempts: int = 30,
         health_delay: float = 1.0,
         max_restarts: int = 5,
+        port_offset: int = 0,
     ) -> None:
         self.services = order_by_dependencies(services)
         self.health_attempts = health_attempts
         self.health_delay = health_delay
         self.max_restarts = max_restarts
+        self.port_offset = int(port_offset)
         self._states: dict[str, _ProcState] = {}
+        from runtime.service_registry import shadow_ports
+        self._shadow_map = shadow_ports(services) if self.port_offset else {}
+
+    def _effective(self, spec: ServiceSpec) -> ServiceSpec:
+        """Shadow mode: deterministic 3980.. ports, independent of the real ones.
+
+        A fixed +100 offset collided with Docker's published ports (3700, 3800),
+        so shadow uses its own contiguous block instead.
+        """
+        new_port = self._shadow_map.get(spec.name)
+        if not new_port:
+            return spec
+        cmd = list(spec.command)
+        for i, token in enumerate(cmd):
+            if token == "--port" and i + 1 < len(cmd):
+                cmd[i + 1] = str(new_port)
+            elif token.startswith("--port="):
+                cmd[i] = f"--port={new_port}"
+        from dataclasses import replace
+        return replace(spec, port=new_port, command=cmd)
 
     # ---------------------------------------------------------------- start
 
@@ -76,17 +98,15 @@ class NativeLauncher:
         report = LaunchReport()
         base_env = as_export()
 
-        for spec in self.services:
+        for raw_spec in self.services:
+            spec = self._effective(raw_spec)
             if only and spec.name not in only:
                 continue
             # startup guards
             exe = spec.command[0]
             resolved = shutil.which(exe) if "/" not in exe else exe
-            if resolved is None and not (spec.optional and True):
-                report.skipped.append(f"{spec.name}: command not found ({exe!r})")
-                continue
             if resolved is None:
-                report.skipped.append(f"{spec.name}: optional command not found ({exe!r})")
+                report.skipped.append(f"{spec.name}: command not found ({exe!r})")
                 continue
             if pidfiles.alive(spec.name):
                 report.skipped.append(f"{spec.name}: already running (pid {pidfiles.read(spec.name)})")
@@ -115,14 +135,14 @@ class NativeLauncher:
             # dependents (deterministic report + ready upstream).
             if spec.health_kind != "none" and spec.port:
                 hres = await wait_for_service(
-                    spec, attempts=max(3, self.health_attempts // 2), delay=self.health_delay
+                    spec, attempts=self.health_attempts, delay=self.health_delay
                 )
                 if not hres.ok:
                     report.health.append(hres)
 
         # final health sweep for everything started
         from runtime.health import sweep
-        started_specs = [s for s in self.services if s.name in report.started]
+        started_specs = [self._effective(s) for s in self.services if s.name in report.started]
         report.health = await sweep(started_specs)
         return report
 
@@ -130,8 +150,11 @@ class NativeLauncher:
         log_path(spec.name).touch()
         logf = log_path(spec.name).open("ab")
         env = {**base_env, **spec.env}
+        from runtime.env import REPO_ROOT
+        cwd = str(REPO_ROOT / spec.cwd) if spec.cwd else str(REPO_ROOT)
         return await asyncio.create_subprocess_exec(
             *spec.command,
+            cwd=cwd,
             stdout=logf,
             stderr=asyncio.subprocess.STDOUT,
             env={**env, "PATH": __import__("os").environ["PATH"]},

@@ -309,7 +309,7 @@ class EgressProfile:
     cidrs: Tuple[str, ...] = ()
     urls: Tuple[str, ...] = ()
     egress: EgressPolicy = EgressPolicy.DIRECT
-    tor_socks: str = "tor-proxy:9050"
+    tor_socks: str = "127.0.0.1:9050"
     proxy_auth: Optional[str] = None
     vpn_profile_path: Optional[str] = None
     vpn_username: Optional[str] = None
@@ -373,7 +373,7 @@ class EgressProfile:
             urls=urls,
             egress=EgressPolicy.coerce(obj.get("egress")),
             tor_socks=str(creds.get("tor_socks") or obj.get("tor_socks")
-                         or "tor-proxy:9050"),
+                         or "127.0.0.1:9050"),
             proxy_auth=str(creds["proxy_auth"]) if creds.get("proxy_auth") else None,
             vpn_profile_path=str(creds["vpn_profile_path"]) if creds.get("vpn_profile_path") else None,
             vpn_username=str(creds["vpn_username"]) if creds.get("vpn_username") else None,
@@ -751,7 +751,7 @@ class ExternalTargetManager:
         if prof is not None and prof.tor_socks:
             socks = prof.tor_socks
         else:
-            socks = self._env("TOR_SOCKS", "tor-proxy:9050")
+            socks = self._env("TOR_SOCKS", "127.0.0.1:9050")
         return socks
 
     async def _tcp_probe(self, host: str, port: int, timeout: float = 2.0) -> bool:
@@ -1644,7 +1644,7 @@ class ExternalTargetManager:
         else:
             raise NotConfiguredError(
                 "KALI_TOOLS_URL not configured; set it in .env (e.g. "
-                "http://kali-tools:3800) or opt into local allowlist mode"
+                "http://127.0.0.1:3800) or opt into local allowlist mode"
             )
 
         out.setdefault("tool", tool)
@@ -1666,7 +1666,7 @@ class ExternalTargetManager:
         return out
 
     # ------------------------------------------------------------------
-    # broad IP scanning (engagement-scoped)
+    # engagement-scoped runners
     # ------------------------------------------------------------------
 
     async def cloak_fetch(
@@ -1680,6 +1680,26 @@ class ExternalTargetManager:
 
         return await CloakBrowserRunner(self).fetch(url, timeout, **opts)
 
+    async def broadscan(
+        self,
+        targets: Sequence[str],
+        ports: Optional[Any] = None,
+        rate: Optional[int] = None,
+        timeout: Optional[float] = None,
+        *,
+        syn: bool = False,
+        banners: bool = True,
+        shuffle: bool = True,
+        workers: Optional[int] = None,
+        probe_timeout_ms: int = 900,
+        opsec: bool = False,
+        decoys: Optional[Sequence[str]] = None,
+        jitter_ms: Optional[int] = None,
+        frag: int = 0,
+        ttl: Optional[str] = None,
+        tcp_ts: bool = False,
+        sport: Optional[str] = None,
+    ) -> Dict[str, Any]:
         """Run ``tools/broadscan`` bounded by the engagement scope.
 
         Every target must validate against the loaded profile (fail closed),
@@ -1687,11 +1707,29 @@ class ExternalTargetManager:
         them, and the probe rate is capped at ``max_packet_rate``. The binary
         additionally receives an allow/deny gate file derived from the
         profile, so a widened target still cannot probe outside scope.
+
+        Signature mirrors ``bridge.broadscan.BroadscanRunner.run`` exactly —
+        keep the two in sync; tests/test_bridge_signatures.py enforces it.
         """
         from .broadscan import BroadscanRunner
 
         return await BroadscanRunner(self).run(
-            targets, ports=ports, rate=rate, timeout=timeout, **opts
+            targets,
+            ports=ports,
+            rate=rate,
+            timeout=timeout,
+            syn=syn,
+            banners=banners,
+            shuffle=shuffle,
+            workers=workers,
+            probe_timeout_ms=probe_timeout_ms,
+            opsec=opsec,
+            decoys=decoys,
+            jitter_ms=jitter_ms,
+            frag=frag,
+            ttl=ttl,
+            tcp_ts=tcp_ts,
+            sport=sport,
         )
 
     async def _run_via_kali(

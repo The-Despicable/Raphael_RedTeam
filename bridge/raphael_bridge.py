@@ -425,7 +425,7 @@ class RaphaelBridge:
             "credentials": {
                 **creds,
                 "tor_socks": creds.get("tor_socks")
-                or self.manager._env("TOR_SOCKS", "tor-proxy:9050"),
+                or self.manager._env("TOR_SOCKS", "127.0.0.1:9050"),
                 "vpn_profile_path": remap_legacy(
                     creds.get("vpn_profile_path")
                     or self.manager._env("VPN_PROFILE_PATH") or ""
@@ -718,7 +718,6 @@ class RaphaelBridge:
             "vpn/profile/load": "Validate + attach an OpenVPN profile",
             "bridge.logs": "Tail the audit trail",
             "kali.run": "Scoped tool run routed to kali-tools (single catalog)",
-            "web.cloak": "Scoped stealth-browser page fetch (cloakbrowser)",
             "scan.broad": "Engagement-scoped broad TCP scan (tools/broadscan)",
         }
         schemas = {

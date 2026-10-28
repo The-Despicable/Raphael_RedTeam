@@ -25,7 +25,10 @@ class HealthResult:
 
 async def probe_http(url: str, timeout: float = 3.0) -> HealthResult:
     try:
-        r = await httpx.AsyncClient(timeout=timeout).get(url)
+        # trust_env=False: a host-level http_proxy must never be able to make a
+        # loopback service look down (or route a health check through Tor).
+        async with httpx.AsyncClient(timeout=timeout, trust_env=False) as client:
+            r = await client.get(url)
         body = r.text[:200]
         if r.status_code == 200 and '"status"' in body and "ok" in body:
             return HealthResult("http", True, body)

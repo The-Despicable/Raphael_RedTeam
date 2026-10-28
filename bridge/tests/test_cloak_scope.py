@@ -125,7 +125,7 @@ class TestScope:
             return orig(**kw)
         cb.launch = cap
         CloakBrowserRunner(m).fetch_sync("https://example.com/", timeout=5)
-        assert seen["proxy"] == "socks5://tor-proxy:9050"
+        assert seen["proxy"] == "socks5://127.0.0.1:9050"
 
 
 class TestLive:

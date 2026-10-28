@@ -35,8 +35,8 @@ class Settings(BaseSettings):
     brain_db: str = Field(default="/data/brain.db", alias="BRAIN_DB")
 
     # --- Tor ----------------------------------------------------------------
-    tor_socks: str = Field(default="tor-proxy:9050", alias="TOR_SOCKS")
-    tor_control: str = Field(default="tor-proxy:9051", alias="TOR_CONTROL")
+    tor_socks: str = Field(default="127.0.0.1:9050", alias="TOR_SOCKS")
+    tor_control: str = Field(default="127.0.0.1:9051", alias="TOR_CONTROL")
     tor_control_pass: Optional[str] = Field(default=None, alias="TOR_CONTROL_PASS")
 
     # --- Sliver -------------------------------------------------------------
@@ -46,7 +46,7 @@ class Settings(BaseSettings):
 
     # --- Kali tools ---------------------------------------------------------
     kali_tools_url: str = Field(
-        default="http://kali-tools:3800", alias="KALI_TOOLS_URL"
+        default="http://127.0.0.1:3800", alias="KALI_TOOLS_URL"
     )
 
     # --- Broadscan (self-hosted IP scanner, scope-gated) --------------------

@@ -1,0 +1,5 @@
+{
+  "$comment": "Engagement scope for self-hosted engines (broadscan, cloakbrowser). FAIL CLOSED: an empty allow list denies every target. Both broadscan and cloakbrowser refuse to run unless a target matches an allow entry and no deny entry.",
+  "allow": [],
+  "deny": []
+}

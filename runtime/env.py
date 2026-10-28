@@ -33,6 +33,51 @@ def _load_dotenv(path: Path) -> None:
 
 _load_dotenv(REPO_ROOT / ".env")
 
+# ---------------------------------------------------------------- Docker DNS scrub
+# A stale .env may still carry compose hostnames. Rewrite them to loopback at
+# load time so no runtime path can resolve a name that no longer exists.
+_DOCKER_ALIASES = ("kali-tools", "neo4j", "tor-proxy", "sliver-server",
+                   "host.docker.internal")
+
+
+def _normalize_docker_dns() -> None:
+    for key in ("KALI_TOOLS_URL", "NEO4J_URI", "SLIVER_GRPC", "SLIVER_HTTPS",
+                "TOR_SOCKS", "RAPHAEL_PROXY_URL"):
+        val = os.environ.get(key)
+        if not val:
+            continue
+        for alias in _DOCKER_ALIASES:
+            if f"//{alias}:" in val or val.startswith(f"{alias}:"):
+                val = (val.replace(f"//{alias}:", "//127.0.0.1:")
+                          .replace(f"{alias}:", "127.0.0.1:", 1))
+                os.environ[key] = val
+                break
+
+
+_normalize_docker_dns()
+
+# ---------------------------------------------------------------- interpreter
+def _interpreter() -> str:
+    venv = REPO_ROOT / ".venv" / "bin" / "python"
+    return str(venv) if venv.is_file() else "python3"
+
+
+RAPHAEL_PY: str = os.environ.get("RAPHAEL_PY", _interpreter())
+os.environ.setdefault("RAPHAEL_PY", RAPHAEL_PY)
+
+# ---------------------------------------------------------------- service ports
+def _load_service_ports() -> dict[str, int]:
+    """Ports from configs/services.json — the single source of truth."""
+    import json
+    path = REPO_ROOT / "configs" / "services.json"
+    if not path.is_file():
+        return {}
+    data = json.loads(path.read_text())
+    return {s["name"]: int(s["port"]) for s in data.get("services", []) if s.get("port")}
+
+
+SERVICE_PORTS: dict[str, int] = _load_service_ports()
+
 # ---------------------------------------------------------------- paths
 ORCHESTRATOR_PATH: Path = Path(os.environ.get("ORCHESTRATOR_PATH", REPO_ROOT / "src" / "orchestrator"))
 SRC_PATH: Path = Path(os.environ.get("SRC_PATH", REPO_ROOT / "src"))
@@ -47,7 +92,9 @@ VPN_DIR: Path = Path(os.environ.get("VPN_DIR", REPO_ROOT / "vpn"))
 BRIDGE_DIR: Path = Path(os.environ.get("BRIDGE_DIR", REPO_ROOT / "bridge"))
 
 # ---------------------------------------------------------------- service URLs (localhost-first, no Docker DNS)
-KALI_TOOLS_URL: str = os.environ.get("KALI_TOOLS_URL", "http://127.0.0.1:3800")
+KALI_TOOLS_URL: str = os.environ.get(
+    "KALI_TOOLS_URL", f"http://127.0.0.1:{SERVICE_PORTS.get('kali-tools', 3800)}"
+)
 TOR_SOCKS: str = os.environ.get("TOR_SOCKS", "127.0.0.1:9050")
 TOR_CONTROL: str = os.environ.get("TOR_CONTROL", "127.0.0.1:9051")
 SLIVER_GRPC: str = os.environ.get("SLIVER_GRPC", "127.0.0.1:31337")

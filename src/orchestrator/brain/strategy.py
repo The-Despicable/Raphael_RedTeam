@@ -3,8 +3,11 @@ from typing import Any
 
 logger = logging.getLogger("strategy")
 
+from .evasion.phase import COVERING_TRACKS, AFTER_PHASE
+
 DEFAULT_PHASES = [
-    "harvest", "recon", "scan", "exploit", "postex",
+    "harvest", "recon", "scan", "exploit", AFTER_PHASE,
+    COVERING_TRACKS,
     "lateral", "credential", "exfil", "phish",
 ]
 

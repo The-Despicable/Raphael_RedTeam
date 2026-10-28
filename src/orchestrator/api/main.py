@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from orchestrator.api.agent import router as agent_router
+from orchestrator.api.evasion import router as evasion_router
 from orchestrator.api.tools import router as tools_router
 from orchestrator.api.tools_bridge import router as tools_bridge_router
 from orchestrator.api.session import router as session_router
@@ -87,6 +88,7 @@ app.include_router(agent_router)
 app.include_router(tools_router)
 app.include_router(tools_bridge_router)
 app.include_router(session_router)
+app.include_router(evasion_router)
 
 
 @app.get("/health", response_model=HealthResponse)

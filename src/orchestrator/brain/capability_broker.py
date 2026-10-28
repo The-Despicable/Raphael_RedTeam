@@ -554,7 +554,7 @@ class CapabilityBroker:
 
     # ── Tool Adapters ──────────────────────────────────────────
     # Kali-Tools HTTP adapter
-    KALI_TOOLS_URL = "http://kali-tools:3800"
+    KALI_TOOLS_URL = "http://127.0.0.1:3800"
 
     def create_tool_adapter(self, tool_name: str) -> 'ToolAdapter':
         """Create a tool adapter that enforces broker authorization."""
@@ -1396,7 +1396,7 @@ class KaliToolAdapter:
     ):
         self.broker = broker
         self.tool_name = tool_name
-        self.kali_url = kali_url or os.environ.get("KALI_TOOLS_URL", "http://kali-tools:3800")
+        self.kali_url = kali_url or os.environ.get("KALI_TOOLS_URL", "http://127.0.0.1:3800")
     
     def call(
         self,
@@ -1438,7 +1438,7 @@ class KaliToolAdapter:
             target=target,
             action_type=action_type,
             capability=self.tool_name,
-            method=f"kali-tools:{self.tool_name}",
+            method=f"kali/{self.tool_name}",
             impact_estimate=numeric_impact,
             metadata={"tool": self.tool_name, "args": resolved_args, "metadata": metadata or {}},
         )

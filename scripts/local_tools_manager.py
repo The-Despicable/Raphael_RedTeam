@@ -197,7 +197,7 @@ def _cli_which(args: argparse.Namespace) -> int:
 
 
 def main() -> int:
-    p = argparse.ArgumentParser(description="Native subprocess tool broker (replaces docker exec)")
+    p = argparse.ArgumentParser(description="Native subprocess tool broker (replaces the container exec pattern)")
     sub = p.add_subparsers(dest="cmd", required=True)
     run_p = sub.add_parser("run", help="run a tool against a target")
     run_p.add_argument("--tool", required=True)

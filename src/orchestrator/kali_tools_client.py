@@ -9,7 +9,7 @@ import subprocess
 import sys
 from typing import Optional
 
-KALI_TOOLS_URL = os.getenv("KALI_TOOLS_URL", "http://kali-tools:3800")
+KALI_TOOLS_URL = os.getenv("KALI_TOOLS_URL", "http://127.0.0.1:3800")
 FORCE_LOCAL = os.getenv("RAPHAEL_FORCE_LOCAL", "0") == "1"
 from orchestrator.hardening.timeout_guard import get_timeout_guard, TimeoutError as GuardTimeout
 from orchestrator.hardening.rate_limiter import get_limiter

@@ -228,6 +228,11 @@ async def stop_attack(req: StopRequest):
     return {"status": "stopped", "attacks_stopped": stopped}
 
 
+@app.get("/health")
+async def health():
+    return {"status": "ok", "service": "mhddos-service", "version": "2.0"}
+
+
 @app.get("/status")
 async def get_status():
     active = {}

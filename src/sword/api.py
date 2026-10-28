@@ -49,6 +49,7 @@ async def sword_run(req: SwordRequest):
         log.error("sword run failed: %s", e)
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/health")
 @app.get("/sword/health")
 async def health():
     tools = {}
@@ -56,7 +57,7 @@ async def health():
         p = os.popen(f"which {name} 2>/dev/null")
         tools[name] = bool(p.read().strip())
         p.close()
-    return {"status": "ok", "tools": tools}
+    return {"status": "ok", "service": "sword", "version": "2.0", "tools": tools}
 
 @app.post("/sword/report")
 async def generate_report(data: dict):
@@ -67,7 +68,7 @@ async def generate_report(data: dict):
 
 
 # ── Cloak broker mediation ──────────────────────────────────────
-CLOAK_SERVICE_URL = os.getenv("CLOAK_SERVICE_URL", os.getenv("CLOAK_URL", "http://cloak-service:3400"))
+CLOAK_SERVICE_URL = os.getenv("CLOAK_SERVICE_URL", os.getenv("CLOAK_URL", "http://127.0.0.1:3401"))
 CLOAK_FALLBACK_URLS = [CLOAK_SERVICE_URL, "http://127.0.0.1:3401"]
 
 

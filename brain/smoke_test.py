@@ -53,7 +53,7 @@ async def in_process_smoke() -> int:
     db_path = str(Path(tmpdir) / "brain.db")
     os.environ["BRAIN_DB"] = db_path
     os.environ.setdefault("LOG_LEVEL", "WARNING")
-    os.environ.setdefault("KALI_TOOLS_URL", "http://kali-tools:3800")
+    os.environ.setdefault("KALI_TOOLS_URL", "http://127.0.0.1:3800")
 
     # Reset cached settings (in case module was imported before).
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
