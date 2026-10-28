@@ -79,6 +79,11 @@ class AuditRequest(BaseModel):
     ports: str = "1-1000"
 
 
+@app.get("/health")
+async def health():
+    return {"status": "ok", "version": "2.0", "service": "cai-service"}
+
+
 @app.post("/agent/recon")
 async def agent_recon(req: ReconRequest):
     try:

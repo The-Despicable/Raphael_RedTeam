@@ -1,0 +1,208 @@
+{
+  "services": [
+    {
+      "name": "raphael-api",
+      "command": [
+        "python3",
+        "-m",
+        "uvicorn",
+        "orchestrator.api.main:app",
+        "--app-dir",
+        "src",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "3900"
+      ],
+      "port": 3900,
+      "health_kind": "http"
+    },
+    {
+      "name": "brain",
+      "command": [
+        "python3",
+        "-m",
+        "uvicorn",
+        "brain.main:app",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "3700"
+      ],
+      "port": 3700,
+      "health_kind": "http"
+    },
+    {
+      "name": "c2-server",
+      "command": [
+        "python3",
+        "-m",
+        "uvicorn",
+        "main:app",
+        "--app-dir",
+        "src/c2-server",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "3501"
+      ],
+      "port": 3501,
+      "health_kind": "http"
+    },
+    {
+      "name": "recon-pipeline",
+      "command": [
+        "python3",
+        "-m",
+        "uvicorn",
+        "main:app",
+        "--app-dir",
+        "src/recon-pipeline",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "3503"
+      ],
+      "port": 3503,
+      "health_kind": "http"
+    },
+    {
+      "name": "cloak-service",
+      "command": [
+        "python3",
+        "-m",
+        "uvicorn",
+        "main:app",
+        "--app-dir",
+        "src/cloak-service",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "3400"
+      ],
+      "port": 3400,
+      "health_kind": "http"
+    },
+    {
+      "name": "cai-service",
+      "command": [
+        "python3",
+        "-m",
+        "uvicorn",
+        "main:app",
+        "--app-dir",
+        "src/cai-service",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "3200"
+      ],
+      "port": 3200,
+      "health_kind": "http"
+    },
+    {
+      "name": "mhddos-service",
+      "command": [
+        "python3",
+        "-m",
+        "uvicorn",
+        "main:app",
+        "--app-dir",
+        "src/mhddos-service",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "3300"
+      ],
+      "port": 3300,
+      "health_kind": "http",
+      "uid_guard": true
+    },
+    {
+      "name": "phishing",
+      "command": [
+        "python3",
+        "-m",
+        "uvicorn",
+        "main:app",
+        "--app-dir",
+        "src/phishing",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "3502"
+      ],
+      "port": 3502,
+      "health_kind": "http"
+    },
+    {
+      "name": "sword",
+      "command": [
+        "python3",
+        "-m",
+        "uvicorn",
+        "sword.api:app",
+        "--app-dir",
+        "src",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "3600"
+      ],
+      "port": 3600,
+      "health_kind": "http",
+      "uid_guard": true
+    },
+    {
+      "name": "kali-tools",
+      "command": [
+        "python3",
+        "-m",
+        "uvicorn",
+        "server:app",
+        "--app-dir",
+        "src/kali-tools",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "3800"
+      ],
+      "port": 3800,
+      "health_kind": "http",
+      "env": {
+        "KALI_TOOLS_URL": "http://127.0.0.1:3800"
+      }
+    },
+    {
+      "name": "tor",
+      "port": 9050,
+      "command": [
+        "tor",
+        "-f",
+        "tor/torrc"
+      ],
+      "health_kind": "tcp",
+      "optional": true
+    },
+    {
+      "name": "sliver-server",
+      "port": 31337,
+      "command": [
+        "sliver/sliver-server",
+        "daemon"
+      ],
+      "health_kind": "tcp",
+      "optional": true
+    },
+    {
+      "name": "neo4j",
+      "port": 7687,
+      "command": [
+        "data/neo4j/bin/neo4j",
+        "console"
+      ],
+      "health_kind": "tcp",
+      "optional": true
+    }
+  ]
+}

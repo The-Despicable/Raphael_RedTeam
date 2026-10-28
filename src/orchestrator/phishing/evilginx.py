@@ -1,11 +1,13 @@
 import json, os, subprocess
 
 class EvilGinx:
-    def __init__(self, binary: str = "evilginx", config_dir: str = "~/.evilginx"):
+    def __init__(self, binary: str = "evilginx2", config_dir: str = "~/.evilginx"):
         self.binary = binary
         self.config_dir = os.path.expanduser(config_dir)
         self._available = any([
+            os.path.isfile("/usr/local/bin/evilginx2"),
             os.path.isfile("/usr/local/bin/evilginx"),
+            os.path.isfile("/usr/bin/evilginx2"),
             os.path.isfile("/usr/bin/evilginx"),
             os.path.isfile("/tmp/evilginx/evilginx"),
         ])

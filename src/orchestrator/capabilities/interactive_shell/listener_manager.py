@@ -71,6 +71,7 @@ class ListenerManager:
             "10.0.0.0/8",
             "172.16.0.0/12",
             "192.168.0.0/16",
+            "172.18.0.0/16",
         ]
         self.allowed_lport_range = allowed_lport_range
         self._listeners: Dict[int, ActiveListener] = {}  # lport -> ActiveListener

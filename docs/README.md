@@ -391,3 +391,5 @@ This software is intended for **authorized security testing only**. You must:
 1. Have written permission from the target system owner
 2. Comply with all applicable laws (CFAA, Computer Misuse Act, etc.)
 3. Never use against systems you do not own or have explicit permission to test
+
+> **Canonical compose**: `raphael-redteam/docker-compose.yml` is the single source of truth. This tree's `configs/docker-compose.yml` is an include stub to it.

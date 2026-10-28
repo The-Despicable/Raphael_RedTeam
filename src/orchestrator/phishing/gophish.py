@@ -3,7 +3,7 @@ import json, os, ssl, time, urllib.request, urllib.error
 class GoPhishAPI:
     def __init__(self, api_host: str = "https://127.0.0.1", api_port: int = 3333, api_key: str = None):
         self.base = f"{api_host}:{api_port}/api"
-        self.api_key = api_key or os.environ.get("GOPHISH_API_KEY", "")
+        self.api_key = api_key or os.environ.get("GOPHISH_API_KEY", "") or os.environ.get("PHISHING_API_KEY", "")
         self._available = bool(self.api_key)
         self._ctx = ssl.create_default_context()
         self._ctx.check_hostname = False

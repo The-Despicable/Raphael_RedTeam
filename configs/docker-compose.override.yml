@@ -1,0 +1,112 @@
+# docker-compose.override.yml — Raphael external-target bridge wiring.
+# Merge into the raphael-redteam compose stack (docker compose -f docker-compose.yml
+# -f configs/docker-compose.override.yml up -d) or place next to the main file as
+# docker-compose.override.yml (auto-merged by docker compose).
+#
+# SECURITY CONSTRAINTS HONOURED:
+#   * no unconditional --privileged anywhere
+#   * vpn-gateway adds only CAP_NET_ADMIN + /dev/net/tun, and is OPT-IN
+#     via the compose profile "vpn" (never starts by default — fail closed)
+#   * no host DNS hijacking/captive portal: services keep explicit resolvers
+#   * ca-certificates mounted wherever TLS is needed
+
+networks:
+  raphael-net:
+    name: raphael-net
+    external: true
+
+services:
+
+  # ---------------------------------------------------------------- brain ---
+  # brain service is unchanged (see brain/); it consumes TOR_SOCKS,
+  # KALI_TOOLS_URL and NEO4J_URI from .env — no duplication here.
+
+  # -------------------------------------------------------------- sliver ---
+  # Operator config: bind-mount ./sliver to the container /config so the
+  # operator.cfg Sliver generates at first boot lands on the host at
+  # <repo>/sliver/operator.cfg (spec 6: copy via compose volume).
+  sliver-server:
+    volumes:
+      - ./sliver:/config
+      - ./sliver-config:/sliver-config   # mounted read-side for operator clients
+    environment:
+      SLIVER_OPERATOR_CONFIG: /config/operator.cfg
+
+  # ----------------------------------------------------------- tor-proxy ---
+  tor-proxy:
+    environment:
+      EGRESS_STRATEGY: tor
+      TOR_SOCKS: tor-proxy:9050
+      TOR_CONTROL: tor-proxy:9051
+      # All DNS for tor-routed flows must resolve INSIDE the circuit
+      # (curl --socks5-hostname / socks5h). No plain DNS escapes the container.
+      DNS_PRIMARY: 8.8.8.8
+      DNS_SECONDARY: 1.1.1.1
+    volumes:
+      # CA bundle so HTTPS canaries/cert pinning work inside the proxy chain
+      - /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro
+
+  # ----------------------------------------------------------- kali-tools ---
+  # Kali keeps full tool access (NET_RAW/NET_ADMIN already granted on the
+  # service) and reaches the internet through the raphael-net bridge NAT.
+  # Bridge clients must never scan the internet directly: scope enforcement
+  # lives in src/bridge/external_target_manager.py (validate_target_scope).
+  kali-tools:
+    environment:
+      # Proxy chain for tools that honour env proxies (curl, nuclei, httpx…).
+      # Point ALL of them at the Tor SOCKS endpoint by default; engagement
+      # policy (egress_policy.set) chooses what actually leaves the host.
+      HTTP_PROXY: ${TOR_SOCKS:-socks5://tor-proxy:9050}
+      HTTPS_PROXY: ${TOR_SOCKS:-socks5://tor-proxy:9050}
+      ALL_PROXY: ${TOR_SOCKS:-socks5://tor-proxy:9050}
+      DNS_PRIMARY: 8.8.8.8
+      DNS_SECONDARY: 1.1.1.1
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    extra_hosts:
+      # WSL2: let containers reach host services (host-side VPN tunnels etc.)
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro
+
+  # ----------------------------------------------------------- raphael-api --
+  raphael-api:
+    environment:
+      # api agents call the SAME bridge code path for external targets
+      BRIDGE_MANAGER_MODULE: src.bridge.external_target_manager
+      EGRESS_STRATEGY: ${EGRESS_STRATEGY:-tor}
+      TOR_SOCKS: tor-proxy:9050
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # ----------------------------------------------------------- vpn-gateway --
+  # OPTIONAL containerized VPN egress (compose profile "vpn"). Starts ONLY
+  # with:  docker compose --profile vpn up -d vpn-gateway
+  # Mount the engagement .ovpn at projects/_global/vpn/profile.ovpn.
+  # No --privileged: capabilities are limited to NET_ADMIN + the TUN device.
+  vpn-gateway:
+    image: alpine:3.20
+    profiles: ["vpn"]
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      DNS_PRIMARY: ${DNS_PRIMARY:-8.8.8.8}
+      DNS_SECONDARY: ${DNS_SECONDARY:-1.1.1.1}
+      # corporate DNS once the tunnel is up (optional)
+      DNS_CORPORATE: ${DNS_CORPORATE:-}
+    volumes:
+      - ./projects/_global/vpn:/etc/openvpn:ro
+      - /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro
+    working_dir: /etc/openvpn
+    # auth-user-pass file (0600) may live next to profile.ovpn as auth.txt
+    command: >
+      sh -c "apk add --no-cache openvpn ca-certificates >/dev/null 2>&1;
+             exec openvpn --config /etc/openvpn/profile.ovpn
+             --auth-user-pass /etc/openvpn/auth.txt
+             --script-security 1 --verb 3"
+    networks:
+      - raphael-net
+    restart: unless-stopped

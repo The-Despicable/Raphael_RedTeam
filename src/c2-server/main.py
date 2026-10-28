@@ -273,7 +273,5 @@ if __name__ == "__main__":
         "main:app",
         host="0.0.0.0",
         port=int(os.getenv("C2_PORT", "3501")),
-        ssl_version=ssl.PROTOCOL_TLS_SERVER if ssl_ctx else None,
-        ssl_context=ssl_ctx,
         log_level="info",
     )

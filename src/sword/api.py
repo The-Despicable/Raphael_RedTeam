@@ -1,4 +1,5 @@
 import asyncio, json, sys, os, logging
+import httpx
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -63,3 +64,114 @@ async def generate_report(data: dict):
     md = report.generate_markdown()
     html = report.generate_html()
     return {"markdown": md, "html": html}
+
+
+# ── Cloak broker mediation ──────────────────────────────────────
+CLOAK_SERVICE_URL = os.getenv("CLOAK_SERVICE_URL", os.getenv("CLOAK_URL", "http://cloak-service:3400"))
+CLOAK_FALLBACK_URLS = [CLOAK_SERVICE_URL, "http://127.0.0.1:3401"]
+
+
+async def _cloak_base() -> str:
+    # Prefer the configured/internal URL; fall back to host-published URL.
+    for base in CLOAK_FALLBACK_URLS:
+        try:
+            async with httpx.AsyncClient(timeout=3) as client:
+                r = await client.get(f"{base.rstrip('/')}/health")
+            if r.status_code == 200:
+                return base.rstrip("/")
+        except Exception:
+            continue
+    return CLOAK_SERVICE_URL.rstrip("/")
+
+
+class CloakMediateRequest(BaseModel):
+    url: Optional[str] = None
+    target: Optional[str] = None
+    viewport: Optional[dict] = None
+    user_agent: Optional[str] = None
+    proxy: Optional[str] = None
+    wait: int = 3
+
+
+async def _mediate_cloak(payload: CloakMediateRequest) -> dict:
+    base = await _cloak_base()
+    url = payload.url or payload.target or "about:blank"
+    body = {
+        "url": url,
+        "viewport": payload.viewport,
+        "user_agent": payload.user_agent,
+        "proxy": payload.proxy,
+        "wait": payload.wait,
+    }
+    try:
+        async with httpx.AsyncClient(timeout=60) as client:
+            r = await client.post(f"{base}/launch", json=body)
+        if r.status_code >= 400:
+            # try alternate alias
+            async with httpx.AsyncClient(timeout=60) as client:
+                r = await client.post(f"{base}/cloak", json=body)
+        try:
+            data = r.json()
+        except Exception:
+            data = {"raw": r.text[:2000]}
+        return {
+            "status": "ok" if r.status_code < 400 else "error",
+            "mediator": "sword",
+            "upstream": base,
+            "upstream_status": r.status_code,
+            "cloak_service": data,
+        }
+    except Exception as e:
+        log.error("cloak mediation failed: %s", e)
+        raise HTTPException(status_code=502, detail=f"cloak mediation failed: {e}")
+
+
+@app.get("/broker/status")
+async def broker_status():
+    base = await _cloak_base()
+    cloak_health = None
+    upstream_status = 0
+    try:
+        async with httpx.AsyncClient(timeout=5) as client:
+            r = await client.get(f"{base}/health")
+        upstream_status = r.status_code
+        if r.status_code == 200:
+            cloak_health = r.json()
+    except Exception as e:
+        cloak_health = {"error": str(e)}
+    return {
+        "status": "mediating" if upstream_status == 200 else "degraded",
+        "mediator": "sword",
+        "upstream_cloak": base,
+        "upstream_status": upstream_status,
+        "cloak_service": cloak_health,
+        "mediation": "sword -> cloak-service broker wrapper",
+    }
+
+
+@app.post("/broker")
+async def broker_root(payload: CloakMediateRequest = CloakMediateRequest()):
+    return await _mediate_cloak(payload)
+
+
+@app.post("/broker/cloak")
+async def broker_cloak(payload: CloakMediateRequest = CloakMediateRequest()):
+    return await _mediate_cloak(payload)
+
+
+@app.post("/broker/mediate")
+async def broker_mediate(payload: CloakMediateRequest = CloakMediateRequest()):
+    return await _mediate_cloak(payload)
+
+
+@app.post("/cloak")
+async def cloak_root(payload: CloakMediateRequest = CloakMediateRequest()):
+    return await _mediate_cloak(payload)
+
+
+@app.post("/cloak/launch")
+async def cloak_launch(payload: CloakMediateRequest = CloakMediateRequest()):
+    return await _mediate_cloak(payload)
+
+
+# backward-compat alias under /sword prefix is handled by router-less mounts above

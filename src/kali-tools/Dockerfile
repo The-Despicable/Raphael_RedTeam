@@ -1,44 +1,17 @@
-FROM kalilinux/kali-rolling
+# Incremental layer on top of the existing kali-tools image.
+FROM raphael/kali-tools:latest
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    # Recon
-    nmap masscan dnsutils whois netcat-openbsd \
-    enum4linux smbclient smbmap \
-    # Web
-    gobuster ffuf dirb nikto wfuzz whatweb wapiti \
-    hydra \
-    # Exploitation
-    sqlmap metasploit-framework \
-    # AD / Windows
-    impacket-scripts bloodhound.py certipy-ad \
-    kerberoast krb5-user \
-    # Cracking
-    hashcat john \
-    # Post-exploitation
-    netcat-traditional socat \
-    # Utilities
-    python3 python3-pip curl wget git jq unzip \
-    && rm -rf /var/lib/apt/lists/*
+# GAP-006: ship a Python 3.11 runtime (Pupy needs <=3.11) + Pupy C2.
+# The base Kali image only provides Python 3.13, which breaks Pupy deps.
+RUN curl -sL https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.11.18%2B20261026-x86_64-unknown-linux-gnu-install_only.tar.gz -o /tmp/py311.tgz && \
+    mkdir -p /opt/python3.11 && tar xzf /tmp/py311.tgz -C /opt/python3.11 --strip-components=1 && rm -f /tmp/py311.tgz
 
-RUN pip3 install --no-cache-dir --break-system-packages \
-    fastapi uvicorn[standard] httpx \
-    pyyaml aiofiles
+RUN /opt/python3.11/bin/python3 -m pip install --no-cache-dir 'git+https://github.com/n1nj4sec/pupy@nextgen' --no-deps && \
+    /opt/python3.11/bin/python3 -m pip install --no-cache-dir netaddr xattr rsa pyaes pycryptodome hexdump 'tinyec @ https://github.com/alxchk/tinyec/archive/master.zip' pyelftools && \
+    rm -rf /opt/http-parser-src && git clone --depth 1 https://github.com/benoitc/http-parser /opt/http-parser-src && \
+    cp -r /opt/http-parser-src/http_parser /opt/python3.11/lib/python3.11/site-packages/ && \
+    ln -sf /opt/python3.11/bin/pupysh /usr/local/bin/pupy && \
+    chmod +x /usr/local/bin/pupy /opt/python3.11/bin/pupysh
 
-RUN curl -Lo /tmp/nuclei.zip \
-    https://github.com/projectdiscovery/nuclei/releases/download/v3.11.0/nuclei_3.11.0_linux_amd64.zip \
-    && unzip -o /tmp/nuclei.zip -d /usr/local/bin/ nuclei \
-    && chmod +x /usr/local/bin/nuclei \
-    && rm /tmp/nuclei.zip
-
-RUN curl -Lo /usr/local/bin/kerbrute \
-    https://github.com/ropnop/kerbrute/releases/latest/download/kerbrute_linux_amd64 \
-    && chmod +x /usr/local/bin/kerbrute
-
-RUN curl -Lo /usr/local/bin/pspy64 https://github.com/DominicBreuker/pspy/releases/latest/download/pspy64 \
-    && chmod +x /usr/local/bin/pspy64
-
-COPY server.py /app/server.py
-WORKDIR /app
-EXPOSE 3800
-
-CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "3800"]
+# Ensure BloodHound Python ingestor is present (no-op if already installed).
+RUN /usr/bin/python3 -m pip install --no-cache-dir --break-system-packages bloodhound >/dev/null 2>&1 || true

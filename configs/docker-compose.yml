@@ -114,6 +114,8 @@ services:
     environment:
       - SERVICE_NAME=phishing
       - RAPHAEL_PATH=/raphael
+      - GOPHISH_API_KEY=${GOPHISH_API_KEY}
+      - PHISHING_API_KEY=${PHISHING_API_KEY}
     volumes:
       - ./orchestrator:/raphael/orchestrator
     sysctls:

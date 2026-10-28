@@ -1,0 +1,86 @@
+# external-audits/docker-compose.yml.legacy
+#
+# ROLLBACK ARTIFACT — kept for exactly ONE release after the native migration.
+# The canonical runtime is now scripts/native_up.sh (no Docker required).
+#
+# This file exists only so an operator can fall back if the native stack
+# misbehaves. Remove it at the next release cut. Do NOT add new services here.
+#
+# To roll back temporarily:
+#   cd external-audits && docker compose -f docker-compose.yml.legacy up -d
+#
+# NOTE: the raphael-net overlay network is DEAD in the native world. Tor is
+# consumed via socks5h://127.0.0.1:9050 on the host. Nothing native should
+# reference raphael-net.
+
+version: "3.9"
+
+services:
+  tor-proxy:
+    image: dperson/torproxy
+    container_name: raphael-tor
+    ports:
+      - "127.0.0.1:9050:9050"
+    restart: unless-stopped
+
+  kali-tools:
+    build: ./docker/kali
+    container_name: raphael-kali
+    ports:
+      - "127.0.0.1:3800:3800"
+    restart: unless-stopped
+
+  brain:
+    build: .
+    command: uvicorn brain.main:app --host 0.0.0.0 --port 3700
+    ports:
+      - "127.0.0.1:3700:3700"
+    environment:
+      - KALI_TOOLS_URL=http://kali-tools:3800
+    restart: unless-stopped
+
+  cai:
+    build: .
+    command: uvicorn src.cai-service.main:app --host 0.0.0.0 --port 3201
+    ports:
+      - "127.0.0.1:3201:3201"
+    restart: unless-stopped
+
+  cloak:
+    build: .
+    command: uvicorn src.cloak.main:app --host 0.0.0.0 --port 3401
+    ports:
+      - "127.0.0.1:3401:3401"
+    restart: unless-stopped
+
+  phishing:
+    build: .
+    command: uvicorn src.phishing.main:app --host 0.0.0.0 --port 3502
+    ports:
+      - "127.0.0.1:3502:3502"
+    restart: unless-stopped
+
+  raphael-api:
+    build: .
+    command: uvicorn orchestrator.main:app --host 0.0.0.0 --port 3900
+    ports:
+      - "127.0.0.1:3900:3900"
+    restart: unless-stopped
+
+  # OPTIONAL targets — escape-hatch only, NOT part of Raphael core.
+  vulnapp:
+    build: ./docker/vulnapp
+    profiles: ["targets"]
+    restart: unless-stopped
+  dvwa:
+    image: vulnerables/web-dvwa
+    profiles: ["targets"]
+    restart: unless-stopped
+
+  # OPTIONAL services — enabled via profiles, not default.
+  neo4j:
+    image: neo4j:5.19
+    profiles: ["neo4j"]
+    environment:
+      - NEO4J_AUTH=neo4j/raphael
+    restart: unless-stopped

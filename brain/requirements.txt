@@ -1,0 +1,24 @@
+# Autonomous Brain — Python dependencies
+# Pinned to known-good minor versions for reproducible builds.
+
+# Web framework
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+pydantic==2.10.4
+pydantic-settings==2.7.0
+
+# Persistence
+aiosqlite==0.20.0
+
+# HTTP client (LLM, Kali tools, etc.)
+httpx==0.28.1
+
+# Optional systems (graceful degrade if missing)
+neo4j==5.27.0; python_version >= "3.11"
+
+# ML toggle (only installed when RAPHAEL_ENABLE_ML=1)
+# torch / transformers are intentionally NOT included in the base image.
+# Operators who need local ML add them via a custom layer.
+
+# Logging / utils
+python-multipart==0.0.20
